@@ -15,7 +15,7 @@ class CreateAssumptionsTable extends Migration
     {
         Schema::create('assumptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integerIncrements('project_id');
+            $table->integer('project_id');
             $table->string('goal_id')->nullable;
             $table->string('outcome_id')->nullable;
             $table->string('output_id')->nullable;

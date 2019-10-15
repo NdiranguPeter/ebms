@@ -8,7 +8,7 @@ use App\Currency;
 use App\DB;
 use App\Indicator;
 use App\IR_Office;
-use App\outcome;
+use App\Outcome;
 use App\Output;
 use App\Partner;
 use App\Project;
