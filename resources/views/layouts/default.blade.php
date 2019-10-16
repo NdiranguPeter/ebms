@@ -90,7 +90,8 @@
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand">
 					<small>
-						<img src="{{ asset('storage/logo.jpg') }}" alt="" style="max-height: 40px; margin-top: -5%;">
+						<img src="{{ asset('storage/images/logo.jpg') }}" alt=""
+							style="max-height: 40px; margin-top: -5%;">
 						EBMS
 					</small>
 				</a>
@@ -103,7 +104,7 @@
 					<li class="light-blue dropdown-modal">
 						<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 							<img style="width:50px; height:50px;" class="nav-user-photo"
-								src="{{ asset('storage/logo.jpg') }}" alt="" />
+								src="{{ asset('storage/images/logo.jpg') }}" alt="" />
 							<span class="user-info">
 								<small>Welcome,</small>
 								{{ Auth::user()->name }}

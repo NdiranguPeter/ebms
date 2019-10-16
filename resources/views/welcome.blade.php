@@ -21,8 +21,8 @@
             <div class="col-md-8" style="justify-content: center;
   text-align: center; background-color:#0081c7; margin-top: 7%; padding: 50px;">
 
-                <img src="{{ asset('storage/logo.jpg') }}" alt="islamic relief logo" class="img-fluid mx-auto d-block"
-                    style="margin-bottom: 10px;">
+                <img src="{{ asset('storage/images/logo.jpg') }}" alt="islamic relief logo"
+                    class="img-fluid mx-auto d-block" style="margin-bottom: 10px;">
                 <h1 style="color: #fff; font-weight: bold; font-size: 30px;">Electronic Beneficiaries Management
                     System</h1>
                 <h2 style="color: #fff; font-weight: bold; text-align:center;">(E-BMS)</h2>
