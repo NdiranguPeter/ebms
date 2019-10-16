@@ -35,9 +35,14 @@
 
             <!-- PAGE CONTENT BEGINS -->
             <div class="container-fluid">
+                <style>
+                    .sett td {
+                        padding: 20px;
+                    }
+                </style>
 
                 <div class="row">
-                    <table class="table table-hover table-bordered">
+                    <table class="sett">
                         <tr>
                             <td>
                                 <a class="btn btn-success" href="/countries">
