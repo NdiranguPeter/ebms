@@ -1,5 +1,6 @@
 <?php
 
+use App\Question;
 use Illuminate\Http\Request;
 
 /*
@@ -12,9 +13,15 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
-Route::post('login', 'API\UserController@login');
-Route::post('register', 'API\UserController@register');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+Route::middleware('auth:api')->get('/survey', function (Request $request) {
+    return $request->user()->surveys;
+});
+Route::middleware('auth:api')->get('/questions/{survey_id}', function ($id) {
 
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('details', 'API\UserController@details');
+    $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->get();
+
+    return $questions;
 });

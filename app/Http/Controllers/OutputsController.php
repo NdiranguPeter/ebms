@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\DipExport;
-use App\outcome;
+use App\Outcome;
 use App\Output;
 use App\Project;
 use Illuminate\Http\Request;

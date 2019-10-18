@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Indicator;
 use App\Indicatorafter;
-use App\outcome;
+use App\Outcome;
 use App\Output;
-use App\project;
+use App\Project;
 use App\Unit;
 use Illuminate\Http\Request;
 
