@@ -42,7 +42,7 @@
                         {{Form::label('group', 'Group')}}
                         <select name="group_id" id="group"
                             class="form-control @error('ir_office') is-invalid @enderror">
-                            <option value="" selected>choose question category</option>
+                            <option value=0 selected>choose question category</option>
                             @foreach ($groups as $group)
                             <option value={{$group->id}}>{{$group->name}}</option>
                             @endforeach
