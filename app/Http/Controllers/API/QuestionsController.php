@@ -30,7 +30,7 @@ class QuestionsController extends Controller
             'success' => true,
             'questions' => $questions,
             'options'=>$qn_options,
-        ], 400);
+        ], 302);
     }
 
     public function survey()
@@ -48,6 +48,6 @@ class QuestionsController extends Controller
         return response()->json([
             'success' => true,
             'data' => $surveys,
-        ], 400);
+        ], 302);
     }
 }
