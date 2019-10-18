@@ -206,7 +206,10 @@ class QuestionsController extends Controller
         $new_option = new Option;
 
         $new_option->question_id = $id;
+
         $survey_id = $request->input('survey_id');
+
+        $new_option->survey_id = $survey_id;
 
         $options = implode('|', $request->input('name'));
 
