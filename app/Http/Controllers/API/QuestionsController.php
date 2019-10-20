@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Question;
 use App\Option;
+use App\Question;
 
 class QuestionsController extends Controller
 {
@@ -29,7 +29,7 @@ class QuestionsController extends Controller
         return response()->json([
             'success' => true,
             'questions' => $questions,
-            'options'=>$qn_options,
+            'options' => $qn_options,
         ], 302);
     }
 
@@ -41,12 +41,11 @@ class QuestionsController extends Controller
         if ($surveys->isEmpty()) {
             return response()->json([
                 'success' => false,
-                'message' => auth()->user()->name.' doesnt have any surveys yet',
+                'message' => auth()->user()->name . ' doesnt have any surveys yet',
             ], 400);
         }
 
         return response()->json([
-            'success' => true,
             'data' => $surveys,
         ], 302);
     }
