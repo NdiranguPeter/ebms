@@ -16,7 +16,7 @@ class QuestionsController extends Controller
 
         // dd($survey);
 
-        $questions = Question::where('survey_id', $survey->id)->get();
+        $questions = Question::where('survey_id', $survey->id)->orderBy('qn_order', 'asc')->get();
         $qn_options = Option::where('survey_id', $survey->id)->get();
 
         if ($questions->isEmpty()) {
