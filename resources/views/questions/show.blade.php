@@ -93,6 +93,7 @@
                 @if ($questions->count()>0)
 
                 <div class="col-xs-12 col-sm-6">
+                    <h1>{{$survey->name}}</h1>
                     <table class="table table-bordered">
 
                         @foreach ($questions as $question)
