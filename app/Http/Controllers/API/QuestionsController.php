@@ -29,6 +29,23 @@ class QuestionsController extends Controller
         return response()->json($questions);
     }
 
+    public function options($id)
+    {
+
+        $survey = auth()->user()->surveys()->find($id);
+
+        $qn_options = Option::where('survey_id', $survey->id)->get();
+
+        if ($qn_options->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => $survey->name . ' doesnt have options yet',
+            ], 400);
+        }
+
+        return response()->json($qn_options);
+    }
+
     public function survey()
     {
 
