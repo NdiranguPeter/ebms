@@ -34,7 +34,7 @@
                     {!! Form::open(['action'=>'QuestionsController@store', 'method'=>'POST']) !!}
                     <input type="hidden" name="survey_id" value={{$survey->id}}>
                     <input type="hidden" name="hint" value="">
-                    <input type="hidden" name="qn_order" value={{$questions->count()+1}}>
+                    <input type="hidden" name="qn_order" value={{$qn_order+1}}>
                     <input type="hidden" name="default" value="">
                     <input type="hidden" name="user_id" value={{ Auth::user()->id }}>
                     <div class="form-group">

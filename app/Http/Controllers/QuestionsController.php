@@ -89,8 +89,9 @@ class QuestionsController extends Controller
         $groups = Group::where('survey_id', $survey->id)->get();
         // dd($groups);
         $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->paginate(10);
+        $question_order = Question::where('survey_id', $id)->max("qn_order")->get();
 
-        return view('questions.show')->with(['survey' => $survey, 'groups' => $groups, 'questions' => $questions]);
+        return view('questions.show')->with(['qn_order' => $question_order, 'survey' => $survey, 'groups' => $groups, 'questions' => $questions]);
 
     }
 
