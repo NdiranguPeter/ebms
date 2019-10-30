@@ -20,9 +20,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/questions/{survey_id}', 'API\QuestionsController@show');
     Route::get('/options/{survey_id}', 'API\QuestionsController@options');
     Route::get('/survey', 'API\QuestionsController@survey');
-    Route::post('/answer', 'API\QuestionsController@answer');
 
 });
-
+Route::post('/answer', 'API\QuestionsController@answer');
 Route::post('/login', 'AuthController@login');
 Route::middleware('auth:api')->post('/logout', 'AuthController@logout');
