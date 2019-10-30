@@ -6,6 +6,7 @@ use App\Answer;
 use App\Http\Controllers\Controller;
 use App\Option;
 use App\Question;
+use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
