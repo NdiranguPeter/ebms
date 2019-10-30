@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Answer;
 use App\Http\Controllers\Controller;
 use App\Option;
 use App\Question;
@@ -59,5 +60,10 @@ class QuestionsController extends Controller
         }
 
         return response()->json($surveys);
+    }
+
+    public function answer(Request $request)
+    {
+        Answer::create($request->all());
     }
 }
