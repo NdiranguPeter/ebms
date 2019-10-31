@@ -54,8 +54,9 @@
                         <tbody>
                             @foreach ($answers_list as $list)
                             <tr>
-                                @foreach ($answers as $answer)
+
                                 @foreach ($questions as $question)
+                                @foreach ($answers as $answer)
                                 @if ($answer->qn_id == $question->id)
                                 <td>{{$answer->ans}}</td>
                                 @else
