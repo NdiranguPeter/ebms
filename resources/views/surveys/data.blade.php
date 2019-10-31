@@ -55,18 +55,16 @@
                         </thead>
                         <tbody>
                             @foreach ($answers as $answer)
-
                             <tr>
                                 @foreach ($questions as $question)
                                 @if ($answer->qn_id == $question->id)
                                 <td>{{$answer->ans}}</td>
                                 @endif
-                                @else
+                                @elseif($answer->qn_id != $question->id)
                                 <td></td>
                                 @endforeach
                             </tr>
                             @endforeach
-
                         </tbody>
                     </table>
 
