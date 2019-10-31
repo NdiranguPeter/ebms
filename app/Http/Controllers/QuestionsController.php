@@ -95,6 +95,19 @@ class QuestionsController extends Controller
 
     }
 
+    public function data($id)
+    {
+
+        $survey = Survey::find($id);
+
+        $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->paginate(10);
+
+        $answers = Answer::where('survey_id', $id)->get();
+
+        return view('surveys.data')->with(['survey' => $survey, 'questions' => $questions, 'answers' => $answers]);
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

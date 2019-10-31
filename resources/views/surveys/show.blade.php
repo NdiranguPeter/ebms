@@ -45,7 +45,7 @@
                 <div style="float:right;">
                     <table>
                         <tr>
-                            <td><a href="#">data</a> | </td>
+                            <td><a href="/data/{{$survey->id}}">data</a> | </td>
                             <td><a href="#">archive</a> | </td>
                             <td><a href="/surveys/{{$survey->id}}/edit">edit</a> | </td>
                             <td>

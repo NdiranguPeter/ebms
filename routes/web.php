@@ -127,6 +127,7 @@ Route::resource('projects', 'ProjectsController');
 
 Route::resource('surveys', 'SurveysController');
 Route::get('/questions/{survey_id}', 'QuestionsController@show');
+Route::get('/data/{survey_id}', 'QuestionsController@data');
 Route::get('/questions/{question_id}/delete', 'QuestionsController@destroy');
 Route::get('/groups/{group_id}/delete', 'GroupsController@destroy');
 Route::get('/questions/{question_id}/duplicate', 'QuestionsController@duplicate');
