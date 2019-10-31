@@ -15,7 +15,7 @@
                 </li>
                 /
                 <li class="active">Survey</li>
-            </ul><!-- /.breadcrumb -->
+            </ul>
 
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
@@ -29,8 +29,6 @@
         </div>
 
         <div class="page-content">
-
-
             <div class="page-header">
                 <h1>
                     {{$survey->name}}
@@ -57,8 +55,6 @@
                                 @endforeach
                             </tr>
                         </thead>
-
-
                         <tbody>
 
                             <tr>
