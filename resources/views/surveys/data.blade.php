@@ -59,9 +59,10 @@
                                 @foreach ($questions as $question)
                                 @if ($answer->qn_id == $question->id)
                                 <td>{{$answer->ans}}</td>
-                                @endif
-                                @elseif($answer->qn_id != $question->id)
+                                @else
                                 <td></td>
+                                @endif
+
                                 @endforeach
                             </tr>
                             @endforeach
