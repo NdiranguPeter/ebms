@@ -47,20 +47,24 @@
                         <thead>
 
                             <tr>
-                                @foreach ($qns as $question)
+                                @foreach ($questions as $question)
                                 <th scope="col">{{$question->column}}</th>
+
                                 @endforeach
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($questions as $question)
+
                             <tr>
-                                @foreach ($questions as $question)
                                 @foreach ($answers as $answer)
                                 @if ($answer->qn_id == $question->id)
                                 <td>{{$answer->ans}}</td>
                                 @endif
                                 @endforeach
-                                @endforeach
+                            </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
 
