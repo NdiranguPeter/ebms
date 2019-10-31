@@ -62,7 +62,20 @@ class QuestionsController extends Controller
 
         return response()->json($surveys);
     }
+    public function project()
+    {
 
+        $projects = auth()->user()->projects;
+
+        if ($projects->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => auth()->user()->name . ' doesnt have any surveys yet',
+            ], 400);
+        }
+
+        return response()->json($projects);
+    }
     public function answer(Request $request)
     {
         Answer::create($request->all());
