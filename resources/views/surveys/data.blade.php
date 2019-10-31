@@ -59,10 +59,13 @@
                         <tbody>
 
                             <tr>
+                                @foreach ($questions as $question)
                                 @foreach ($answers as $answer)
+                                @if ($answer->qn_id == $question->id)
                                 <td>{{$answer->ans}}</td>
+                                @endif
                                 @endforeach
-
+                                @endforeach
 
                         </tbody>
                     </table>
