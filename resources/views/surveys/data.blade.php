@@ -62,6 +62,7 @@
                                 <td></td>
                                 @endif
                                 @endforeach
+                                @endforeach
                             </tr>
                             @endforeach
                         </tbody>
