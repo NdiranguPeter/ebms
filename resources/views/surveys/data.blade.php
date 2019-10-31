@@ -45,13 +45,10 @@
                     @if (count($answers) > 0)
                     <table class="table table-hover table-bordered">
                         <thead>
+
                             <tr>
-                                @foreach ($questions as $question)
-                                @foreach ($answers as $answer)
-                                @if ($answer->qn_id == $question->id)
+                                @foreach ($qns as $question)
                                 <th scope="col">{{$question->column}}</th>
-                                @endif
-                                @endforeach
                                 @endforeach
                             </tr>
                         </thead>

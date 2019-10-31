@@ -101,11 +101,18 @@ class QuestionsController extends Controller
 
         $survey = Survey::find($id);
 
+        
+        $qns = \DB::table('questions')
+            ->join('answers', 'answer.qn_id', 'questions.id')
+            ->select('questions.*')->where('questions.survey_id', $id)
+            ->get();
+
+
         $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->paginate(10);
 
         $answers = Answer::where('survey_id', $id)->get();
 
-        return view('surveys.data')->with(['survey' => $survey, 'questions' => $questions, 'answers' => $answers]);
+        return view('surveys.data')->with(['qns'=>$qns,'survey' => $survey, 'questions' => $questions, 'answers' => $answers]);
 
     }
 
