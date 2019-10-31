@@ -51,19 +51,7 @@
                                 @endforeach
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                @foreach ($answers as $answer)
-                                @foreach ($questions as $question)
-                                @if ($answer->qn_id == $question->id)
-                                <td>{{$answer->ans}}</td>
-                                @else
-                                <td></td>
-                                @endif
-                                @endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
+
                     </table>
                     @else
                     <p>Survey doesn't have data yet</p>
