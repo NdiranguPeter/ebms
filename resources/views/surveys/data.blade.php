@@ -58,8 +58,6 @@
                                 @foreach ($answers as $answer)
                                 @if ($answer->qn_id == $question->id)
                                 <td>{{$answer->ans}}</td>
-                                @else
-                                <td></td>
                                 @endif
                                 @endforeach
                                 @endforeach
