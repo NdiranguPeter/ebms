@@ -46,8 +46,8 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                @foreach ($answers as $answer)
                                 @foreach ($questions as $question)
+                                @foreach ($answers as $answer)
                                 @if ($answer->qn_id == $question->id)
                                 <th scope="col">{{$question->column}}</th>
                                 @endif
