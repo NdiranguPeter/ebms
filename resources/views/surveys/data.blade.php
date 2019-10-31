@@ -65,7 +65,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
                     @else
                     <p>Survey doesn't have data yet</p>
                     @endif
