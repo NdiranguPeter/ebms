@@ -53,14 +53,18 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($questions as $question)
-                            @foreach ($answers as $answer)
-                            @if ($answer->qn_id == $question->id)
+                            @foreach ($answers_list as $list)
                             <tr>
+                                @foreach ($questions as $question)
+                                @foreach ($answers as $answer)
+                                @if ($answer->qn_id == $question->id)
+
                                 <td>{{$answer->ans}}</td>
+
+                                @endif
+                                @endforeach
+                                @endforeach
                             </tr>
-                            @endif
-                            @endforeach
                             @endforeach
 
 
