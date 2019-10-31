@@ -53,7 +53,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <tr>
                                 @foreach ($questions as $question)
                                 @foreach ($answers as $answer)
@@ -62,7 +61,6 @@
                                 @endif
                                 @endforeach
                                 @endforeach
-
                         </tbody>
                     </table>
 

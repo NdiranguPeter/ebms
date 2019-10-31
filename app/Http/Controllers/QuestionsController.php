@@ -103,7 +103,7 @@ class QuestionsController extends Controller
 
         
         $qns = \DB::table('questions')
-            ->join('answers', 'answer.qn_id', 'questions.id')
+            ->join('answers', 'answers.qn_id', 'questions.id')
             ->select('questions.*')->where('questions.survey_id', $id)
             ->get();
 
