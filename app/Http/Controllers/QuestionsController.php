@@ -6,6 +6,7 @@ use App\Group;
 use App\Option;
 use App\Question;
 use App\Survey;
+use App\Answer;
 use DB;
 use Illuminate\Http\Request;
 
