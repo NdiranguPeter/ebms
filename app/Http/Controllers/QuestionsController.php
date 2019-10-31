@@ -112,7 +112,9 @@ class QuestionsController extends Controller
 
         $answers = Answer::where('survey_id', $id)->get();
 
-        return view('surveys.data')->with(['qns'=>$qns,'survey' => $survey, 'questions' => $questions, 'answers' => $answers]);
+        $answers_list = Answer::where('survey_id', $id)->distinct('qn_id')->get();
+
+        return view('surveys.data')->with(['answers_list'=>$answers_list,'qns'=>$qns,'survey' => $survey, 'questions' => $questions, 'answers' => $answers]);
 
     }
 

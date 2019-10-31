@@ -52,8 +52,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($answers as $answer)
+                            @foreach ($answers_list as $list)
                             <tr>
+                                @foreach ($answers as $answer)
                                 @foreach ($questions as $question)
                                 @if ($answer->qn_id == $question->id)
                                 <td>{{$answer->ans}}</td>
