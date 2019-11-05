@@ -43,28 +43,39 @@
 
                     @include('layouts.messages')
                     @if (count($answers) > 0)
-                    <table class="table table-hover table-bordered">
+                    <table class=" table-hover table-bordered">
                         <thead>
                             <tr>
-                                @foreach ($questions as $question)
-                                <th scope="col">{{$question->column}}</th>
+                                @foreach ($answers_list as $answer_list)
+
+                                <th scope="col" style="padding: 10px;">
+                                    @foreach ($questions as $question)
+                                    @if ($question->id == $answer_list->qn_id)
+                                    {{$question->column}}
+                                    @endif
+                                    @endforeach
+                                </th>
                                 @endforeach
                             </tr>
                         </thead>
                         <tbody>
-
                             <tr>
-                                @foreach ($questions as $question)
-                                @foreach ($answers as $answer)
-                                @if ($answer->qn_id == $question->id)
-                                <td>{{$answer->ans}}</td>
-                                @endif
-                                @endforeach
+                                @foreach ($answers_list as $answer_list)
+                                <td>
+                                    <table class="table">
+                                        @foreach ($answers as $answer)
+                                        @if ($answer->qn_id == $answer_list->qn_id)
+                                        <tr>
+                                            <td>
+                                                {{$answer->ans}}
+                                            </td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
+                                    </table>
+                                </td>
                                 @endforeach
                             </tr>
-
-
-
                         </tbody>
                     </table>
                     @else

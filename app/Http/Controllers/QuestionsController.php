@@ -105,7 +105,9 @@ class QuestionsController extends Controller
 
         $answers = Answer::where('survey_id', $id)->get();
 
-        $answers_list = Answer::where('survey_id', $id)->distinct('qn_id')->get();
+        $answers_list = Answer::where('survey_id', $id)->groupBy('qn_id')->get();
+
+        // dd($answers_list);
 
         return view('surveys.data')->with(['answers_list'=>$answers_list,'survey' => $survey, 'questions' => $questions, 'answers' => $answers]);
 
