@@ -89,7 +89,7 @@ class QuestionsController extends Controller
         $survey = Survey::find($id);
         $groups = Group::where('survey_id', $survey->id)->get();
         // dd($groups);
-        $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->paginate(10);
+        $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->get();
 
         $checkboxquestions = DB::table('questions')   
         ->select('questions.*')     
@@ -109,7 +109,7 @@ class QuestionsController extends Controller
         ->get();
 
         
-        $grouped_questions = Question::where('survey_id', $id)->groupBy('group_id')->orderBy('qn_order','asc')->paginate(10);
+        $grouped_questions = Question::where('survey_id', $id)->groupBy('group_id')->orderBy('qn_order','asc')->paginate(3);
 
 
         $question_order = Question::where('survey_id', $id)->max("qn_order");

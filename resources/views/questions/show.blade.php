@@ -135,7 +135,8 @@
 
                     </table>
                     @endforeach
-                    {{$questions->links()}}
+                    {{-- {{$questions->links()}} --}}
+                    {{$grouped_questions->links()}}
 
 
                 </div>
