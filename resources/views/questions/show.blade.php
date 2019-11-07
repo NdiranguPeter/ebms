@@ -117,7 +117,7 @@
                             <td>
 
 
-                                <a href="" data-toggle="modal" data-target="#skipModal"><i
+                                <a href="" data-toggle="modal" data-target="#skipModal" data-qnid={{$question->id}}><i
                                         class="ace-icon glyphicon glyphicon-cog"></i></a>
                                 &nbsp;
                                 <a href="/questions/{{$question->id}}/delete"
@@ -215,36 +215,35 @@
             <div class="modal-body">
                 <p style="font-weight:bold;">This question will only be displayed if the following conditions apply</p>
                 <br />
-                <select name="" id="" style="min-width: 300px;">
+                {!! Form::open(['action'=>'SkipController@store', 'method'=>'POST']) !!}
+                <select id='questions' name='questions' style="min-width: 300px;">
                     <option value="">select question from list</option>
                     @foreach ($radioquestions as $radioquestion)
-                    <option value="">{!!$radioquestion->name!!}</option>
+                    <option value={{$radioquestion->id}}>{!!$radioquestion->name!!}</option>
                     @endforeach
                     @foreach ($checkboxquestions as $checkboxquestions)
-                    <option value="">{!!$checkboxquestions->name!!}</option>
+                    <option value={{$checkboxquestions->id}}>{!!$checkboxquestions->name!!}</option>
                     @endforeach
                 </select>
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                <select name="" id="">
-                    <option value="">=</option>
+                <select name="operator" id="operator">
+                    <option value="=" selected>=</option>
                 </select>
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                <select name="" id="" style="min-width: 150px;">
+                <select id='options' name='options' style="min-width: 150px;">
                     <option value="">select value</option>
-                    @foreach ($questionsanswers as $questionsanswer)
-                    <option value="">{{$questionsanswer->ans}}</option>
-                    @endforeach
+
                 </select>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                {{Form::submit('Save skip', ['class'=>'btn btn-primary','style'=>'margin-left: 30%;'])}}
             </div>
+            {!! Form::close() !!}
         </div>
     </div>
 </div>
@@ -256,6 +255,42 @@
 setTimeout(function() {
 $(".alert").alert('close');
 }, 1600);
+});
+
+
+$(document).ready(function() {
+
+$('select[name="questions"]').on('change', function(){
+var qnId = $(this).val();
+if(qnId) {
+$.ajax({
+url: '/options/'+qnId,
+type:"GET",
+dataType:"json",
+beforeSend: function(){
+$('#loader').css("visibility", "visible");
+},
+
+success:function(data) {
+
+$('select[name="options"]').empty();
+
+$.each(data, function(key, value){
+
+$('select[name="options"]').append('<option value="'+ value +'">' + value + '</option>');
+
+});
+},
+complete: function(){
+$('#loader').css("visibility", "hidden");
+}
+});
+} else {
+$('select[name="answers"]').empty();
+}
+
+});
+
 });
 
 

@@ -36,6 +36,7 @@ Route::get('/pars/{id}', 'PagesController@pars');
 Route::get('/qntype/{id}', 'QuestionsController@qntype');
 Route::post('/qntype/{id}', 'QuestionsController@storeType');
 
+
 Route::get('/repo/{id}', 'PagesController@repo');
 Route::get('/jan/repo/{id}/{year}', 'PagesController@janrepo');
 Route::get('/feb/repo/{id}/{year}', 'PagesController@febrepo');
@@ -127,6 +128,7 @@ Route::resource('projects', 'ProjectsController');
 
 Route::resource('surveys', 'SurveysController');
 Route::get('/questions/{survey_id}', 'QuestionsController@show');
+Route::get('/options/{qn_id}', 'QuestionsController@options');
 Route::get('/data/{survey_id}', 'QuestionsController@data');
 Route::get('/questions/{question_id}/delete', 'QuestionsController@destroy');
 Route::get('/groups/{group_id}/delete', 'GroupsController@destroy');
@@ -157,3 +159,4 @@ Route::resource('deliverables', 'DeliverablesController');
 Route::resource('risksafter', 'RisksAfterController');
 Route::resource('assumptionsafter', 'AssuptionsAfterController');
 Route::resource('groups', 'GroupsController');
+Route::resource('skip', 'SkipController');
