@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use Illuminate\Http\Request;
+use DB;
 
 class GroupsController extends Controller
 {
@@ -97,6 +98,10 @@ class GroupsController extends Controller
         $group = Group::find($id);
         $survey_id = $group->survey_id;
 
+        DB::table('questions')
+           ->where('group_id', '>=', $id)
+           ->update(['group_id'=>0]);
+    
         $group->delete();
         return redirect('/questions/' . $survey_id)->with('error', 'Group deleted');
 

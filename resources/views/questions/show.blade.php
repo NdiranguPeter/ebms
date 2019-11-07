@@ -1,4 +1,5 @@
 @extends('layouts.default')
+
 @section('content')
 <div class="container-fluid main-content">
     <div class="main-content-inner">
@@ -23,6 +24,10 @@
             .form-group>label {
                 color: #0081c3;
             }
+
+            .qns {
+                width: 350px;
+            }
         </style>
 
         <div class="page-content">
@@ -30,7 +35,7 @@
             <!-- PAGE CONTENT BEGINS -->
             <div class="container-fluid">
                 @include('layouts.messages')
-                <div class="col-xs-12 col-sm-6 table-bordered">
+                <div class="col-xs-12 col-sm-6 table-bordered" style="margin-top: 25px; padding: 10px;">
                     {!! Form::open(['action'=>'QuestionsController@store', 'method'=>'POST']) !!}
                     <input type="hidden" name="survey_id" value={{$survey->id}}>
                     <input type="hidden" name="hint" value="">
@@ -38,7 +43,8 @@
                     <input type="hidden" name="default" value="">
                     <input type="hidden" name="user_id" value={{ Auth::user()->id }}>
                     <div class="form-group">
-                        <a style="float:right;" data-toggle="modal" data-target="#exampleModal">Create/delete group</a>
+                        <a style="float:right;" data-toggle="modal" data-target="#exampleModal">Create or Delete
+                            group</a>
                         {{Form::label('group', 'Group')}}
                         <select name="group_id" id="group"
                             class="form-control @error('ir_office') is-invalid @enderror">
@@ -51,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('name', 'Question')}}
-                        {{Form::textarea('name', '', ['id' => 'article-ckeditor', 'class' => 'form-control'])}}
+                        {{Form::textarea('name', '', [ 'class' => 'form-control'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('type', 'Question type')}}
@@ -93,16 +99,27 @@
                 @if ($questions->count()>0)
 
                 <div class="col-xs-12 col-sm-6">
-                    <h1 style="font-size: 18px;
-    color: #0081c3;">{{$survey->name}}</h1>
-                    <table class="table table-bordered">
+                    <h1 style="font-size: 18px;color: #0081c3;">{{$survey->name}}</h1>
+                    @foreach ($grouped_questions as $grouped_qn)
+                    @foreach ($groups as $group)
+                    @if ($group->id == $grouped_qn->group_id )
+                    <p>{{$group->name}}</p>
+                    @endif
+                    @endforeach
 
+                    <table class="table table-bordered">
                         @foreach ($questions as $question)
+                        @if ($grouped_qn->group_id == $question->group_id)
+
                         <tr>
                             <td>{{$question->qn_order}}</td>
-                            <td>{!!$question->name!!}</td>
+                            <td class="qns">{!!$question->name!!}</td>
                             <td>
-                                <a href="#"> <i class="ace-icon glyphicon glyphicon-cog"></i></a>&nbsp;&nbsp;
+
+
+                                <a href="" data-toggle="modal" data-target="#skipModal"><i
+                                        class="ace-icon glyphicon glyphicon-cog"></i></a>
+                                &nbsp;
                                 <a href="/questions/{{$question->id}}/delete"
                                     onclick="return confirm('Are you sure you want to delete?')"> <i
                                         class="red ace-icon glyphicon glyphicon-trash"></i></a>&nbsp;&nbsp;
@@ -113,11 +130,14 @@
                                         class="green ace-icon glyphicon glyphicon-duplicate"></i></a>
                             </td>
                         </tr>
-
+                        @endif
                         @endforeach
 
                     </table>
+                    @endforeach
                     {{$questions->links()}}
+
+
                 </div>
 
 
@@ -180,6 +200,55 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="skipModal" tabindex="-1" role="dialog" aria-labelledby="skipModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="skipModalLabel">Skip logic</h4>
+            </div>
+            <div class="modal-body">
+                <p style="font-weight:bold;">This question will only be displayed if the following conditions apply</p>
+                <br />
+                <select name="" id="" style="min-width: 300px;">
+                    <option value="">select question from list</option>
+                    @foreach ($radioquestions as $radioquestion)
+                    <option value="">{!!$radioquestion->name!!}</option>
+                    @endforeach
+                    @foreach ($checkboxquestions as $checkboxquestions)
+                    <option value="">{!!$checkboxquestions->name!!}</option>
+                    @endforeach
+                </select>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <select name="" id="">
+                    <option value="">=</option>
+                </select>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <select name="" id="" style="min-width: 150px;">
+                    <option value="">select value</option>
+                    @foreach ($questionsanswers as $questionsanswer)
+                    <option value="">{{$questionsanswer->ans}}</option>
+                    @endforeach
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     $(document).ready(function() {
 // show the alert
@@ -187,6 +256,9 @@ setTimeout(function() {
 $(".alert").alert('close');
 }, 1600);
 });
+
+
 </script>
+
 
 @endsection

@@ -47,6 +47,7 @@
                         {{Form::label('group', 'Group')}}
                         <select name="group_id" id="group"
                             class="form-control @error('ir_office') is-invalid @enderror">
+                            <option value=0>Select group</option>
                             @foreach ($groups as $group)
                             <option value={{$group->id}} @if ($question->group_id == $group->id)
                                 selected

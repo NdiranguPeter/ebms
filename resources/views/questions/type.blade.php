@@ -27,27 +27,33 @@
 
         <div class="page-content">
             <div class="container-fluid">
-
-                <p style="font-size:medium; font-weight:bold;">{!!$question->name!!}</p>
+                @include('layouts.messages')
+                <span style="font-weight: bold; font-size: large;"> {!!$question->name!!} </span>
 
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                 {!! Form::open(['action'=>['QuestionsController@storeType',$question->id], 'method'=>'POST']) !!}
                 <input type="hidden" name="qn_id" value={{$question->id}}>
                 <input type="hidden" name="survey_id" value={{$question->survey_id}}>
+                <div><span>Options</span> <span style="margin-left: 13%;">Values</span></div>
+
                 <div id="boxes-wrap">
-                    <div>
+
+                    <div style="margin-top: 10px;">
 
                         <input name="name[]" type="text" class="name" placeholder="option 1">
+
+                        <input name="value[]" type="number" class="value" value=1>
                         <button class="remove-gas-row" type="button">Remove</button>
+
                     </div>
                 </div>
 
-                <div style="float:right;">
-                    {{Form::submit('Save Options', ['class'=>'btn btn-primary'])}}
+                <div style="margin-top: 10px;">
+                    <a href="#" id="add">Click to add option <i class="ace-icon glyphicon glyphicon-plus"></i></a>
+                    {{Form::submit('Save Options', ['class'=>'btn btn-primary','style'=>'margin-left: 30%;'])}}
                 </div>
                 {!! Form::close() !!}
 
-                <a href="#" id="add">Add More options <i class="ace-icon glyphicon glyphicon-plus"></i></a>
             </div>
         </div>
     </div>
@@ -66,6 +72,7 @@ $('#add').click(function () {
 var newRow = boxRowTemplate.clone();
 inputCount++;
 newRow.find('input.name').attr('placeholder', 'option '+inputCount);
+newRow.find('input.value').attr('value', inputCount);
 boxesWrap.append(newRow);
 });
 

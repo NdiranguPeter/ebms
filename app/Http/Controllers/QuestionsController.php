@@ -90,9 +90,31 @@ class QuestionsController extends Controller
         $groups = Group::where('survey_id', $survey->id)->get();
         // dd($groups);
         $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->paginate(10);
+
+        $checkboxquestions = DB::table('questions')   
+        ->select('questions.*')     
+        ->where('questions.survey_id', $id)
+        ->where('questions.type', "checkbox")       
+        ->get();
+
+        $radioquestions = DB::table('questions')   
+        ->select('questions.*')     
+        ->where('questions.survey_id', $id)
+        ->where('questions.type', "radio")       
+        ->get();
+
+        $questionsanswers = DB::table('answers')   
+        ->select('answers.*')     
+        ->where('answers.survey_id', $id)
+        ->get();
+
+        
+        $grouped_questions = Question::where('survey_id', $id)->groupBy('group_id')->orderBy('qn_order','asc')->paginate(10);
+
+
         $question_order = Question::where('survey_id', $id)->max("qn_order");
 
-        return view('questions.show')->with(['qn_order' => $question_order, 'survey' => $survey, 'groups' => $groups, 'questions' => $questions]);
+        return view('questions.show')->with(['questionsanswers'=>$questionsanswers, 'radioquestions'=>$radioquestions, 'checkboxquestions'=>$checkboxquestions, 'grouped_questions'=>$grouped_questions, 'qn_order' => $question_order, 'survey' => $survey, 'groups' => $groups, 'questions' => $questions]);
 
     }
 
@@ -205,11 +227,19 @@ class QuestionsController extends Controller
 
         $new_question->qn_order = $question->qn_order + 1;
 
-        // dd($new_question);
-
+        
         $new_question->save();
-        return redirect('/questions/' . $survey_id)->with('success', $name . ' duplicated successfully');
 
+        if($new_question->type == "radio" || $new_question->type == "checkbox"){
+
+            $option = Option::where('question_id', $question->id)->first();
+            $new_option = $option->replicate();
+            $new_option->question_id = $new_question->id;
+            $new_option->save();
+        } 
+
+        return redirect('/questions/' . $survey_id)->with('success', $name . ' duplicated successfully');
+     
     }
     public function qntype($id)
     {
@@ -222,6 +252,15 @@ class QuestionsController extends Controller
     public function storeType(Request $request, $id)
     {
 
+$this->validate($request, [
+    'name.*' => 'required',
+   ],
+    [
+        'name.*.required' => 'Put atleast one option',
+          ]);
+
+
+
         $new_option = new Option;
 
         $new_option->question_id = $id;
@@ -231,8 +270,10 @@ class QuestionsController extends Controller
         $new_option->survey_id = $survey_id;
 
         $options = implode('|', $request->input('name'));
+        $values = implode('|', $request->input('value'));
 
         $new_option->name = $options;
+        $new_option->value = $values;
 
         $new_option->save();
 
