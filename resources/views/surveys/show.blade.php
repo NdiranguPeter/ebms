@@ -81,7 +81,7 @@
                 </a>
                 <a class="btn btn-primary" style="float:right;" href="/questions/{{$survey->id}}">
                     <i class="ace-icon fa fa-arrow-circle-o-right"></i>
-                    Survey Quetions
+                    Survey Questions
                 </a>
 
             </div>

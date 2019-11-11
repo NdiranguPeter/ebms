@@ -41,14 +41,14 @@ class SkipController extends Controller
             'options.required' => 'answer cannot be empty',
         ]);
 
+        $qn_id = $request->input('qn_id');
         $question = $request->input('questions');
         $operator = $request->input('operator');
         $option = $request->input('options');
 
-        
+        $skip = $qn_id."|".$question."|".$operator."|".$option;
 
-
-        dd($option);
+        dd($skip);
 
     }
 

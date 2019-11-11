@@ -211,11 +211,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="skipModalLabel">Skip logic</h4>
+                <a style="float:right;" href="#">View all skip logic</a>
             </div>
             <div class="modal-body">
                 <p style="font-weight:bold;">This question will only be displayed if the following conditions apply</p>
                 <br />
                 {!! Form::open(['action'=>'SkipController@store', 'method'=>'POST']) !!}
+                <input type="hidden" name="qn_id" value={{$question->id}}>
                 <select id='questions' name='questions' style="min-width: 300px;">
                     <option value="">select question from list</option>
                     @foreach ($radioquestions as $radioquestion)
