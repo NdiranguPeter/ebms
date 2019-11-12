@@ -99,7 +99,8 @@
                 @if ($questions->count()>0)
 
                 <div class="col-xs-12 col-sm-6">
-                    <h1 style="font-size: 18px;color: #0081c3;">{{$survey->name}}</h1>
+                    <h1 style="font-size: 18px;color: #0081c3; font-weight: bold;">{{$survey->name}}</h1>
+                    <hr>
                     @foreach ($grouped_questions as $grouped_qn)
                     @foreach ($groups as $group)
                     @if ($group->id == $grouped_qn->group_id )
@@ -117,9 +118,7 @@
                             <td>
 
 
-                                <a href="" data-toggle="modal" data-target="#skipModal"
-                                    data-questionid={{$question->id}}><i
-                                        class="ace-icon glyphicon glyphicon-cog"></i></a>
+                                <a href="/skip/{{$question->id}}"><i class="ace-icon glyphicon glyphicon-cog"></i></a>
                                 &nbsp;
                                 <a href="/questions/{{$question->id}}/delete"
                                     onclick="return confirm('Are you sure you want to delete?')"> <i
@@ -204,53 +203,6 @@
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="skipModal" tabindex="-1" role="dialog" aria-labelledby="skipModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="skipModalLabel">Skip logic</h4>
-                <a style="float:right;" href="#">View all skip logic</a>
-            </div>
-            <div class="modal-body">
-                <p style="font-weight:bold;">This question will only be displayed if the following conditions apply</p>
-                <br />
-                {!! Form::open(['action'=>'SkipController@store', 'method'=>'POST']) !!}
-                <input type="text" name="qnid" value="">
-                <select id='questions' name='questions' style="min-width: 300px;">
-                    <option value="">select question from list</option>
-                    @foreach ($radioquestions as $radioquestion)
-                    <option value={{$radioquestion->id}}>{!!$radioquestion->name!!}</option>
-                    @endforeach
-                    @foreach ($checkboxquestions as $checkboxquestions)
-                    <option value={{$checkboxquestions->id}}>{!!$checkboxquestions->name!!}</option>
-                    @endforeach
-                </select>
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                <select name="operator" id="operator">
-                    <option value="=" selected>=</option>
-                </select>
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                <select id='options' name='options' style="min-width: 150px;">
-                    <option value="">select value</option>
-
-                </select>
-
-            </div>
-            <div class="modal-footer">
-                {{Form::submit('Save skip', ['class'=>'btn btn-primary','style'=>'margin-left: 30%;'])}}
-            </div>
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
-
 
 <script>
     $(document).ready(function() {
@@ -259,9 +211,6 @@ setTimeout(function() {
 $(".alert").alert('close');
 }, 1600);
 });
-
-
-
 
 </script>
 

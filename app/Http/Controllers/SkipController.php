@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Answer;
+use App\Group;
+use App\Option;
+use App\Question;
+use App\Survey;
+use DB;
+
 
 class SkipController extends Controller
 {
@@ -41,7 +48,7 @@ class SkipController extends Controller
             'options.required' => 'answer cannot be empty',
         ]);
 
-        $qn_id = $request->input('qn_id');
+        $qn_id = $request->input('qnid');
         $question = $request->input('questions');
         $operator = $request->input('operator');
         $option = $request->input('options');
@@ -64,30 +71,29 @@ class SkipController extends Controller
         $question = Question::find($id);
 
         $survey = Survey::find($question->survey_id);
+
+        // dd($survey->id);
       
-        $questions = Question::where('survey_id', $id)
-        ->
+        $questions1 = DB::table('questions')
+        ->select('questions.*')
+        ->where('questions.qn_order','<', $question->qn_order)
+        ->where('questions.survey_id', '=', $survey->id)
+        // ->where('questions.type','=', 'radio')
+        ->where('questions.type','=', 'checkbox')
         ->orderBy('qn_order', 'asc')
         ->get();
 
-        $checkboxquestions = DB::table('questions')
-            ->select('questions.*')
-            ->where('questions.survey_id', $id)
-            ->where('questions.type', "checkbox")
-            ->get();
+        $questions2 = DB::table('questions')
+        ->select('questions.*')
+        ->where('questions.qn_order','<', $question->qn_order)
+        ->where('questions.survey_id', '=', $survey->id)
+        ->where('questions.type','=', 'radio')
+        ->orderBy('qn_order', 'asc')
+        ->get();
 
-        $radioquestions = DB::table('questions')
-            ->select('questions.*')
-            ->where('questions.survey_id', $id)
-            ->where('questions.type', "radio")
-            ->get();
-
-        $questionsanswers = DB::table('answers')
-            ->select('answers.*')
-            ->where('answers.survey_id', $id)
-            ->get();
-
-             return view('skip.create')->with(['questionsanswers' => $questionsanswers, 'radioquestions' => $radioquestions, 'checkboxquestions' => $checkboxquestions,  'questions' => $questions]);
+        $questions = $questions1->merge($questions2);
+        
+        return view('skip.show')->with(['question'=>$question,'questions' => $questions]);
 
     }
 

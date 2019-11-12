@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = ['user_id', 'survey_id', 'group_id', 'name', 'type', 'qn_order','mandatory', 'column', 'hint', 'default'];
+    protected $fillable = ['user_id', 'survey_id', 'group_id', 'name', 'type', 'qn_order','mandatory', 'column', 'hint', 'default','skip'];
     protected $table = "questions";
 
     public function user()
