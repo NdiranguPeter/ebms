@@ -117,7 +117,8 @@
                             <td>
 
 
-                                <a href="" data-toggle="modal" data-target="#skipModal" data-qnid={{$question->id}}><i
+                                <a href="" data-toggle="modal" data-target="#skipModal"
+                                    data-questionid={{$question->id}}><i
                                         class="ace-icon glyphicon glyphicon-cog"></i></a>
                                 &nbsp;
                                 <a href="/questions/{{$question->id}}/delete"
@@ -217,7 +218,7 @@
                 <p style="font-weight:bold;">This question will only be displayed if the following conditions apply</p>
                 <br />
                 {!! Form::open(['action'=>'SkipController@store', 'method'=>'POST']) !!}
-                <input type="hidden" name="qn_id" value={{$question->id}}>
+                <input type="text" name="qnid" value="">
                 <select id='questions' name='questions' style="min-width: 300px;">
                     <option value="">select question from list</option>
                     @foreach ($radioquestions as $radioquestion)
@@ -260,40 +261,6 @@ $(".alert").alert('close');
 });
 
 
-$(document).ready(function() {
-
-$('select[name="questions"]').on('change', function(){
-var qnId = $(this).val();
-if(qnId) {
-$.ajax({
-url: '/options/'+qnId,
-type:"GET",
-dataType:"json",
-beforeSend: function(){
-$('#loader').css("visibility", "visible");
-},
-
-success:function(data) {
-
-$('select[name="options"]').empty();
-
-$.each(data, function(key, value){
-
-$('select[name="options"]').append('<option value="'+ value +'">' + value + '</option>');
-
-});
-},
-complete: function(){
-$('#loader').css("visibility", "hidden");
-}
-});
-} else {
-$('select[name="answers"]').empty();
-}
-
-});
-
-});
 
 
 </script>

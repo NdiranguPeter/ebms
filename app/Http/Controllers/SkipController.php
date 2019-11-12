@@ -23,7 +23,7 @@ class SkipController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -46,7 +46,7 @@ class SkipController extends Controller
         $operator = $request->input('operator');
         $option = $request->input('options');
 
-        $skip = $qn_id."|".$question."|".$operator."|".$option;
+        $skip = $qn_id . "|" . $question . "|" . $operator . "|" . $option;
 
         dd($skip);
 
@@ -60,7 +60,35 @@ class SkipController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $question = Question::find($id);
+
+        $survey = Survey::find($question->survey_id);
+      
+        $questions = Question::where('survey_id', $id)
+        ->
+        ->orderBy('qn_order', 'asc')
+        ->get();
+
+        $checkboxquestions = DB::table('questions')
+            ->select('questions.*')
+            ->where('questions.survey_id', $id)
+            ->where('questions.type', "checkbox")
+            ->get();
+
+        $radioquestions = DB::table('questions')
+            ->select('questions.*')
+            ->where('questions.survey_id', $id)
+            ->where('questions.type', "radio")
+            ->get();
+
+        $questionsanswers = DB::table('answers')
+            ->select('answers.*')
+            ->where('answers.survey_id', $id)
+            ->get();
+
+             return view('skip.create')->with(['questionsanswers' => $questionsanswers, 'radioquestions' => $radioquestions, 'checkboxquestions' => $checkboxquestions,  'questions' => $questions]);
+
     }
 
     /**
