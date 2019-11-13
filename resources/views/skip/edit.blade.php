@@ -47,17 +47,22 @@
                         <div class="tab-content">
 
                             <div id="skip" class="tab-pane in active">
-                                @if ($question->skip == null)
+
                                 {!!$question->qn_order.") ".$question->name!!}
                                 <p style="font-weight:bold;">This question will only be displayed if the following
                                     conditions apply</p>
                                 <br />
-                                {!! Form::open(['action'=>'SkipController@store', 'method'=>'POST']) !!}
+                                {!! Form::open(['action'=>['SkipController@update', $question->id], 'method'=>'POST'])
+                                !!}
                                 <input type="hidden" name="qnid" value={{$question->id}}>
                                 <select id='questions' name='questions' style="min-width: 300px;">
-                                    <option value="">select question from list</option>
+
                                     @foreach ($questions as $question)
+                                    @if ($question->id == $skipsdetails[1])
+                                    <option value={{$question->id}} selected>{!!$question->name!!}</option>
+                                    @else
                                     <option value={{$question->id}}>{!!$question->name!!}</option>
+                                    @endif
                                     @endforeach
 
                                 </select>
@@ -74,53 +79,11 @@
                                     <option value="">select value</option>
 
                                 </select>
+                                {{Form::hidden('_method','PUT')}}
 
-                                {{Form::submit('Save', ['class'=>'btn btn-primary','style'=>'float:right;'])}}
+                                {{Form::submit('update', ['class'=>'btn btn-primary','style'=>'float:right;'])}}
 
                                 {!! Form::close() !!}
-
-
-                                @else
-                                <p>Skip for this question is already set</p>
-
-                                <table class="table table-bodered">
-                                    <thead>
-                                        <th>displayed</th>
-                                        <th>if</th>
-                                        <th></th>
-                                        <th>value</th>
-                                        <th></th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-
-                                            <td>
-                                                @foreach ($allquestions as $allquestion)
-                                                @if ($allquestion->id == $skipsdetails[0])
-                                                {!!$allquestion->name!!}
-                                                @endif
-                                                @endforeach
-                                            </td>
-                                            <td>
-                                                @foreach ($allquestions as $allquestion)
-                                                @if ($allquestion->id == $skipsdetails[1])
-                                                {!!$allquestion->name!!}
-                                                @endif
-                                                @endforeach
-                                            </td>
-                                            <td>{{$skipsdetails[2]}}</td>
-                                            <td>{{$skipsdetails[3]}}</td>
-                                            <td><a href="/skip/{{$question->id}}/delete"> <i
-                                                        class="red ace-icon glyphicon glyphicon-trash"></i></a>&nbsp;&nbsp;
-                                                <a href="/skip/{{$question->id}}/edit"> <i
-                                                        class="ace-icon glyphicon glyphicon-edit"></i></a>&nbsp;&nbsp;
-                                            </td>
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                @endif
                             </div>
 
                             <div id="summation" class="tab-pane">

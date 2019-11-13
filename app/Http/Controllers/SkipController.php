@@ -55,7 +55,14 @@ class SkipController extends Controller
 
         $skip = $qn_id . "|" . $question . "|" . $operator . "|" . $option;
 
-        dd($skip);
+        $qn = Question::find($qn_id);
+
+        $qn->skip = $skip;
+
+        $qn->save();
+
+        return redirect('/questions/' . $qn->survey_id)->with('success', $qn->name . ' skip set successful');
+
 
     }
 
@@ -92,8 +99,16 @@ class SkipController extends Controller
         ->get();
 
         $questions = $questions1->merge($questions2);
+
+        $skipsdetails = "";
+
+        if($question->skip != null){
+            $skipsdetails = explode('|', $question->skip);
+        }
+
+        $allquestions = Question::where('survey_id',$question->survey_id)->get();
         
-        return view('skip.show')->with(['question'=>$question,'questions' => $questions]);
+        return view('skip.show')->with(['allquestions'=>$allquestions, 'skipsdetails'=>$skipsdetails,'question'=>$question,'questions' => $questions]);
 
     }
 
@@ -105,7 +120,43 @@ class SkipController extends Controller
      */
     public function edit($id)
     {
-        //
+     $question = Question::find($id);
+   
+     
+        $survey = Survey::find($question->survey_id);
+
+        // dd($survey->id);
+      
+        $questions1 = DB::table('questions')
+        ->select('questions.*')
+        ->where('questions.qn_order','<', $question->qn_order)
+        ->where('questions.survey_id', '=', $survey->id)
+        // ->where('questions.type','=', 'radio')
+        ->where('questions.type','=', 'checkbox')
+        ->orderBy('qn_order', 'asc')
+        ->get();
+
+        $questions2 = DB::table('questions')
+        ->select('questions.*')
+        ->where('questions.qn_order','<', $question->qn_order)
+        ->where('questions.survey_id', '=', $survey->id)
+        ->where('questions.type','=', 'radio')
+        ->orderBy('qn_order', 'asc')
+        ->get();
+
+        $questions = $questions1->merge($questions2);
+
+        $skipsdetails = "";
+
+        if($question->skip != null){
+            $skipsdetails = explode('|', $question->skip);
+        }
+
+        $allquestions = Question::where('survey_id',$question->survey_id)->get();
+        
+        return view('skip.edit')->with(['allquestions'=>$allquestions, 'skipsdetails'=>$skipsdetails,'question'=>$question,'questions' => $questions]);
+
+
     }
 
     /**
@@ -116,8 +167,33 @@ class SkipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+    
     {
-        //
+
+         $this->validate($request, [
+
+            'options' => 'required',
+        ], [
+            'options.required' => 'answer cannot be empty',
+        ]);
+
+        $question = Question::find($id);
+
+    $qn_id = $request->input('qnid');
+    $ques = $request->input('questions');
+    $operator = $request->input('operator');
+    $option = $request->input('options');
+
+    $skip = $qn_id . "|" . $ques . "|" . $operator . "|" . $option;
+  
+
+$question->skip = $skip;
+
+        $question->save();
+
+return redirect('/questions/' . $question->survey_id)->with('success', $question->name . ' skip updated successful');
+
+
     }
 
     /**
@@ -128,6 +204,11 @@ class SkipController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = Question::find($id);
+        $question->skip = null;
+        $question->save();
+       
+return redirect('/questions/' . $question->survey_id)->with('success', $question->name . ' skip removed successful');
+
     }
 }
