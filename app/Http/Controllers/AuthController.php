@@ -13,7 +13,7 @@ class AuthController extends Controller
                 'form_params' => [
                     'grant_type' => 'password',
                     'client_id' => 2,
-                    'client_secret' => 'zY1M97jDIU0MKL4rLcsizGJwRSVGsU6L8uuQjwVU',
+                    'client_secret' => 'tHtoGX5AaKHvsuEIDffj3DaDYSql8rL7yYHYQhOk',
                     'username' => $request->username,
                     'password' => $request->password,
                 ],
