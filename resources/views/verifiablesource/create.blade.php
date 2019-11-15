@@ -52,14 +52,14 @@
 
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
-                        {{Form::text('name','', ['class' => 'form-control', 'placeholder' => ''])}}
+                        {{Form::text('name','', ['class' => 'form-control', 'placeholder' => 'Means of verification'])}}
                     </div>
                     <div class="form-group">
-                        {{Form::label('responsibility', 'Responsibility of')}}
+                        {{Form::label('responsibility', 'Responsibility person')}}
                         {{Form::text('responsibility','', ['class' => 'form-control', 'placeholder' => ''])}}
                     </div>
                     <div class="form-group">
-                        {{Form::label('frequency', 'frequency')}}
+                        {{Form::label('frequency', 'Frequency')}}
                         <select name="frequency" id="frequency"
                             class="form-control @error('frequency') is-invalid @enderror">
                             <option value="weekly">Weekly</option>

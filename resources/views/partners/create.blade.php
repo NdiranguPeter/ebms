@@ -102,7 +102,6 @@
                             <option value="Lead Organization">Lead Organization</option>
                             <option value="Partner">Partner</option>
                             <option value="Implementing Partner">Implementing Partner</option>
-                            <option value="Donor">Donor</option>
                             <option value="Financial Institution">Financial Institution</option>
                             <option value="Supplier">Supplier</option>
                             <option value="Service Provider">Service Provider</option>

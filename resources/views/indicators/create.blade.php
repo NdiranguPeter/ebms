@@ -87,7 +87,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('target_baseline', 'Baseline')}}
-                        {{Form::text('target_baseline', '', ['class' => 'form-control', 'placeholder' => 'Target at baseline'])}}
+                        {{Form::text('target_baseline', '', ['class' => 'form-control', 'placeholder' => 'Baseline value'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('project_target', 'Project target')}}
