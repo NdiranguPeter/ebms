@@ -49,6 +49,7 @@
                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                     edit project
                 </a>
+
                 <a class="btn btn-success" href="/indicators/goal/create/{{$project->id}}">
                     <i class="ace-icon fa fa-plus bigger-130"></i>
                     Add goal indicator

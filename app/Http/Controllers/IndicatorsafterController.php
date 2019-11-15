@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\indicator;
-use App\indicatorafter;
+use App\Indicator;
+use App\Indicatorafter;
 use App\Project;
 use Illuminate\Http\Request;
 

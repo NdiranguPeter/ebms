@@ -53,10 +53,7 @@
                     <input name="goal_id" type="hidden" value="{{$indicator->goal_id}}">
                     <input name="outcome_id" type="hidden" value="{{$indicator->outcome_id}}">
                     <input name="project_id" type="hidden" value="{{$indicator->project_id}}">
-
                     <input name="duration" type="hidden" value={{$indicator->duration}}>
-
-
                     <div class="col-sm-6">
 
 
