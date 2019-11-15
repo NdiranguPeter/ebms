@@ -107,17 +107,13 @@
                     <p>{{$group->name}}</p>
                     @endif
                     @endforeach
-
                     <table class="table table-bordered">
                         @foreach ($questions as $question)
                         @if ($grouped_qn->group_id == $question->group_id)
-
                         <tr>
                             <td>{{$question->qn_order}}</td>
                             <td class="qns">{!!$question->name!!}</td>
                             <td>
-
-
                                 <a href="/skip/{{$question->id}}"><i class="ace-icon glyphicon glyphicon-cog"></i></a>
                                 &nbsp;
                                 <a href="/questions/{{$question->id}}/delete"
@@ -137,21 +133,12 @@
                     @endforeach
                     {{-- {{$questions->links()}} --}}
                     {{$grouped_questions->links()}}
-
-
                 </div>
-
-
-
                 @else
-
                 <div class="col-xs-12 col-sm-6 alert alert-success">
                     <p>This survey currently doesnt have any questions</p>
                 </div>
-
                 @endif
-
-
             </div>
         </div>
     </div>

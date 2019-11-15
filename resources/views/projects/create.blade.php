@@ -152,8 +152,8 @@
                             <select name="type" id="type" class="form-control @error('stage') is-invalid @enderror">
                                 <option value="Humanitarian Assistance">Humanitarian Assistance</option>
                                 <option value="Development Assistance">Development Assistance</option>
-                                <option value="Confrict Prevention">Confrict Prevention</option>
-                                <option value="Disaster risk reduction">Disaster risk reduction</option>
+                                <option value="Confrict Prevention">Conflict Prevention</option>
+                                <option value="Disaster risk reduction">Disaster Risk Reduction</option>
                             </select>
                         </div>
                         <hr>
