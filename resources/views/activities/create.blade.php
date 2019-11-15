@@ -62,6 +62,10 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
+                            {{Form::label('activity', 'Activity name')}}
+                            {{Form::textarea('activity', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Activity name'])}}
+                        </div>
+                        <div class="form-group">
                             {{Form::label('scoring', 'Project scoring')}}
                             <select name="scoring" id="scoring"
                                 class="form-control @error('scoring') is-invalid @enderror">
@@ -170,6 +174,9 @@
                         </table>
                     </div>
 
+
+                </div>
+                <div class="col-sm-6">
                     <div class="form-group">
                         <h5>Indirect beneficiaries</h5>
                         <div class="col-sm-6">
@@ -183,7 +190,6 @@
                         </div>
 
                     </div>
-
                     <div class="form-group">
                         <h5>People leaving with disability</h5>
 
@@ -196,8 +202,6 @@
                             {{Form::number('disabled_female', 0, ['class' => 'form-control', 'placeholder' => ''])}}
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
 
                     <div class="form-group">
                         {{Form::label('person_responsible', 'Person responsible')}}
@@ -243,10 +247,7 @@
                         {{Form::label('budget', 'Budget')}}
                         {{Form::text('budget', '', ['class' => 'form-control','id'=>'budget', 'readonly'=>'true','onmouseover'=>'changeThis(this)'])}}
                     </div>
-                    <div class="form-group">
-                        {{Form::label('activity', 'Activity name')}}
-                        {{Form::textarea('activity', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Activity name'])}}
-                    </div>
+
 
                     <a href="/activities/output/{{$output->id}}" class="btn btn-default" style="float:left;"><i
                             class="ace-icon fa fa-arrow-circle-o-left"></i>Back to activities</a>
