@@ -232,6 +232,7 @@
                             <option value='Fields'>Fields</option>
                             <option value='Events'>Events</option>
                             <option value='Audits'>Audits</option>
+                            <option value='Days'>Days</option>
 
                         </select>
                     </div>

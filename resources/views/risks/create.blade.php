@@ -119,10 +119,9 @@
                             <select name="likelihood" id="likelihood"
                                 class="form-control @error('likelihood') is-invalid @enderror">
                                 <option value="Not Defined">Not Defined</option>
-                                <option value="Operational Risk">Operational Risk</option>
                                 <option value="Very Unlikely">Very unlikely</option>
                                 <option value="Unlikely">Unlikely</option>
-                                <option value="Likely">likely</option>
+                                <option value="Likely">Likely</option>
                                 <option value="Very likely">Very likely</option>
                             </select>
                         </div>

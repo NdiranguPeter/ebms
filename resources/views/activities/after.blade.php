@@ -200,6 +200,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <h5>People leaving with disability</h5>
+
+                            <div class="col-sm-6">
+                                {{Form::label('disabled_male', 'Male')}}
+                                {{Form::number('disabled_male', 0, ['class' => 'form-control', 'placeholder' => ''])}}
+                            </div>
+                            <div class="col-sm-6">
+                                {{Form::label('disabled_female', 'Female')}}
+                                {{Form::number('disabled_female', 0, ['class' => 'form-control', 'placeholder' => ''])}}
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="col-sm-6">
