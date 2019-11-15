@@ -21,8 +21,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/options/{survey_id}', 'API\QuestionsController@options');
     Route::get('/survey', 'API\QuestionsController@survey');
     Route::get('/project', 'API\QuestionsController@project');
-});
+Route::get('/indicators/{project_id}', 'API\ProjectController@indicators');
+Route::get('/activities/{project_id}', 'API\ProjectController@activities');
 
+});
 Route::post('/answer', 'API\QuestionsController@answer');
 Route::post('/login', 'AuthController@login');
 Route::middleware('auth:api')->post('/logout', 'AuthController@logout');
