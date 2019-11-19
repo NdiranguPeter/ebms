@@ -8,10 +8,7 @@
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="/home">Home</a>
                 </li>
-                /
-                <li>
-                    {!!$indicator->name!!}
-                </li>
+
 
 
 
@@ -27,10 +24,7 @@
                 </form>
             </div><!-- /.nav-search -->
         </div>
-
         <div class="page-content">
-
-
             <div class="page-header">
                 <h1>
                     Add Verification source
@@ -45,14 +39,25 @@
                 </div>
                 @endisset($error)
 
-                <div class="well col-sm-8">
+                <div class="well col-sm-12">
+                    <span style="color: green; font-size:bold;">{!!$indicator->name!!}</span>
                     {!! Form::open(['action'=>'VerificationsourcesController@store', 'method'=>'POST']) !!}
                     @csrf
                     <input type="hidden" name='indicator_id' value={{$indicator->id}}>
 
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
-                        {{Form::text('name','', ['class' => 'form-control', 'placeholder' => 'Means of verification'])}}
+                        <select name="name" id="name" class="form-control @error('frequency') is-invalid @enderror">
+                            <option value="" selected>Select one</option>
+                            <option value="midterm and final evaluation"></option>
+                            <option value="project reports">project reports</option>
+                            <option value="final evaluation surveys">final evaluation surveys</option>
+                            <option value="midterm evaluation surveys">midterm evaluation surveys</option>
+                            <option value="field visits">field visits</option>
+                            <option value="market surveys">market surveys</option>
+                            <option value="follow up by project team">follow up by project team</option>
+                            <option value="member satisfaction surveys">member satisfaction surveys</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         {{Form::label('responsibility', 'Responsibility person')}}
@@ -80,6 +85,7 @@
                         {{Form::label('source', 'Information source')}}
                         <select multiple name="source[]" id="source"
                             class="form-control @error('source') is-invalid @enderror">
+
                             <option value="baseline study">Baseline study</option>
                             <option value="database">Database</option>
                             <option value="evaluation forms">Evaluation forms</option>

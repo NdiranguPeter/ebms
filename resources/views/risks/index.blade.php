@@ -100,7 +100,7 @@
                             <?php $count = 1; ?>
                             @foreach ($risks as $risk)
 
-                            <tr>
+                            <tr style="font-size: x-small;">
                                 <td> {{$count}} </td>
                                 {{-- <td> {{$risk->$vsf}} </td> --}}
                                 <td> {{$risk->name}} </td>

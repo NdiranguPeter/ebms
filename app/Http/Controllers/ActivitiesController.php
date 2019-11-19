@@ -11,6 +11,7 @@ use App\Output;
 use App\Partner;
 use App\Project;
 use App\Unit;
+use App\Challenge;
 use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
@@ -474,11 +475,13 @@ class ActivitiesController extends Controller
 
         $units = Unit::all();
 
+        $challenges = Challenge::where('activity_id',$id)->get();
+
         $outcome = Outcome::find($output->outcome_id);
 
         $before_after = 'after';
 
-        return view('activities.after')->with(['before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
+        return view('activities.after')->with(['challenges'=>$challenges,'before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
 
     }
 

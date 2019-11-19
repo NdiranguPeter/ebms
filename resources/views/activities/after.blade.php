@@ -28,15 +28,12 @@
                 <h1>
                     Update activity {{$before_after}} project implementation
                 </h1>
+                <a style="float:right;" data-toggle="modal" data-target="#exampleModal">Add Challenges</a>
             </div><!-- /.page-header -->
 
             <!-- PAGE CONTENT BEGINS -->
             <div class="container-fluid">
-                @isset($error)
-                <div class="alert alert-danger">
-                    {{$error}}
-                </div>
-                @endisset
+                @include('layouts.messages')
 
                 <div class="well col-sm-12">
                     {!! Form::open(['action'=>'ActivitiesAfterController@store', 'method'=>'POST']) !!}
@@ -330,5 +327,76 @@
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Record any challenge faced during activity implementation
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (count($challenges)>0)
+
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Challenge</th>
+                        <th>Solution Implemented</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($challenges as $challenge)
+                        <tr>
+                            <td>{{$challenge->challenge}}</td>
+                            <td>{{$challenge->solution}}</td>
+                            <td>
+                                {!! Form::open(['action'=>['ChallengesController@destroy',$challenge->id],
+                                'method'=>'POST']) !!}
+
+                                {{Form::button('<i class="red ace-icon fa fa-trash-o">Delete</i>', ['type'=>'submit', 'onClick'=>'return confirm("Are you sure you want to delete?")'])}}
+
+                                {{Form::hidden('_method','DELETE')}}
+                                {!!Form::close()!!}
+                            </td>
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @endif
+                <hr>
+
+                {!! Form::open(['action'=>'ChallengesController@store', 'method'=>'POST']) !!}
+
+                <input type="hidden" name="activity_id" value={{$activity->id}}>
+                {{Form::label('challenge', 'State the challenge')}}
+                {{Form::textarea('challenge','', ['class' => 'form-control'])}}
+                <hr>
+                {{Form::label('solution', 'Solution implemented')}}
+                {{Form::textarea('solution','', ['class' => 'form-control'])}}
+
+            </div>
+
+            <div class="modal-footer">
+                {{Form::submit('Save', ['class'=>'btn btn-primary right'])}}
+
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+    $(".alert").alert('close');
+    }, 3600);
+    });
+</script>
 
 @endsection

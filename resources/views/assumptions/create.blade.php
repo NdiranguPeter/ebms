@@ -52,7 +52,7 @@
                     <input type="hidden" name="output_id" value=0>
                     <input type="hidden" name="activity_id" value=0>
                     <input type="hidden" name="project_id" value={{$project->id}}>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         @if ($goal == 1)
                         <input type="hidden" name="goal_id" value={{$project->id}}>
                         @endif
@@ -93,39 +93,42 @@
                         </div>
 
                         @endif
-                        <div class="form-group">
-                            {{Form::label('name', 'Assumption name')}}
-                            {{Form::text('name','', ['class' => 'form-control', 'placeholder' => 'Assumption name'])}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('owner', 'Assumption owner')}}
-                            {{Form::text('owner','', ['class' => 'form-control', 'placeholder' => 'owner'])}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('reason', 'Reason for assumption')}}
-                            {{Form::textarea('reason', '', ['class' => 'form-control', 'placeholder' => 'reason'])}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('validation', 'How to validate')}}
-                            {{Form::textarea('validation', '', ['class' => 'form-control', 'placeholder' => 'validate'])}}
-                        </div>
+
 
                     </div>
-                    <div class="col-sm-6">
 
-                        <div class="form-group">
-                            {{Form::label('description', 'Impact description')}}
-                            {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'description'])}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('response', 'Response Strategy')}}
-                            {{Form::textarea('response', '', ['class' => 'form-control', 'placeholder' => 'Response strategy'])}}
-                        </div>
-                        <div style="float:right;">
-                            {{Form::submit('Save Assumption', ['class'=>'btn btn-primary'])}}
-                        </div>
 
+                    <div class="form-group col-sm-6">
+                        {{Form::label('name', 'Assumption name')}}
+                        {{Form::text('name','', ['class' => 'form-control', 'placeholder' => 'Assumption name'])}}
                     </div>
+                    <div class="form-group col-sm-6">
+                        {{Form::label('owner', 'Assumption owner')}}
+                        {{Form::text('owner','', ['class' => 'form-control', 'placeholder' => 'owner'])}}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{Form::label('reason', 'Reason for assumption')}}
+                        {{Form::textarea('reason', '', ['class' => 'form-control', 'placeholder' => 'reason'])}}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{Form::label('validation', 'How to validate')}}
+                        {{Form::textarea('validation', '', ['class' => 'form-control', 'placeholder' => 'validate'])}}
+                    </div>
+
+
+
+                    <div class="form-group col-sm-6">
+                        {{Form::label('description', 'Impact description')}}
+                        {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'description'])}}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{Form::label('response', 'Response Strategy')}}
+                        {{Form::textarea('response', '', ['class' => 'form-control', 'placeholder' => 'Response strategy'])}}
+                    </div>
+                    <div style="float:right;">
+                        {{Form::submit('Save Assumption', ['class'=>'btn btn-primary'])}}
+                    </div>
+
                     {!! Form::close() !!}
                 </div>
 

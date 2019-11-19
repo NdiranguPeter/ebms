@@ -95,7 +95,7 @@
                             <?php $count = 1; ?>
                             @foreach ($assumptions as $assumption)
 
-                            <tr>
+                            <tr style="font-size: x-small;">
                                 <td> {{$count}} </td>
                                 {{-- <td> {{$assumption->$vsf}} </td> --}}
                                 <td> {{$assumption->reason}} </td>

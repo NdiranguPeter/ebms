@@ -131,7 +131,8 @@ Route::get('/questions/{survey_id}', 'QuestionsController@show');
 Route::get('/options/{qn_id}', 'QuestionsController@options');
 Route::get('/data/{survey_id}', 'QuestionsController@data');
 Route::get('/questions/{question_id}/delete', 'QuestionsController@destroy');
-Route::get('/groups/{group_id}/delete', 'GroupsController@destroy');
+// Route::get('/groups/{group_id}/delete', 'GroupsController@destroy');
+Route::get('/challenges/{challenge_id}/delete', 'ChallengesController@destroy');
 Route::get('/skip/{qn_id}/delete', 'SkipController@destroy');
 Route::get('/questions/{question_id}/duplicate', 'QuestionsController@duplicate');
 
@@ -160,4 +161,5 @@ Route::resource('deliverables', 'DeliverablesController');
 Route::resource('risksafter', 'RisksAfterController');
 Route::resource('assumptionsafter', 'AssuptionsAfterController');
 Route::resource('groups', 'GroupsController');
+Route::resource('challenges', 'ChallengesController');
 Route::resource('skip', 'SkipController');

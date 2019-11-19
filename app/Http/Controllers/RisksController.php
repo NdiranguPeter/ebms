@@ -137,7 +137,7 @@ class RisksController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $risks = Risk::where('goal_id', '!=', '0')->get();
+        $risks = Risk::where('goal_id', '=', $id)->get();
 
         return view('risks.index')->with(['risks' => $risks, 'goal' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -165,7 +165,9 @@ class RisksController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $risks = Risk::where('outcome_id', '!=', '0')->get();
+        $risks = Risk::where('outcome_id', '!=', '0')
+        ->where('project_id','=', $id)
+        ->get();
 
         return view('risks.index')->with(['risks' => $risks, 'outcome' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -192,7 +194,9 @@ class RisksController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $risks = Risk::where('output_id', '!=', '0')->get();
+        $risks = Risk::where('output_id', '!=', '0')
+        ->where('project_id','=', $id)
+        ->get();
 
         return view('risks.index')->with(['risks' => $risks, 'output' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -219,7 +223,9 @@ class RisksController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $risks = Risk::where('activity_id', '!=', '0')->get();
+      $risks = Risk::where('activity_id', '!=', '0')
+        ->where('project_id','=', $id)
+        ->get();
 
         return view('risks.index')->with(['risks' => $risks, 'activity' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 

@@ -78,7 +78,7 @@
 </table>
 <h2>SECTION 1. TECHNICAL ACCOMPLISHMENT AGAINST PLAN DURING THE YEAR</h2>
 <table class="table table-bordered">
-    <tr>
+    <tr style="background: #349ba7 !important;color: #fff;">
         <th>Goal | Outcome | Outputs</th>
         <th>Indicator description</th>
         <th>Value at start</th>
@@ -91,7 +91,7 @@
         <th>RYGB</th>
     </tr>
     <tr>
-        <td><b>Impact statement </b> - {!!$project->goal!!} </td>
+        <td><b>Project Goal </b> - {!!$project->goal!!} </td>
 
         <td>
             <ul>
@@ -261,7 +261,7 @@
     @foreach ($outcomes as $outcome)
 
     <tr>
-        <td><b>outcome {{$y}}</b>- {!!$outcome->name!!} </td>
+        <td><b style="color:#0081c3;">Outcome {{$y}}</b>- {!!$outcome->name!!} </td>
 
         <td>
             <ul>
@@ -418,7 +418,7 @@
     @if ($outcome->id == $output->outcome_id)
 
     <tr>
-        <td><b>output {{$y}}.{{$i}} </b> - {!!$output->name!!} </td>
+        <td><b style="color:green;">Output {{$y}}.{{$i}} </b> - {!!$output->name!!} </td>
 
         <td>
             <ul>

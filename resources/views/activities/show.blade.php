@@ -17,15 +17,6 @@
                 <li class="active"></li>
             </ul><!-- /.breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
 
         <div class="page-content">
@@ -75,12 +66,12 @@
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($activities as $activity)
-                            <tr>
+                            <tr style="font-size: smaller;">
                                 <th scope="row">{{$i}}</th>
                                 <td scope="row"><a href="/activities/{{$activity->id}}/edit">{!!$activity->name!!}</a>
                                 </td>
                                 <td scope="row">{!!$activity->created_at!!}</td>
-                                <td scope="row">
+                                <td scope="row" style="width: 200px;">
                                     <table>
                                         <tr>
                                             <td style="padding:10px;">
@@ -88,7 +79,7 @@
                                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td style="font-size: smaller;">
                                                 {!!
                                                 Form::open(['action'=>['ActivitiesController@destroy',$activity->id],
                                                 'method'=>'POST']) !!}
@@ -98,7 +89,7 @@
                                                 {{Form::hidden('_method','DELETE')}}
                                                 {!!Form::close()!!}
                                             </td>
-                                            <td style="padding:10px;">
+                                            <td style="padding:10px; font-size: x-small;">
                                                 |
                                                 <a class="blue" href="/activities/before/{{$activity->id}}">
                                                     <i class="ace-icon fa fa-refresh bigger-130">before</i>
@@ -142,7 +133,7 @@
 
                                     @foreach ($activities as $activity)
 
-                                    <tr>
+                                    <tr style="font-size: smaller;">
                                         <td><a href="/resources/create/{{$activity->id}}">{!!$activity->name!!}</a></td>
                                     </tr>
 

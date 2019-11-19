@@ -131,7 +131,8 @@ class AssumptionsController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $assumptions = Assumption::where('goal_id', '!=', '0')->get();
+        $assumptions = Assumption::where('goal_id','=', $id)
+             ->get();
 
         return view('assumptions.index')->with(['assumptions' => $assumptions, 'goal' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -159,7 +160,9 @@ class AssumptionsController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $assumptions = Assumption::where('outcome_id', '!=', '0')->get();
+        $assumptions = Assumption::where('outcome_id', '!=', '0')
+          ->where('project_id','=', $id)
+        ->get();
 
         return view('assumptions.index')->with(['assumptions' => $assumptions, 'outcome' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -186,7 +189,9 @@ class AssumptionsController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $assumptions = Assumption::where('output_id', '!=', '0')->get();
+        $assumptions = Assumption::where('output_id', '!=', '0')
+        ->where('project_id','=', $id)
+        ->get();
 
         return view('assumptions.index')->with(['assumptions' => $assumptions, 'output' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -213,7 +218,9 @@ class AssumptionsController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $assumptions = Assumption::where('activity_id', '!=', '0')->get();
+        $assumptions = Assumption::where('activity_id', '!=', '0')
+        ->where('project_id','=', $id)
+        ->get();
 
         return view('assumptions.index')->with(['assumptions' => $assumptions, 'activity' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 

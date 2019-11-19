@@ -68,7 +68,7 @@
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($indicators as $indicator)
-                            <tr>
+                            <tr style="font-size: smaller;">
                                 <th scope="row">{{$i}}</th>
                                 <td scope="row"><a href="/indicators/{{$indicator->id}}/edit">{!!$indicator->name!!}</a>
                                 </td>
@@ -134,7 +134,7 @@
 
                                     @foreach ($indicators as $indicator)
 
-                                    <tr>
+                                    <tr style="font-size: smaller;">
                                         <td>
                                             <a
                                                 href="/verifiablesource/create/{{$indicator->id}}">{!!$indicator->name!!}</a>

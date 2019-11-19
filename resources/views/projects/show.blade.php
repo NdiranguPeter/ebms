@@ -100,6 +100,9 @@
                         <p><b>Donors: </b>{{$project->donors}}</p>
                         <p><b>Start Date: </b>{{$project->start}}</p>
                         <p><b>End Date: </b>{{$project->end}}</p>
+                        <p><b>Sector: </b>{{$project->sector}} <b>Split</b> {{$project->sector_split}}</p>
+                        <p><b>SDG: </b>{{$project->sdg}} <b>Split</b> {{$project->sdg_split}}</p>
+
                     </div>
 
                     <div class="col-sm-12">

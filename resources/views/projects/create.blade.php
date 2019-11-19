@@ -523,7 +523,7 @@
         // show the alert
         setTimeout(function() {
         $(".alert").alert('close');
-        }, 1600);
+        }, 3600);
         });
         
 </script>
