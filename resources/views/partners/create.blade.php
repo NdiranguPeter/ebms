@@ -48,7 +48,7 @@
                 <div class="well col-sm-8">
                     {!! Form::open(['action'=>'PartnersController@store', 'method'=>'POST']) !!}
                     @csrf
-
+                    <input type="hidden" name="from" value="settings">
                     <div class="form-group">
                         {{Form::label('name', 'Partner name')}}
                         {{Form::text('name','', ['class' => 'form-control', 'placeholder' => 'name'])}}
@@ -74,14 +74,14 @@
                             <option value="National NGO">National NGO</option>
                             <option value="International NGO">International NGO</option>
                             <option value="Governmental Organization">Governmental Organization</option>
-                            <option value="Public sector organization">Public sector organization</option>
+                            <option value="Public sector organization">Public Sector Organization</option>
                             <option value="Public/Private Partnership">Public/Private Partnership</option>
                             <option value="Multilateral Organization">Multilateral Organization</option>
                             <option value="Company">Company</option>
                             <option value="Consultancy Office">Consultancy Office</option>
                             <option value="Cooperative">Cooperative</option>
                             <option value="Farm/Agricultural Institute">Farm/Agricultural Institute</option>
-                            <option value="Independent entrepreneur">Independent entrepreneur</option>
+                            <option value="Independent entrepreneur">Independent Entrepreneur</option>
                             <option value="Bank">Bank</option>
                             <option value="Micro Financing Institute">Micro Financing Institute</option>
                             <option value="Educational Institute">Educational Institute</option>
@@ -89,7 +89,7 @@
                             <option value="Research Institute">Research Institute</option>
                             <option value="Medical Institute">Medical Institute</option>
                             <option value="Religious Institute">Religious Institute</option>
-                            <option value="Emergency services">Emergency services</option>
+                            <option value="Emergency services">Emergency Services</option>
                             <option value="Police">Police</option>
                             <option value="Military">Military</option>
                             <option value="Other">Other</option>

@@ -58,9 +58,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            {{Form::label('accessed', 'Assumption accessed throught M&E?')}}
-                            <select name="accessed" id="accessed"
-                                class="form-control @error('accessed') is-invalid @enderror">
+                            {{Form::label('accessed', 'Assumption assesed through M&E?')}}
+                            <select name="accessed" id="assesed"
+                                class="form-control @error('assesed') is-invalid @enderror">
                                 <option value="Yes"> Yes</option>
                                 <option value="No">No</option>
 
@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('response', 'Response Strategy')}}
-                            {{Form::textarea('response', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
+                            {{Form::textarea('response', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Response strategy'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Update Assumption', ['class'=>'btn btn-primary'])}}

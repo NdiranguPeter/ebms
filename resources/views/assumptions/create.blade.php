@@ -95,7 +95,7 @@
                         @endif
                         <div class="form-group">
                             {{Form::label('name', 'Assumption name')}}
-                            {{Form::text('name','', ['class' => 'form-control', 'placeholder' => 'Assuption name'])}}
+                            {{Form::text('name','', ['class' => 'form-control', 'placeholder' => 'Assumption name'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('owner', 'Assumption owner')}}
@@ -119,7 +119,7 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('response', 'Response Strategy')}}
-                            {{Form::textarea('response', '', ['class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
+                            {{Form::textarea('response', '', ['class' => 'form-control', 'placeholder' => 'Response strategy'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Save Assumption', ['class'=>'btn btn-primary'])}}

@@ -50,6 +50,7 @@ class PartnersController extends Controller
 
         ]);
         $partner = new Partner();
+        $from = $request->input('from');
         $partner->name = $request->input('name');
         $partner->acronym = $request->input('acronym');
         $partner->type = $request->input('type');
@@ -61,7 +62,12 @@ class PartnersController extends Controller
 
         $partner->save();
 
-        return redirect('/partners')->with('success', 'Partner created');
+        if($from == "project"){
+            return redirect('/projects/create')->with('success', 'Partner created');
+        }else{
+return redirect('/partners')->with('success', 'Partner created');
+
+        }
 
     }
 

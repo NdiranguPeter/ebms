@@ -54,11 +54,16 @@ class DonorsController extends Controller
         $donor->address = $request->input('address');
         $donor->phone = $request->input('phone');
         $donor->description = $request->input('description');
+        $from = $request->input('from');
 
         $donor->save();
 
-        return redirect('/donors')->with('success', 'Donor successfully created');
+        if($from == "project"){
+            return redirect('/projects/create')->with('success', 'Donor successfully created');
+        }else{
 
+        return redirect('/donors')->with('success', 'Donor successfully created');
+        }
     }
 
     /**
