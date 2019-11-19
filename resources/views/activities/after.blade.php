@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('content')
+
 <div class="container-fluid main-content">
     <div class="main-content-inner">
         <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -15,19 +16,9 @@
                 </li>
                 /
                 <li class="active">{!!$output->name!!}</li>
-                /
-                <li class="active">{!!$activity->name!!} </li>
+
             </ul><!-- /.breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
 
         <div class="page-content">
@@ -58,10 +49,13 @@
                     <input name="person_responsible" type="hidden" value={{$activity->person_responsible}}>
 
                     <input name="total_beneficiaries" type="hidden" value={{$activity->total_beneficiaries}}>
+                    <div class="col-sm-12">
+                        <p style="color: green; font-weight:bold;">{!!$activity->name!!}</p>
+                    </div>
+                    <br />
+                    <br />
 
                     <div class="col-sm-6">
-
-
                         <?php 
                         $period = $activity->duration;
                         if ($period<=365) {
@@ -83,12 +77,11 @@
                         
                         if ($years>0 && $months >0) {
                            $years ++;
-                        }
+                        }                     
+                                                ?>
 
-                        
-                        
-                        ?>
-                        <p>Duration: {{$interval->format('%y years %m months %d days')}}</p>
+                        {{-- <p style="color: green;">Duration: {{$interval->format('%y years %m months %d days')}}</p>
+                        --}}
                         @if ($years >1)
                         <div class="form-group">
                             {{Form::label('the_year', 'Select year')}}
@@ -188,6 +181,11 @@
                                 </tbody>
                             </table>
                         </div>
+
+
+                    </div>
+
+                    <div class="col-sm-6"><br>
                         <h5>Indirect beneficiaries</h5>
                         <div class="form-group">
                             <div class="col-sm-6">
@@ -201,6 +199,7 @@
                         </div>
 
                         <div class="form-group">
+
                             <h5>People leaving with disability</h5>
 
                             <div class="col-sm-6">
@@ -213,11 +212,8 @@
                             </div>
                         </div>
 
-                    </div>
+                        <div class="form-group" style="margin-top:10px;">
 
-                    <div class="col-sm-6">
-
-                        <div class="form-group">
                             {{Form::label('gender_age_distribution', 'Geneder/Age distribution')}}
                             <table class="table table-bordered">
                                 <th>Age group</th>

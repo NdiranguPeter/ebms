@@ -249,6 +249,7 @@ class ActivitiesController extends Controller
         $cur = Currency::find($activity->currency);
 
         $uni = Unit::find($activity->unit);
+
         $activity->unit = $uni->name;
         $activity->unit_id = $uni->id;
         $project = Project::find($outcome->project_id);

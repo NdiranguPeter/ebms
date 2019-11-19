@@ -46,7 +46,7 @@
                     <a data-toggle="modal" data-target="#selectProject">
                         <div class="col-md-4 dashcard" style="background-color:#d15b47 !important; ">
                             <i class="ace-icon fa fa-desktop"></i>
-                            <h6>logic model</h6>
+                            <h6>Logic Model</h6>
                         </div>
                     </a>
 

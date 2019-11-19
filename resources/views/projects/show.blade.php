@@ -38,21 +38,20 @@
                 {{-- {{route('exportproject',$project->id)}} --}}
                 <a class="btn btn-primary" href="/test">
                     <i class="ace-icon fa fa-download"></i>
-                    Download project details
                 </a>
 
                 <a class="btn btn-success" href="/logframe/{{$project->id}}">
                     <i class="ace-icon fa fa-desktop"></i>
-                    logic model
+                    Logic Model
                 </a>
                 <a class="btn btn-primary" href="/projects/{{$project->id}}/edit">
                     <i class="ace-icon fa fa-pencil bigger-130"></i>
-                    edit project
+                    Edit Project
                 </a>
 
                 <a class="btn btn-success" href="/indicators/goal/create/{{$project->id}}">
                     <i class="ace-icon fa fa-plus bigger-130"></i>
-                    Add goal indicator
+                    Add Goal Indicator
                 </a>
                 <a style="float:right;">
 

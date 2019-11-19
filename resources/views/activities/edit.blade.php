@@ -15,19 +15,8 @@
                 </li>
                 /
                 <li>{!!$output->name!!}</li>
-                /
-                <li class="active">{!!$activity->name!!}</li>
             </ul><!-- /.breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
 
         <div class="page-content">
@@ -55,6 +44,11 @@
                     <input name="target_baseline" type="hidden" value=0>
                     <input name="total_beneficiaries" type="hidden" value={{$activity->total_beneficiaries}}>
                     <input name="currency" type="hidden" value={{$project->currency}}>
+                    <div class="col-sm-12">
+                        <p style="color: green; font-weight:bold;">{!!$activity->name!!}</p>
+                    </div>
+                    <br />
+                    <br />
                     <div class="col-sm-6">
                         <div class="form-group">
                             {{Form::label('scoring', 'Project scoring')}}

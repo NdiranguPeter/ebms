@@ -13,19 +13,9 @@
                     <i class="ace-icon fa fa-cog"></i>
                     <a href="/meal">MEAL</a>
                 </li>
-                /
-                <li class="active">{!!$indicator->name!!} </li>
+
             </ul><!-- /.breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
 
         <div class="page-content">
@@ -40,12 +30,8 @@
             <!-- PAGE CONTENT BEGINS -->
             <div class="container-fluid">
                 @include('layouts.messages')
-                <div class="well col-sm-8">
-                    <center>
-                        <b style="color:#0081c3; font-size:20px;">
-                            {!!$indicator->name!!}
-                        </b>
-                    </center>
+                <div class="well col-sm-12">
+
                     {!! Form::open(['action'=>'IndicatorsafterController@store', 'method'=>'POST']) !!}
                     <input name="id" type="hidden" value="{{$indicator->id}}">
                     <input name="the_year" type="hidden" value=1>
@@ -54,6 +40,9 @@
                     <input name="outcome_id" type="hidden" value="{{$indicator->outcome_id}}">
                     <input name="project_id" type="hidden" value="{{$indicator->project_id}}">
                     <input name="duration" type="hidden" value={{$indicator->duration}}>
+                    <div class="col-sm-12" style="color:green; font-weight:bold;">
+                        <p>{!!$indicator->name!!}</p>
+                    </div>
                     <div class="col-sm-6">
 
 
@@ -83,7 +72,7 @@
                         
                         
                         ?>
-                        <p>Duration: {{$interval->format('%y years %m months %d days')}}</p>
+                        {{-- <p>Duration: {{$interval->format('%y years %m months %d days')}}</p> --}}
                         @if ($years >1)
                         <div class="form-group">
                             {{Form::label('the_year', 'Select year')}}
@@ -107,8 +96,6 @@
                             <input name="ovi_date" type="hidden" value={{\Carbon\Carbon::now()}}>
 
                             @endif
-
-
 
                         </div>
                         <div class="form-group">
@@ -135,8 +122,8 @@
                         </div>
 
                         @endif
-
-
+                    </div>
+                    <div class="col-sm-6">
                         <div class="form-group">
                             {{Form::label('activities_distribution', 'indicator/Time distribution')}}
                             <table class="table table-bordered">
@@ -215,10 +202,6 @@
                                 </tbody>
                             </table>
                         </div>
-
-
-
-
 
 
                         <a href="/indicators/{{$indicator->project_id}}" class="btn btn-default" style="float:left;"><i

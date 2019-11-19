@@ -68,6 +68,18 @@
                             {{-- <span class="badge badge-primary" style="float:right;">{{$number_outputs}}</span> --}}
                         </div>
                     </a>
+                    <a href="/indicators/{{$project->id}}">
+                        <div class="col-md-4 dashcard" style="background-color:#415f8f !important; ">
+                            <i class="ace-icon fa fa-lightbulb-o "></i>
+
+                            <h6>Indicators</h6>
+
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="row">
                     <a href="/activities/{{$project->id}}">
                         <div class="col-md-4 dashcard" style="background-color:#abbac3 !important; ">
                             <i class="ace-icon fa fa-lemon-o "></i>
@@ -79,9 +91,6 @@
                         </div>
                     </a>
 
-                </div>
-
-                <div class="row">
                     <a data-toggle="modal" data-target="#selectRiskFor">
                         <div class="col-md-4 dashcard " style="background-color:#87b87f !important; ">
                             <i class="ace-icon fa fa-bullhorn "></i>
@@ -96,14 +105,7 @@
                             {{-- <span class="badge badge-primary" style="float:right;">{{$number_outputs}}</span> --}}
                         </div>
                     </a>
-                    <a href="/indicators/{{$project->id}}">
-                        <div class="col-md-4 dashcard" style="background-color:#415f8f !important; ">
-                            <i class="ace-icon fa fa-lightbulb-o "></i>
 
-                            <h6>Indicators</h6>
-
-                        </div>
-                    </a>
 
                 </div>
 
