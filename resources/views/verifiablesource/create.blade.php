@@ -9,9 +9,6 @@
                     <a href="/home">Home</a>
                 </li>
 
-
-
-
             </ul><!-- /.breadcrumb -->
 
             <div class="nav-search" id="nav-search">

@@ -23,6 +23,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/project', 'API\QuestionsController@project');
 Route::get('/indicators/{project_id}', 'API\ProjectController@indicators');
 Route::get('/activities/{project_id}', 'API\ProjectController@activities');
+Route::get('/risks/{project_id}', 'API\ProjectController@risks');
+Route::get('/assumptions/{project_id}', 'API\ProjectController@assumptions');
 
 });
 Route::post('/answer', 'API\QuestionsController@answer');

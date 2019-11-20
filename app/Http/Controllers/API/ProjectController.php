@@ -28,6 +28,44 @@ class ProjectController extends Controller
         return response()->json($indicators);
     }
 
+       public function risks($project_id)
+    {
+
+          $risks = DB::table('risks')
+            ->select('risks.*')
+            ->where('risks.project_id', $project_id)
+            ->get();
+
+
+        if ($risks->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => auth()->user()->name . ' doesnt have any risks yet',
+            ], 400);
+        }
+
+        return response()->json($risks);
+    }
+
+       public function assumptions($project_id)
+    {
+
+          $assumptions = DB::table('assumptions')
+            ->select('assumptions.*')
+            ->where('assumptions.project_id', $project_id)
+            ->get();
+
+
+        if ($assumptions->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => auth()->user()->name . ' doesnt have any assumptions yet',
+            ], 400);
+        }
+
+        return response()->json($assumptions);
+    }
+
      public function activities($project_id)
     {
 
