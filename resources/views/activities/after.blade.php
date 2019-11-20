@@ -28,7 +28,9 @@
                 <h1>
                     Update activity {{$before_after}} project implementation
                 </h1>
+                @if ($before_after == "after")
                 <a style="float:right;" data-toggle="modal" data-target="#exampleModal">Add Challenges</a>
+                @endif
             </div><!-- /.page-header -->
 
             <!-- PAGE CONTENT BEGINS -->
@@ -341,6 +343,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                @if ($before_after == "after")
                 @if (count($challenges)>0)
 
                 <table class="table table-bordered">
@@ -367,6 +370,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                @endif
                 @endif
                 <hr>
 
