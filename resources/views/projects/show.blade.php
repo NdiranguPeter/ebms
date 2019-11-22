@@ -100,8 +100,142 @@
                         <p><b>Donors: </b>{{$project->donors}}</p>
                         <p><b>Start Date: </b>{{$project->start}}</p>
                         <p><b>End Date: </b>{{$project->end}}</p>
-                        <p><b>Sector: </b>{{$project->sector}} <b>Split</b> {{$project->sector_split}}</p>
-                        <p><b>SDG: </b>{{$project->sdg}} <b>Split</b> {{$project->sdg_split}}</p>
+                        <table>
+                            <thead>
+                                <th><b>Global goal: </b></th>
+                                <th><b>Split</b></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding-right: 100px;">
+                                        <table>
+                                            @foreach ($global_goals as $global_goal)
+
+                                            <tr>
+
+                                                <td>
+                                                    {{$global_goal}}
+                                                </td>
+
+
+                                            </tr>
+
+                                            @endforeach
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            @foreach ($global_goals_split as $global_goal_split)
+
+                                            <tr>
+
+                                                <td>
+                                                    {{$global_goal_split}} %
+                                                </td>
+
+
+                                            </tr>
+
+                                            @endforeach
+                                        </table>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <thead>
+                                <th><b>Sector: </b></th>
+                                <th><b>Split</b></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding-right: 100px;">
+                                        <table>
+                                            @foreach ($sectors as $sector)
+
+                                            <tr>
+
+                                                <td>
+                                                    {{$sector}}
+                                                </td>
+
+
+                                            </tr>
+
+                                            @endforeach
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            @foreach ($sectors_split as $sector_split)
+
+                                            <tr>
+
+                                                <td>
+                                                    {{$sector_split}} %
+                                                </td>
+
+
+                                            </tr>
+
+                                            @endforeach
+                                        </table>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                        <table>
+                            <thead>
+                                <th><b>SDG: </b></th>
+                                <th><b>Split</b></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding-right: 100px;">
+                                        <table>
+                                            @foreach ($sdgs as $sdg)
+
+                                            <tr>
+
+                                                <td>
+                                                    {{$sdg}}
+                                                </td>
+
+
+                                            </tr>
+
+                                            @endforeach
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            @foreach ($sdgs_split as $sdg_split)
+
+                                            <tr>
+
+                                                <td>
+                                                    {{$sdg_split}} %
+                                                </td>
+
+
+                                            </tr>
+
+                                            @endforeach
+                                        </table>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
 
                     </div>
 

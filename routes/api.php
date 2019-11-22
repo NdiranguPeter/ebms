@@ -28,5 +28,6 @@ Route::get('/assumptions/{project_id}', 'API\ProjectController@assumptions');
 
 });
 Route::post('/answer', 'API\QuestionsController@answer');
+Route::post('/indicatorafter', 'API\QuestionsController@indicatorafter');
 Route::post('/login', 'AuthController@login');
 Route::middleware('auth:api')->post('/logout', 'AuthController@logout');

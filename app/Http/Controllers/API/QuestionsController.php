@@ -78,6 +78,11 @@ class QuestionsController extends Controller
     }
     public function answer(Request $request)
     {
-        Answer::create($request->all());
+                Answer::create($request->all());
+    }
+
+     public function indicatorafter(Request $request)
+    {
+                dd($request->id);
     }
 }

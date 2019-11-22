@@ -49,39 +49,12 @@
                             {{Form::label('name', 'Project Name')}}
                             {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Project name'])}}
                         </div>
+
                         <div class="form-group">
                             {{Form::label('irw_pin', 'IRW Pin Code')}}
                             {{Form::text('irw_pin', '', ['class' => 'form-control', 'placeholder' => 'Project irw_pin'])}}
                         </div>
-                        <div class="form-group">
-                            {{Form::label('start', 'Start date')}}
-                            {{Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'Start date'])}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('end', 'End date')}}
-                            {{Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'End date'])}}
-                        </div>
 
-                        <div class="form-group" id="field">
-                            {{Form::label('location', 'Location')}}
-                            {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Actual location the project is conducted'])}}
-                        </div>
-                        <div class="form-group">
-                            <a style="float:right;" data-toggle="modal" data-target="#exampleModal">Create new partner
-                            </a>
-                            {{Form::label('partners', 'Partners')}}
-                            <select name="partners[]" id="" class="form-control multiselect" multiple="multiple"
-                                role="multiselect">
-                                @if (count($partners)>0)
-                                @foreach ($partners as $partner)
-                                <option value="{{$partner->id}}">{{$partner->name}}</option>
-                                @endforeach
-                                @else
-                                <option value="">No partner</option>
-                                @endif
-
-                            </select>
-                        </div>
                         <div class="form-group">
                             {{Form::label('ir_office', 'IR Country Office')}}
                             <select name="ir_office" id="ir_office"
@@ -97,45 +70,7 @@
                             {{Form::label('fo_pin', 'FO Pin')}}
                             {{Form::text('fo_pin', '', ['class' => 'form-control', 'placeholder' => ''])}}
                         </div>
-                        <div class="form-group">
-                            <a style="float:right;" data-toggle="modal" data-target="#donorModal">Create new donor
-                            </a>
-                            {{Form::label('donors', 'Donors')}}
-                            <select name="donors[]" id="" class="form-control multiselect" multiple="multiple"
-                                role="multiselect">
-                                @if (count($donors)>0)
-                                @foreach ($donors as $donor)
-                                <option value="{{$donor->id}}">{{$donor->name}}</option>
-                                @endforeach
 
-                                @else
-                                <option value="">No donor saved yet</option>
-                                @endif
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('goal', 'Project Goal')}}
-                            {{Form::textarea('goal', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'project goal'])}}
-                        </div>
-
-                    </div>
-                    <div class="col-sm-6">
-
-                        <div class="form-group">
-                            {{Form::label('target_group', 'Target Group')}}
-                            <select style="min-width: 450px !important;" name="target_group[]" id="target_group"
-                                class="form-control multiselect" multiple="multiple" role="multiselect">
-                                @if (count($target_groups)>0)
-                                @foreach ($target_groups as $target_group)
-                                <option value="{{$target_group->id}}">{{$target_group->name}}</option>
-                                @endforeach
-
-                                @else
-                                <p>No target groups saved</p>
-                                @endif
-                            </select>
-                        </div>
 
                         <div class="form-group">
                             {{Form::label('stage', 'Project Stage')}}
@@ -158,130 +93,188 @@
                                 <option value="Disaster risk reduction">Disaster Risk Reduction</option>
                             </select>
                         </div>
-                        <hr>
-                        <h5><b>Sector Impact Target</b></h5>
-                        <br>
-                        <div class="form-group">
-
-                            <table id="dynamicTable">
-                                <tr>
-                                    <td style="width:40%;">
-                                        {{Form::label('global_goal', 'Global Goal')}}
-                                        <select name="g[0][global_goal]" class="form-control">
-                                            <option
-                                                value="Reducing the humanitarian impact on conflicts and natural disasters">
-                                                Reducing the humanitarian impact on conflicts and natural
-                                                disasters
-                                            </option>
-                                            <option
-                                                value="Empowering community to emerge from poverty and vulnerability">
-                                                Empowering community to emerge from poverty and vulnerability</option>
-
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <label for="split"
-                                            class="col-md-4 col-form-label text-md-right">{{ __('% Split') }}</label>
-                                        <input type="text" class="form-control" name="s[0][globalgoal_split]" value="">
-                                    </td>
-                                    <td style="vertical-align: bottom;"><button type="button" name="add" id="add"
-                                            class="btn btn-success">+</button></td>
-                                </tr>
-                            </table>
-
-                        </div>
-                        <div class="form-group">
-
-                            <table id="dynamicTable2">
-
-                                <tr>
-                                    <td style="width:40%;" class="sectors">
-                                        {{Form::label('sector', 'Project Sector')}}
-                                        <select name="c[0][sector]" class="form-control">
-                                            @foreach ($sectors as $sector)
-                                            <option value={{$sector->id}}>{{$sector->name}}</option>
-                                            @endforeach
-                                        </select>
-
-                                    </td>
-                                    <td class="splits">
-                                        <label for="split"
-                                            class="col-md-4 col-form-label text-md-right">{{ __('% Split') }}</label>
-                                        <input id="split" type="text"
-                                            class="form-control @error('split') is-invalid @enderror"
-                                            name="p[0][sector_split]" value="">
-                                    </td>
-
-                                    <td style="vertical-align: bottom;"><button type="button" name="add2" id="add2"
-                                            class="btn btn-success">+</button></td>
 
 
-                                </tr>
 
+                        <div class="form-group" id="boxes-wrap2">
 
-                            </table>
+                            <div style="margin-top: 10px;">
+                                {{Form::label('global_goal', 'Global Goal')}}
+                                <select name="global_goal[]" class="form-control">
+                                    <option value="Reducing the humanitarian impact on conflicts and natural disasters">
+                                        Reducing the humanitarian impact on conflicts and natural
+                                        disasters
+                                    </option>
+                                    <option value="Empowering community to emerge from poverty and vulnerability">
+                                        Empowering community to emerge from poverty and vulnerability</option>
+                                </select>
 
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <table id="dynamicTable3">
-                                <tr>
-                                    <td style="width:40%;">
-                                        {{Form::label('sdg', 'Target SDGs')}}
-                                        <select name="d[0][sdg]" id="sdg"
-                                            class="form-control @error('sdg') is-invalid @enderror">
-                                            <option value="No Poverty">No Poverty</option>
-                                            <option value="Zero Hunger">Zero Hunger</option>
-                                            <option value="Good Health and Well-being">Good Health and Well-being
-                                            </option>
-                                            <option value="Quality Education">Quality Education</option>
-                                            <option value="Gender Equality">Gender Equality</option>
-                                            <option value="Clean Water and Sanitation">Clean Water and Sanitation
-                                            </option>
-                                            <option value="Affordable and Clean Energy">Affordable and Clean Energy
-                                            </option>
-                                            <option value="Decent Work and Economic Growth">Decent Work and Economic
-                                                Growth
-                                            </option>
-                                            <option value="Industry, Innovation and Infrastructure"> Industry,
-                                                Innovation and Infrastructure</option>
-                                            <option value="Reduced Inequality">Reduced Inequality
-                                            </option>
-                                            <option value="Sustainable Cities and Communities">Sustainable Cities and
-                                                Communities</option>
-                                            <option value="Responsible Consumption and Production"> Responsible
-                                                Consumption and Production</option>
-                                            <option value="Climate Action">Climate Action</option>
-                                            <option value="Life Below Water">Life Below Water
-                                            </option>
-                                            <option value="Life on Land">Life on Land</option>
-                                            <option value="Peace and Justice Strong Institutions">Peace and Justice
-                                                Strong Institutions</option>
-                                            <option value="Partnerships to achieve the Goal">Partnerships to achieve the
-                                                Goal
-                                            </option>
-
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <label for="split"
-                                            class="col-md-4 col-form-label text-md-right">{{ __('% Split') }}</label>
-                                        <input id="split" type="text"
-                                            class="form-control @error('split') is-invalid @enderror"
-                                            name="r[0][sdg_split]" value="">
-
-                                    </td>
-                                    <td style="vertical-align: bottom;"><button type="button" name="add3" id="add3"
-                                            class="btn btn-success">+</button>
-                                    </td>
-                                </tr>
-                            </table>
-
+                                {{Form::label('split', 'Goal % split')}}
+                                <input id="split" type="number"
+                                    class="form-control @error('split') is-invalid @enderror"
+                                    name="global_goal_split[]]" value="">
+                                <button class="remove-gas-row2" type="button">Remove</button>
+                                <br />
+                            </div>
+                            <a style="float:right;" href="#" id="add2"> Add global goal<i
+                                    class="ace-icon glyphicon glyphicon-plus"></i></a>
 
                         </div>
                         <hr>
+
+                        <div class="form-group" id="boxes-wrap">
+
+                            <div style="margin-top: 10px;">
+                                {{Form::label('sector', 'Project Sector')}}
+                                <select name="sector[]" class="form-control">
+                                    <option value="Advocacy">Advocacy</option>
+                                    <option value="Capacity building">Capacity building</option>
+                                    <option value="Disaster preparedness planning">Disaster preparedness planning
+                                    </option>
+                                    <option value="Disater response">Disater response</option>
+
+                                    <option value="Disaster risk reduction">Disaster risk reduction</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Food security">Food security</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Income generation">Income generation</option>
+                                    <option value="Micro finance">Micro finance</option>
+                                    <option value="Orphans and Child wlefare">Orphans and Child wlefare</option>
+                                    <option value="Seasonal Qurban">Seasonal Qurban</option>
+                                    <option value="Seasonal Ramadhan">Seasonal Ramadhan</option>
+                                    <option value="Sustainable livelihood">Sustainable livelihood</option>
+                                    <option value="WASH">WASH</option>
+                                    <option value="Shelter">Shelter</option>
+                                    <option value="Peace building and Conflict resolution"></option>
+                                </select>
+
+                                {{Form::label('sector_split', 'Sector % split')}}
+                                <input id="split" type="number"
+                                    class="form-control @error('split') is-invalid @enderror" name="sector_split[]]"
+                                    value="">
+                                <button class="remove-gas-row" type="button">Remove</button>
+                                <br />
+                            </div>
+                            <a style="float:right;" href="#" id="add"> Add sector<i
+                                    class="ace-icon glyphicon glyphicon-plus"></i></a>
+
+                        </div>
+                        <hr>
+
+                        <div class="form-group" id="boxes-wrap3">
+
+                            <div style="margin-top: 10px;">
+                                {{Form::label('sdg', 'SDG')}}
+                                <select name="sdg[]" class="form-control">
+                                    <option value="No Poverty">No Poverty</option>
+                                    <option value="Zero Hunger">Zero Hunger</option>
+                                    <option value="Good Health and Well-being">Good Health and Well-being
+                                    </option>
+                                    <option value="Quality Education">Quality Education</option>
+                                    <option value="Gender Equality">Gender Equality</option>
+                                    <option value="Clean Water and Sanitation">Clean Water and Sanitation
+                                    </option>
+                                    <option value="Affordable and Clean Energy">Affordable and Clean Energy
+                                    </option>
+                                    <option value="Decent Work and Economic Growth">Decent Work and Economic
+                                        Growth
+                                    </option>
+                                    <option value="Industry, Innovation and Infrastructure"> Industry,
+                                        Innovation and Infrastructure</option>
+                                    <option value="Reduced Inequality">Reduced Inequality
+                                    </option>
+                                    <option value="Sustainable Cities and Communities">Sustainable Cities and
+                                        Communities</option>
+                                    <option value="Responsible Consumption and Production"> Responsible
+                                        Consumption and Production</option>
+                                    <option value="Climate Action">Climate Action</option>
+                                    <option value="Life Below Water">Life Below Water
+                                    </option>
+                                    <option value="Life on Land">Life on Land</option>
+                                    <option value="Peace and Justice Strong Institutions">Peace and Justice
+                                        Strong Institutions</option>
+                                    <option value="Partnerships to achieve the Goal">Partnerships to achieve the
+                                        Goal
+                                    </option>
+                                </select>
+
+                                {{Form::label('sdg_split', 'SDG % split')}}
+                                <input id="split" type="number"
+                                    class="form-control @error('split') is-invalid @enderror" name="sdg_split[]]"
+                                    value="">
+                                <button class="remove-gas-row3" type="button">Remove</button>
+                                <br />
+                            </div>
+                            <a style="float:right;" href="#" id="add3">Add SDG <i
+                                    class="ace-icon glyphicon glyphicon-plus"></i></a>
+
+                        </div>
+                        <hr>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{Form::label('start', 'Start date')}}
+                            {{Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'Start date'])}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('end', 'End date')}}
+                            {{Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'End date'])}}
+                        </div>
+
+                        <div class="form-group" id="field">
+                            {{Form::label('location', 'Location')}}
+                            {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Actual location the project is conducted'])}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('target_group', 'Target Group')}}
+                            <select style="min-width: 450px !important;" name="target_group[]" id="target_group"
+                                class="form-control multiselect" multiple="multiple" role="multiselect">
+                                @if (count($target_groups)>0)
+                                @foreach ($target_groups as $target_group)
+                                <option value="{{$target_group->id}}">{{$target_group->name}}</option>
+                                @endforeach
+
+                                @else
+                                <p>No target groups saved</p>
+                                @endif
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <a style="float:right;" data-toggle="modal" data-target="#donorModal">Create new donor
+                            </a>
+                            {{Form::label('donors', 'Donors')}}
+                            <select name="donors[]" id="" class="form-control multiselect" multiple="multiple"
+                                role="multiselect">
+                                @if (count($donors)>0)
+                                @foreach ($donors as $donor)
+                                <option value="{{$donor->id}}">{{$donor->name}}</option>
+                                @endforeach
+
+                                @else
+                                <option value="">No donor saved yet</option>
+                                @endif
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <a style="float:right;" data-toggle="modal" data-target="#exampleModal">Create new partner
+                            </a>
+                            {{Form::label('partners', 'Partners')}}
+                            <select name="partners[]" id="" class="form-control multiselect" multiple="multiple"
+                                role="multiselect">
+                                @if (count($partners)>0)
+                                @foreach ($partners as $partner)
+                                <option value="{{$partner->id}}">{{$partner->name}}</option>
+                                @endforeach
+                                @else
+                                <option value="">No partner</option>
+                                @endif
+
+                            </select>
+                        </div>
+
+
                         <div class="form-group">
                             {{Form::label('budget', 'Project budget')}}
                             {{Form::text('budget', '', ['class' => 'form-control', 'placeholder' => 'project fund'])}}
@@ -297,8 +290,12 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            {{Form::label('goal', 'Project Goal')}}
+                            {{Form::textarea('goal', '', [ 'class' => 'form-control', 'placeholder' => 'project goal'])}}
+                        </div>
+                        <div class="form-group">
                             {{Form::label('description', 'Project description')}}
-                            {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
+                            {{Form::textarea('description', '', [ 'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Create project', ['class'=>'btn btn-primary'])}}
@@ -409,7 +406,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         {{Form::label('description', 'Description')}}
-                                        {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'description'])}}
+                                        {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'description'])}}
                                     </div>
                                 </div>
 
@@ -464,7 +461,7 @@
                                 </div>
                                 <div class="form-group col-sm-6">
                                     {{Form::label('description', 'Donor description')}}
-                                    {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
+                                    {{Form::textarea('description', '', [ 'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
                                 </div>
 
                             </div>
@@ -483,40 +480,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    var i = 0;
-       
-             $("#add").click(function(){
-   
-              ++i;
-   
-              $("#dynamicTable").append('<tr><td style="width:40%;">{{Form::label('global_goal', 'Global Goal')}} <select name="g['+i+'][global_goal]" id="global_goal" class="form-control @error('global_goal') is-invalid @enderror"> <option value="Reducing the humanitarian impact on conflicts and natural disasters">Reducing the humanitarian impact on conflicts and natural disasters</option><option value="Empowering community to emerge from poverty and vulnerability">Empowering community to emerge from poverty and vulnerability</option></select></td><td><label for="split" class="col-md-4 col-form-label text-md-right">{{ __('% Split') }}</label><input id="split" type="text" class="form-control @error('split') is-invalid @enderror" name="s['+i+'][global_split]" value=""> </td> <td style="vertical-align: bottom;"><button type="button" class="btn btn-danger remove-tr">X</button></td></tr>');
-                });
-
-
-                $("#add2").click(function(){
-   
-              ++i;
-   
-              $("#dynamicTable2").append('<tr><td style="width:40%;" class="sectors"> {{Form::label('sector', 'Project sector')}} <select name="c[0][sector]" class="form-control"> @foreach ($sectors as $sector) <option value={{$sector->id}}>{{$sector->name}}</option> @endforeach </select> </td><td class="splits"> <label for="split" class="col-md-4 col-form-label text-md-right">{{ __('% Split') }}</label> <input id="split" type="text" class="form-control @error('split') is-invalid @enderror"  name="p[0][sector_split]" value=""> </td> <td style="vertical-align: bottom;"><button type="button" class="btn btn-danger remove-tr1">X</button></td></tr>');
-                });
-
-
-                 $("#add3").click(function(){
-   
-              ++i;
-                 $("#dynamicTable3").append('<tr><td style="width:40%;">{{Form::label('sdg', 'Target SDGs')}}<select name="d[0][sdg]" id="sdg" class="form-control @error('sdg') is-invalid @enderror"><option value="No Poverty">No Poverty</option><option value="Zero Hunger">Zero Hunger</option><option value="Good Health and Well-being">Good Health and Well-being</option><option value="Quality Education">Quality Education</option><option value="Gender Equality">Gender Equality</option><option value="Clean Water and Sanitation">Clean Water and Sanitation</option><option value="Affordable and Clean Energy">Affordable and Clean Energy </option><option value="Decent Work and Economic Growth">Decent Work and Economic Growth</option><option value="Industry, Innovation and Infrastructure">Industry, Innovation and Infrastructure</option><option value="Reduced Inequality">Reduced Inequality</option><option value="Sustainable Cities and Communities">Sustainable Cities and Communities</option><option value="Responsible Consumption and Production">Responsible Consumption and Production</option><option value="Climate Action">Climate Action</option><option value="Life Below Water">Life Below Water</option><option value="Life on Land">Life on Land</option><option value="Peace and Justice Strong Institutions">Peace and Justice Strong Institutions</option><option value="Partnerships to achieve the Goal">Partnerships to achieve the Goal</option></select></td><td><label for="split" class="col-md-4 col-form-label text-md-right">{{ __('% Split') }}</label><input id="split" type="text" class="form-control @error('split') is-invalid @enderror" name="r[0][sdg_split]" value=""></td><td style="vertical-align: bottom;"><button type="button" class="btn btn-danger remove-tr1">X</button></td></tr>');
-
-                 }); 
-   
-    $(document).on('click', '.remove-tr', function(){  
-         $(this).parents('tr').remove();
-    });  
-    $(document).on('click', '.remove-tr1', function(){
-    $(this).parents('tr').remove();
-    });
-   
-</script>
 
 <script>
     $(document).ready(function() {
@@ -526,6 +489,77 @@
         }, 3600);
         });
         
+</script>
+<script>
+    $(document).ready(function () {
+var boxesWrap = $('#boxes-wrap');
+var boxRow = boxesWrap.children(":first");
+var boxRowTemplate = boxRow.clone();
+boxRow.find('button.remove-gas-row').remove();
+
+// nb can't use .length for inputCount as we are dynamically removing from middle of collection
+var inputCount = 1;
+
+$('#add').click(function () {
+var newRow = boxRowTemplate.clone();
+inputCount++;
+newRow.find('input.name').attr('placeholder', 'option '+inputCount);
+newRow.find('input.value').attr('value', inputCount);
+boxesWrap.append(newRow);
+});
+
+$('#boxes-wrap').on('click', 'button.remove-gas-row', function () {
+$(this).parent().remove();
+});
+});
+</script>
+
+<script>
+    $(document).ready(function () {
+var boxesWrap = $('#boxes-wrap2');
+var boxRow = boxesWrap.children(":first");
+var boxRowTemplate = boxRow.clone();
+boxRow.find('button.remove-gas-row2').remove();
+
+// nb can't use .length for inputCount as we are dynamically removing from middle of collection
+var inputCount = 1;
+
+$('#add2').click(function () {
+var newRow = boxRowTemplate.clone();
+inputCount++;
+newRow.find('input.name').attr('placeholder', 'option '+inputCount);
+newRow.find('input.value').attr('value', inputCount);
+boxesWrap.append(newRow);
+});
+
+$('#boxes-wrap2').on('click', 'button.remove-gas-row2', function () {
+$(this).parent().remove();
+});
+});
+</script>
+
+<script>
+    $(document).ready(function () {
+var boxesWrap = $('#boxes-wrap3');
+var boxRow = boxesWrap.children(":first");
+var boxRowTemplate = boxRow.clone();
+boxRow.find('button.remove-gas-row3').remove();
+
+// nb can't use .length for inputCount as we are dynamically removing from middle of collection
+var inputCount = 1;
+
+$('#add3').click(function () {
+var newRow = boxRowTemplate.clone();
+inputCount++;
+newRow.find('input.name').attr('placeholder', 'option '+inputCount);
+newRow.find('input.value').attr('value', inputCount);
+boxesWrap.append(newRow);
+});
+
+$('#boxes-wrap3').on('click', 'button.remove-gas-row3', function () {
+$(this).parent().remove();
+});
+});
 </script>
 
 @endsection

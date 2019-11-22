@@ -67,7 +67,11 @@
                                         @if ($answer->qn_id == $answer_list->qn_id)
                                         <tr>
                                             <td>
+                                                @if ($answer->ans == null)
+                                                <p>null</p>
+                                                @else
                                                 {{$answer->ans}}
+                                                @endif
                                             </td>
                                         </tr>
                                         @endif
