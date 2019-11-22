@@ -1,3 +1,8 @@
+<style>
+    .fgff td {
+        padding: 10px;
+    }
+</style>
 <center><b style="color:#0081c3;">
         DETAILED IMPLEMENTATION PLAN (DIP)
 
@@ -25,7 +30,7 @@
     </div>
 </div>
 
-<table class=" table-bordered" style="font-size: smaller;">
+<table class="fgff table-bordered" style="font-size: smaller;">
     <thead>
         <tr style="background: #349ba7 !important;color: #fff;">
             <th scope="col" style="width:100px;">Output</th>

@@ -47,6 +47,7 @@ class ChallengesController extends Controller
 
         $challenge = new Challenge();
         $challenge->activity_id = $request->input('activity_id');
+        $challenge->project_id = $request->input('project_id');
         $challenge->challenge = $request->input('challenge');
         $challenge->solution = $request->input('solution');
 

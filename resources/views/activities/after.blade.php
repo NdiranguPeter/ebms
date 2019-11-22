@@ -377,6 +377,7 @@
                 {!! Form::open(['action'=>'ChallengesController@store', 'method'=>'POST']) !!}
 
                 <input type="hidden" name="activity_id" value={{$activity->id}}>
+                <input type="hidden" name="project_id" value={{$project->id}}>
                 {{Form::label('challenge', 'State the challenge')}}
                 {{Form::textarea('challenge','', ['class' => 'form-control'])}}
                 <hr>

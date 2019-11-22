@@ -8,7 +8,7 @@ class Challenge extends Model
 {
     protected $table = "challenges";
 
-    protected $fillable = ['activity_id', 'challenge','solution'];
+    protected $fillable = ['project_id','activity_id', 'challenge','solution'];
 
     public function activity()
     {

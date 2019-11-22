@@ -479,9 +479,12 @@ class ActivitiesController extends Controller
 
         $outcome = Outcome::find($output->outcome_id);
 
+        $project = Project::find($outcome->project_id);
+      
+
         $before_after = 'after';
 
-        return view('activities.after')->with(['challenges'=>$challenges,'before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
+        return view('activities.after')->with(['project'=>$project, 'challenges'=>$challenges,'before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
 
     }
 

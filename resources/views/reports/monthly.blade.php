@@ -1,11 +1,18 @@
 <style>
-    #liss li {
-        line-height: 40px;
+    .cdcc td {
+        height: 75px;
     }
 
-    table td {
-
-        height: 75px;
+    .cdcc>tbody>tr>td,
+    .cdcc>tbody>tr>th,
+    .cdcc>tfoot>tr>td,
+    .cdcc>tfoot>tr>th,
+    .cdcc>thead>tr>td,
+    .cdcc>thead>tr>th {
+        padding: 0px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-top: 1px solid #bfdeec
     }
 </style>
 <table class="table table-bordered">
@@ -180,7 +187,7 @@
 </table>
 
 <h2>SECTION 1. TECHNICAL ACCOMPLISHMENT AGAINST PLAN DURING THE MONTH</h2>
-<table class="table table-bordered">
+<table class="cdcc table table-bordered">
     <tr style="background: #349ba7 !important;color: #fff;">
         <th style="max-width:200px;">Outputs</th>
         <th style="max-width:600px;">Indicator description</th>
@@ -306,7 +313,7 @@
 </table>
 </td>
 <td>
-    <table class="table" id="liss">
+    <table class="cdcc table" id="liss">
         @foreach ($outputindicators as $outputindicator)
         @if ($output->id == $outputindicator->output_id)
         @foreach ($indicatorsafter as $indicatorafter)
@@ -373,7 +380,7 @@
     </table>
 </td>
 <td>
-    <table style="border-collapse: separate;
+    <table class="cdcc" style="border-collapse: separate;
     border-spacing: 0 1px;">
 
         @foreach ($outputindicators as $outputindicator)
@@ -476,10 +483,13 @@ $i++;
         </tr>
     </thead>
     <tbody>
+        @foreach ($challenges as $challenge)
         <tr>
-            <td></td>
-            <td></td>
+            <td>{{$challenge->challenge}}</td>
+            <td>{{$challenge->solution}}</td>
         </tr>
+        @endforeach
+
     </tbody>
 </table>
 <hr>

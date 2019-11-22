@@ -1,9 +1,21 @@
 <style>
-    #liss li {
-        line-height: 25px;
+    .cdccw td {
+        height: 88px;
+    }
+
+    .cdcc>tbody>tr>td,
+    .cdcc>tbody>tr>th,
+    .cdcc>tfoot>tr>td,
+    .cdcc>tfoot>tr>th,
+    .cdcc>thead>tr>td,
+    .cdcc>thead>tr>th {
+        padding: 0px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-top: 1px solid #bfdeec
     }
 </style>
-<table class="table table-bordered">
+<table class="cdcc table table-bordered">
     <thead>
         <tr style="background: #349ba7 !important;color: #fff;">
             <th>Goal</th>
@@ -16,10 +28,10 @@
         <thead>
         <tbody>
             <tr style="font-size: smaller;">
-                <td rowspan="{{count($goalindicators)}}">Project goal pp</td>
-                <th rowspan="{{count($goalindicators)}}">{!!$project->goal!!}</th>
-                <td rowspan="{{count($goalindicators)}}">
-                    <table class="table">
+                <td>Project goal pp</td>
+                <th>{!!$project->goal!!}</th>
+                <td>
+                    <table class="table cdccw">
                         @php
                         $y = 1;
                         @endphp
@@ -33,8 +45,8 @@
                         @endforeach
                     </table>
                 </td>
-                <td rowspan="{{count($goalindicators)}}">
-                    <table class="table">
+                <td>
+                    <table class="table cdccw">
                         @php
                         $y = 1;
                         @endphp
@@ -54,7 +66,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="table">
+                    <table class="table cdccw">
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($risks as $risk)
                         @if($goalindicator->goal_id == $risk->goal_id)
@@ -67,7 +79,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="table">
+                    <table class="table cdccw">
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($assumptions as $assumption)
                         @if($goalindicator->goal_id == $assumption->goal_id)
@@ -98,10 +110,10 @@
         @foreach ($outcomes as $outcome)
     <tbody>
         <tr style="font-size: smaller;">
-            <td rowspan="{{count($outcomeindicators)}}">Outcome {{$counter}}</td>
-            <th rowspan="{{count($outcomeindicators)}}">{!!$outcome->name!!}</th>
+            <td>Outcome {{$counter}}</td>
+            <th>{!!$outcome->name!!}</th>
             <td>
-                <table class="table">
+                <table class="table cdccw">
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @if ($outcomeindicator->outcome_id == $outcome->id)
                     <tr>
@@ -111,8 +123,8 @@
                     @endforeach
                 </table>
             </td>
-            <td rowspan="{{count($outcomeindicators)}}">
-                <table class="table">
+            <td>
+                <table class="table cdccw">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($verificationsources as $verificationsource)
@@ -131,7 +143,7 @@
                 </table>
             </td>
             <td>
-                <table class="table">
+                <table class="table cdccw">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($risks as $risk)
@@ -147,7 +159,7 @@
                 </table>
             </td>
             <td>
-                <table class="table">
+                <table class="table cdccw">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($assumptions as $assumption)
@@ -191,10 +203,10 @@
     @if ($outcome->id == $output->outcome_id)
     <tbody>
         <tr style="font-size: smaller;">
-            <td rowspan="{{count($outputindicators)}}">Output {{$fgrt}}.{{$coer}}</td>
+            <td>Output {{$fgrt}}.{{$coer}}</td>
             <th rowspan=" {{count($outputindicators)}}">{!!$output->name!!}</th>
             <td>
-                <table class="table">
+                <table class="table cdccw">
                     @foreach ($outputindicators as $outputindicator)
                     @if ($outputindicator->output_id == $output->id)
                     <tr>
@@ -204,8 +216,8 @@
                     @endforeach
                 </table>
             </td>
-            <td rowspan="{{count($outputindicators)}}">
-                <table class="table">
+            <td>
+                <table class="table cdccw">
 
                     @foreach ($outputindicators as $outputindicator)
                     @foreach ($verificationsources as $verificationsource)
@@ -222,7 +234,7 @@
                 </table>
             </td>
             <td>
-                <table class="table">
+                <table class="table cdccw">
 
                     @foreach ($risks as $risk)
                     @foreach ($outputindicators as $outputindicator)
@@ -279,7 +291,7 @@
             <td rowspan="{{count($activityresources)}}">Activity {{$fgrt}}.{{$cer}}</td>
             <th rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
             <td rowspan="{{count($activityresources)}}">
-                <table class="table">
+                <table class="table cdccw">
                     @foreach ($activityresources as $activityresource)
                     @if ($activityresource->activity_id == $activity->id)
                     <tr>
