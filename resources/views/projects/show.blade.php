@@ -92,14 +92,7 @@
                         <p><b>Project Stage: </b>{{$project->stage}}</p>
                         <p><b>Project Type: </b>{{$project->type}}</p>
                         <p><b>Project Budget: </b>{{$project->currency}}. {{$project->budget}} </p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p><b>Project Sector: </b>{{$project->sector}}</p>
-                        <p><b>Target Group: </b>{{$target_group->name}}</p>
-                        <p><b>Partners: </b>{{$project->partners}}</p>
-                        <p><b>Donors: </b>{{$project->donors}}</p>
-                        <p><b>Start Date: </b>{{$project->start}}</p>
-                        <p><b>End Date: </b>{{$project->end}}</p>
+                        <br>
                         <table>
                             <thead>
                                 <th><b>Global goal: </b></th>
@@ -107,8 +100,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="padding-right: 100px;">
-                                        <table>
+                                    <td>
+                                        <table class="table">
                                             @foreach ($global_goals as $global_goal)
 
                                             <tr>
@@ -124,7 +117,7 @@
                                         </table>
                                     </td>
                                     <td>
-                                        <table>
+                                        <table class="table">
                                             @foreach ($global_goals_split as $global_goal_split)
 
                                             <tr>
@@ -144,6 +137,15 @@
 
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-sm-6">
+                        <p><b>Project Sector: </b>{{$project->sector}}</p>
+                        <p><b>Target Group: </b>{{$target_group->name}}</p>
+                        <p><b>Partners: </b>{{$project->partners}}</p>
+                        <p><b>Donors: </b>{{$project->donors}}</p>
+                        <p><b>Start Date: </b>{{$project->start}}</p>
+                        <p><b>End Date: </b>{{$project->end}}</p>
+
 
                         <table>
                             <thead>
@@ -152,8 +154,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="padding-right: 100px;">
-                                        <table>
+                                    <td>
+                                        <table class="table">
                                             @foreach ($sectors as $sector)
 
                                             <tr>
@@ -169,7 +171,7 @@
                                         </table>
                                     </td>
                                     <td>
-                                        <table>
+                                        <table class="table">
                                             @foreach ($sectors_split as $sector_split)
 
                                             <tr>
@@ -198,8 +200,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="padding-right: 100px;">
-                                        <table>
+                                    <td>
+                                        <table class="table">
                                             @foreach ($sdgs as $sdg)
 
                                             <tr>
@@ -215,7 +217,7 @@
                                         </table>
                                     </td>
                                     <td>
-                                        <table>
+                                        <table class="table">
                                             @foreach ($sdgs_split as $sdg_split)
 
                                             <tr>
