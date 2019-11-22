@@ -55,7 +55,7 @@ class ProjectsController extends Controller
         $donors = Donor::all();
 
         return view('projects.create')->with(['donors' => $donors, 'partners' => $partners, 'sectors' => $sectors, 'currencies' => $currencies, 'target_groups' => $target_groups]);
-    
+
     }
 
     /**
@@ -88,34 +88,32 @@ class ProjectsController extends Controller
             'global_goal.*' => 'required',
             'global_goal_split.*' => 'required',
 
-            
         ]);
 
         $global_goal_split_total = 0;
-        foreach($request->input('global_goal_split') as $splitt){
+        foreach ($request->input('global_goal_split') as $splitt) {
             $global_goal_split_total = $global_goal_split_total + $splitt;
         }
 
-        
         $sector_split_total = 0;
-        foreach($request->input('sector_split') as $sector_splits){
+        foreach ($request->input('sector_split') as $sector_splits) {
             $sector_split_total = $sector_split_total + $sector_splits;
         }
-        
+
         $sdg_split_total = 0;
-        foreach($request->input('sdg_split') as $sdg_splits){
+        foreach ($request->input('sdg_split') as $sdg_splits) {
             $sdg_split_total = $sdg_split_total + $sdg_splits;
         }
 
-        if($global_goal_split_total > 100 || $sector_split_total > 100 || $sdg_split_total > 100){
+        if ($global_goal_split_total > 100 || $sector_split_total > 100 || $sdg_split_total > 100) {
 
-        $target_groups = TargetGroup::all();
-        $currencies = Currency::all();
-        $sectors = Sector::all();
-        $partners = Partner::all();
-        $donors = Donor::all();
+            $target_groups = TargetGroup::all();
+            $currencies = Currency::all();
+            $sectors = Sector::all();
+            $partners = Partner::all();
+            $donors = Donor::all();
 
-        return redirect('/projects/create')->with('error', '% split cannot add up to over 100%');
+            return redirect('/projects/create')->with('error', '% split cannot add up to over 100%');
 
         }
 
@@ -129,7 +127,6 @@ class ProjectsController extends Controller
 
         $project->sdg = implode('|', $request->input('sdg'));
         $project->sdg_split = implode('|', $request->input('sdg_split'));
-
 
         $project->ir_office = $request->input('ir_office');
 
@@ -155,7 +152,7 @@ class ProjectsController extends Controller
         $project->budget = $request->input('budget');
         $project->currency = $request->input('currency');
         $project->fo_pin = $request->input('fo_pin');
-        
+
         $project->save();
 
         return redirect('/projects')->with('success', 'Project created');
@@ -184,10 +181,10 @@ class ProjectsController extends Controller
         $sectors_split = explode('|', $project->sector_split);
         $sdgs_split = explode('|', $project->sdg_split);
         $global_goals_split = explode('|', $project->globalgoal_split);
-      
+
         $county = Country::find($project->country);
 
-        return view('projects.show')->with(['sectors'=>$sectors, 'sdgs'=>$sdgs, 'global_goals'=>$global_goals,'sectors_split'=>$sectors_split, 'sdgs_split'=>$sdgs_split, 'global_goals_split'=>$global_goals_split, 'project' => $project, 'country' => $county, 'office' => $ir_office, 'target_group' => $target_group]);
+        return view('projects.show')->with(['sectors' => $sectors, 'sdgs' => $sdgs, 'global_goals' => $global_goals, 'sectors_split' => $sectors_split, 'sdgs_split' => $sdgs_split, 'global_goals_split' => $global_goals_split, 'project' => $project, 'country' => $county, 'office' => $ir_office, 'target_group' => $target_group]);
     }
 
     /**
@@ -246,20 +243,52 @@ class ProjectsController extends Controller
             'type' => 'required',
             'goal' => 'required',
             'currency' => 'required',
-            // 'g.*.globalgoal_goal' => 'required',
-            // 's.*.global_split' => 'required',
+            'sdg.*' => 'required',
+            'sdg_split.*' => 'required',
+            'sector.*' => 'required',
+            'sector_spli.*' => 'required',
+            'global_goal.*' => 'required',
+            'global_goal_split.*' => 'required',
+
         ]);
+
+        $global_goal_split_total = 0;
+        foreach ($request->input('global_goal_split') as $splitt) {
+            $global_goal_split_total = $global_goal_split_total + $splitt;
+        }
+
+        $sector_split_total = 0;
+        foreach ($request->input('sector_split') as $sector_splits) {
+            $sector_split_total = $sector_split_total + $sector_splits;
+        }
+
+        $sdg_split_total = 0;
+        foreach ($request->input('sdg_split') as $sdg_splits) {
+            $sdg_split_total = $sdg_split_total + $sdg_splits;
+        }
+
+        if ($global_goal_split_total > 100 || $sector_split_total > 100 || $sdg_split_total > 100) {
+
+            $target_groups = TargetGroup::all();
+            $currencies = Currency::all();
+            $sectors = Sector::all();
+            $partners = Partner::all();
+            $donors = Donor::all();
+
+            return redirect('/projects/create')->with('error', '% split cannot add up to over 100%');
+
+        }
 
         $project = Project::find($id);
 
-        $project->global_goal = implode(',', $request->input('g.*.global_goal'));
-        $project->globalgoal_split = implode(',', $request->input('s.*.globalgoal_split'));
+        $project->global_goal = implode('|', $request->input('global_goal'));
+        $project->globalgoal_split = implode('|', $request->input('global_goal_split'));
 
-        $project->sector = implode(',', $request->input('c.*.sector'));
-        $project->sector_split = implode(',', $request->input('p.*.sector_split'));
+        $project->sector = implode('|', $request->input('sector'));
+        $project->sector_split = implode('|', $request->input('sector_split'));
 
-        $project->sdg = implode(',', $request->input('d.*.sdg'));
-        $project->sdg_split = implode(',', $request->input('r.*.sdg_split'));
+        $project->sdg = implode('|', $request->input('sdg'));
+        $project->sdg_split = implode('|', $request->input('sdg_split'));
 
         $project->ir_office = $request->input('ir_office');
 

@@ -145,7 +145,7 @@
                         <p><b>Donors: </b>{{$project->donors}}</p>
                         <p><b>Start Date: </b>{{$project->start}}</p>
                         <p><b>End Date: </b>{{$project->end}}</p>
-
+                        <br>
 
                         <table>
                             <thead>
