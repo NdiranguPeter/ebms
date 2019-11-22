@@ -15,32 +15,35 @@
         </tr>
         <thead>
         <tbody>
-            <tr>
-                <td rowspan="{{count($goalindicators)}}">Project goal</td>
+            <tr style="font-size: smaller;">
+                <td rowspan="{{count($goalindicators)}}">Project goal pp</td>
                 <th rowspan="{{count($goalindicators)}}">{!!$project->goal!!}</th>
                 <td rowspan="{{count($goalindicators)}}">
-                    <ul>
+                    <table class="table">
                         @php
                         $y = 1;
                         @endphp
                         @foreach ($goalindicators as $goalindicator)
-                        <li>{!!$goalindicator->name!!}</li>
-
+                        <tr>
+                            <td>{!!$goalindicator->name!!}</td>
+                        </tr>
                         @php
                         $y++;
                         @endphp
                         @endforeach
-                    </ul>
+                    </table>
                 </td>
                 <td rowspan="{{count($goalindicators)}}">
-                    <ul style="line-height: 40px;">
+                    <table class="table">
                         @php
                         $y = 1;
                         @endphp
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($verificationsources as $verificationsource)
                         @if ($verificationsource->indicator_id == $goalindicator->id)
-                        <li>{!!$verificationsource->name!!}</li>
+                        <tr>
+                            <td>{!!$verificationsource->name!!}</td>
+                        </tr>
                         @endif
 
                         @endforeach
@@ -48,33 +51,33 @@
                         $y++;
                         @endphp
                         @endforeach
-                    </ul>
+                    </table>
                 </td>
                 <td>
-                    <ul>
+                    <table class="table">
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($risks as $risk)
                         @if($goalindicator->goal_id == $risk->goal_id)
-                        <li>
-                            {{$risk->name}}
-                        </li>
+                        <tr>
+                            <td>{{$risk->name}}</td>
+                        </tr>
                         @endif
                         @endforeach
                         @endforeach
-                    </ul>
+                    </table>
                 </td>
                 <td>
-                    <ul>
+                    <table class="table">
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($assumptions as $assumption)
                         @if($goalindicator->goal_id == $assumption->goal_id)
-                        <li>
-                            {{$assumption->name}}
-                        </li>
+                        <tr>
+                            <td>{{$assumption->name}}</td>
+                        </tr>
                         @endif
                         @endforeach
                         @endforeach
-                    </ul>
+                    </table>
                 </td>
             </tr>
 
@@ -94,63 +97,70 @@
         @endphp
         @foreach ($outcomes as $outcome)
     <tbody>
-        <tr>
+        <tr style="font-size: smaller;">
             <td rowspan="{{count($outcomeindicators)}}">Outcome {{$counter}}</td>
             <th rowspan="{{count($outcomeindicators)}}">{!!$outcome->name!!}</th>
             <td>
-                <ul>
+                <table class="table">
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @if ($outcomeindicator->outcome_id == $outcome->id)
-                    <li> {!!$outcomeindicator->name!!} </li>
-
+                    <tr>
+                        <td>{!!$outcomeindicator->name!!}</td>
+                    </tr>
                     @endif
                     @endforeach
-                </ul>
+                </table>
             </td>
             <td rowspan="{{count($outcomeindicators)}}">
-                <ul style="line-height: 40px;">
+                <table class="table">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($verificationsources as $verificationsource)
                     @if ($outcomeindicator->outcome_id == $outcome->id)
                     @if ($outcomeindicator->id == $verificationsource->indicator_id)
-                    <li>{{$verificationsource->source}}</li>
+                    <tr>
+                        <td>
+                            {{$verificationsource->source}}
+                        </td>
+                    </tr>
                     @endif
                     @endif
                     @endforeach
 
                     @endforeach
-                </ul>
+                </table>
             </td>
             <td>
-                <ul>
+                <table class="table">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($risks as $risk)
                     @if ($outcomeindicator->outcome_id == $outcome->id)
                     @if($outcomeindicator->outcome_id == $risk->outcome_id)
-
-                    <li> {{$risk->name}} </li>
+                    <tr>
+                        <td>{{$risk->name}}</td>
+                    </tr>
                     @endif
                     @endif
                     @endforeach
                     @endforeach
-                </ul>
+                </table>
             </td>
             <td>
-                <ul>
+                <table class="table">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($assumptions as $assumption)
                     @if ($outcomeindicator->outcome_id == $outcome->id)
                     @if($outcomeindicator->outcome_id == $assumption->outcome_id)
-
-                    <li> {{$assumption->name}} </li>
+                    <tr>
+                        <td>{{$assumption->name}}</td>
+                    </tr>
                     @endif
                     @endif
                     @endforeach
                     @endforeach
-                </ul>
+                </table>
             </td>
         </tr>
 
@@ -180,47 +190,53 @@
     @foreach ($outputs as $output)
     @if ($outcome->id == $output->outcome_id)
     <tbody>
-        <tr>
+        <tr style="font-size: smaller;">
             <td rowspan="{{count($outputindicators)}}">Output {{$fgrt}}.{{$coer}}</td>
             <th rowspan=" {{count($outputindicators)}}">{!!$output->name!!}</th>
             <td>
-                <ul>
+                <table class="table">
                     @foreach ($outputindicators as $outputindicator)
                     @if ($outputindicator->output_id == $output->id)
-                    <li> {!!$outputindicator->name!!} </li>
+                    <tr>
+                        <td>{!!$outputindicator->name!!}</td>
+                    </tr>
                     @endif
                     @endforeach
-                </ul>
+                </table>
             </td>
             <td rowspan="{{count($outputindicators)}}">
-                <ul style="line-height: 50px;">
+                <table class="table">
 
                     @foreach ($outputindicators as $outputindicator)
                     @foreach ($verificationsources as $verificationsource)
                     @if ($outputindicator->output_id == $output->id)
                     @if ($outputindicator->id == $verificationsource->indicator_id)
-                    <li>{{$verificationsource->source}}</li>
+                    <tr>
+                        <td>{{$verificationsource->source}}</td>
+                    </tr>
                     @endif
                     @endif
                     @endforeach
 
                     @endforeach
-                </ul>
+                </table>
             </td>
             <td>
-                <ul style="line-height: 45px;">
+                <table class="table">
 
                     @foreach ($risks as $risk)
                     @foreach ($outputindicators as $outputindicator)
                     @if ($outputindicator->output_id == $output->id)
                     @if($outputindicator->output_id == $risk->output_id)
-                    <li> {{$risk->name}} </li>
+                    <tr>
+                        <td>{{$risk->name}}</td>
+                    </tr>
                     @endif
                     @endif
                     @endforeach
 
                     @endforeach
-                </ul>
+                </table>
             </td>
             <td></td>
         </tr>
@@ -259,17 +275,19 @@
     @if ($output->id == $activity->output_id)
 
     <tbody>
-        <tr>
+        <tr style="font-size: smaller;">
             <td rowspan="{{count($activityresources)}}">Activity {{$fgrt}}.{{$cer}}</td>
             <th rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
             <td rowspan="{{count($activityresources)}}">
-                <ul>
+                <table class="table">
                     @foreach ($activityresources as $activityresource)
                     @if ($activityresource->activity_id == $activity->id)
-                    <li>{!!$activityresource->name!!}</li>
+                    <tr>
+                        <td>{!!$activityresource->name!!}</td>
+                    </tr>
                     @endif
                     @endforeach
-                </ul>
+                </table>
             </td>
             <td style="width:100px;" rowspan="{{count($activityresources)}}">
 

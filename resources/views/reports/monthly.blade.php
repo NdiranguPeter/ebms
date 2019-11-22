@@ -2,6 +2,11 @@
     #liss li {
         line-height: 40px;
     }
+
+    table td {
+
+        height: 75px;
+    }
 </style>
 <table class="table table-bordered">
     <tr>
@@ -173,11 +178,12 @@
         </td>
     </tr>
 </table>
+
 <h2>SECTION 1. TECHNICAL ACCOMPLISHMENT AGAINST PLAN DURING THE MONTH</h2>
 <table class="table table-bordered">
     <tr style="background: #349ba7 !important;color: #fff;">
-        <th>Outputs</th>
-        <th>Indicator description</th>
+        <th style="max-width:200px;">Outputs</th>
+        <th style="max-width:600px;">Indicator description</th>
         <th>Value at start</th>
         <th>Total targeted for the month</th>
         <th>Achievement for the month of {{$month}}</th>
@@ -188,38 +194,41 @@
     @endphp
     @foreach ($outputs as $output)
 
-    <tr>
-        <td>output {{$i}} - {!!$output->name!!} </td>
+    <tr style="font-size: smaller;">
+        <td style="max-width:200px;">output {{$i}} - {!!$output->name!!} </td>
 
-        <td>
-            <ul>
+        <td style="max-width:600px;">
+            <table class="table">
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outputindicator->id == $indicatorafter->indicator_id)
-                <li>{!!$outputindicator->name!!}</li>
+                <tr>
+                    <td>{!!$outputindicator->name!!}</td>
+                </tr>
                 @endif
                 @endforeach
                 @endif
                 @endforeach
-            </ul>
+            </table>
         </td>
         <td>
-            <ul id="liss">
+            <table class="table" id="liss">
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outputindicator->id == $indicatorafter->indicator_id)
-
-                <li>{{$outputindicator->baseline_target}}</li>
+                <tr>
+                    <td>{{$outputindicator->baseline_target}}</td>
+                </tr>
                 @endif
                 @endforeach
                 @endif
                 @endforeach
-            </ul>
+            </table>
         </td>
         <td>
-            <ul id="liss">
+            <table class="table" id="liss">
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
                 @foreach ($indicatorsafter as $indicatorafter)
@@ -286,165 +295,174 @@
                 $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
                 }
 
-                if($tmt < 1){ $tmt=1; } @endphp <li>{{sprintf('%0.0f', $tmt)}}</li>
-                    @endif
-                    @endforeach
-                    @endif
-                    @endforeach
-            </ul>
-        </td>
-        <td>
-            <ul id="liss">
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                @php
-                if($month == 'January'){
-                $total = $indicatorafter->jan;
-                }
-                if($month == 'February'){
-                $total = $indicatorafter->jan + $indicatorafter->feb;
-                }
-                if($month == 'March'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
-                }
-                if($month == 'April'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr;
-                }
-                if($month == 'May'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may;
-                }
-                if($month == 'June'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may + $indicatorafter->jun;
-                }if($month == 'July'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul;
-                }if($month == 'August'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug;
-                }if($month == 'September'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-                $indicatorafter->sep;
-                }if($month == 'October'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-                $indicatorafter->sep
-                + $indicatorafter->oct;
-                }if($month == 'November'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-                $indicatorafter->sep
-                +
-                $indicatorafter->oct + $indicatorafter->nov;
-                }
-                if($month == 'December'){
-                $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-                $indicatorafter->sep
-                +
-                $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-                }
-                @endphp
-                <li>
-                    {{$total}}</li>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </ul>
-        </td>
-        <td>
-
-            @foreach ($outputindicators as $outputindicator)
-            @if ($output->id == $outputindicator->output_id)
-            @foreach ($indicatorsafter as $indicatorafter)
-            @if ($outputindicator->id == $indicatorafter->indicator_id)
-            @php
-            if($month == 'January'){
-            $total = $indicatorafter->jan;
-            $tmt = $outputindicator->project_target/12;
-            }
-            if($month == 'February'){
-            $total = $indicatorafter->jan + $indicatorafter->feb;
-            $tmt = $outputindicator->project_target*2/12;
-            }
-            if($month == 'March'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
-            $tmt = $outputindicator->project_target*3/12;
-            }
-            if($month == 'April'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr;
-            $tmt = $outputindicator->project_target*4/12;
-            }
-            if($month == 'May'){
-            $tmt = $outputindicator->project_target*5/12;
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may;
-            }
-            if($month == 'June'){
-            $tmt = $outputindicator->project_target*6/12;
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun;
-            }if($month == 'July'){
-            $tmt = $outputindicator->project_target*7/12;
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul;
-            }if($month == 'August'){
-            $tmt = $outputindicator->project_target*8/12;
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug;
-            }if($month == 'September'){
-            $tmt = $outputindicator->project_target*9/12;
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-            $indicatorafter->sep;
-            }if($month == 'October'){
-            $tmt = $outputindicator->project_target*10/12;
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-            $indicatorafter->sep
-            + $indicatorafter->oct;
-            }if($month == 'November'){
-            $tmt = $outputindicator->project_target*11/12;
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-            $indicatorafter->sep
-            +
-            $indicatorafter->oct + $indicatorafter->nov;
-            }
-            if($month == 'December'){
-            $tmt = $outputindicator->project_target;
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-            $indicatorafter->sep
-            +
-            $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-            }
-
-            if($tmt < 1){ $tmt=1; } $perc=($total/$tmt)*100; if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc
-                <50) { $color='yellow' ; } if ($perc> 49 && $perc
-                    <75) { $color='blue' ; } if ($perc> 74) {
-                        $color = 'green';
-                        }
-                        @endphp
-                        <div
-                            style="line-height: 38px; border:1px solid #fff; color:#fff; width:100px; background-color:{{$color}}">
-                            {{sprintf('%0.2f', $perc)}}%
-                        </div>
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-        </td>
+                if($tmt < 1){ $tmt=1; } @endphp <tr>
+        <td>{{sprintf('%0.0f', $tmt)}}</td>
     </tr>
-    @php
-    $i++;
-    @endphp
+
+    @endif
     @endforeach
+    @endif
+    @endforeach
+</table>
+</td>
+<td>
+    <table class="table" id="liss">
+        @foreach ($outputindicators as $outputindicator)
+        @if ($output->id == $outputindicator->output_id)
+        @foreach ($indicatorsafter as $indicatorafter)
+        @if ($outputindicator->id == $indicatorafter->indicator_id)
+        @php
+        if($month == 'January'){
+        $total = $indicatorafter->jan;
+        }
+        if($month == 'February'){
+        $total = $indicatorafter->jan + $indicatorafter->feb;
+        }
+        if($month == 'March'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
+        }
+        if($month == 'April'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr;
+        }
+        if($month == 'May'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may;
+        }
+        if($month == 'June'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun;
+        }if($month == 'July'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul;
+        }if($month == 'August'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug;
+        }if($month == 'September'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
+        $indicatorafter->sep;
+        }if($month == 'October'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
+        $indicatorafter->sep
+        + $indicatorafter->oct;
+        }if($month == 'November'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
+        $indicatorafter->sep
+        +
+        $indicatorafter->oct + $indicatorafter->nov;
+        }
+        if($month == 'December'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
+        $indicatorafter->sep
+        +
+        $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
+        }
+        @endphp
+        <tr>
+            <td>
+                {{$total}}
+            </td>
+        </tr>
+        @endif
+        @endforeach
+        @endif
+        @endforeach
+    </table>
+</td>
+<td>
+    <table style="border-collapse: separate;
+    border-spacing: 0 1px;">
+
+        @foreach ($outputindicators as $outputindicator)
+        @if ($output->id == $outputindicator->output_id)
+        @foreach ($indicatorsafter as $indicatorafter)
+        @if ($outputindicator->id == $indicatorafter->indicator_id)
+        @php
+        if($month == 'January'){
+        $total = $indicatorafter->jan;
+        $tmt = $outputindicator->project_target/12;
+        }
+        if($month == 'February'){
+        $total = $indicatorafter->jan + $indicatorafter->feb;
+        $tmt = $outputindicator->project_target*2/12;
+        }
+        if($month == 'March'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
+        $tmt = $outputindicator->project_target*3/12;
+        }
+        if($month == 'April'){
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr;
+        $tmt = $outputindicator->project_target*4/12;
+        }
+        if($month == 'May'){
+        $tmt = $outputindicator->project_target*5/12;
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may;
+        }
+        if($month == 'June'){
+        $tmt = $outputindicator->project_target*6/12;
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun;
+        }if($month == 'July'){
+        $tmt = $outputindicator->project_target*7/12;
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul;
+        }if($month == 'August'){
+        $tmt = $outputindicator->project_target*8/12;
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug;
+        }if($month == 'September'){
+        $tmt = $outputindicator->project_target*9/12;
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
+        $indicatorafter->sep;
+        }if($month == 'October'){
+        $tmt = $outputindicator->project_target*10/12;
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
+        $indicatorafter->sep
+        + $indicatorafter->oct;
+        }if($month == 'November'){
+        $tmt = $outputindicator->project_target*11/12;
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
+        $indicatorafter->sep
+        +
+        $indicatorafter->oct + $indicatorafter->nov;
+        }
+        if($month == 'December'){
+        $tmt = $outputindicator->project_target;
+        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
+        $indicatorafter->sep
+        +
+        $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
+        }
+
+        if($tmt < 1){ $tmt=1; } $perc=($total/$tmt)*100; if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc
+            <50) { $color='yellow' ; } if ($perc> 49 && $perc
+                <75) { $color='blue' ; } if ($perc> 74) {
+                    $color = 'green';
+                    }
+                    @endphp
+                    <tr>
+                        <td style="background-color:{{$color}}">{{sprintf('%0.2f', $perc)}}%</td>
+                    </tr>
+
+                    @endif
+                    @endforeach
+                    @endif
+                    @endforeach
+    </table>
+</td>
+</tr>
+@php
+$i++;
+@endphp
+@endforeach
 
 </table>
 <hr>

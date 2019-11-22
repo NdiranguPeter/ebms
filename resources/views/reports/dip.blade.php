@@ -24,11 +24,12 @@
         <p><b>Total beneficiaries: </b>{{$activities->sum('total_beneficiaries')}}</p>
     </div>
 </div>
-<table class="table table-hover table-bordered">
+
+<table class=" table-bordered" style="font-size: smaller;">
     <thead>
         <tr style="background: #349ba7 !important;color: #fff;">
             <th scope="col" style="width:100px;">Output</th>
-            <th scope="col">Description of activities</th>
+            <th style="min-width: 200px;" scope="col">Description of activities</th>
             <th scope="col">Unit</th>
             {{-- <th scope="col">Baseline</th> --}}
             <th scope="col">Project target</th>
@@ -57,7 +58,7 @@
     <tbody>
         <tr>
             <th style="color:#0081c3;">output {{$i}}</th>
-            <th>
+            <th style="min-width: 200px;">
                 {!!$output->name!!}
             </th>
             <th></th>
@@ -92,7 +93,7 @@
             <th>
                 <b> activity {{$i}}.{{$y}}</b>
             </th>
-            <td>
+            <td style="min-width: 200px;">
                 {!!$activity->name!!}
             </td>
             <td>
