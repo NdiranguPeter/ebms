@@ -79,7 +79,7 @@
         $all_total_female = $grand_total_under_five_female + $grand_tota_six_eighteen_female
         + $grand_tota_nineteen_fifty_female + $grand_tota_over_fifty_female;
         ?>
-        <tr>
+        <tr style="font-size:smaller;">
             <td rowspan="5" width="234">
                 <p> {{$activity->name}} </p>
             </td>

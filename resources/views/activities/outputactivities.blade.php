@@ -72,12 +72,12 @@
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($activities as $activity)
-                            <tr>
+                            <tr style="font-size: smaller;">
                                 <th scope="row">{{$i}}</th>
                                 <td scope="row"><a href="/activities/{{$activity->id}}/edit">{!!$activity->name!!}</a>
                                 </td>
-                                <td scope="row">{!!$activity->created_at!!}</td>
-                                <td scope="row">
+                                <td scope="row" style="width: 120px;">{!!$activity->created_at!!}</td>
+                                <td scope="row" style="width: 210px;">
                                     <table>
                                         <tr>
                                             <td style="padding:10px;">

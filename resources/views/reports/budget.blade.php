@@ -11,12 +11,24 @@
     <tbody>
         @if (count($activities)>0)
         @foreach ($activities as $activity)
-        <tr>
+        <tr style="font-size:smaller;">
             <td> {{$activity->budget_code}} </td>
             <td>{{$activity->name}}</td>
             <td>{{$activity->budget_unit}}</td>
-            <td>{{$activity->cost_unit}}</td>
-            <td>{{$activity->budget}}</td>
+            <td>
+                @php
+                $number = number_format($activity->cost_unit);
+
+                @endphp
+                {{$number}}
+            </td>
+            <td>
+                @php
+                $number = number_format($activity->budget);
+
+                @endphp
+                {{$number}} {{$activity->currency}}
+            </td>
         </tr>
         @endforeach
 

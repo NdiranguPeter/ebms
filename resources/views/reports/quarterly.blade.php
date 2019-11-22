@@ -1,6 +1,18 @@
 <style>
-    #liss li {
-        line-height: 45px;
+    .cdcc td {
+        height: 75px;
+    }
+
+    .cdcc>tbody>tr>td,
+    .cdcc>tbody>tr>th,
+    .cdcc>tfoot>tr>td,
+    .cdcc>tfoot>tr>th,
+    .cdcc>thead>tr>td,
+    .cdcc>thead>tr>th {
+        padding: 0px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-top: 1px solid #bfdeec
     }
 </style>
 <table class="table table-bordered">
@@ -88,7 +100,7 @@
                         }
                         @endphp
                         <div
-                            style="border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
+                            style="font-weight: bold; font-size: xx-large; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
                             {{$perc}}%
                         </div>
 
@@ -113,47 +125,53 @@
     <tr>
         <td style="color:#0081c3; font-size:bold;">outcome {{$y}} - {!!$outcome->name!!} </td>
 
-        <td>
-            <ol>
+        <td style="padding:0px !important;">
+            <table class="table cdcc">
                 @foreach ($outcomeindicators as $outcomeindicator)
                 @if ($outcome->id == $outcomeindicator->outcome_id)
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <li>{!!$outcomeindicator->name!!}</li>
+                <tr>
+                    <td>{!!$outcomeindicator->name!!}</td>
+                </tr>
                 @endif
                 @endforeach
                 @endif
                 @endforeach
-            </ol>
+            </table>
         </td>
-        <td>
-            <ol id="liss">
+        <td style="padding:0px !important;">
+            <table class="table cdcc">
                 @foreach ($outcomeindicators as $outcomeindicator)
                 @if ($outcome->id == $outcomeindicator->outcome_id)
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <li>{{$outcomeindicator->project_target}}</li>
+                <tr>
+                    <td>{{$outcomeindicator->project_target}}</td>
+                </tr>
                 @endif
                 @endforeach
                 @endif
                 @endforeach
-            </ol>
+            </table>
         </td>
-        <td>
-            <ol id="liss">
+        <td style="padding:0px !important;">
+            <table class="table cdcc" id="liss">
                 @foreach ($outcomeindicators as $outcomeindicator)
                 @if ($outcome->id == $outcomeindicator->outcome_id)
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <li>{{sprintf('%0.0f', $outcomeindicator->project_target/4)}}</li>
+                <tr>
+                    <td>{{sprintf('%0.0f', $outcomeindicator->project_target/4)}}</td>
+                </tr>
                 @endif
                 @endforeach
                 @endif
                 @endforeach
-            </ol>
+            </table>
         </td>
-        <td>
-            <ol id="liss">
+        <td style="padding:0px !important;">
+            <table class="table cdcc" id="liss">
                 @php
                 if($qrt == 'QRT 1'){
                 $tqrt1 = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
@@ -169,12 +187,14 @@
                 @if ($outcome->id == $outcomeindicator->outcome_id)
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <li>{{$tqrt1}}</li>
+                <tr>
+                    <td>{{$tqrt1}}</td>
+                </tr>
                 @endif
                 @endforeach
                 @endif
                 @endforeach
-                </ul>
+            </table>
         </td>
 
     </tr>
@@ -187,102 +207,112 @@
     <tr>
         <td><b>output {{$y}}.{{$i}}</b> - {!!$output->name!!} </td>
 
-        <td>
+        <td style="padding:0px !important;">
 
-            <ol>
+            <table class="table cdcc">
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
-                <li>{!!$outputindicator->name!!}</li>
+                <tr>
+                    <td>{!!$outputindicator->name!!}</td>
+                </tr>
                 @endif
                 @endforeach
 
-                </ul>
+            </table>
         </td>
 
-        <td>
-            <ol id="liss">
+        <td style="padding:0px !important;">
+            <table class="table cdcc" id="liss" style="padding:0px !important;">
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
-
-                <li>{{$outputindicator->baseline_target}}</li>
+                <tr>
+                    <td>
+                        {{$outputindicator->baseline_target}}
+                    </td>
+                </tr>
                 @endif
                 @endforeach
 
-                </ul>
+            </table>
         </td>
-        <td>
-            <ol id="liss">
+        <td style="padding:0px !important;">
+            <table class="table cdcc" id="liss">
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
 
                 @php
                 $tqt1 = $outputindicator->project_target/4;
-                if($tqt1 < 1){ $tqt1=1; } @endphp <li><b>{{$tqt1}}</b></li>
-                    @endif
-                    @endforeach
-
-
-            </ol>
-        </td>
-        <td colspan="2" style="min-width:200px;">
-            <ol id="liss">
-
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                @php
-                if($outputindicator->project_target == 0){
-                $tqt1 = 0;
-                }else{
-                $tqt1 = $outputindicator->project_target/4;
-                }
-                if($tqt1 < 1){ $tqt1=1; } @endphp @php $t=0; if($qrt=='QRT 1' ){ $t=$indicatorafter->jan +
-                    $indicatorafter->feb + $indicatorafter->mar;
-                    }
-                    if($qrt == 'QRT 2'){
-                    $t = $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun;
-                    }
-                    if($qrt == 'QRT 3'){
-                    $t = $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
-                    }
-                    if($qrt == 'QRT 4'){
-                    $t = $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-                    }
-                    $prc = $t/$tqt1;
-
-                    $perc=sprintf('%0.2f', $prc*100);
-
-                    if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 &&
-                            $perc <75) { $color='blue' ; } if ($perc> 74) {
-                                $color = 'green';
-                                }
-                                @endphp
-                                <li>
-                                    {{$t}} <span
-                                        style="border:1px solid #fff;width:100px; padding:0px 0px 0px 10px; color:#fff; margin-left: 20px; background-color:{{$color}}">
-                                        {{$perc}}% </span>
-                                </li>
-
-                                @endif
-                                @endforeach
-                                @endif
-                                @endforeach
-
-                                </ul>
-        </td>
-
-
+                if($tqt1 < 1){ $tqt1=1; } @endphp <tr>
+        <td><b>{{$tqt1}}</b></td>
     </tr>
-    @php
-    $i++;
-    @endphp
     @endif
     @endforeach
 
 
-    @php
-    $y++;
-    @endphp
-    @endforeach
+</table>
+</td>
+<td colspan="2" style="min-width:200px; padding:0px !important;">
+    <table class="table cdcc" id="liss">
+
+        @foreach ($outputindicators as $outputindicator)
+        @if ($output->id == $outputindicator->output_id)
+        @foreach ($indicatorsafter as $indicatorafter)
+        @if ($outputindicator->id == $indicatorafter->indicator_id)
+        @php
+        if($outputindicator->project_target == 0){
+        $tqt1 = 0;
+        }else{
+        $tqt1 = $outputindicator->project_target/4;
+        }
+        if($tqt1 < 1){ $tqt1=1; } @endphp @php $t=0; if($qrt=='QRT 1' ){ $t=$indicatorafter->jan +
+            $indicatorafter->feb + $indicatorafter->mar;
+            }
+            if($qrt == 'QRT 2'){
+            $t = $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun;
+            }
+            if($qrt == 'QRT 3'){
+            $t = $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
+            }
+            if($qrt == 'QRT 4'){
+            $t = $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
+            }
+            $prc = $t/$tqt1;
+
+            $perc=sprintf('%0.2f', $prc*100);
+
+            if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 &&
+                    $perc <75) { $color='blue' ; } if ($perc> 74) {
+                        $color = 'green';
+                        }
+                        @endphp
+                        <tr>
+                            <td>{{$t}}</td>
+
+                            <td
+                                style="border:1px solid #fff;width:100px; padding:0px 0px 0px 10px; color:#fff; margin-left: 20px; background-color:{{$color}};font-weight: bold;">
+                                <span>
+                                    {{$perc}}% </span></td>
+
+                        </tr>
+                        @endif
+                        @endforeach
+                        @endif
+                        @endforeach
+
+    </table>
+</td>
+
+
+</tr>
+@php
+$i++;
+@endphp
+@endif
+@endforeach
+
+
+@php
+$y++;
+@endphp
+@endforeach
 </table>

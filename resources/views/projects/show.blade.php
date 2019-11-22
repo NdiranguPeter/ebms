@@ -91,7 +91,12 @@
                         <p><b>IRW Pin Code: </b>{{$project->irw_pin}}</p>
                         <p><b>Project Stage: </b>{{$project->stage}}</p>
                         <p><b>Project Type: </b>{{$project->type}}</p>
-                        <p><b>Project Budget: </b>{{$project->currency}}. {{$project->budget}} </p>
+                        <p><b>Project Budget: </b>{{$project->currency}}. @php
+                            $number = number_format($project->budget);
+
+                            @endphp
+                            {{$number}}
+                        </p>
                         <br>
                         <table>
                             <thead>

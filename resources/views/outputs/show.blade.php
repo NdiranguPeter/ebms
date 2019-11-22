@@ -91,7 +91,7 @@
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($outputs as $output)
-                            <tr>
+                            <tr style="font-size:smaller;">
                                 <th scope="row">{{$i}}</th>
                                 <td scope="row"><a href="/activities/output/{{$output->id}}">{!!$output->name!!}</a>
                                 </td>

@@ -179,7 +179,7 @@
                         @endforeach
 
                         <div
-                            style="border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
+                            style="font-weight: bold; font-size: xx-large; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
                             {{sprintf('%0.4f', $perc)}}%
                         </div>
         </td>
@@ -380,7 +380,7 @@
     </table>
 </td>
 <td>
-    <table class="cdcc" style="border-collapse: separate;
+    <table class="table cdcc" style="border-collapse: separate;
     border-spacing: 0 1px;">
 
         @foreach ($outputindicators as $outputindicator)
@@ -456,7 +456,9 @@
                     }
                     @endphp
                     <tr>
-                        <td style="background-color:{{$color}}">{{sprintf('%0.2f', $perc)}}%</td>
+                        <td style="background-color:{{$color}}; vertical-align: middle; color: white;">
+                            <span style="font-weight:bold; ">{{sprintf('%0.2f', $perc)}}%</span>
+                        </td>
                     </tr>
 
                     @endif

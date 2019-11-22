@@ -78,7 +78,7 @@
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($outcomes as $outcome)
-                            <tr>
+                            <tr style="font-size: smaller;">
                                 <th scope="row">{{$i}}</th>
                                 <td scope="row"><a href="/outputs/{{$outcome->id}}">{!!$outcome->name!!}</a></td>
                                 <td scope="row">{!!$outcome->created_at!!}</td>
