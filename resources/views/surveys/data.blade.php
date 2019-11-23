@@ -59,7 +59,7 @@
                                         @if ($answer->qn_id == $answer_list->qn_id)
                                         <tr>
 
-                                            @if ($answer->ans == null)
+                                            @if ($answer->ans->isEmpty())
                                             <td>null</td>
                                             @else
                                             <td>
