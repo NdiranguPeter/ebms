@@ -59,10 +59,13 @@
                                         @if ($answer->qn_id == $answer_list->qn_id)
                                         <tr>
 
+                                            @if ($answer->ans == null)
+                                            <td>null</td>
+                                            @else
                                             <td>
                                                 {{$answer->ans}}
                                             </td>
-
+                                            @endif
 
                                         </tr>
                                         @endif
