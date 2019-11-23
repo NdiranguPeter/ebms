@@ -6,6 +6,9 @@ use App\Answer;
 use App\Http\Controllers\Controller;
 use App\Option;
 use App\Question;
+use App\Indicatorafter;
+use App\Indicator;
+
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
@@ -90,11 +93,11 @@ class QuestionsController extends Controller
     public function indicatorafter(Request $request)
     {
     
-        return response()->json($request->id);
+       
 
         $actyafter = Indicatorafter::where('indicator_id', $request->id)->where('before_after', "after")->first();
         
-        
+         return response()->json($actyafter);
 
         if ($actyafter === null) {
             $indicator = Indicator::find($request->id);            
