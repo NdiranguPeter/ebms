@@ -146,14 +146,7 @@ class QuestionsController extends Controller
         $indicatorafter->baseline_target = $indicator->baseline_target;
         $indicatorafter->project_target = $indicator->project_target;
 
-        $datetime1 = new DateTime($indicator->start);
-        $datetime2 = new DateTime($indicator->end);
-        $interval = $datetime1->diff($datetime2);
-        $years = $interval->format('%y');
-        $months = $interval->format('%m');
-        $days = $interval->format('%d');
-
-
+      
         $indicatorafter->year = $request->year;
         $indicatorafter->before_after = "after";
 
@@ -172,7 +165,7 @@ class QuestionsController extends Controller
         $indicatorafter->nov = $request->nov;
         $indicatorafter->dec = $request->dec;
 
-$indicatorafter->years = $years;
+$indicatorafter->years = $request->year;
 
 
          return response()->json($indicatorafter);
