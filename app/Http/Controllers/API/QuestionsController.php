@@ -97,6 +97,7 @@ class QuestionsController extends Controller
 
         $actyafter = Indicatorafter::where('indicator_id', $request->id)->where('before_after', "after")->first();
         
+
         if ($actyafter === null) {
             $indicator = Indicator::find($request->id);            
         } else {
@@ -172,6 +173,9 @@ class QuestionsController extends Controller
         $indicatorafter->dec = $request->dec;
 
 $indicatorafter->years = $years;
+
+
+         return response()->json($indicatorafter);
 
         $indicatorafter->save();
 
