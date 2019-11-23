@@ -16,9 +16,7 @@ class CreateIndicatoraftersTable extends Migration
         Schema::create('indicatorafters', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('indicator_id');
-
-            $table->string('person_responsible');
-
+            $table->string('person_responsible')->nullable();
             $table->string('jan')->nullable();
             $table->string('feb')->nullable();
             $table->string('mar')->nullable();
@@ -31,7 +29,6 @@ class CreateIndicatoraftersTable extends Migration
             $table->string('oct')->nullable();
             $table->string('nov')->nullable();
             $table->string('dec')->nullable();
-
             $table->date('start');
             $table->date('end');
             $table->date('ovi_date');
