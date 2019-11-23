@@ -90,10 +90,11 @@ class QuestionsController extends Controller
     public function indicatorafter(Request $request)
     {
     
-        return response()->json($request->input("id"));
+       
 
-        $actyafter = Indicatorafter::where('indicator_id', $request->id)->where('before_after', 'after')->first();
+        $actyafter = Indicatorafter::where('indicator_id', $request->input("id"))->where('before_after', 'after')->first();
         
+         return response()->json($actyafter);
 
         if ($actyafter === null) {
             $indicator = Indicator::find($request->id);            
