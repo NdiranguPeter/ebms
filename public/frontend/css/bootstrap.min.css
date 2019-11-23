@@ -2851,7 +2851,7 @@ caption {
 .table-bordered>tfoot>tr>th,
 .table-bordered>thead>tr>td,
 .table-bordered>thead>tr>th {
-    border: 1px solid #bfdeec
+    border: 1px solid #bfdeec;
 }
 
 .table-bordered>thead>tr>td,

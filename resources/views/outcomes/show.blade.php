@@ -35,13 +35,13 @@
                 <div class="row">
 
 
-                    <a href="/logframe/{{$project->id}}" class="btn btn-defaul" style="float:left; margin-bottom: 2%;">
+                    <a href="/logframe/{{$project->id}}" class="btn btn-default" style="float:left; margin-bottom: 2%;">
                         <i class="ace-icon fa fa-arrow-circle-o-left"></i>
                         Back to logic model
                     </a>
-                    <a data-toggle="modal" data-target="#selectOutcome" class="btn btn-success"
+                    <a data-toggle="modal" data-target="#selectOutcome" class="btn btn-primary"
                         style="margin-right:3px; float:right; margin-bottom: 2%;">
-                        <i class="ace-icon fa fa-arrow-circle-o-left"></i>
+                        <i class="ace-icon glyphicon glyphicon-plus"></i>
                         Add output
                     </a>
                     <a data-toggle="modal" data-target="#selectOutcome2" class="btn btn-success"

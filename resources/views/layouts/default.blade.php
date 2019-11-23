@@ -59,7 +59,7 @@
 		}
 
 		.well {
-			border: 1px solid #2da0ef;
+			border: 0.5px solid #efefef;
 			color: #2da0ef;
 		}
 

@@ -14,7 +14,11 @@
                     <a href="/meal">MEAL</a>
                 </li>
                 /
-                <li class="active"></li>
+                <li class="active">
+
+                    {{$project->name}} - All activities
+
+                </li>
             </ul><!-- /.breadcrumb -->
 
         </div>
@@ -22,11 +26,19 @@
         <div class="page-content">
 
 
-            <div class="page-header">
-                <h1>
-                    Activities
+            <div>
 
-                </h1>
+
+                <a href="/logframe/{{$project->id}}" class="btn btn-default" style="float:left; margin-bottom: 2%;">
+                    <i class="ace-icon fa fa-arrow-circle-o-left"></i>
+                    Back to logic model
+                </a>
+
+                <a data-toggle="modal" data-target="#selectActivity" class="btn btn-primary"
+                    style="float:right; margin-bottom: 2%;">
+                    <i class="ace-icon glyphicon glyphicon-plus"></i>
+                    Add Resource
+                </a>
             </div><!-- /.page-header -->
 
             <!-- PAGE CONTENT BEGINS -->
@@ -38,16 +50,7 @@
                 @endisset
 
                 <div class="row">
-                    <a href="/logframe/{{$project->id}}" class="btn btn-success" style="float:left; margin-bottom: 2%;">
-                        <i class="ace-icon fa fa-arrow-circle-o-left"></i>
-                        Back to logic model
-                    </a>
 
-                    <a data-toggle="modal" data-target="#selectActivity" class="btn btn-primary"
-                        style="float:right; margin-bottom: 2%;">
-                        <i class="ace-icon glyphicon glyphicon-plus"></i>
-                        Add Resource
-                    </a>
                     <div class="col-sm-12" style="min-height:20px !important;">
                         @include('layouts.messages')
                     </div>
