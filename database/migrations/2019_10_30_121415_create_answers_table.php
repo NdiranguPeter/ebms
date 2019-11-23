@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->bigIncrements('id');
             $table->String('survey_id');
             $table->String('qn_id');
-            $table->String('ans');
+            $table->String('ans')->nullable();
             $table->timestamps();
         });
     }
