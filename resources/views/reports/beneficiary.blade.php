@@ -83,65 +83,65 @@
             <td rowspan="5" width="234">
                 <p> {{$activity->name}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>&lt;5</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$tota_under_five_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$tota_under_five_female}}</p>
             </td>
             <td>{{$total_under_five}}</td>
         </tr>
         <tr>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>6-18</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$tota_six_eighteen_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$tota_six_eighteen_female}}</p>
             </td>
-            <td> {{$tota_six_eighteen}} </td>
+            <td style="line-height: 0.5px;">{{$tota_six_eighteen}} </td>
         </tr>
         <tr>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>19-50</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$tota_nineteen_fifty_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$tota_nineteen_fifty_female}}</p>
             </td>
-            <td> {{$tota_nineteen_fifty}} </td>
+            <td style="line-height: 0.5px;">{{$tota_nineteen_fifty}} </td>
         </tr>
         <tr>
-            <td width="234">
-                <p>&gt;50</p>
+            <td width="234" style="line-height: 0.5px;">
+                <p>over 50</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$tota_over_fifty_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$tota_over_fifty_female}}</p>
             </td>
-            <td> {{$tota_over_fifty}} </td>
+            <td style="line-height: 0.5px;">{{$tota_over_fifty}} </td>
         </tr>
         <tr>
 
             <td>
                 <b>Total</b>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$total_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$total_female}}</p>
             </td>
-            <td> <b>{{$grand_total}} </b></td>
+            <td style="line-height: 0.5px;"><b>{{$grand_total}} </b></td>
 
         </tr>
 
@@ -150,80 +150,81 @@
             <td width="634">
                 <p>Activity</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>Age group</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>male</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>female</p>
             </td>
-            <td width="234">Total</td>
+            <td width="234" style="line-height: 0.5px;">Total</td>
         </tr>
         <tr>
-            <td rowspan="5" width="234">
+            <td rowspan="5" width="234" style="line-height: 0.5px;">
                 <p> All activities summary </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>&lt;5</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$grand_total_under_five_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$grand_total_under_five_female}}</p>
             </td>
             <td>{{$grand_total_under_five_male + $grand_total_under_five_female}}</td>
         </tr>
         <tr>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>6-18</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$grand_tota_six_eighteen_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$grand_tota_six_eighteen_female}}</p>
             </td>
-            <td> {{$grand_tota_six_eighteen_male + $grand_tota_six_eighteen_female}} </td>
+            <td style="line-height: 0.5px;">{{$grand_tota_six_eighteen_male + $grand_tota_six_eighteen_female}} </td>
         </tr>
         <tr>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p>19-50</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$grand_tota_nineteen_fifty_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$grand_tota_nineteen_fifty_female}}</p>
             </td>
-            <td> {{$grand_tota_nineteen_fifty_male + $grand_tota_nineteen_fifty_female}} </td>
+            <td style="line-height: 0.5px;">{{$grand_tota_nineteen_fifty_male + $grand_tota_nineteen_fifty_female}}
+            </td>
         </tr>
         <tr>
-            <td width="234">
-                <p>&gt;50</p>
+            <td width="234" style="line-height: 0.5px;">
+                <p>over 50</p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$grand_tota_over_fifty_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$grand_tota_over_fifty_female}}</p>
             </td>
-            <td> {{$grand_tota_over_fifty_male + $grand_tota_over_fifty_female}} </td>
+            <td style="line-height: 0.5px;">{{$grand_tota_over_fifty_male + $grand_tota_over_fifty_female}} </td>
         </tr>
         <tr>
 
             <td>
                 <b>Total</b>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$all_total_male}} </p>
             </td>
-            <td width="234">
+            <td width="234" style="line-height: 0.5px;">
                 <p> {{$all_total_female}}</p>
             </td>
-            <td> <b>{{$all_total}} </b></td>
+            <td style="line-height: 0.5px;"><b>{{$all_total}} </b></td>
 
         </tr>
     </tbody>

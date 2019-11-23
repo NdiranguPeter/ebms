@@ -9,16 +9,16 @@
             <td width="634">
                 <p>Activity</p>
             </td>
-            <td width="234" style="line-height: 0.5px;">
+            <td width="234">
                 <p>Age group</p>
             </td>
-            <td width="234" style="line-height: 0.5px;">
+            <td width="234">
                 <p>male</p>
             </td>
-            <td width="234" style="line-height: 0.5px;">
+            <td width="234">
                 <p>female</p>
             </td>
-            <td width="234" style="line-height: 0.5px;">Total</td>
+            <td width="234">Total</td>
         </tr>
         @php
         $overall_total_male = 0;
