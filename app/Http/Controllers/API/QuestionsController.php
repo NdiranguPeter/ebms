@@ -76,11 +76,15 @@ class QuestionsController extends Controller
 
         return response()->json($projects);
     }
-    
     public function answer(Request $request)
-    {        
+    {
+        $qid = $request->qid;
+
+        $answer = Answer::where('qid',$qid)->get();
+
+        if($answer->isEmpty()){
                 Answer::create($request->all());
-        
+        }
     }
 
      public function indicatorafter(Request $request)
