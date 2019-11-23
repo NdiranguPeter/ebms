@@ -17,15 +17,7 @@
                 <li class="active"></li>
             </ul><!-- /.breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
+
         </div>
 
         <div class="page-content">
@@ -33,6 +25,7 @@
 
             <div class="page-header">
                 <h1>
+                    {{$project->name}} -
                     indicators
 
                 </h1>
@@ -42,15 +35,17 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <a href="/logframe/{{$project->id}}" class="btn btn-success" style="float:left; margin-bottom: 2%;">
+                    <a href="/logframe/{{$project->id}}" class="btn btn-default" style="float:left; margin-bottom: 2%;">
                         <i class="ace-icon fa fa-arrow-circle-o-left"></i>
                         Back to logic model
                     </a>
+                    @if (count($indicators) > 0)
                     <a data-toggle="modal" data-target="#selectIndicator" class="btn btn-primary"
                         style="float:right; margin-bottom: 2%;">
                         <i class="ace-icon glyphicon glyphicon-plus"></i>
                         Add Verification source
                     </a>
+                    @endif
                     <div class="col-sm-12" style="min-height:20px !important;">
                         @include('layouts.messages')
                     </div>

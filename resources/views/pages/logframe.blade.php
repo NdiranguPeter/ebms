@@ -20,28 +20,25 @@
                 <li class="active">logic model</li>
             </ul><!-- /.breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
+
         </div>
 
         <div class="page-content">
 
             <div class="page-header">
-                <a href="/meal" class="btn btn-success" style="float:right;">
+
+                <a style="float:right;" class="btn btn-success" href="/indicators/goal/create/{{$project->id}}">
+                    <i class="ace-icon fa fa-plus bigger-130"></i>
+                    Add Goal Indicator
+                </a>
+                <a href="/meal" class="btn btn-default" style="float:right;">
                     <i class="ace-icon fa fa-arrow-circle-o-left"></i>
                     Back to dashboard
                 </a>
+
                 <b style="color:#0081c3;">
                     {{$project->name}}
                 </b>
-
 
             </div><!-- /.page-header -->
             <?php 
@@ -53,7 +50,9 @@
             <div class="container-fluid">
                 @include('layouts.messages')
 
+
                 <div class="row">
+
                     <a href="/outcomes/{{$project->id}}">
                         <div class="col-md-4 dashcard " style="background-color:#428bca !important; ">
                             <i class="ace-icon fa fa-flag "></i>

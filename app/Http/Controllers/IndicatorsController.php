@@ -48,8 +48,7 @@ class IndicatorsController extends Controller
             'project_target' => 'required',
             'start' => 'required',
             'end' => 'required',
-
-        ]);
+            ]);
 
         $user_id = auth()->user()->id;
 
@@ -103,7 +102,7 @@ class IndicatorsController extends Controller
             ->join('indicators', 'indicators.project_id', 'projects.id')
             ->select('indicators.*')->where('projects.id', $id)
             ->orderBy('created_at', 'desc')
-            ->paginate(7);
+            ->paginate(10);
 
         return view('indicators.show')->with(['project' => $project, 'indicators' => $indicators]);
 

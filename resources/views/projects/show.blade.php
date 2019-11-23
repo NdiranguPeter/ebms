@@ -17,15 +17,6 @@
                 <li class="active">{{$project->name}}</li>
             </ul><!-- /.breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div>
             <div class="clo-sm-6" style="margin-top: 20px;">
                 <a class="btn btn-default" href="/projects">
                     <i class="ace-icon fa fa-arrow-circle-o-left"></i>
@@ -49,10 +40,6 @@
                     Edit Project
                 </a>
 
-                <a class="btn btn-success" href="/indicators/goal/create/{{$project->id}}">
-                    <i class="ace-icon fa fa-plus bigger-130"></i>
-                    Add Goal Indicator
-                </a>
                 <a style="float:right;">
 
                     <table>
