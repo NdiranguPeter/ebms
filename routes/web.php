@@ -161,5 +161,6 @@ Route::resource('deliverables', 'DeliverablesController');
 Route::resource('risksafter', 'RisksAfterController');
 Route::resource('assumptionsafter', 'AssuptionsAfterController');
 Route::resource('groups', 'GroupsController');
+Route::resource('targetgroups', 'TargetgoupsController');
 Route::resource('challenges', 'ChallengesController');
 Route::resource('skip', 'SkipController');

@@ -28,8 +28,19 @@ if ($budget_diff > 0 && $activity->budget >0) {
         <tr>
             <td> {{$activity->budget_code}} </td>
             <td>{{$activity->name}}</td>
-            <td>{{$activity->budget}}</td>
-            <td>{{$activityafter->budget}}</td>
+            <td>
+                @php
+                $number = number_format($activity->budget);
+
+                @endphp
+                {{$number}}
+            </td>
+            <td>
+                @php
+                $number = number_format($activityafter->budget);
+
+                @endphp
+                {{$number}}</td>
             <td>{{$budget_diff}}</td>
             <td>{{$variace}}%</td>
         </tr>

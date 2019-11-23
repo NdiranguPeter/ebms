@@ -38,22 +38,22 @@
             <th scope="col">Unit</th>
             {{-- <th scope="col">Baseline</th> --}}
             <th scope="col">Project target</th>
-            <th>JAN</th>
-            <th>FEB</th>
-            <th>MAR</th>
-            <th>APR</th>
-            <th>MAY</th>
-            <th>JUN</th>
-            <th>JUL</th>
-            <th>AUG</th>
-            <th>SEP</th>
-            <th>OCT</th>
-            <th>NOV</th>
-            <th>DEC</th>
-            <th>Total </th>
-            <th>Responsible</th>
-            <th>Budget</th>
-            <th>RYBG</th>
+            <th style="padding: 2px;">JAN</th>
+            <th style="padding: 2px;">FEB</th>
+            <th style="padding: 2px;">MAR</th>
+            <th style="padding: 2px;">APR</th>
+            <th style="padding: 2px;">MAY</th>
+            <th style="padding: 2px;">JUN</th>
+            <th style="padding: 2px;">JUL</th>
+            <th style="padding: 2px;">AUG</th>
+            <th style="padding: 2px;">SEP</th>
+            <th style="padding: 2px;">OCT</th>
+            <th style="padding: 2px;">NOV</th>
+            <th style="padding: 2px;">DEC</th>
+            <th style="padding: 2px;">Total </th>
+            <th style="padding: 2px;">Responsible</th>
+            <th style="padding: 2px;">Budget</th>
+
         </tr>
     </thead>
     <tbody>
@@ -83,7 +83,7 @@
             <th></th>
             <th></th>
             <th></th>
-            <th></th>
+
         </tr>
     </tbody>
     @php
@@ -156,7 +156,7 @@
             @endforeach
 
             <th></th>
-            <th></th>
+
 
         </tr>
     </tbody>

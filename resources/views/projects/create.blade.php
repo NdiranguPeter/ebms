@@ -219,6 +219,8 @@
                             {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Actual location the project is conducted'])}}
                         </div>
                         <div class="form-group">
+                            <a style="float:right;" data-toggle="modal" data-target="#targetModal">Create target
+                                group</a>
                             {{Form::label('target_group', 'Target Group')}}
                             <select style="min-width: 450px !important;" name="target_group[]" id="target_group"
                                 class="form-control multiselect" multiple="multiple" role="multiselect">
@@ -460,6 +462,37 @@
 
                             <div class="modal-footer">
                                 {{Form::submit('Save', ['class'=>'btn btn-primary'])}}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="targetModal" tabindex="-1" role="dialog" aria-labelledby="targetModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="targetModalLabel">Create target group</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+
+                                {!! Form::open(['action'=>'TargetgoupsController@store', 'method'=>'POST']) !!}
+
+                                {{Form::label('name', 'Group name')}}
+                                {{Form::text('name','', ['class' => 'form-control'])}}
+
+                            </div>
+
+                            <div class="modal-footer">
+                                {{Form::submit('Save', ['class'=>'btn btn-primary right'])}}
+
                             </div>
                             {!! Form::close() !!}
                         </div>

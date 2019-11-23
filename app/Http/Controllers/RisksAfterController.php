@@ -83,7 +83,9 @@ class RisksAfterController extends Controller
      */
     public function show($id)
     {
-        return view('risks.after')->with('id', $id);
+
+        $risk = Risk::find($id);
+        return view('risks.after')->with(['id'=>$id,'risk'=>$risk]);
     }
 
     /**

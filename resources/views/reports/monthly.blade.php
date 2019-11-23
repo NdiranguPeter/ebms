@@ -494,28 +494,3 @@ $i++;
 
     </tbody>
 </table>
-<hr>
-<h2>Section 3: Plan for next month</h2>
-<hr>
-<table class="table table-bordered">
-    <thead>
-        <tr style="background: #349ba7 !important;color: #fff;">
-            <th>#</th>
-            <th>Output code</th>
-            <th>Indicator</th>
-            <th>Unit</th>
-            <th>Target at Baseline</th>
-            <th>Target for next month</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>

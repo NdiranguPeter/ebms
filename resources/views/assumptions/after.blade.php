@@ -26,6 +26,10 @@
                 @include('layouts.messages')
 
                 <div class="well col-sm-12">
+                    <p style="font-weight: bold;">
+                        {{$assumption->name}}
+                    </p>
+                    <br>
 
                     {!! Form::open(['action'=>'AssuptionsAfterController@store', 'method'=>'POST']) !!}
                     @csrf

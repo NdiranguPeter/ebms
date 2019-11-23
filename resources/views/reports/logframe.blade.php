@@ -288,7 +288,7 @@
 
     <tbody>
         <tr style="font-size: smaller;">
-            <td rowspan="{{count($activityresources)}}">Activity {{$fgrt}}.{{$cer}}</td>
+            <td rowspan="{{count($activityresources)}}">Activity:{{$fgrt}}.{{$coer}}.{{$cer}}</td>
             <th rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
             <td rowspan="{{count($activityresources)}}">
                 <table class="table cdccw">
@@ -308,7 +308,12 @@
                 {{$curr->symbol}}.
                 @endif
                 @endforeach
-                {{$activity->budget}}
+                @php
+                $number = number_format($activity->budget);
+
+                @endphp
+                {{$number}} {{$activity->currency}}
+
             </td>
             <td rowspan="{{count($activityresources)}}"></td>
             <td rowspan="{{count($activityresources)}}"></td>

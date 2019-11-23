@@ -85,7 +85,9 @@ class AssuptionsAfterController extends Controller
      */
     public function show($id)
     {
-        return view('assumptions.after')->with('id', $id);
+
+        $assumption = Assumption::find($id);
+        return view('assumptions.after')->with(['id'=>$id,'assumption'=>$assumption]);
 
     }
 

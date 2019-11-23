@@ -26,6 +26,10 @@
                 @include('layouts.messages')
 
                 <div class="well col-sm-12">
+                    <p style="font-weight: bold;">
+                        {{$risk->name}}
+                    </p>
+                    <br>
 
                     {!! Form::open(['action'=>'RisksAfterController@store', 'method'=>'POST']) !!}
                     @csrf

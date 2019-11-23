@@ -29,8 +29,11 @@
                     Update activity {{$before_after}} project implementation
                 </h1>
                 @if ($before_after == "after")
-                <a style="float:right;" data-toggle="modal" data-target="#exampleModal">Add Challenges</a>
+                <a class="btn btn-primary" style="float:right; margin-top: -2%;" data-toggle="modal"
+                    data-target="#exampleModal">Add
+                    Challenges</a>
                 @endif
+
             </div><!-- /.page-header -->
 
             <!-- PAGE CONTENT BEGINS -->
@@ -50,6 +53,7 @@
                     <input name="total_beneficiaries" type="hidden" value={{$activity->total_beneficiaries}}>
                     <div class="col-sm-12">
                         <p style="color: green; font-weight:bold;">{!!$activity->name!!}</p>
+
                     </div>
                     <br />
                     <br />
@@ -336,7 +340,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Record any challenge faced during activity implementation
+                <h5 class="modal-title" id="exampleModalLabel">Record any challenge faced during implementation
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -378,10 +382,10 @@
 
                 <input type="hidden" name="activity_id" value={{$activity->id}}>
                 <input type="hidden" name="project_id" value={{$project->id}}>
-                {{Form::label('challenge', 'State the challenge')}}
+                {{Form::label('challenge', 'State the challenge', ['style'=>'color: #2da0ef;'])}}
                 {{Form::textarea('challenge','', ['class' => 'form-control'])}}
                 <hr>
-                {{Form::label('solution', 'Solution implemented')}}
+                {{Form::label('solution', 'Solution implemented', ['style'=>'color: #2da0ef;'])}}
                 {{Form::textarea('solution','', ['class' => 'form-control'])}}
 
             </div>
