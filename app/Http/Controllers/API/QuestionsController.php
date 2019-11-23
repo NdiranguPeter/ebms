@@ -4,11 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Answer;
 use App\Http\Controllers\Controller;
+use App\Indicator;
+use App\Indicatorafter;
 use App\Option;
 use App\Question;
-use App\Indicatorafter;
-use App\Indicator;
-
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
@@ -92,14 +91,11 @@ class QuestionsController extends Controller
 
     public function indicatorafter(Request $request)
     {
-    
-       
 
         $actyafter = Indicatorafter::where('indicator_id', $request->id)->where('before_after', "after")->first();
-        
 
         if ($actyafter === null) {
-            $indicator = Indicator::find($request->id);            
+            $indicator = Indicator::find($request->id);
         } else {
 
             $indicator = Indicatorafter::where('indicator_id', $request->id)->where('before_after', 'after')->first();
@@ -140,13 +136,12 @@ class QuestionsController extends Controller
 
         $indicatorafter->start = $indicator->start;
         $indicatorafter->end = $indicator->end;
-                
+
         $indicatorafter->ovi_date = $indicator->start;
-       
+
         $indicatorafter->baseline_target = $indicator->baseline_target;
         $indicatorafter->project_target = $indicator->project_target;
 
-      
         $indicatorafter->year = $request->year;
         $indicatorafter->before_after = "after";
 
@@ -165,10 +160,7 @@ class QuestionsController extends Controller
         $indicatorafter->nov = $request->nov;
         $indicatorafter->dec = $request->dec;
 
-$indicatorafter->years = $request->year;
-
-
-         return response()->json($indicatorafter);
+        $indicatorafter->years = $request->year;
 
         $indicatorafter->save();
 
