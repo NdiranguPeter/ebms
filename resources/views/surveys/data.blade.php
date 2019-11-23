@@ -58,13 +58,15 @@
                                         @foreach ($answers as $answer)
                                         @if ($answer->qn_id == $answer_list->qn_id)
                                         <tr>
+
+                                            @if ($answer->ans == null)
+                                            <td>null</td>
+                                            @else
                                             <td>
-                                                @if ($answer->ans == null)
-                                                <p>null</p>
-                                                @else
                                                 {{$answer->ans}}
-                                                @endif
                                             </td>
+                                            @endif
+
                                         </tr>
                                         @endif
                                         @endforeach
