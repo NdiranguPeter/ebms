@@ -80,19 +80,15 @@ class QuestionsController extends Controller
     {
         $qid = $request->qid;
 
-        $answer = Answer::where('qid',$qid)->get();
+        $answer = Answer::where('qid', $qid)->get();
 
-        if($answer->isEmpty()){
-
-            if($request->ans == ""){
-                $request->ans = "-";
-            }
-                Answer::create($request->all());
+        if ($answer->isEmpty()) {
+            Answer::create($request->all());
         }
     }
 
-     public function indicatorafter(Request $request)
+    public function indicatorafter(Request $request)
     {
-                dd($request->id);
+        dd($request->id);
     }
 }
