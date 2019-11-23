@@ -94,19 +94,7 @@ class QuestionsController extends Controller
         if ($actyafter === null) {
 
             $indicator = Indicator::find($request->id);
-            $indicator->jan = 0;
-            $indicator->feb = 0;
-            $indicator->mar = 0;
-            $indicator->apr = 0;
-            $indicator->may = 0;
-            $indicator->jun = 0;
-            $indicator->jul = 0;
-            $indicator->aug = 0;
-            $indicator->sep = 0;
-            $indicator->oct = 0;
-            $indicator->nov = 0;
-            $indicator->dec = 0;
-
+            
         } else {
 
             $indicator = Indicatorafter::where('indicator_id', $request->id)->where('before_after', 'after')->first();
@@ -148,7 +136,7 @@ class QuestionsController extends Controller
         $indicatorafter->start = $indicator->start;
         $indicatorafter->end = $indicator->end;
                 
-        $indicatorafter->ovi_date = Carbon\Carbon::now();
+        $indicatorafter->ovi_date = $indicator->start;
        
         $indicatorafter->baseline_target = $indicator->baseline_target;
         $indicatorafter->project_target = $indicator->project_target;
