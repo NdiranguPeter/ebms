@@ -83,6 +83,10 @@ class QuestionsController extends Controller
         $answer = Answer::where('qid',$qid)->get();
 
         if($answer->isEmpty()){
+
+            if($request->ans == ""){
+                $request->ans = "-";
+            }
                 Answer::create($request->all());
         }
     }

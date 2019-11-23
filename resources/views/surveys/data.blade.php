@@ -60,7 +60,7 @@
                                         <tr>
 
                                             <td>
-                                                {{$answer->ans}}"
+                                                {{$answer->ans}}
                                             </td>
 
 
