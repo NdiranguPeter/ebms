@@ -97,8 +97,6 @@ class QuestionsController extends Controller
 
         $actyafter = Indicatorafter::where('indicator_id', $request->id)->where('before_after', "after")->first();
         
-         return response()->json($actyafter);
-
         if ($actyafter === null) {
             $indicator = Indicator::find($request->id);            
         } else {
