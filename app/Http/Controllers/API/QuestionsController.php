@@ -78,11 +78,11 @@ class QuestionsController extends Controller
     }
     public function answer(Request $request)
     {
-        $qn_id = $request->qn_id;
+        $qid = $request->qid;
 
-        $answer = Answer::where('qn_id',$qn_id)->get();
+        $answer = Answer::where('qid',$qid)->get();
 
-        if($qn_id == null){
+        if($qid == null){
                 Answer::create($request->all());
         }
     }
