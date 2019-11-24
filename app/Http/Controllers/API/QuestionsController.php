@@ -4,12 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Answer;
 use App\Http\Controllers\Controller;
+use App\Indicator;
+use App\Indicatorafter;
 use App\Option;
 use App\Question;
-use App\Indicatorafter;
-use App\Indicator;
 use App\Risksafter;
-
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
@@ -93,14 +92,11 @@ class QuestionsController extends Controller
 
     public function indicatorafter(Request $request)
     {
-    
-       
 
         $actyafter = Indicatorafter::where('indicator_id', $request->id)->where('before_after', "after")->first();
-        
 
         if ($actyafter === null) {
-            $indicator = Indicator::find($request->id);            
+            $indicator = Indicator::find($request->id);
         } else {
 
             $indicator = Indicatorafter::where('indicator_id', $request->id)->where('before_after', 'after')->first();
@@ -118,7 +114,6 @@ class QuestionsController extends Controller
             $indicator->project_id = $act->project_id;
 
         }
-        
 
         $id = $request->id;
 
@@ -142,12 +137,12 @@ class QuestionsController extends Controller
 
         $indicatorafter->start = $indicator->start;
         $indicatorafter->end = $indicator->end;
-                
+
         $indicatorafter->ovi_date = $indicator->start;
-       
+
         $indicatorafter->baseline_target = $indicator->baseline_target;
         $indicatorafter->project_target = $indicator->project_target;
-      
+
         $indicatorafter->year = $request->year;
         $indicatorafter->before_after = "after";
         $indicatorafter->indicator_id = $request->id;
@@ -168,19 +163,18 @@ class QuestionsController extends Controller
 
     }
 
-     public function riskafter(Request $request)
-    {       
-         $riskafter = Risksafter::where('risk_id', $request->risk_id)->get();
+    public function riskafter(Request $request)
+    {
+        $riskafter = Risksafter::where('risk_id', $request->risk_id)->get();
 
-        if ($answer->isEmpty()) {
-        $riskafter = new Risksafter();
+        if ($riskafter->isEmpty()) {
+            $riskafter = new Risksafter();
         }
         $riskafter->risk_id = $request->risk_id;
         $riskafter->occur = $request->risk_id;
         $riskafter->impact = $request->risk_id;
         $riskafter->response = $request->response;
         $riskafter->save();
-            
-     }
+    }
 
 }
