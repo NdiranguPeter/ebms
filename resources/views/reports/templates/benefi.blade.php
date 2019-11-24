@@ -26,7 +26,7 @@
         <div class="page-content">
 
             <div class="page-header">
-                <a href="/test" class="btn btn-primary" style="float:right; margin-left: 20px;">
+                <a href="/export_report" class="btn btn-primary" style="float:right; margin-left: 20px;">
                     <i class="ace-icon fa fa-download"></i>
                     download Beneficiary Report
                 </a>

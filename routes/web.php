@@ -14,7 +14,7 @@
 Route::get('/', 'PagesController@index');
 Route::get('/rte', 'PagesController@rte');
 Route::get('/meal', 'PagesController@meal');
-Route::get('/test', 'PagesController@test');
+Route::get('/export_report', 'PagesController@test');
 Route::get('/years/{id}', 'PagesController@years');
 Route::get('/planning/{id}', 'PagesController@planning');
 Route::get('/me/{id}', 'PagesController@me');

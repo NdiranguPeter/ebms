@@ -27,7 +27,7 @@
                     Reports
                 </a>
                 {{-- {{route('exportproject',$project->id)}} --}}
-                <a class="btn btn-primary" href="/test">
+                <a class="btn btn-primary" href="/export_report">
                     <i class="ace-icon fa fa-download"></i>
                 </a>
 

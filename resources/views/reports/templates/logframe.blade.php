@@ -27,7 +27,7 @@
 
             <div class="page-header">
                 {{-- {{route('exportlogframe',$project->id)}} --}}
-                <a href="/test" class="btn btn-primary" style="float:right; margin-left: 20px;">
+                <a href="/export_report" class="btn btn-primary" style="float:right; margin-left: 20px;">
                     <i class="ace-icon fa fa-download"></i>
                     download logframe
                 </a>

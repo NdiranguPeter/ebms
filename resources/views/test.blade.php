@@ -103,8 +103,7 @@
 
                     <li class="light-blue dropdown-modal">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="{{ asset('frontend/images/avatars/user.jpg') }}"
-                                alt="Jason's Photo" />
+                            <img class="nav-user-photo" src="{{ asset('frontend/images/avatars/user.jpg') }}" />
                             <span class="user-info">
                                 <small>Welcome,</small>
                                 {{ Auth::user()->name }}
