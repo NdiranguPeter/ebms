@@ -182,7 +182,7 @@ class QuestionsController extends Controller
         if ($assumptionafter == null) {
             $assumptionafter = new AssumptionAfter();
         }
-        $assumptionafter->risk_id = $request->assumption_id;
+        $assumptionafter->assumption_id = $request->assumption_id;
         $assumptionafter->occur = $request->occur;
         $assumptionafter->accessed = $request->accessed;
         $assumptionafter->validated = $request->validated;
