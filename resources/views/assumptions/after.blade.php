@@ -53,7 +53,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            {{Form::label('accessed', 'Assumption assesed through M&E?')}}
+                            {{Form::label('accessed', 'Assumption assessed through M&E?')}}
                             <select name="accessed" id="assesed"
                                 class="form-control @error('assesed') is-invalid @enderror">
                                 <option value="Yes"> Yes</option>

@@ -15,12 +15,12 @@ class CreateAssumptionAftersTable extends Migration
     {
         Schema::create('assumption_afters', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('assumption_id');
-            $table->string('occur');
-            $table->string('impact');
-            $table->string('response');
-            $table->string('validated');
-            $table->string('accessed');
+            $table->integer('assumption_id')->nullable();
+            $table->string('occur')->nullable();
+            $table->string('impact')->nullable();
+            $table->string('response')->nullable();
+            $table->string('validated')->nullable();
+            $table->string('accessed')->nullable();
             $table->timestamps();
 
         });

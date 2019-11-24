@@ -9,6 +9,7 @@ use App\Indicatorafter;
 use App\Option;
 use App\Question;
 use App\Risksafter;
+use App\AssumptionAfter;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
@@ -134,7 +135,6 @@ class QuestionsController extends Controller
         }
 
         $indicatorafter->person_responsible = $request->responsible;
-
         $indicatorafter->start = $indicator->start;
         $indicatorafter->end = $indicator->end;
 
@@ -174,5 +174,22 @@ class QuestionsController extends Controller
         $riskafter->response = $request->response;
         $riskafter->save();
     }
+
+       public function assumptionafter(Request $request)
+    {
+        $assumptionafter = AssumptionAfter::where('assumption_id', $request->assumption_id)->first();
+
+        if ($assumptionafter == null) {
+            $assumptionafter = new AssumptionAfter();
+        }
+        $assumptionafter->risk_id = $request->assumption_id;
+        $assumptionafter->occur = $request->occur;
+        $assumptionafter->accessed = $request->accessed;
+        $assumptionafter->validated = $request->validated;
+        $assumptionafter->impact = $request->impact;
+        $assumptionafter->response = $request->response;
+        $assumptionafter->save();
+    }
+
 
 }
