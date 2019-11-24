@@ -165,7 +165,7 @@ class QuestionsController extends Controller
 
     public function riskafter(Request $request)
     {
-        $riskafter = Risksafter::where('risk_id', $request->risk_id)->get();
+        $riskafter = Risksafter::where('risk_id', $request->risk_id)->first();
 
         if ($riskafter->isEmpty()) {
             $riskafter = new Risksafter();
