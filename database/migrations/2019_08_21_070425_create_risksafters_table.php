@@ -15,10 +15,10 @@ class CreateRisksaftersTable extends Migration
     {
         Schema::create('risksafters', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('risk_id');
-            $table->string('occur');
-            $table->string('impact');
-            $table->string('response');
+            $table->integer('risk_id')->nullable();
+            $table->string('occur')->nullable();
+            $table->string('impact')->nullable();
+            $table->string('response')->nullable();
             $table->timestamps();
         });
     }

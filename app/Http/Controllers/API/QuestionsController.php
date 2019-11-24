@@ -8,7 +8,7 @@ use App\Option;
 use App\Question;
 use App\Indicatorafter;
 use App\Indicator;
-use App\Risk;
+use App\Risksafter;
 
 use Illuminate\Http\Request;
 
@@ -168,12 +168,9 @@ class QuestionsController extends Controller
 
     }
 
-
      public function riskafter(Request $request)
-    {
-       
-            Risk::create($request->all());
-      
-    }
+    {       
+            Risksafter::create($request->all());
+     }
 
 }
