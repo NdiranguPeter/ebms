@@ -158,16 +158,14 @@ class QuestionsController extends Controller
         $indicatorafter->oct = $request->oct;
         $indicatorafter->nov = $request->nov;
         $indicatorafter->dec = $request->dec;
-
         $indicatorafter->save();
-
     }
 
     public function riskafter(Request $request)
     {
         $riskafter = Risksafter::where('risk_id', $request->risk_id)->first();
 
-        if ($riskafter->isEmpty()) {
+        if ($riskafter == null) {
             $riskafter = new Risksafter();
         }
         $riskafter->risk_id = $request->risk_id;
