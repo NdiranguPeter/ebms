@@ -8,6 +8,7 @@ use App\Option;
 use App\Question;
 use App\Indicatorafter;
 use App\Indicator;
+use App\Risk;
 
 use Illuminate\Http\Request;
 
@@ -146,13 +147,10 @@ class QuestionsController extends Controller
        
         $indicatorafter->baseline_target = $indicator->baseline_target;
         $indicatorafter->project_target = $indicator->project_target;
-
       
         $indicatorafter->year = $request->year;
         $indicatorafter->before_after = "after";
-
         $indicatorafter->indicator_id = $request->id;
-
         $indicatorafter->jan = $request->jan;
         $indicatorafter->feb = $request->feb;
         $indicatorafter->mar = $request->mar;
@@ -168,6 +166,14 @@ class QuestionsController extends Controller
 
         $indicatorafter->save();
 
+    }
+
+
+     public function riskafter(Request $request)
+    {
+       
+            Risk::create($request->all());
+      
     }
 
 }
