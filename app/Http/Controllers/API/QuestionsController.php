@@ -169,8 +169,8 @@ class QuestionsController extends Controller
             $riskafter = new Risksafter();
         }
         $riskafter->risk_id = $request->risk_id;
-        $riskafter->occur = $request->risk_id;
-        $riskafter->impact = $request->risk_id;
+        $riskafter->occur = $request->occur;
+        $riskafter->impact = $request->impact;
         $riskafter->response = $request->response;
         $riskafter->save();
     }
