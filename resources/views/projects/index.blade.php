@@ -79,7 +79,7 @@
                                     @foreach ($users as $user)
                                     @foreach ($projects as $project)
                                     @if ($project->user_id == $user->id)
-                                    {{$user->name}}
+
                                     @endif
                                     @endforeach
                                     @endforeach
