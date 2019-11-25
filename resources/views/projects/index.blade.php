@@ -56,6 +56,7 @@
                                 <th scope="col" style="width:100px;"> End</th>
                                 <th scope="col"> Location</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">User</th>
                                 <th scope="col">Last updated</th>
                                 {{-- <th scope="col">RYBG</th> --}}
                                 <th scope="col"></th>
@@ -73,6 +74,7 @@
                                 <td scope="row">{{$project->end}}</td>
                                 <td scope="row">{{$project->location}}</td>
                                 <td scope="row">{{$project->stage}}</td>
+                                <td scope="row">{{$project->name}}</td>
                                 <td>{{$project->updated_at}}</td>
                                 {{-- <td></td> --}}
                                 <td>
