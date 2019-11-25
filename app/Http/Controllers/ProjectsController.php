@@ -40,6 +40,22 @@ class ProjectsController extends Controller
         return view('projects.index')->with(['projects' => $projects]);
     }
 
+     public function allprojects()
+    {
+        // $projects = Project::all();
+        // $projects = Project::where('name','projectname')->get();
+        // $projects = Project::orderBy('created_at', 'desc')->take(2)->get();
+        // $projects = Project::orderBy('created_at', 'desc')->get();
+        $user_id = auth()->user()->id;
+
+        $user = User::find($user_id);
+        // return $user->projects;
+
+        $projects = Projects()->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('projects.index')->with(['projects' => $projects]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

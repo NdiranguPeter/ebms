@@ -74,6 +74,7 @@ Route::get('/reports/logframe/{id}', 'ProjectsController@export_logframe')->name
 Route::get('/reports/monthly/{id}', 'ProjectsController@export_monthly')->name('exportmonthly');
 
 Route::get('/projects/export/{id}', 'ProjectsController@export_Project')->name('exportproject');
+Route::get('/allprojects', 'ProjectsController@allprojects');
 
 Route::get('/activities/before/{id}', 'ActivitiesController@before');
 Route::get('/activities/after/{id}', 'ActivitiesController@after');
