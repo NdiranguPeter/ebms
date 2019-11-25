@@ -75,8 +75,9 @@
                                 <td scope="row">{{$project->location}}</td>
                                 <td scope="row">{{$project->stage}}</td>
                                 <td scope="row">
-                                    @foreach ($projects as $project)
+
                                     @foreach ($users as $user)
+                                    @foreach ($projects as $project)
                                     @if ($project->user_id == $user->id)
                                     {{$user->name}}
                                     @endif
