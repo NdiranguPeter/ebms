@@ -16,16 +16,7 @@ class SurveysController extends Controller
      */
     public function index()
     {
-        // $surveys = survey::all();
-        // $surveys = survey::where('name','surveyname')->get();
-        // $surveys = survey::orderBy('created_at', 'desc')->take(2)->get();
-        // $surveys = survey::orderBy('created_at', 'desc')->get();
-        //
-
-        // $user = User::find($user_id);
-        // $user_id = auth()->user()->id;
-
-        // $user = User::find($user_id);
+        
 
         $surveys = auth()->user()->surveys()->paginate(10);
 

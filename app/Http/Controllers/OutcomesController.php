@@ -112,7 +112,9 @@ class OutcomesController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $outcome = Outcome::find($id);
+        $outcome->delete();
+        return redirect('/outcomes/'.$outcome->project_id)->with('error', 'Outcome deleted');
     }
 
     public function createoutcome($id)

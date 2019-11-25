@@ -82,8 +82,9 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                {!! Form::open(['action'=>['OutcomesController@destroy',$outcome->id],
-                                                'method'=>'POST']) !!}
+                                                {!!
+                                                Form::open(['action'=>['OutcomesController@destroy',$outcome->id],'method'=>'POST'])
+                                                !!}
 
                                                 {{Form::button('<i class="red ace-icon fa fa-trash-o"></i>', ['type'=>'submit', 'onClick'=>'return confirm("Are you sure you want to delete?")'])}}
 
