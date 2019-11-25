@@ -116,7 +116,10 @@ class OutputsController extends Controller
      */
     public function destroy($id)
     {
-        //
+          $output = Output::find($id);
+        $output->delete();
+        return redirect('/outputs/'.$output->outcome_id)->with('error', 'Outcome deleted');
+    
     }
 
     public function createOutput($id)
