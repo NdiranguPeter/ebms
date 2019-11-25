@@ -131,8 +131,7 @@
 
                     </table>
                     @endforeach
-                    {{-- {{$questions->links()}} --}}
-                    {{$grouped_questions->links()}}
+
                 </div>
                 @else
                 <div class="col-xs-12 col-sm-6 alert alert-success">
