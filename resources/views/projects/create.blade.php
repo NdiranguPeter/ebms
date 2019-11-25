@@ -365,6 +365,7 @@
                                             <option value="Emergency services">Emergency services</option>
                                             <option value="Police">Police</option>
                                             <option value="Military">Military</option>
+                                            <option value="Nutrition">Nutrition</option>
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
