@@ -74,7 +74,15 @@
                                 <td scope="row">{{$project->end}}</td>
                                 <td scope="row">{{$project->location}}</td>
                                 <td scope="row">{{$project->stage}}</td>
-                                <td scope="row">{{$user->name}}</td>
+                                <td scope="row">
+                                    @foreach ($projects as $project)
+                                    @foreach ($users as $user)
+                                    @if ($project->user_id == $user->id)
+                                    {{$user->name}}
+                                    @endif
+                                    @endforeach
+                                    @endforeach
+                                </td>
                                 <td>{{$project->updated_at}}</td>
                                 {{-- <td></td> --}}
                                 <td>
