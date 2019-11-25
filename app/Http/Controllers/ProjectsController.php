@@ -34,7 +34,7 @@ class ProjectsController extends Controller
 
         $projects = auth()->user()->projects()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('projects.index')->with(['projects' => $projects]);
+        return view('projects.index')->with(['user'=>$user, 'projects' => $projects]);
     }
 
      public function allprojects()
@@ -47,7 +47,7 @@ class ProjectsController extends Controller
 
         $projects = Project::orderBy('created_at', 'desc')->paginate(10);
 
-        return view('projects.index')->with(['projects' => $projects]);
+        return view('projects.index')->with(['user'=>$user,'projects' => $projects]);
     }
 
     /**

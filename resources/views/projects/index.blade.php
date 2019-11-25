@@ -74,7 +74,7 @@
                                 <td scope="row">{{$project->end}}</td>
                                 <td scope="row">{{$project->location}}</td>
                                 <td scope="row">{{$project->stage}}</td>
-                                <td scope="row">{{$project->name}}</td>
+                                <td scope="row">{{$user->name}}</td>
                                 <td>{{$project->updated_at}}</td>
                                 {{-- <td></td> --}}
                                 <td>
