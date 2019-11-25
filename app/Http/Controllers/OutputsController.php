@@ -118,14 +118,13 @@ class OutputsController extends Controller
     {
           $output = Output::find($id);
         $output->delete();
-        return redirect('/outputs/'.$output->outcome_id)->with('error', 'Outcome deleted');
+        return redirect('/outputs/'.$output->outcome_id)->with('error', 'output deleted');
     
     }
 
     public function createOutput($id)
     {
 
-        // $project = Project::find($id);
         $outcome = outcome::find($id);
 
         return view('outputs.create')->with('outcome', $outcome);
