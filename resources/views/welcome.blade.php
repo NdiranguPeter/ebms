@@ -25,7 +25,7 @@
                     class="img-fluid mx-auto d-block" style="margin-bottom: 10px;">
                 <h1 style="color: #fff; font-weight: bold; font-size: 30px;">Electronic Beneficiaries Management
                     System</h1>
-                <h2 style="color: #fff; font-weight: bold; text-align:center;">(E-BMS)</h2>
+                <h2 style="color: #fff; font-weight: bold; text-align:center;">(e-BMS)</h2>
 
                 <div class="text-center" style="margin-top:30px;">
                     @if (Route::has('login'))
