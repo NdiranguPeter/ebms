@@ -90,7 +90,7 @@ class QuestionsController extends Controller
     {
         $qid = $request->qid;
 
-        $answer = Answer::where('qid', $qid)->get();
+        $answer = Answer::where('qid', $qid)->where('qn_id',$request->qn_id)->get();
 
         if ($answer->isEmpty()) {
             Answer::create($request->all());
