@@ -196,7 +196,7 @@
                     </div> --}}
                     <div class="form-group">
                         {{Form::label('project_target', 'Project target')}}
-                        {{Form::text('project_target','', ['class' => 'form-control', 'placeholder' => 'Project target'])}}
+                        {{Form::number('project_target','', ['class' => 'form-control', 'placeholder' => 'Project target'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('person_responsible', 'Person responsible')}}
@@ -233,7 +233,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('no_unit', 'Number of budgeting units')}}
-                        {{Form::text('no_unit', '', ['class' => 'form-control', 'id'=>'no_unit', 'placeholder' => 'Number of budgeting units'])}}
+                        {{Form::number('no_unit', '', ['class' => 'form-control', 'id'=>'no_unit', 'placeholder' => 'Number of budgeting units'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('cost_unit', 'Cost per budgeting unit')}}
