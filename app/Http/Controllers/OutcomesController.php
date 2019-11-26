@@ -101,7 +101,17 @@ class OutcomesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+     $this->validate($request, [
+    'outcome' => 'required',
+]);
+
+$outcome = Outcome::find($id);
+$outcome->name = $request->outcome;
+
+$outcome->save();
+
+return redirect('/outcomes/' . $outcome->project_id)->with('success', 'outcome updated');
+
     }
 
     /**

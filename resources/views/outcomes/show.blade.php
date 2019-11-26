@@ -77,7 +77,7 @@
                                     <table>
                                         <tr>
                                             <td style="padding:10px;">
-                                                <a class="green" href="#">
+                                                <a class="green" data-toggle="modal" data-target="#editOutput">
                                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                 </a>
                                             </td>
@@ -106,6 +106,37 @@
                     <p>No project outcomes created yet</p>
                     @endif
 
+                </div>
+
+                <div class="modal fade" id="editOutput" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editOutput">Select Output</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {!! Form::open(['action'=>['OutcomesController@update', $outcome->id
+                                ],'method'=>'POST']) !!}
+
+                                <div class="form-group">
+                                    {{Form::label('outcome', 'Outcome name')}}
+                                    {{Form::textarea('outcome', $outcome->name, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Output name'])}}
+                                </div>
+                                {{Form::hidden('_method','PUT')}}
+                                {{Form::submit('Save update', ['class'=>'btn btn-primary','style'=>'float:right;'])}}
+
+                                {!! Form::close() !!}
+                            </div>
+                            <div class="modal-footer">
+                                <button style="float:left;" type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="modal fade" id="selectOutcome" tabindex="-1" role="dialog"
