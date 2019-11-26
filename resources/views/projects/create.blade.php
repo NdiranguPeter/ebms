@@ -292,7 +292,7 @@
                             {{Form::textarea('description', '', [ 'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
                         </div>
                         <div style="float:right;">
-                            {{Form::submit('Create project', ['class'=>'btn btn-primary'])}}
+                            {{Form::submit('Save project', ['class'=>'btn btn-primary'])}}
                         </div>
                         {!! Form::close() !!}
                     </div>

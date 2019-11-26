@@ -289,7 +289,7 @@
                         </div>
                         <div style="float:right;">
                             {{Form::hidden('_method','PUT')}}
-                            {{Form::submit('Save project', ['class'=>'btn btn-primary'])}}
+                            {{Form::submit('Save updates', ['class'=>'btn btn-primary'])}}
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -458,7 +458,7 @@
                             </div>
                             <div style="float:right;">
                                 {{Form::hidden('_method','PUT')}}
-                                {{Form::submit('SSave project', ['class'=>'btn btn-primary'])}}
+                                {{Form::submit('Save donor', ['class'=>'btn btn-primary'])}}
                             </div>
                             {!! Form::close() !!}
                         </div>
