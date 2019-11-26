@@ -73,8 +73,10 @@
                             {{Form::label('scoring', 'Project scoring')}}
                             <select name="scoring" id="scoring"
                                 class="form-control @error('scoring') is-invalid @enderror">
-                                <option value="value" selected>Value</option>
-
+                                <option value={{$indicator->scoring}} selected>{{$indicator->scoring}}</option>
+                                @foreach ($units as $unit)
+                                <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
