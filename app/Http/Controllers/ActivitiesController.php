@@ -13,6 +13,7 @@ use App\Project;
 use App\Unit;
 use App\Challenge;
 use App\Sector;
+use App\Deliverable;
 use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
