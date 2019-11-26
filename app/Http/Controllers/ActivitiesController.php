@@ -13,7 +13,7 @@ use App\Project;
 use App\Unit;
 use App\Challenge;
 use App\Sector;
-use App\Deliverable;
+
 use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
@@ -61,7 +61,6 @@ class ActivitiesController extends Controller
         $user_id = auth()->user()->id;
 
         $output_id = $request->input('id');
-
         $activity_name = strip_tags($request->input('activity'));
         $activity_scoring = $request->input('scoring');
         $activity_unit = $request->input('unit');
