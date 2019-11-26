@@ -492,8 +492,7 @@ class ActivitiesController extends Controller
     {
 
         $actyafter = Activityafter::where('activity_id', $id)->where('before_after', 'before')->first();
-        // return $actyafter;
-
+      
         if ($actyafter === null) {
             $activity = Activity::find($id);
             $output = Output::find($activity->output_id);
@@ -529,9 +528,9 @@ class ActivitiesController extends Controller
 
         $outcome = Outcome::find($output->outcome_id);
 
-        // return $actyafter;
+         $project = Project::find($outcome->project_id);
 
-        return view('activities.after')->with(['before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
+             return view('activities.after')->with(['project'=>$project, 'before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
 
     }
 }
