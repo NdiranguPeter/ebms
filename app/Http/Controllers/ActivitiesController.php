@@ -69,7 +69,6 @@ class ActivitiesController extends Controller
         $sec = $end - $start;
         $activity_tb = $request->input('project_target');
         $activity_currency = $request->input('currency');
-
         $zero_two_male = $request->input('zero_two_male');
         $three_five_male = $request->input('three_five_male');
         $six_twelve_male = $request->input('six_twelve_male');
