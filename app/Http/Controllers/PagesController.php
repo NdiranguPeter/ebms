@@ -100,7 +100,7 @@ class PagesController extends Controller
     }
     public function meal()
     {
-        $projects = Project::orderBy('created_at', 'desc')->paginate(10);
+        $projects = auth()->user()->projects()->orderBy('created_at', 'desc')->paginate(10);
         $outcomes = outcome::orderBy('created_at', 'desc')->paginate(6);
 
         return view('pages.meal')->with(['projects' => $projects, 'outcomes' => $outcomes]);
