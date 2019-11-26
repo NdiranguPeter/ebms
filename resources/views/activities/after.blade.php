@@ -103,7 +103,7 @@
                             <input name="before_after" type="hidden" value={{$before_after}}>
 
                             {{Form::label('budget', 'Budget(USD)')}}
-                            {{Form::text('budget_end', $activity->budget, ['class' => 'form-control', 'placeholder' => 'budget'])}}
+                            {{Form::text('budget_end', $activity->budget, ['readonly'=>'true','class' => 'form-control', 'placeholder' => 'budget'])}}
                         </div>
 
                         <div class="form-group">
