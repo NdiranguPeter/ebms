@@ -149,7 +149,7 @@
 
                         </div>
                         <div class="form-group">
-                            <h5>People leaving with disability</h5>
+                            <h5>People living with disability</h5>
 
                             <div class="col-sm-6">
                                 {{Form::label('disabled_male', 'Male')}}
@@ -213,7 +213,6 @@
                         {{Form::label('budget_unit', 'Budgeting unit')}}
                         <select name="budget_unit" id="budget_unit"
                             class="form-control @error('budget_unit') is-invalid @enderror">
-
                             <option value='Pieces'>Pieces</option>
                             <option value='Persons'>Persons</option>
                             <option value='Items'>Items</option>
