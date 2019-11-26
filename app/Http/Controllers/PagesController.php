@@ -136,7 +136,7 @@ class PagesController extends Controller
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
             ->select('outputs.*')->where('projects.id', $id)
-            ->orderBy('created_at', 'desc')->paginate(6);
+            ->orderBy('created_at', 'desc')->get();
 
         // $activities = Activity::where('project_id', $id)->get();
 
@@ -340,7 +340,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->get();
-        // return $indicatorsafter;
+       
         $month = 'January';
 
         $challenges = Challenge::where('project_id',$id)->get();
