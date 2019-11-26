@@ -237,7 +237,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('cost_unit', 'Cost per budgeting unit')}}
-                        {{Form::text('cost_unit', '', ['class' => 'form-control','id'=>'cost_unit', 'placeholder' => 'Cost per budgeting units'])}}
+                        {{Form::number('cost_unit', '', ['class' => 'form-control','id'=>'cost_unit', 'placeholder' => 'Cost per budgeting units'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('budget', 'Budget')}}
