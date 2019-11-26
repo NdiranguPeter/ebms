@@ -12,6 +12,7 @@ use App\Partner;
 use App\Project;
 use App\Unit;
 use App\Challenge;
+use App\Sector;
 use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
