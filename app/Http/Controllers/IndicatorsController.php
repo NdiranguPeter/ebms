@@ -62,7 +62,6 @@ class IndicatorsController extends Controller
 
         $indicator = new indicator();
         $indicator->user_id = $user_id;
-
         $indicator->name = $indicator_name;
         $indicator->scoring = $indicator_scoring;
         $indicator->unit = $indicator_unit;
@@ -103,7 +102,7 @@ class IndicatorsController extends Controller
         $indicators = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
             ->select('indicators.*')->where('projects.id', $id)
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return view('indicators.show')->with(['project' => $project, 'indicators' => $indicators]);

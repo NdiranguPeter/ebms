@@ -88,11 +88,11 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('start', 'Start date')}}
-                            {{Form::date('start', $indicator->start, ['class' => 'form-control', 'placeholder' => 'start'])}}
+                            {{Form::date('start', $indicator->start, ['readonly' => 'true','class' => 'form-control', 'placeholder' => 'start'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('end', 'End date')}}
-                            {{Form::date('end', $indicator->end, ['class' => 'form-control', 'placeholder' => 'end'])}}
+                            {{Form::date('end', $indicator->end, ['readonly' => 'true','class' => 'form-control', 'placeholder' => 'end'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Save indicator', ['class'=>'btn btn-primary'])}}
