@@ -103,7 +103,7 @@ class IndicatorsController extends Controller
         $indicators = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
             ->select('indicators.*')->where('projects.id', $id)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate(10);
 
         return view('indicators.show')->with(['project' => $project, 'indicators' => $indicators]);

@@ -32,6 +32,19 @@
                 @include('layouts.messages')
 
                 <div class="well col-sm-12">
+                    <div class="col-sm-12">
+                        <p style="text-align: center;font-size: x-large;font-weight: bold;">
+                            @if ($msg == "goal")
+                            {{$project->goal}}
+                            @endif
+                            @if ($msg == "outcome")
+                            {{$outcome->name}}
+                            @endif
+                            @if ($msg == "output")
+                            {{$output->name}}
+                            @endif
+                        </p>
+                    </div>
                     {!! Form::open(['action'=>['IndicatorsController@update', $indicator->id ],'method'=>'POST']) !!}
                     <div class="col-sm-6">
 
@@ -84,6 +97,7 @@
                         <div style="float:right;">
                             {{Form::submit('Save indicator', ['class'=>'btn btn-primary'])}}
                         </div>
+
                         <a href="/indicators/{{$project->id}}" class="btn btn-default" style="float:left;"><i
                                 class="ace-icon fa fa-arrow-circle-o-left"></i>Back to indicators</a>
                     </div>

@@ -93,7 +93,9 @@ class OutputsController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $output = Output::find($id);
+    
     }
 
     /**
@@ -105,7 +107,18 @@ class OutputsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'output' => 'required'
+            ]);
+
+       $output = Output::find($id);
+       $output->name = $request->output;
+
+       $output->save();
+
+       return redirect('/outputs/'.$output->outcome_id)->with('success', 'output updated');
+
+
     }
 
     /**
