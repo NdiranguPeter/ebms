@@ -129,7 +129,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <th>Period</th>
-                                    <th>Achieved</th>
+                                    <th>Planned</th>
                                 </thead>
                                 <tbody>
                                     @if (($months <1 && $days>0) || $months>0 || $years >=1 ) <tr>
