@@ -34,13 +34,13 @@
                 <div class="well col-sm-12">
                     <div class="col-sm-12">
                         <p style="text-align: center;font-size: x-large;font-weight: bold;">
-                            @if ($msg == "Goal")
+                            @if ($msg == "goal")
                             {{$project->goal}}
                             @endif
-                            @if ($msg == "Outcome")
+                            @if ($msg == "outcome")
                             {{$outcome->name}}
                             @endif
-                            @if ($msg == "Output")
+                            @if ($msg == "output")
                             {{$output->name}}
                             @endif
                         </p>
