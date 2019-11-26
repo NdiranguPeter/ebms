@@ -37,7 +37,12 @@
                             @if ($msg == "Goal")
                             {!!$project->goal!!}
                             @endif
-
+                            @if ($msg == "Outcome")
+                            {{$outcome->name}}
+                            @endif
+                            @if ($msg == "Output")
+                            {{$output->name}}
+                            @endif
                         </p>
                     </div>
                     {!! Form::open(['action'=>['IndicatorsController@update', $indicator->id ],'method'=>'POST']) !!}

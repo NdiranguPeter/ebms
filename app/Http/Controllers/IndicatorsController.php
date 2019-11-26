@@ -145,11 +145,13 @@ class IndicatorsController extends Controller
             $come = 1;
 
         }
+        $outcome = Outcome::find($indicator->outcome_id);
+        $output = Output::find($indicator->output_id);
         $units = Unit::all();
 
         $project = Project::find($indicator->project_id);
 
-        return view('indicators.edit')->with(['units'=>$units,'msg' => $msg, 'project' => $project, 'goal' => $goal, 'put' => $put, 'come' => $come, 'indicator' => $indicator]);
+        return view('indicators.edit')->with(['output'=>$output,'outcome'=>$outcome, 'units'=>$units,'msg' => $msg, 'project' => $project, 'goal' => $goal, 'put' => $put, 'come' => $come, 'indicator' => $indicator]);
     }
 
     /**
