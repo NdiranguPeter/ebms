@@ -135,6 +135,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                @if (count($outputs)>0)
                                 {!! Form::open(['action'=>['OutputsController@update', $output->id
                                 ],'method'=>'POST']) !!}
 
@@ -149,6 +150,7 @@
                                 {{Form::submit('Save update', ['class'=>'btn btn-primary','style'=>'float:right;'])}}
 
                                 {!! Form::close() !!}
+                                @endif
 
                             </div>
                             <div class="modal-footer">
