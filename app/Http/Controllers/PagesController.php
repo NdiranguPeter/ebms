@@ -1114,11 +1114,16 @@ $challenges = Challenge::where('project_id', $id)->get();
         $datetime2 = new \DateTime($project->end);
         $interval = $datetime1->diff($datetime2);
         $years = $interval->format('%y');
+       
         $months = $interval->format('%m');
         $days = $interval->format('%d');
         if ($months > 0 || ($months == 0 && $days > 0)) {
             $years++;
         }
+        if ($years < 1) {
+    $years = 1;
+}
+
 
         return view('pages.reports')->with(['years' => $years, 'project' => $project, 'outcomes' => $outcomes]);
 
