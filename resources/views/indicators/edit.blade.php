@@ -34,15 +34,10 @@
                 <div class="well col-sm-12">
                     <div class="col-sm-12">
                         <p style="text-align: center;font-size: x-large;font-weight: bold;">
-                            @if ($msg == "goal")
-                            {{$project->goal}}
+                            @if ($msg == "Goal")
+                            {!!$project->goal!!}
                             @endif
-                            @if ($msg == "outcome")
-                            {{$outcome->name}}
-                            @endif
-                            @if ($msg == "output")
-                            {{$output->name}}
-                            @endif
+
                         </p>
                     </div>
                     {!! Form::open(['action'=>['IndicatorsController@update', $indicator->id ],'method'=>'POST']) !!}
