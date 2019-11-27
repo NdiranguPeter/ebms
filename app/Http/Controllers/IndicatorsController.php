@@ -237,7 +237,7 @@ class IndicatorsController extends Controller
 
     public function createOutputIndicator($id)
     {
-        $units = Unit::all();
+        $units = Unit::all(); 
         $output = Output::find($id);
         $outcome = outcome::find($output->outcome_id);
         $project = project::find($outcome->project_id);

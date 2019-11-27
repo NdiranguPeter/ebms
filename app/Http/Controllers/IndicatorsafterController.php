@@ -60,7 +60,6 @@ class IndicatorsafterController extends Controller
         }
 
         $indicatorafter->person_responsible = $request->input('person_responsible');
-
         $indicatorafter->start = $request->input('start');
         $indicatorafter->end = $request->input('end');
 
@@ -69,20 +68,15 @@ class IndicatorsafterController extends Controller
         }
         if ($request->input('ovi_date') == '') {
             $indicatorafter->ovi_date = $request->input('ovi_date_default');
-
         }
 
         $indicatorafter->baseline_target = $request->input('baseline_target');
         $indicatorafter->project_target = $request->input('project_target');
-
         $years = $request->input('years');
         $months = $request->input('months');
-
         $indicatorafter->year = $request->input('the_year');
         $indicatorafter->before_after = $request->input('before_after');
-
         $indicatorafter->indicator_id = $request->input('id');
-// $indicatorafter->duration = $request->input('duration');
 
         $indicatorafter->jan = $request->input('jan');
         $indicatorafter->feb = $request->input('feb');
@@ -97,19 +91,13 @@ class IndicatorsafterController extends Controller
         $indicatorafter->nov = $request->input('nov');
         $indicatorafter->dec = $request->input('dec');
 
-        // $indicatorafter->years = $years;
-
         $indicatorafter->save();
-
         $indicators = indicator::where('project_id', $project_id)->paginate(10);
 
         $project = Project::find($project_id);
 
         return redirect('/indicators/' . $project->id)->with(['project' => $project, 'indicators' => $indicators]);
-
-        // return view('indicators.show')->with(['project' => $project, 'indicators' => $indicators, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'indicator updated']);
-
-    }
+ }
 
     /**
      * Display the specified resource.

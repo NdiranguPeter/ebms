@@ -53,7 +53,6 @@
             <th style="padding: 2px;">Total </th>
             <th style="padding: 2px;">Responsible</th>
             <th style="padding: 2px;">Budget</th>
-
         </tr>
     </thead>
     <tbody>
@@ -149,13 +148,7 @@
 
             <th> {{$activityafter->person_responsible}}</th>
 
-            @foreach ($currency as $cur)
-            @if ($activity->currency == $cur->id)
             <th style="width:100px;"> {{$cur->symbol}} {{$activityafter->budget}}</th>
-            @endif
-            @endforeach
-
-            <th></th>
 
 
         </tr>
