@@ -363,7 +363,7 @@ class IndicatorsController extends Controller
 
         // $outcome = Outcome::find($output->outcome_id);\
 
-        // return $indicator;
+        // dd($indicator);
 
         return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator]);
 

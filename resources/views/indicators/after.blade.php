@@ -111,7 +111,8 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('ovi_date', 'Expected date of achieving Indicator')}}
-                            {{Form::date('ovi_date',  ['class' =>'form-control', 'placeholder' => ''])}}
+                            {{Form::date('ovi_date', \Carbon\Carbon::now(), ['class' =>'form-control', 'placeholder'
+                            => ''])}}
                         </div>
                         @endif
                     </div>
