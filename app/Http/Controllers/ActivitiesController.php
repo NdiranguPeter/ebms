@@ -177,8 +177,9 @@ class ActivitiesController extends Controller
             $output = Output::find($output_id);
             $outcome = Outcome::find($output->outcome_id);
             $project = Project::find($outcome->project_id);
+            $deliverables = Deliverable::all();
 
-            return view('activities.create')->with(['sectors' => $sectors, 'project' => $project, 'output' => $output, 'outcome' => $outcome, 'units' => $units, 'error' => 'Total Gender/Age distribution -' . $totol_beneficiaries . ' is greater than total beneficiaries target - ' . $activity_tb]);
+            return view('activities.create')->with(['deliverables'=>$deliverables, 'sectors' => $sectors, 'project' => $project, 'output' => $output, 'outcome' => $outcome, 'units' => $units, 'error' => 'Total Gender/Age distribution -' . $totol_beneficiaries . ' is greater than total beneficiaries target - ' . $activity_tb]);
 
         }
 
