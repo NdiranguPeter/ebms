@@ -44,8 +44,6 @@
                         <p>{!!$indicator->name!!}</p>
                     </div>
                     <div class="col-sm-6">
-
-
                         <?php 
                         $period = $indicator->duration;
                         if ($period<=365) {
@@ -68,8 +66,7 @@
                         if ($years>0 && $months >0) {
                            $years ++;
                         }
-
-                        
+                       
                         
                         ?>
                         {{-- <p>Duration: {{$interval->format('%y years %m months %d days')}}</p> --}}

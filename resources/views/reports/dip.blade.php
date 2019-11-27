@@ -148,7 +148,7 @@
 
             <th> {{$activityafter->person_responsible}}</th>
 
-            <th style="width:100px;"> {{$cur->symbol}} {{$activityafter->budget}}</th>
+            <th style="width:100px;"> {{$activityafter->budget}}</th>
 
 
         </tr>
