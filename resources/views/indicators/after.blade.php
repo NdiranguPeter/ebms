@@ -65,9 +65,7 @@
                         
                         if ($years>0 && $months >0) {
                            $years ++;
-                        }
-                       
-                        
+                        }                                             
                         ?>
                         {{-- <p>Duration: {{$interval->format('%y years %m months %d days')}}</p> --}}
                         @if ($years >1)
@@ -100,9 +98,7 @@
                             {{Form::text('person_responsible',$indicator->person_responsible , ['class' =>
                             'form-control', 'placeholder' => 'person responsible'])}}
                         </div>
-
                         @if ($before_after == 'before')
-
                         <div class="form-group">
                             {{Form::label('baseline_target', 'Baseline')}}
                             {{Form::text('baseline_target',$indicator->baseline_target , ['class' =>
@@ -117,7 +113,6 @@
                             {{Form::label('ovi_date', 'Expected date of achieving Indicator')}}
                             {{Form::date('ovi_date', , ['class' =>'form-control', 'placeholder' => ''])}}
                         </div>
-
                         @endif
                     </div>
                     <div class="col-sm-6">
