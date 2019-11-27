@@ -203,7 +203,7 @@
 
                         <div class="form-group">
 
-                            <h5>People leaving with disability</h5>
+                            <h5>People living with disability</h5>
 
                             <div class="col-sm-6">
                                 {{Form::label('disabled_male', 'Male')}}
@@ -217,7 +217,7 @@
 
                         <div class="form-group" style="margin-top:10px;">
 
-                            {{Form::label('gender_age_distribution', 'Geneder/Age distribution')}}
+                            {{Form::label('gender_age_distribution', 'Gender/Age distribution')}}
                             <table class="table table-bordered">
                                 <th>Age group</th>
                                 <th>Male</th>
