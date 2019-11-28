@@ -7,7 +7,6 @@
             <th>Impact</th>
             <th>Management strategy</th>
             <th>Responsibility</th>
-            <th>Risk occur</th>
         </tr>
     </thead>
     <tbody>
@@ -22,8 +21,6 @@
             <td>Y|N</td>
         </tr>
         @endforeach
-
-
     </tbody>
 </table>
 {{$risks->links()}}

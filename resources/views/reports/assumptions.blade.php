@@ -7,7 +7,7 @@
             <th>Validation</th>
             <th>Response</th>
             <th>Responsibility</th>
-            <th>Assumption occured</th>
+
         </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
             <td>{{$assumption->validation}}</td>
             <td>{{$assumption->response}}</td>
             <td>{{$assumption->owner}}</td>
-            <td>Y|N</td>
+
         </tr>
         @endforeach
 
