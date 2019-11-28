@@ -202,6 +202,10 @@ class PagesController extends Controller
     public function dipbefore($id)
     {
 
+        
+        $donors = explode(',',$project->donors);
+
+        $alldonors = Donor::all();   
         $project = Project::find($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -234,7 +238,7 @@ class PagesController extends Controller
 
         $cur = Currency::all();
 
-        return view('reports.templates.dip')->with(['currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.dip')->with(['alldonors'=>$alldonors,'donors'=>$donors,'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function dipafter($id)

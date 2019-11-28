@@ -34,9 +34,9 @@
         @php
         $end = \Carbon\Carbon::parse($project->end);
         $start = \Carbon\Carbon::parse($project->start);
-        $diff = $end->diffInDays($start);
+        $diff = $end->diffInMonths($start);
         @endphp
-        <p>Duration: <b>{{$diff}}</b> days</p>
+        <p>Duration: <b>{{$diff}}</b> Months</p>
         <p><b>Total beneficiaries: </b>{{$activities->sum('total_beneficiaries')}}</p>
     </div>
 </div>
