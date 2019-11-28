@@ -101,7 +101,7 @@
             {{$exp}}
         </td>
         <td>Total beneficiaries served</td>
-        <td>{{$total}}</td>
+        <td>{{2*$total}}</td>
     </tr>
     <tr>
         <td colspan="4">
