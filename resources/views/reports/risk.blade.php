@@ -28,8 +28,6 @@
             <td>{{$riskafter->response}}</td>
             @endif
             @endforeach
-
-
         </tr>
         @endforeach
     </tbody>

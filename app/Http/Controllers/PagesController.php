@@ -16,6 +16,7 @@ use App\Risk;
 use App\Unit;
 use App\Challenge;
 use App\Risksafter;
+use App\AssumptionAfter;
 
 class PagesController extends Controller
 {
@@ -1037,12 +1038,15 @@ $challenges = Challenge::where('project_id', $id)->get();
         $project = Project::find($id);
         $assumptions = Assumption::where('project_id', $id)->orderBy('created_at', 'desc')->paginate(5);
         $when = 'before';
+        $assumptionsafter = AssumptionAfter::all();
 
-        return view('reports.templates.assumptions')->with(['when' => $when, 'assumptions' => $assumptions, 'project' => $project]);
+        return view('reports.templates.assumptions')->with(['assumptionsafter'=>$assumptionsafter,'when' => $when, 'assumptions' => $assumptions, 'project' => $project]);
     }
 
     public function assumptionafter($id)
     {
+        $assumptionsafter = AssumptionAfter::all();
+
         $project = Project::find($id);
         $when = 'after';
         $assumptions = \DB::table('assumptions')
@@ -1050,7 +1054,7 @@ $challenges = Challenge::where('project_id', $id)->get();
             ->select('assumptions.*')->where('assumptions.project_id', $id)
             ->paginate(10);
 
-        return view('reports.templates.assumptions')->with(['when' => $when, 'assumptions' => $assumptions, 'project' => $project]);
+        return view('reports.templates.assumptions')->with(['assumptionsafter'=>$assumptionsafter,'when' => $when, 'assumptions' => $assumptions, 'project' => $project]);
     }
 
     public function pars($id)

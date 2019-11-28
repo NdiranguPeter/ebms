@@ -7,6 +7,11 @@
             <th>Validation</th>
             <th>Response</th>
             <th>Responsibility</th>
+            @if (count($assumptionsafter)>0 && $when == "after")
+            <th>Occur</th>
+            <th>Impact</th>
+            <th>Response</th>
+            @endif
 
         </tr>
     </thead>
@@ -19,6 +24,13 @@
             <td>{{$assumption->validation}}</td>
             <td>{{$assumption->response}}</td>
             <td>{{$assumption->owner}}</td>
+            @foreach($assumptionsafter as $assumptionafter)
+            @if ($assumptionafter->assumption_id == $assumption->id && $when == "after" )
+            <td>{{$assumptionafter->occur}}</td>
+            <td>{{$assumptionafter->impact}}</td>
+            <td>{{$assumptionafter->response}}</td>
+            @endif
+            @endforeach
 
         </tr>
         @endforeach
