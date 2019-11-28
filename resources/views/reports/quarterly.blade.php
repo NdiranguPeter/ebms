@@ -316,3 +316,23 @@ $y++;
 @endphp
 @endforeach
 </table>
+<hr>
+<h2>Section 2: Major challenges and solutions</h2>
+<hr>
+<table class="table table-bordered">
+    <thead>
+        <tr style="background: #349ba7 !important;color: #fff;">
+            <th>Challenge</th>
+            <th>Solution</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($challenges as $challenge)
+        <tr>
+            <td>{{$challenge->challenge}}</td>
+            <td>{{$challenge->solution}}</td>
+        </tr>
+        @endforeach
+
+    </tbody>
+</table>
