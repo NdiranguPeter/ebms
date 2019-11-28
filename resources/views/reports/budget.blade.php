@@ -17,15 +17,15 @@
             <td>{{$activity->name}}</td>
             <td>{{$activity->budget_unit}}</td>
             <td>
+                {{$activity->budget/$activity->cost_unit}}
+            </td>
+            <td>
                 @php
                 $number = number_format($activity->cost_unit);
-
                 @endphp
                 {{$number}}
             </td>
-            <td>
-                {{$activity->budget/$activity->cost_unit}}
-            </td>
+
             <td>
                 {{$activity->budget}}
             </td>
