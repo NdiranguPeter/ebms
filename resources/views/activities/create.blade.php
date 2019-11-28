@@ -174,8 +174,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            {{Form::label('unit', 'Type of deliverable')}}
-                            <select name="unit" id="type" class="form-control @error('unit') is-invalid @enderror">
+                            {{Form::label('deliverables', 'Type of deliverable')}}
+                            <select name="deliverables" id="type"
+                                class="form-control @error('unit') is-invalid @enderror">
                                 @if(count($deliverables)>0)
                                 @foreach ($deliverables as $deliverable)
                                 <option value={{$deliverable->id}}>{{$deliverable->name}}</option>

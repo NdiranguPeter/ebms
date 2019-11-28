@@ -22,7 +22,6 @@ class CreateActivitiesTable extends Migration
             $table->string('unit');
             $table->string('baseline_target');
             $table->string('project_target');
-
             $table->date('start');
             $table->date('end');
             $table->string('duration');
@@ -30,13 +29,11 @@ class CreateActivitiesTable extends Migration
             $table->string('person_responsible');
             $table->string('budget');
             $table->integer('currency');
-
             $table->string('budget_code');
             $table->string('budget_unit');
             $table->string('no_unit');
             $table->string('cost_unit');
             $table->integer('total_beneficiaries');
-
             $table->integer('total_male');
             $table->integer('total_female');
             $table->integer('indirect_male')->nullable();

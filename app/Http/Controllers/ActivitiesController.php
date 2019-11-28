@@ -53,7 +53,7 @@ class ActivitiesController extends Controller
         $this->validate($request, [
             'activity' => 'required',
             'scoring' => 'required',
-            'unit' => 'required',
+            'deliverables' => 'required',
             'target_baseline' => 'required',
 
         ]);
@@ -63,7 +63,7 @@ class ActivitiesController extends Controller
         $output_id = $request->input('id');
         $activity_name = strip_tags($request->input('activity'));
         $activity_scoring = $request->input('scoring');
-        $activity_unit = $request->input('unit');
+        $activity_unit = 26;
         $start = strtotime($request->input('start'));
         $end = strtotime($request->input('end'));
         $sec = $end - $start;
