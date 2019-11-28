@@ -4,6 +4,7 @@
             <th>Budget code</th>
             <th>Activity Description</th>
             <th>Unit</th>
+            <th>#of units</th>
             <th>Cost/Unit</th>
             <th>Total</th>
         </tr>
@@ -21,6 +22,9 @@
 
                 @endphp
                 {{$number}}
+            </td>
+            <td>
+                {{$activity->budget/$activity->cost_unit}}
             </td>
             <td>
                 {{$activity->budget}}
