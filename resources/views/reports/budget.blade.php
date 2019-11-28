@@ -30,6 +30,7 @@
                 {{$activity->budget}}
             </td>
         </tr>
+
         @endforeach
 
         @else
@@ -38,7 +39,27 @@
         </tr>
         @endif
 
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>
+                @if (count($activities)>0)
+                @php
+                $tot = 0;
+                @endphp
+                @foreach ($activities as $activity)
+                @php
+                $tot = $tot + $activity->budget;
+                @endphp
+                @endforeach
+                @endif
+                {{$tot}}
+            </td>
 
+        </tr>
 
     </tbody>
 
