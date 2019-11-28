@@ -15,6 +15,7 @@ use App\Project;
 use App\Risk;
 use App\Unit;
 use App\Challenge;
+use App\Risksafter;
 
 class PagesController extends Controller
 {
@@ -1026,7 +1027,9 @@ $challenges = Challenge::where('project_id', $id)->get();
 
         $when = 'after';
 
-        return view('reports.templates.risk')->with(['when' => $when, 'risks' => $risks, 'project' => $project]);
+        $risksafter = Risksafter::all();
+
+        return view('reports.templates.risk')->with(['risksafter'=>$risksafter,'when' => $when, 'risks' => $risks, 'project' => $project]);
     }
 
     public function assumptionbefore($id)
