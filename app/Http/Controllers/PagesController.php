@@ -904,6 +904,7 @@ $challenges = Challenge::where('project_id', $id)->get();
             ->select('activityafters.*')->where('projects.id', $id)
             ->get();
 
+          
         return view('reports.templates.budget')->with(['activitiesafter' => $activityafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 

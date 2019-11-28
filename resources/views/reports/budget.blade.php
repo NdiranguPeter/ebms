@@ -23,9 +23,7 @@
                 {{$number}}
             </td>
             <td>
-                @php
-                $number = number_format($activity->budget);
-                @endphp
+                {{$activity->budget}}
             </td>
         </tr>
         @endforeach
