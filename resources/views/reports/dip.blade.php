@@ -12,7 +12,18 @@
     <div class="col-sm-6">
         <p>Project title: <b>{!!$project->name!!}</b></p>
         <p>Implementing Office: <b>{!!$ir_office->name!!}</b></p>
-        <p>Donor: <b>{!!$project->donors!!}</b></p>
+        <p>Donor:
+            @foreach ($donors as $donor)
+            @foreach ($alldonors as $alldonor)
+            @if ($alldonor->id == $donor)
+            @php
+            $dn = $alldonor->name;
+            @endphp
+            @endif
+            @endforeach
+            @endforeach
+
+            <b>{{$dn}}</b></p>
         <p>Sector: <b>{!!$project->sector!!}</b></p>
         <p>Type of project: <b>{!!$project->type!!}</b></p>
     </div>

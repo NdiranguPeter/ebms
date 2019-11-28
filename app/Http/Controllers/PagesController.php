@@ -17,6 +17,7 @@ use App\Unit;
 use App\Challenge;
 use App\Risksafter;
 use App\AssumptionAfter;
+use App\Donor;
 
 class PagesController extends Controller
 {
@@ -273,9 +274,13 @@ class PagesController extends Controller
         $units = Unit::all();
         $ir_office = IR_Office::find($project->ir_office);
 
+        $donors = explode(',',$project->donors);
+
+        $alldonors = Donor::all();        
+
         $cur = Currency::all();
 
-        return view('reports.templates.dip')->with(['currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.dip')->with(['alldonors'=>$alldonors,'donors'=>$donors,'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function repo($id)
@@ -731,7 +736,7 @@ $challenges = Challenge::where('project_id', $id)->get();
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->get();
-// return $outputindicators;
+
         $qrt = 'QRT 1';
          $challenges = Challenge::where('project_id', $id)->get();
         return view('reports.templates.quarterly')->with(['challenges'=>$challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
