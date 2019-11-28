@@ -20,7 +20,10 @@
                 @if ($activity->budget < 1) @php $activity->budget = 1;
                     @endphp
                     @endif
-                    {{$activity->budget/$activity->cost_unit}}
+                    @if ($activity->cost_unit < 1) @php $activity->cost_unit = 1;
+                        @endphp
+                        @endif
+                        {{$activity->budget/$activity->cost_unit}}
             </td>
             <td>
                 @php
