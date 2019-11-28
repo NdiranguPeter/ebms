@@ -125,73 +125,62 @@
                                     <th>Planned</th>
                                 </thead>
                                 <tbody>
-                                    @if (($months <1 && $days>0) || $months>0 || $years >=1 ) <tr>
-                                            <td>January</td>
-                                            <td><input name="jan" type="number" value={{$indicator->jan}}></td>
-                                        </tr>
-                                        @endif
+                                    <tr>
+                                        <td>January</td>
+                                        <td><input name="jan" type="number" value={{$indicator->jan}}></td>
+                                    </tr>
+                                    <tr>
+                                        <td>February</td>
+                                        <td><input name="feb" type="number" value={{$indicator->feb}}></td>
+                                    </tr>
+                                    <tr>
+                                        <td>March</td>
+                                        <td><input name="mar" type="number" value={{$indicator->mar}}></td>
+                                    </tr>
+                                    <tr>
+                                        <td>April</td>
+                                        <td><input name="apr" type="number" value={{$indicator->apr}}></td>
+                                    </tr>
+                                    <tr>
+                                        <td>May</td>
+                                        <td><input name="may" type="number" value={{$indicator->may}}></td>
+                                    </tr>
+                                    <tr>
+                                        <td>June</td>
+                                        <td><input name="jun" type="number" value={{$indicator->jun}}></td>
+                                    </tr>
+                                    <tr>
+                                        <td>July</td>
+                                        <td><input name="jul" type="number" value={{$indicator->jul}}></td>
+                                    </tr>
+                                    <tr>
+                                        <td>August</td>
+                                        <td><input name="aug" type="number" value={{$indicator->aug}}>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>September</td>
+                                        <td><input name="sep" type="number" value={{$indicator->sep}}>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>October</td>
+                                        <td><input name="oct" type="number" value={{$indicator->oct}}>
+                                        </td>
+                                    </tr>
 
-                                        @if (($months==1 && $days>0) || $months >1 || $years >=1) <tr>
-                                            <td>February</td>
-                                            <td><input name="feb" type="number" value={{$indicator->feb}}></td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==2 && $days>0) || $months >2|| $years >=1) <tr>
-                                            <td>March</td>
-                                            <td><input name="mar" type="number" value={{$indicator->mar}}></td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==3 && $days>0) || $months >3 || $years >=1 ) <tr>
-                                            <td>April</td>
-                                            <td><input name="apr" type="number" value={{$indicator->apr}}></td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==4 && $days>0) || $months >4 || $years >=1) <tr>
-                                            <td>May</td>
-                                            <td><input name="may" type="number" value={{$indicator->may}}></td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==5 && $days>0) || $months >5 || $years >=1) <tr>
-                                            <td>June</td>
-                                            <td><input name="jun" type="number" value={{$indicator->jun}}></td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==6 && $days>0) || $months >6 || $years >=1) <tr>
-                                            <td>July</td>
-                                            <td><input name="jul" type="number" value={{$indicator->jul}}></td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==7 && $days>0) || $months >7|| $years >=1) <tr>
-                                            <td>August</td>
-                                            <td><input name="aug" type="number" value={{$indicator->aug}}>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==8 && $days>0) || $months >8 || $years >=1) <tr>
-                                            <td>September</td>
-                                            <td><input name="sep" type="number" value={{$indicator->sep}}>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==9 && $days>0) || $months >9 || $years >=1) <tr>
-                                            <td>October</td>
-                                            <td><input name="oct" type="number" value={{$indicator->oct}}>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                        @if (($months==10 && $days>0) || $months >10 || $years >=1)
-                                        <tr>
-                                            <td>November</td>
-                                            <td><input name="nov" type="number" value={{$indicator->nov}}></td>
-                                        </tr>
-                                        @endif
-                                        @if ($months==11 && $days>0 || $years >=1)
-                                        <tr>
-                                            <td>December</td>
-                                            <td><input name="dec" type="number" value={{$indicator->dec}}>
-                                            </td>
-                                        </tr>
-                                        @endif
+                                    <tr>
+                                        <td>November</td>
+                                        <td><input name="nov" type="number" value={{$indicator->nov}}></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>December</td>
+                                        <td><input name="dec" type="number" value={{$indicator->dec}}>
+                                        </td>
+                                    </tr>
+
+
                                 </tbody>
                             </table>
                         </div>
