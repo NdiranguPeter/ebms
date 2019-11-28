@@ -7,11 +7,10 @@
             <th>Impact</th>
             <th>Management strategy</th>
             <th>Responsibility</th>
-            @if (count($risksafter)>0 $$ $when == "after")
+            @if (count($risksafter)>0 && $when == "after")
             <th>Occur</th>
             <th>Response</th>
             @endif
-
         </tr>
     </thead>
     <tbody>
@@ -24,8 +23,7 @@
             <td>{{$risk->strategy}}</td>
             <td>{{$risk->owner}}</td>
             @foreach($risksafter as $riskafter)
-            @if ($riskafter->risk_id == $risk->id $$ $when == "after" )
-
+            @if ($riskafter->risk_id == $risk->id && $when == "after" )
             <td>{{$riskafter->occur}}</td>
             <td>{{$riskafter->response}}</td>
             @endif
