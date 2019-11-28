@@ -162,7 +162,6 @@ class PagesController extends Controller
             ->join('resources', 'resources.activity_id', 'activities.id')
             ->select('resources.*')->where('projects.id', $id)
             ->get();
-
         $outcomeindicators = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('indicators', 'indicators.outcome_id', 'outcomes.id')
@@ -201,11 +200,6 @@ class PagesController extends Controller
 
     public function dipbefore($id)
     {
-
-        
-        $donors = explode(',',$project->donors);
-
-        $alldonors = Donor::all();   
         $project = Project::find($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -235,6 +229,12 @@ class PagesController extends Controller
 
         $units = Unit::all();
         $ir_office = IR_Office::find($project->ir_office);
+
+        
+$donors = explode(',', $project->donors);
+
+$alldonors = Donor::all();
+
 
         $cur = Currency::all();
 
