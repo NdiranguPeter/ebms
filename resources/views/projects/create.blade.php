@@ -267,11 +267,9 @@
 
                             </select>
                         </div>
-
-
                         <div class="form-group">
                             {{Form::label('budget', 'Project budget')}}
-                            {{Form::text('budget', '', ['class' => 'form-control', 'placeholder' => 'project fund'])}}
+                            {{Form::number('budget', '', ['class' => 'form-control', 'placeholder' => 'project fund'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('currency', 'Project currency')}}
