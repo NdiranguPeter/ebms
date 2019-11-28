@@ -988,8 +988,6 @@ $challenges = Challenge::where('project_id', $id)->get();
             ->select('outputs.*')->where('projects.id', $id)
             ->orderBy('created_at', 'desc')->paginate(6);
 
-// $activities = Activity::where('project_id', $id)->get();
-
         $activities = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
@@ -1013,8 +1011,10 @@ $challenges = Challenge::where('project_id', $id)->get();
         $project = Project::find($id);
         $risks = Risk::where('project_id', $id)->orderBy('created_at', 'desc')->paginate(5);
         $when = 'before';
+        
+        $risksafter = Risksafter::all();
 
-        return view('reports.templates.risk')->with(['when' => $when, 'risks' => $risks, 'project' => $project]);
+        return view('reports.templates.risk')->with(['risksafter'=>$risksafter,'when' => $when, 'risks' => $risks, 'project' => $project]);
     }
 
     public function riskafter($id)

@@ -7,6 +7,11 @@
             <th>Impact</th>
             <th>Management strategy</th>
             <th>Responsibility</th>
+            @if (count($risksafter)>0)
+            <th>Occur</th>
+            <th>Response</th>
+            @endif
+
         </tr>
     </thead>
     <tbody>
@@ -18,6 +23,15 @@
             <td>{{$risk->impact}}</td>
             <td>{{$risk->strategy}}</td>
             <td>{{$risk->owner}}</td>
+            @foreach($risksafter as $riskafter)
+            @if ($riskafter->risk_id == $risk->id)
+
+            <td>{{$riskafter->occur}}</td>
+            <td>{{$riskafter->response}}</td>
+            @endif
+            @endforeach
+
+
         </tr>
         @endforeach
     </tbody>
