@@ -18,7 +18,7 @@
             <td>{{$risk->impact}}</td>
             <td>{{$risk->strategy}}</td>
             <td>{{$risk->owner}}</td>
-            <td>Y|N</td>
+
         </tr>
         @endforeach
     </tbody>
