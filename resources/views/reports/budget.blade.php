@@ -56,7 +56,11 @@
                 @endphp
                 @endforeach
                 @endif
-                {{$tot}}
+                @php
+                $number = number_format($tot);
+                @endphp
+                {{$number}}
+
             </td>
 
         </tr>
