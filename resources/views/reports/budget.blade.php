@@ -25,9 +25,7 @@
             <td>
                 @php
                 $number = number_format($activity->budget);
-
                 @endphp
-                {{$number}} {{$activity->currency}}
             </td>
         </tr>
         @endforeach
