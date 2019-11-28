@@ -17,7 +17,10 @@
             <td>{{$activity->name}}</td>
             <td>{{$activity->budget_unit}}</td>
             <td>
-                {{$activity->budget/$activity->cost_unit}}
+                @if ($activity->budget < 1) @php $activity->budget = 1;
+                    @endphp
+                    @endif
+                    {{$activity->budget/$activity->cost_unit}}
             </td>
             <td>
                 @php
