@@ -14,6 +14,7 @@ use App\Project;
 use App\Sector;
 use App\TargetGroup;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -180,7 +181,8 @@ $users = User::all();
      */
     public function show($id)
     {
-        $project = Project::find($id);
+        
+        $project = Project::find($id);        
         $donor = Donor::find($project->donors);
         $project->donors = $donor->name;
         $partner = Partner::find($project->partners);

@@ -19,18 +19,12 @@
                 </li>
                 /
                 <li class="active">{!!$outcome->name!!}</li>
-            </ul><!-- /.breadcrumb -->
-
-
+            </ul>
         </div>
-
         <div class="page-content">
-
-
             <div class="page-header">
                 <h1>
                     Outputs
-
                 </h1>
             </div><!-- /.page-header -->
 
@@ -115,15 +109,10 @@
 
                         </tbody>
                     </table>
-
                     @else
                     <p>No project outputs created yet</p>
                     @endif
-
-
-
                 </div>
-
                 <div class="modal fade" id="editOutput" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -138,20 +127,14 @@
                                 @if (count($outputs)>0)
                                 {!! Form::open(['action'=>['OutputsController@update', $output->id
                                 ],'method'=>'POST']) !!}
-
                                 <div class="form-group">
                                     {{Form::label('output', 'Output name')}}
                                     {{Form::textarea('output', $output->name, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Output name'])}}
                                 </div>
-
-
-
                                 {{Form::hidden('_method','PUT')}}
                                 {{Form::submit('Save update', ['class'=>'btn btn-primary','style'=>'float:right;'])}}
-
                                 {!! Form::close() !!}
                                 @endif
-
                             </div>
                             <div class="modal-footer">
                                 <button style="float:left;" type="button" class="btn btn-secondary"
@@ -160,8 +143,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="modal fade" id="selectOutput" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -188,7 +169,6 @@
                                 @else
                                 <a href="/outputs/create/{{$outcome->id}}">Create a Output</a>
                                 @endif
-
                             </div>
                             <div class="modal-footer">
                                 <a href="/outputs/create/{{$outcome->id}}">Create a output</a>
@@ -210,21 +190,17 @@
                             <div class="modal-body">
                                 @if (count($outputs)>0)
                                 <table class="table table-bordered">
-
                                     @foreach ($outputs as $output)
-
                                     <tr>
                                         <td><a href="/indicators/output/create/{{$output->id}}">{!!$output->name!!}</a>
                                         </td>
                                     </tr>
-
                                     @endforeach
                                 </table>
                                 {{-- {{$outcomes->links()}} --}}
                                 @else
                                 <a href="/outputs/create/{{$outcome->id}}">Create a Output</a>
                                 @endif
-
                             </div>
                             <div class="modal-footer">
                                 <a href="/outputs/create/{{$outcome->id}}">Create a output</a>
@@ -233,11 +209,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
-
 @endsection
