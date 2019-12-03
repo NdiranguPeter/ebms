@@ -53,6 +53,7 @@
                         <input name="scoring" type="hidden" value=0>
                         <input name="output_id" type="hidden" value=0>
                         <input name="outcome_id" type="hidden" value=0>
+                        <input name="i_order" type="hidden" value={{$indicator_order+1}}>
                         <input name="goal_id" type="hidden" value=0>
                         @if ($come == 1)
                         <input name="outcome_id" type="hidden" value={{$outcome->id}}>

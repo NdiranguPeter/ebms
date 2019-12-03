@@ -64,7 +64,7 @@
                             <?php $i = 1; ?>
                             @foreach ($indicators as $indicator)
                             <tr style="font-size: smaller;">
-                                <th scope="row">{{$i}}</th>
+                                <th scope="row">{{$indicator->i_order}}</th>
                                 <td scope="row"><a href="/indicators/{{$indicator->id}}/edit">{!!$indicator->name!!}</a>
                                 </td>
                                 <td scope="row">{!!$indicator->created_at!!}</td>

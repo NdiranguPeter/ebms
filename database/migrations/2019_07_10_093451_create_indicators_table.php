@@ -16,7 +16,8 @@ class CreateIndicatorsTable extends Migration
         Schema::create('indicators', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('project_id');
+            $table->unsignedBigInteger('project_id');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->integer('goal_id');
             $table->integer('outcome_id');
             $table->integer('output_id');

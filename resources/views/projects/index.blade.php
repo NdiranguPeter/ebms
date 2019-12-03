@@ -76,13 +76,6 @@
                                 <td scope="row">{{$project->stage}}</td>
                                 <td scope="row">
 
-                                    @foreach ($users as $user)
-                                    @foreach ($projects as $project)
-                                    @if ($project->user_id == $user->id)
-
-                                    @endif
-                                    @endforeach
-                                    @endforeach
                                 </td>
                                 <td>{{$project->updated_at}}</td>
                                 {{-- <td></td> --}}

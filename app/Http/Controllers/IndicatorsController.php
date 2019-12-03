@@ -31,7 +31,7 @@ class IndicatorsController extends Controller
      */
     public function create()
     {
-        //
+    
     }
 
     /**
@@ -74,6 +74,7 @@ class IndicatorsController extends Controller
         $indicator->outcome_id = $request->input('outcome_id');
         $indicator->output_id = $request->input('output_id');
         $indicator->start = $request->input('start');
+        $indicator->i_order = $request->input('i_order');
         $indicator->end = $request->input('end');
         $project_id = $request->input('project_id');
 
@@ -100,12 +101,14 @@ class IndicatorsController extends Controller
     {
         $project = Project::find($id);
         $indicators = \DB::table('projects')
-            ->join('indicators', 'indicators.project_id', 'projects.id')
-            ->select('indicators.*')->where('projects.id', $id)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        ->join('indicators', 'indicators.project_id', 'projects.id')
+        ->select('indicators.*')->where('projects.id', $id)
+        ->orderBy('created_at', 'asc')
+        ->paginate(10);
 
-        return view('indicators.show')->with(['project' => $project, 'indicators' => $indicators]);
+       
+
+            return view('indicators.show')->with(['project' => $project, 'indicators' => $indicators]);
 
     }
 
@@ -241,8 +244,10 @@ class IndicatorsController extends Controller
         $output = Output::find($id);
         $outcome = outcome::find($output->outcome_id);
         $project = project::find($outcome->project_id);
+        $indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
 
-        return view('indicators.create')->with(['output' => $output, 'msg' => 'output', 'goal' => 0, 'come' => 0, 'put' => 1, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
+
+        return view('indicators.create')->with(['indicator_order'=>$indicator_order, 'output' => $output, 'msg' => 'output', 'goal' => 0, 'come' => 0, 'put' => 1, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
 
     }
     public function createOutcomeIndicator($id)
@@ -252,8 +257,10 @@ class IndicatorsController extends Controller
 
         $outcome = outcome::find($id);
         $project = project::find($outcome->project_id);
+$indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
 
-        return view('indicators.create')->with(['msg' => 'outcome', 'goal' => 0, 'come' => 1, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
+
+        return view('indicators.create')->with(['indicator_order'=>$indicator_order, 'msg' => 'outcome', 'goal' => 0, 'come' => 1, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
 
     }
     public function createGoalIndicator($id)
@@ -265,7 +272,11 @@ class IndicatorsController extends Controller
 
         $outcome = outcome::where('project_id', $project->id)->get();
 
-        return view('indicators.create')->with(['msg' => 'goal', 'goal' => 1, 'come' => 0, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
+        
+$indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
+
+
+        return view('indicators.create')->with(['indicator_order'=>$indicator_order, 'msg' => 'goal', 'goal' => 1, 'come' => 0, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
 
     }
 
