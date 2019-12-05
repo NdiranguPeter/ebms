@@ -49,7 +49,7 @@ $users = User::all();
 
         $projects = Project::orderBy('created_at', 'desc')->paginate(10);
 
-$users = User::all();
+        $users = User::all();
 
         return view('projects.index')->with(['users'=>$users,'projects' => $projects]);
     }
