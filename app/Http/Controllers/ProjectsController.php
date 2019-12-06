@@ -27,21 +27,21 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-      
+
         $user_id = auth()->user()->id;
 
         $user = User::find($user_id);
         // return $user->projects;
-$users = User::all();
+        $users = User::all();
 
         $projects = auth()->user()->projects()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('projects.index')->with(['users'=>$users, 'projects' => $projects]);
+        return view('projects.index')->with(['users' => $users, 'projects' => $projects]);
     }
 
-     public function allprojects()
+    public function allprojects()
     {
-        
+
         $user_id = auth()->user()->id;
 
         $user = User::find($user_id);
@@ -51,7 +51,7 @@ $users = User::all();
 
         $users = User::all();
 
-        return view('projects.index')->with(['users'=>$users,'projects' => $projects]);
+        return view('projects.allprojects')->with(['users' => $users, 'projects' => $projects]);
     }
 
     /**
@@ -181,8 +181,8 @@ $users = User::all();
      */
     public function show($id)
     {
-        
-        $project = Project::find($id);        
+
+        $project = Project::find($id);
         $donor = Donor::find($project->donors);
         $project->donors = $donor->name;
         $partner = Partner::find($project->partners);
@@ -345,7 +345,7 @@ $users = User::all();
      */
     public function destroy($id)
     {
-        $project = Project::find($id);        
+        $project = Project::find($id);
         $project->delete();
         return redirect('/projects')->with('error', 'Project deleted');
 

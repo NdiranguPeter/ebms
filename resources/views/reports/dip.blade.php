@@ -39,6 +39,29 @@
         <p>Duration: <b>{{$diff}}</b> Months</p>
         <p><b>Total beneficiaries: </b>{{$activities->sum('total_beneficiaries')}}</p>
     </div>
+
+    <div class="col-sm-12">
+        <b>Overall perfomance</b>
+
+        @php
+        $target_total = 1;
+        if ($target_total > 0) {
+        $perc = 0;
+        }else{
+        $perc = 0;
+        }
+        $perc = sprintf('%0.2f', $perc);
+        if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 && $perc
+                <75) { $color='blue' ; } if ($perc> 74) {
+                    $color = 'green';
+                    }
+                    @endphp
+                    <div
+                        style="font-weight: bold; font-size: xx-large; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
+                        {{$perc}}%
+                    </div>
+
+    </div>
 </div>
 
 <table class="fgff table-bordered" style="font-size: smaller;">
