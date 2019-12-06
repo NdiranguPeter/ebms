@@ -47,7 +47,7 @@ class ProjectsController extends Controller
         $user = User::find($user_id);
         // return $user->projects;
 
-        $projects = Project::orderBy('created_at', 'desc')->paginate(10);
+        $projects = Project::orderBy('project_order', 'asc')->paginate(10);
 
         $users = User::all();
 

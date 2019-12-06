@@ -66,7 +66,7 @@
                             <?php $i = 1; ?>
                             @foreach ($projects as $project)
                             <tr style="font-size:smaller;">
-                                <th scope="row">{{$project->id}}</th>
+                                <th scope="row">{{$project->project_counter}}</th>
                                 <td><a href="/projects/{{$project->id}}"> {{$project->name}} </a>
                                 </td>
                                 <td scope="row">{{$project->stage}}</td>
