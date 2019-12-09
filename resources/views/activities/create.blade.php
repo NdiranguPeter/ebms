@@ -60,7 +60,6 @@
 
                         <h5>Direct beneficiaries</h5>
                         <div class="form-group">
-                            {{Form::label('gender_age_distribution', 'Gender/Age distribution')}}
                             <table class="table table-bordered">
                                 <th>Age group</th>
                                 <th>Male</th>

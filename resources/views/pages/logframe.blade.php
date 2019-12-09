@@ -27,10 +27,6 @@
 
             <div class="page-header">
 
-                <a style="float:right;" class="btn btn-success" href="/indicators/goal/create/{{$project->id}}">
-                    <i class="ace-icon fa fa-plus bigger-130"></i>
-                    Add Goal Indicator
-                </a>
                 <a href="/meal" class="btn btn-default" style="float:right;">
                     <i class="ace-icon fa fa-arrow-circle-o-left"></i>
                     Back to dashboard

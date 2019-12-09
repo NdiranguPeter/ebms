@@ -40,9 +40,11 @@ class ChallengesController extends Controller
 
             'challenge' => 'required',
             'solution' => 'required',
+            'observation' => 'required',
         ], [
             'challenge.required' => 'Challenge field cannot be empty',
             'solution.required' => 'Solution field cannot be empty',
+            'observation.required' => 'General observation field cannot be empty',
         ]);
 
         $challenge = new Challenge();
@@ -50,11 +52,12 @@ class ChallengesController extends Controller
         $challenge->project_id = $request->input('project_id');
         $challenge->challenge = $request->input('challenge');
         $challenge->solution = $request->input('solution');
+        $challenge->observation = $request->input('observation');
 
         $challenge->save();
 
 
-        return redirect('/activities/after/' . $challenge->activity_id)->with('success', 'Challenge created.');
+        return redirect('/activities/after/' . $challenge->activity_id)->with('success', 'Challenge saved.');
     }
 
     /**

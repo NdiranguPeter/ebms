@@ -29,7 +29,7 @@
                     Update activity {{$before_after}} project implementation
                 </h1>
                 @if ($before_after == "after")
-                <a class="btn btn-primary" style="float:right; margin-top: -2%;" data-toggle="modal"
+                <a class="btn btn-success" style="float:right; margin-top: -2%;" data-toggle="modal"
                     data-target="#exampleModal">Add
                     Challenges</a>
                 @endif
@@ -178,35 +178,10 @@
                     </div>
 
                     <div class="col-sm-6"><br>
-                        <h5>Indirect beneficiaries</h5>
-                        <div class="form-group">
-                            <div class="col-sm-6">
-                                {{Form::label('indirect_male', 'Male')}}
-                                {{Form::number('indirect_male', $activity->indirect_male, ['class' => 'form-control', 'placeholder' => ''])}}
-                            </div>
-                            <div class="col-sm-6">
-                                {{Form::label('indirect_female', 'Female')}}
-                                {{Form::number('indirect_female', $activity->indirect_female, ['class' => 'form-control', 'placeholder' => ''])}}
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-
-                            <h5>People living with disability</h5>
-
-                            <div class="col-sm-6">
-                                {{Form::label('disabled_male', 'Male')}}
-                                {{Form::number('disabled_male', 0, ['class' => 'form-control', 'placeholder' => ''])}}
-                            </div>
-                            <div class="col-sm-6">
-                                {{Form::label('disabled_female', 'Female')}}
-                                {{Form::number('disabled_female', 0, ['class' => 'form-control', 'placeholder' => ''])}}
-                            </div>
-                        </div>
 
                         <div class="form-group" style="margin-top:10px;">
-
-                            {{Form::label('gender_age_distribution', 'Gender/Age distribution')}}
+                            <h5>Direct beneficiaries</h5>
                             <table class="table table-bordered">
                                 <th>Age group</th>
                                 <th>Male</th>
@@ -307,6 +282,39 @@
                             </table>
                         </div>
 
+                        <h5>Indirect beneficiaries</h5>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                {{Form::label('indirect_male', 'Male')}}
+                                {{Form::number('indirect_male', $activity->indirect_male, ['class' => 'form-control', 'placeholder' => ''])}}
+                            </div>
+                            <div class="col-sm-6">
+                                {{Form::label('indirect_female', 'Female')}}
+                                {{Form::number('indirect_female', $activity->indirect_female, ['class' => 'form-control', 'placeholder' => ''])}}
+                            </div>
+                        </div>
+                        <div style="min-height:10px;">
+                            <p>&nbsp</p>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+
+                            <h5>People living with disability</h5>
+
+                            <div class="col-sm-6">
+                                {{Form::label('disabled_male', 'Male')}}
+                                {{Form::number('disabled_male', 0, ['class' => 'form-control', 'placeholder' => ''])}}
+                            </div>
+
+                            <div class="col-sm-6">
+                                {{Form::label('disabled_female', 'Female')}}
+                                {{Form::number('disabled_female', 0, ['class' => 'form-control', 'placeholder' => ''])}}
+                            </div>
+
+                        </div>
+                        <div style="min-height:10px;">
+                            <p>&nbsp</p>
+                        </div>
+
                         <a href="/activities/output/{{$output->id}}" class="btn btn-default" style="float:left;"><i
                                 class="ace-icon fa fa-arrow-circle-o-left"></i>Back to activities</a>
                         <div style="float:right;">
@@ -371,11 +379,14 @@
 
                 <input type="hidden" name="activity_id" value={{$activity->id}}>
                 <input type="hidden" name="project_id" value={{$project->id}}>
-                {{Form::label('challenge', 'State the challenge', ['style'=>'color: #2da0ef;'])}}
+                {{Form::label('challenge', 'State the Challenge', ['style'=>'color: #2da0ef;'])}}
                 {{Form::textarea('challenge','', ['class' => 'form-control'])}}
                 <hr>
-                {{Form::label('solution', 'Solution implemented', ['style'=>'color: #2da0ef;'])}}
+                {{Form::label('solution', 'Solution Implemented', ['style'=>'color: #2da0ef;'])}}
                 {{Form::textarea('solution','', ['class' => 'form-control'])}}
+                <hr>
+                {{Form::label('observation', 'General Observation and Recommendation', ['style'=>'color: #2da0ef;'])}}
+                {{Form::textarea('observation','', ['class' => 'form-control'])}}
 
             </div>
 
