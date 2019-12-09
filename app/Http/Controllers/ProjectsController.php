@@ -67,8 +67,11 @@ class ProjectsController extends Controller
         $sectors = Sector::all();
         $partners = Partner::all();
         $donors = Donor::all();
+        $project_order = Project::max("project_order");
+        $project_counter = Project::max("project_counter");
 
-        return view('projects.create')->with(['donors' => $donors, 'partners' => $partners, 'sectors' => $sectors, 'currencies' => $currencies, 'target_groups' => $target_groups]);
+
+        return view('projects.create')->with(['project_counter'=>$project_counter,'project_order'=>$project_order, 'donors' => $donors, 'partners' => $partners, 'sectors' => $sectors, 'currencies' => $currencies, 'target_groups' => $target_groups]);
 
     }
 
@@ -166,10 +169,14 @@ class ProjectsController extends Controller
         $project->budget = $request->input('budget');
         $project->currency = $request->input('currency');
         $project->fo_pin = $request->input('fo_pin');
+        $project->project_counter =$request->input('project_counter');
+        $project->project_order =$request->input('project_order');
 
         $project->save();
 
-        return redirect('/projects')->with('success', 'Project created');
+        
+
+        return redirect('/indicators/goal/create/'.$project->id);
 
     }
 

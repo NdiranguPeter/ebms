@@ -86,6 +86,14 @@ class IndicatorsController extends Controller
             ->select('indicators.*')->where('projects.id', $indicator->project_id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+            
+
+            if($indicator->goal_id != 0){
+                
+return redirect('/projects')->with('success', 'Project successfully created');
+
+            }
+
 
         return redirect('/indicators/' . $indicator->project_id)->with(['project' => $project, 'indicators' => $indicators]);
 

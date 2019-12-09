@@ -35,10 +35,10 @@
 							<h6>SURVEY</h6>
 						</div>
 					</a>
-					<a href="/projects">
+					<a href="#">
 						<div class="col-md-4 dashcard" style="background-color:#d15b47 !important; ">
-							<i class="ace-icon fa fa-desktop"></i>
-							<h6>PROJECT PROFILE</h6>
+							<i class="ace-icon fa fa-money"></i>
+							<h6>CVA</h6>
 						</div>
 						<a href="/meal">
 							<div class="col-md-4 dashcard" style="background-color:#abbac3 !important; ">

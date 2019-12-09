@@ -292,6 +292,8 @@
                         <div style="float:right;">
                             {{Form::submit('Save project', ['class'=>'btn btn-primary'])}}
                         </div>
+                        <input type="hidden" name="project_counter" value={{$project_counter+1}}>
+                        <input type="hidden" name="project_order" value={{$project_order+1}}>
                         {!! Form::close() !!}
                     </div>
                 </div>
