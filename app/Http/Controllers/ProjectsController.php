@@ -62,12 +62,13 @@ class ProjectsController extends Controller
     public function create()
     {
 
+        $user_id = auth()->user()->id;
         $target_groups = TargetGroup::all();
         $currencies = Currency::all();
         $sectors = Sector::all();
         $partners = Partner::all();
         $donors = Donor::all();
-        $project_order = Project::max("project_order");
+        $project_order = Project::where('user_id',$user_id)->max("project_order");
         $project_counter = Project::max("project_counter");
 
 
