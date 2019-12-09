@@ -494,3 +494,20 @@ $i++;
 
     </tbody>
 </table>
+<h2>Section 3: General observation and recommendation</h2>
+<hr>
+<table class="table table-bordered">
+    <thead>
+        <tr style="background: #349ba7 !important;color: #fff;">
+            <th>Observation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($challenges as $challenge)
+        <tr>
+            <td>{{$challenge->observation}}</td>
+        </tr>
+        @endforeach
+
+    </tbody>
+</table>

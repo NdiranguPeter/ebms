@@ -30,8 +30,8 @@
                 </h1>
                 @if ($before_after == "after")
                 <a class="btn btn-success" style="float:right; margin-top: -2%;" data-toggle="modal"
-                    data-target="#exampleModal">Add
-                    Challenges</a>
+                    data-target="#exampleModal"><i class="ace-icon fa fa-plus"></i> Add
+                    Challenges, Solutions and General Observations</a>
                 @endif
 
             </div><!-- /.page-header -->

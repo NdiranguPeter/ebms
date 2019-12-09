@@ -155,7 +155,6 @@
                                 <a class="btn btn-primary" href="/risks/goal/{{$project->id}}">Goal</a>
                                 <a class="btn btn-success" href="/risks/outcome/{{$project->id}}">Outcome</a>
                                 <a class="btn btn-primary" href="/risks/output/{{$project->id}}">Output</a>
-                                <a class="btn btn-success" href="/risks/activity/{{$project->id}}">Activities</a>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -179,7 +178,6 @@
                                 <a class="btn btn-primary" href="/assumptions/goal/{{$project->id}}">Goal</a>
                                 <a class="btn btn-success" href="/assumptions/outcome/{{$project->id}}">Outcome</a>
                                 <a class="btn btn-primary" href="/assumptions/output/{{$project->id}}">Output</a>
-                                <a class="btn btn-success" href="/assumptions/activity/{{$project->id}}">Activities</a>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -37,14 +37,14 @@
                         {{Form::label('name', 'Name')}}
                         <select name="name" id="name" class="form-control @error('frequency') is-invalid @enderror">
                             <option value="" selected>Select one</option>
-                            <option value="midterm and final evaluation"></option>
-                            <option value="project reports">project reports</option>
-                            <option value="final evaluation surveys">final evaluation surveys</option>
-                            <option value="midterm evaluation surveys">midterm evaluation surveys</option>
-                            <option value="field visits">field visits</option>
-                            <option value="market surveys">market surveys</option>
-                            <option value="follow up by project team">follow up by project team</option>
-                            <option value="member satisfaction surveys">member satisfaction surveys</option>
+                            <option value="midterm and final evaluation">Midterm and final evaluation</option>
+                            <option value="project reports">Project reports</option>
+                            <option value="final evaluation surveys">Final evaluation surveys</option>
+                            <option value="midterm evaluation surveys">Midterm evaluation surveys</option>
+                            <option value="field visits">Field visits</option>
+                            <option value="market surveys">Market surveys</option>
+                            <option value="follow up by project team">Follow up by project team</option>
+                            <option value="member satisfaction surveys">Member satisfaction surveys</option>
                         </select>
                     </div>
                     <div class="form-group">
