@@ -34,7 +34,7 @@
 
                 <div class="well col-sm-12">
                     <div class="col-sm-12">
-                        <p style="text-align: center;font-size: x-large;font-weight: bold;">
+                        <p style="text-align: left;font-size: x-large;font-weight: bold;">
                             @if ($msg == "goal")
                             {{$project->goal}}
                             @endif
@@ -74,7 +74,7 @@
 
                     <div class="form-group">
                         {{Form::label('indicator', 'Indicator name')}}
-                        {{Form::textarea('indicator', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Indicator name'])}}
+                        {{Form::textarea('indicator', '', ['class' => 'form-control', 'placeholder' => 'Indicator name'])}}
                     </div>
                 </div>
                 <div class="col-sm-6">

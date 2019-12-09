@@ -125,7 +125,7 @@
 
                                 <div class="form-group">
                                     {{Form::label('outcome', 'Outcome name')}}
-                                    {{Form::textarea('outcome', $outcome->name, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Output name'])}}
+                                    {{Form::textarea('outcome', $outcome->name, [ 'class' => 'form-control', 'placeholder' => 'Output name'])}}
                                 </div>
                                 {{Form::hidden('_method','PUT')}}
                                 {{Form::submit('Save update', ['class'=>'btn btn-primary','style'=>'float:right;'])}}

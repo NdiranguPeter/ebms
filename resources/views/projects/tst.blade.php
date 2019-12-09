@@ -92,7 +92,7 @@
             </div>
             <div class="form-group">
                 {{Form::label('goal', 'Project Impact statement')}}
-                {{Form::textarea('goal', $project->goal, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'project goal'])}}
+                {{Form::textarea('goal', $project->goal, [ 'class' => 'form-control', 'placeholder' => 'project goal'])}}
             </div>
 
         </div>
@@ -292,8 +292,7 @@
             </div>
             <div class="form-group">
                 {{Form::label('description', 'Project description')}}
-                {{Form::textarea('description', $project->description, ['id' => 'article-ckeditor',
-                            'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
+                {{Form::textarea('description', $project->description, ['class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
             </div>
             <div style="float:right;">
                 {{Form::hidden('_method','PUT')}}

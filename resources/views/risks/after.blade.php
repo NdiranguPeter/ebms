@@ -46,11 +46,11 @@
 
                         <div class="form-group">
                             {{Form::label('impact', 'Impact on the project')}}
-                            {{Form::textarea('impact', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'impact'])}}
+                            {{Form::textarea('impact', '', [ 'class' => 'form-control', 'placeholder' => 'impact'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('response', 'Response Strategy')}}
-                            {{Form::textarea('response', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
+                            {{Form::textarea('response', '', ['class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Update Risk', ['class'=>'btn btn-primary'])}}

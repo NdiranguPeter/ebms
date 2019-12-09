@@ -58,7 +58,7 @@
                     <div class=" col-sm-6">
                         <div class="form-group">
                             {{Form::label('description', 'Donor description')}}
-                            {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
+                            {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Save donor', ['class'=>'btn btn-primary'])}}

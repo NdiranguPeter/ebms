@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         {{Form::label('output', 'Project output')}}
-                        {{Form::textarea('output', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Project output'])}}
+                        {{Form::textarea('output', '', [ 'class' => 'form-control', 'placeholder' => 'Project output'])}}
                     </div>
 
                     <a href="/outputs/{{$outcome->id}}" class="btn btn-default" style="float:left;"><i

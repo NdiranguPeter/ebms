@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('description', 'Survey description')}}
-                        {{Form::textarea('description', $survey->description, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Survey description. e.g objectives'])}}
+                        {{Form::textarea('description', $survey->description, [ 'class' => 'form-control', 'placeholder' => 'Survey description. e.g objectives'])}}
                     </div>
                     <div style="float:right;">
                         {{Form::submit('Update Survey', ['class'=>'btn btn-primary'])}}

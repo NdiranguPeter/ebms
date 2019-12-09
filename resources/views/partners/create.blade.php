@@ -114,7 +114,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('description', 'Description')}}
-                        {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'description'])}}
+                        {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'description'])}}
                     </div>
                     <div style="float:right;">
                         {{Form::submit('Save Partner', ['class'=>'btn btn-primary'])}}

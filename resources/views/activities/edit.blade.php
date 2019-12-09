@@ -272,7 +272,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('activity', 'Activity name')}}
-                        {{Form::textarea('activity', $activity->name, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Activity name'])}}
+                        {{Form::textarea('activity', $activity->name, [ 'class' => 'form-control', 'placeholder' => 'Activity name'])}}
                     </div>
                     <a href="/activities/output/{{$output->id}}" class="btn btn-default" style="float:left;"><i
                             class="ace-icon fa fa-arrow-circle-o-left"></i>Back to activities</a>

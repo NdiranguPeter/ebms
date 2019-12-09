@@ -86,7 +86,7 @@
                 <div class="col-xs-12 col-sm-6 table-bordered">
                     <div class="form-group">
                         {{Form::label('name', 'Question')}}
-                        {{Form::textarea('name', $question->name, ['id' => 'article-ckeditor', 'class' => 'form-control'])}}
+                        {{Form::textarea('name', $question->name, ['class' => 'form-control'])}}
                     </div>
                 </div>
                 <div style="float:right;">

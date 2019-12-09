@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         {{Form::label('outcome', 'Project outcome')}}
-                        {{Form::textarea('outcome', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Project outcome'])}}
+                        {{Form::textarea('outcome', '', [ 'class' => 'form-control', 'placeholder' => 'Project outcome'])}}
                     </div>
                     <div style="float:right;">
                         {{Form::submit('Save outcome', ['class'=>'btn btn-primary'])}}

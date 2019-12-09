@@ -55,7 +55,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             {{Form::label('activity', 'Activity name')}}
-                            {{Form::textarea('activity', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Activity name'])}}
+                            {{Form::textarea('activity', '', ['class' => 'form-control', 'placeholder' => 'Activity name'])}}
                         </div>
 
                         <h5>Direct beneficiaries</h5>

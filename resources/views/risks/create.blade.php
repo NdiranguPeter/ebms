@@ -153,11 +153,11 @@
 
                         <div class="form-group">
                             {{Form::label('description', 'Impact description')}}
-                            {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'description'])}}
+                            {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'description'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('strategy', 'Response Strategy')}}
-                            {{Form::textarea('strategy', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
+                            {{Form::textarea('strategy', '', ['class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Save Risk', ['class'=>'btn btn-primary'])}}

@@ -65,7 +65,7 @@
                         @endif
                         <div class="form-group">
                             {{Form::label('indicator', 'Indicator name')}}
-                            {{Form::textarea('indicator', $indicator->name, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Indicator name'])}}
+                            {{Form::textarea('indicator', $indicator->name, [ 'class' => 'form-control', 'placeholder' => 'Indicator name'])}}
                         </div>
                     </div>
                     <div class="col-sm-6">
