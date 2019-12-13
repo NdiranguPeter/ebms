@@ -13,6 +13,8 @@ use App\Project;
 use App\Unit;
 use App\Challenge;
 use App\Sector;
+use DateTime;
+
 
 use Illuminate\Http\Request;
 
@@ -55,6 +57,7 @@ class ActivitiesController extends Controller
             'scoring' => 'required',
             'deliverables' => 'required',
             'target_baseline' => 'required',
+            'end' => 'after:start'
 
         ]);
 
@@ -152,9 +155,30 @@ class ActivitiesController extends Controller
         $activity->total_male = $total_male;
         $activity->total_female = $total_female;
 
+         $datetime1 = new DateTime($activity->start);
+        $datetime2 = new DateTime($activity->end);
+
+        
+$startyear = $datetime1->format('Y');
+$startmonth = $datetime1->format('m');
+
+$endyear = $datetime2->format('Y');
+$endmonth = $datetime2->format('m');
+
+
         if ($activity_tb >= $totol_beneficiaries) {
 
             $activity->save();
+
+            // if ($startyear == $endyear) {
+
+            //     $Activityafter = new Activityafter();
+            //     $Activityafter->activity_id = $activity->id;
+
+            // }
+
+
+
 
             $activities = \DB::table('outcomes')
 

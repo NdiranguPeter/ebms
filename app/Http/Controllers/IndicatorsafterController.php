@@ -39,44 +39,17 @@ class IndicatorsafterController extends Controller
     {
         $this->validate($request, [
             'person_responsible' => 'required',
-
         ]);
 
         $id = $request->input('id');
-        $output_id = $request->input('output_id');
-        $goal_id = $request->input('goal_id');
-        $outcome_id = $request->input('outcome_id');
-        $project_id = $request->input('project_id');
-        $year = $request->input('the_year');
+        $year = $request->input('year');
         $before_after = $request->input('before_after');
 
-        $actyafter = indicatorafter::where('indicator_id', $id)->where('year', $year)->where('before_after', $before_after)->first();
+        $indicatorafter = indicatorafter::where('indicator_id', $id)->where('year', $year)->where('before_after', $before_after)->first();
 
-        if ($actyafter == null) {
-            $indicatorafter = new indicatorafter;
-        } else {
-            $indicatorafter = $actyafter;
-
-        }
-
-        $indicatorafter->person_responsible = $request->input('person_responsible');
-        $indicatorafter->start = $request->input('start');
-        $indicatorafter->end = $request->input('end');
-
-        if ($request->input('ovi_date') !== '') {
-            $indicatorafter->ovi_date = $request->input('ovi_date');
-        }
-        if ($request->input('ovi_date') == '') {
-            $indicatorafter->ovi_date = $request->input('ovi_date_default');
-        }
-
-        $indicatorafter->baseline_target = $request->input('baseline_target');
-        $indicatorafter->project_target = $request->input('project_target');
-        $years = $request->input('years');
-        $months = $request->input('months');
-        $indicatorafter->year = $request->input('the_year');
-        $indicatorafter->before_after = $request->input('before_after');
         $indicatorafter->indicator_id = $request->input('id');
+        $indicatorafter->person_responsible = $request->input('person_responsible');
+        $indicatorafter->jan =0;
 
         $indicatorafter->jan = $request->input('jan');
         $indicatorafter->feb = $request->input('feb');
@@ -90,11 +63,17 @@ class IndicatorsafterController extends Controller
         $indicatorafter->oct = $request->input('oct');
         $indicatorafter->nov = $request->input('nov');
         $indicatorafter->dec = $request->input('dec');
+        $indicatorafter->ovi_date = $request->input('ovi_date');
 
         $indicatorafter->save();
-        $indicators = indicator::where('project_id', $project_id)->paginate(10);
 
-        $project = Project::find($project_id);
+        $indica = Indicator::find($indicatorafter->indicator_id);
+
+        $project = Project::find($indica->project_id);
+
+        
+$indicators = indicator::where('project_id', $project->id)->paginate(10);
+
 
         return redirect('/indicators/' . $project->id)->with(['project' => $project, 'indicators' => $indicators]);
  }

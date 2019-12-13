@@ -73,12 +73,12 @@
 		<b class="arrow"></b>
 	</li>
 
-	<li class="{{ (request()->is('settings')) ? 'active' : '' }}">
-		<a href="/settings">
-			<i class="menu-icon fa fa-cogs"></i>
-			<span class="menu-text"> Settings </span>
-		</a>
+	{{-- <li class="{{ (request()->is('settings')) ? 'active' : '' }}">
+	<a href="/settings">
+		<i class="menu-icon fa fa-cogs"></i>
+		<span class="menu-text"> Settings </span>
+	</a>
 
-		<b class="arrow"></b>
-	</li>
+	<b class="arrow"></b>
+	</li> --}}
 </ul><!-- /.nav-list -->

@@ -32,7 +32,7 @@
                         <div class="col-md-4 dashcard " style="background-color:#428bca !important; ">
 
                             <i class="ace-icon fa fa-info-circle "></i>
-                            <h6>Project Profile</h6>
+                            <h6>Projects</h6>
                         </div>
                     </a>
                     <a data-toggle="modal" data-target="#selectProject">

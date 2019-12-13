@@ -142,10 +142,8 @@
 </div>
 <script>
     $(document).ready(function() {
-
 $('select[name="questions"]').on('change', function(){
 var qnId = $(this).val();
-
 if(qnId) {
 $.ajax({
 url: '/options/'+qnId,
@@ -154,15 +152,10 @@ dataType:"json",
 beforeSend: function(){
 $('#loader').css("visibility", "visible");
 },
-
 success:function(data) {
-
 $('select[name="options"]').empty();
-
 $.each(data, function(key, value){
-
 $('select[name="options"]').append('<option value="'+ value +'">' + value + '</option>');
-
 });
 },
 complete: function(){
@@ -172,9 +165,7 @@ $('#loader').css("visibility", "hidden");
 } else {
 $('select[name="answers"]').empty();
 }
-
 });
-
 });
 </script>
 

@@ -31,154 +31,267 @@
             <div class="container-fluid">
                 @include('layouts.messages')
                 <div class="well col-sm-12">
+                    <p>{!!$ind->name!!}</p>
+
+                    {!! Form::open(['action'=>'IndicatorsController@before2']) !!}
+                    <div class="form-group">
+                        <input name="before_after" type="hidden" value={{$before_after}}>
+                        <input type="hidden" name="indicatorID" value={{$ind->id}}>
+                        {{Form::label('year', 'Select year')}} 
+                        <select name="year" id="year" class="form-control @error('year') is-invalid @enderror" onchange="this.form.submit()">
+                            @php
+                            $datetime3 = new DateTime($ind->start);
+                            $datetime1 = new DateTime($indicator->start);
+                            $datetime2 = new DateTime($indicator->end);
+                            $interval = $datetime1->diff($datetime2);
+                            $years = $interval->format('%y');
+                            $months = $interval->format('%m');
+                            $days = $interval->format('%d');
+                            $startyear = $datetime1->format('Y');
+                            $startyr = $datetime3->format('Y');
+                            $startmonth = $datetime1->format('m');
+                            $endyear = $datetime2->format('Y');
+                            $endmonth = $datetime2->format('m');
+                            @endphp
+                            @for ($i =$startyr; $i <= $endyear; $i++) <option value={{$i}} @if ($yr == $i)
+                                selected
+                            @endif>{{$i}}</option>
+                                @endfor
+                        </select>
+                    </div>
+
+                </div>
+                <div class="well col-sm-12">
+                    {!! Form::close() !!}
 
                     {!! Form::open(['action'=>'IndicatorsafterController@store', 'method'=>'POST']) !!}
-                    <input name="id" type="hidden" value="{{$indicator->id}}">
-                    <input name="the_year" type="hidden" value=1>
-                    <input name="output_id" type="hidden" value="{{$indicator->output_id}}">
-                    <input name="goal_id" type="hidden" value="{{$indicator->goal_id}}">
-                    <input name="outcome_id" type="hidden" value="{{$indicator->outcome_id}}">
-                    <input name="project_id" type="hidden" value="{{$indicator->project_id}}">
-                    <input name="duration" type="hidden" value={{$indicator->duration}}>
-                    <div class="col-sm-12" style="color:green; font-weight:bold;">
-                        <p>{!!$indicator->name!!}</p>
-                    </div>
+                 
+                    <input name="year" type="hidden" value="{{$yr}}">
+                   <input type="hidden" name="id" value={{$ind->id}}>
+                    <input name="before_after" type="hidden" value={{$before_after}}>
+
                     <div class="col-sm-6">
-                        <?php 
-                        $period = $indicator->duration;
-                        if ($period<=365) {
-                            $datetime1 = new DateTime($indicator->start);
-                            $datetime2 = new DateTime($indicator->end);
-                            $interval = $datetime1->diff($datetime2);
-                            $years = $interval->format('%y');
-                            $months = $interval->format('%m');
-                            $days = $interval->format('%d');
-                        } else {
-                            $datetime1 = new DateTime($indicator->start);
-                            $datetime2 = new DateTime($indicator->end);
-                            $interval = $datetime1->diff($datetime2);
-                            $years = $interval->format('%y');
-                            $months = $interval->format('%m');
-                            $days = $interval->format('%d');
-                            $counter = 1;
-                        }
-                        
-                        if ($years>0 && $months >0) {
-                           $years ++;
-                        }                                             
-                        ?>
-                        {{-- <p>Duration: {{$interval->format('%y years %m months %d days')}}</p> --}}
-                        @if ($years >1)
-                        <div class="form-group">
-                            {{Form::label('the_year', 'Select year')}}
-                            <select name="the_year" id="the_year"
-                                class="form-control @error('the year') is-invalid @enderror">
-                                @for ($i = 1; $i <= $years; $i++) <option value={{$i}}>{{$i}}</option>
-                                    @endfor
-                            </select>
-                        </div>
-                        @endif
-                        <div class="form-group">
-                            <input name="start" type="hidden" value={{$indicator->start}}>
-                            <input name="end" type="hidden" value={{$indicator->end}}>
-                            <input name="years" type="hidden" value={{$years}}>
-                            <input name="months" type="hidden" value={{$months}}>
-                            <input name="before_after" type="hidden" value={{$before_after}}>
-                            <input name="ovi_date_default" type="hidden" value={{\Carbon\Carbon::now()}}>
-                            @if ($before_after == 'after')
-                            <input name="baseline_target" type="hidden" value={{$indicator->baseline_target}}>
-                            <input name="project_target" type="hidden" value={{$indicator->project_target}}>
-                            <input name="ovi_date" type="hidden" value={{\Carbon\Carbon::now()}}>
 
-                            @endif
-
-                        </div>
                         <div class="form-group">
                             {{Form::label('person_responsible', 'Person responsible')}}
                             {{Form::text('person_responsible',$indicator->person_responsible , ['class' =>
                             'form-control', 'placeholder' => 'person responsible'])}}
                         </div>
-                        @if ($before_after == 'before')
+
                         <div class="form-group">
                             {{Form::label('baseline_target', 'Baseline')}}
                             {{Form::text('baseline_target',$indicator->baseline_target , ['class' =>
-                                                    'form-control', 'placeholder' => ''])}}
+                                                    'form-control', 'placeholder' => '','readonly' => 'true'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('project_target', 'Project target')}}
                             {{Form::text('project_target',$indicator->project_target , ['class' =>
-                                                    'form-control', 'placeholder' => ''])}}
+                                                    'form-control', 'placeholder' => '','readonly' => 'true'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('ovi_date', 'Expected date of achieving Indicator')}}
-                            {{Form::date('ovi_date', \Carbon\Carbon::now(), ['class' =>'form-control', 'placeholder'
+                            {{Form::date('ovi_date', $indicator->ovi_date, ['class' =>'form-control', 'placeholder'
                             => ''])}}
                         </div>
-                        @endif
+
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {{Form::label('activities_distribution', 'indicator/Time distribution')}}
+                            {{Form::label('activities_distribution', 'Indicator/Time distribution')}}
                             <table class="table table-bordered">
                                 <thead>
                                     <th>Period</th>
                                     <th>Planned</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    @if($startyear != $endyear)
+                                    @if($startmonth <= 1) <tr>
                                         <td>January</td>
                                         <td><input name="jan" type="number" value={{$indicator->jan}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>February</td>
-                                        <td><input name="feb" type="number" value={{$indicator->feb}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>March</td>
-                                        <td><input name="mar" type="number" value={{$indicator->mar}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>April</td>
-                                        <td><input name="apr" type="number" value={{$indicator->apr}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>May</td>
-                                        <td><input name="may" type="number" value={{$indicator->may}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>June</td>
-                                        <td><input name="jun" type="number" value={{$indicator->jun}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>July</td>
-                                        <td><input name="jul" type="number" value={{$indicator->jul}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>August</td>
-                                        <td><input name="aug" type="number" value={{$indicator->aug}}>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>September</td>
-                                        <td><input name="sep" type="number" value={{$indicator->sep}}>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>October</td>
-                                        <td><input name="oct" type="number" value={{$indicator->oct}}>
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <td>November</td>
-                                        <td><input name="nov" type="number" value={{$indicator->nov}}></td>
-                                    </tr>
+                                        </tr>
+                                        @endif
 
-                                    <tr>
-                                        <td>December</td>
-                                        <td><input name="dec" type="number" value={{$indicator->dec}}>
-                                        </td>
-                                    </tr>
+                                        @if($startmonth <= 2) <tr>
+                                            <td>February</td>
+                                            <td><input name="feb" type="number" value={{$indicator->feb}}></td>
+                                            </tr>
+                                            @endif
+                                            @if($startmonth <= 3) <tr>
+                                                <td>March</td>
+                                                <td><input name="mar" type="number" value={{$indicator->mar}}></td>
+                                                </tr>
+                                                @endif
+                                                @if($startmonth <= 4 ) <tr>
+                                                    <td>April</td>
+                                                    <td><input name="apr" type="number" value={{$indicator->apr}}>
+                                                    </td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($startmonth <= 5) <tr>
+                                                        <td>May</td>
+                                                        <td><input name="may" type="number" value={{$indicator->may}}>
+                                                        </td>
+                                                        </tr>
+                                                        @endif
+                                                        @if($startmonth <= 6 ) <tr>
+                                                            <td>June</td>
+                                                            <td><input name="jun" type="number"
+                                                                    value={{$indicator->jun}}></td>
+                                                            </tr>
+                                                            @endif
+                                                            @if($startmonth <= 7) <tr>
+                                                                <td>July</td>
+                                                                <td><input name="jul" type="number"
+                                                                        value={{$indicator->jul}}></td>
+                                                                </tr>
+                                                                @endif
+                                                                @if($startmonth <= 8) <tr>
+                                                                    <td>August</td>
+                                                                    <td><input name="aug" type="number"
+                                                                            value={{$indicator->aug}}>
+                                                                    </td>
+                                                                    </tr>
+                                                                    @endif
+                                                                    @if($startmonth <= 9) <tr>
+                                                                        <td>September</td>
+                                                                        <td><input name="sep" type="number"
+                                                                                value={{$indicator->sep}}>
+                                                                        </td>
+                                                                        </tr>
+                                                                        @endif
+                                                                        @if($startmonth <= 10) <tr>
+                                                                            <td>October</td>
+                                                                            <td><input name="oct" type="number"
+                                                                                    value={{$indicator->oct}}>
+                                                                            </td>
+                                                                            </tr>
+                                                                            @endif
+                                                                            @if($startmonth <= 11 ) <tr>
+                                                                                <td>November</td>
+                                                                                <td><input name="nov" type="number"
+                                                                                        value={{$indicator->nov}}>
+                                                                                </td>
+                                                                                </tr>
+                                                                                @endif
+                                                                                @if($startmonth <= 12) <tr>
+                                                                                    <td>December</td>
+                                                                                    <td><input name="dec" type="number"
+                                                                                            value={{$indicator->dec}}>
+                                                                                    </td>
+                                                                                    </tr>
+                                                                                    @endif
+                                                                                    @endif
+
+
+                                                                                    @if($startyear == $endyear)
+
+                                                                                    @if($startmonth <= 1 AND $endmonth>=
+                                                                                        1)
+                                                                                        <tr>
+                                                                                            <td>January</td>
+                                                                                            <td><input name="jan"
+                                                                                                    type="number"
+                                                                                                    value={{$indicator->jan}}>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        @endif
+                                                                                        @if($startmonth <= 2 AND
+                                                                                            $endmonth>= 2)
+                                                                                            <tr>
+                                                                                                <td>February</td>
+                                                                                                <td><input name="feb"
+                                                                                                        type="number"
+                                                                                                        value={{$indicator->feb}}>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            @endif
+                                                                                            @if($startmonth <= 3 AND
+                                                                                                $endmonth>=3) <tr>
+                                                                                                    <td>March</td>
+                                                                                                    <td><input
+                                                                                                            name="mar"
+                                                                                                            type="number"
+                                                                                                            value={{$indicator->mar}}>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                @endif
+                                                                                                @if($startmonth <= 4 AND
+                                                                                                    $endmonth>= 4)
+                                                                                                    <tr>
+                                                                                                        <td>April</td>
+                                                                                                        <td>
+                                                                                                            <input
+                                                                                                                name="apr"
+                                                                                                                type="number"
+                                                                                                                value={{$indicator->apr}}>
+                                                                                                        </td>
+                                                                                                    </tr>
+@endif
+@if($startmonth <=5 AND $endmonth >=5)
+    <tr>
+        <td>May</td>
+        <td><input name="may" type="number" value={{$indicator->may}}>
+        </td>
+    </tr>
+    @endif
+    @if($startmonth<= 6 AND $endmonth >=6) <tr>
+            <td>June
+            </td>
+            <td><input name="jun" type="number" value={{$indicator->jun}}>
+            </td>
+        </tr>
+        @endif
+
+        @if($startmonth <= 7 AND $endmonth >=7)
+            <tr>
+                <td>July
+                </td>
+                <td><input name="jul" type="number" value={{$indicator->jul}}>
+                </td>
+            </tr>
+            @endif
+            @if($startmonth <= 8 AND $endmonth >=8)
+                <tr>
+                    <td>August
+                    </td>
+                    <td><input name="aug" type="number" value={{$indicator->aug}}>
+                    </td>
+                </tr>
+                @endif
+                @if($startmonth <= 9 AND $endmonth >=9)
+                    <tr>
+                        <td>September
+                        </td>
+                        <td><input name="sep" type="number" value={{$indicator->sep}}>
+                        </td>
+                    </tr>
+                    @endif
+                    @if($startmonth <= 10 AND $endmonth >=10)
+                        <tr>
+                            <td>October
+                            </td>
+                            <td><input name="oct" type="number" value={{$indicator->oct}}>
+                            </td>
+                        </tr>
+                        @endif
+                        @if($startmonth <= 11 AND $endmonth >=11)
+                            <tr>
+                                <td>November
+                                </td>
+                                <td><input name="nov" type="number" value={{$indicator->nov}}>
+                                </td>
+                            </tr>
+                            @endif
+                            @if($startmonth <= 12 AND $endmonth >=12)
+                                <tr>
+                                    <td>December
+                                    </td>
+                                    <td><input name="dec" type="number" value={{$indicator->dec}}>
+                                    </td>
+                                </tr>
+                                @endif
+                                  @endif
 
 
                                 </tbody>
@@ -186,7 +299,7 @@
                         </div>
 
 
-                        <a href="/indicators/{{$indicator->project_id}}" class="btn btn-default" style="float:left;"><i
+                        <a href="/indicators/{{$ind->project_id}}" class="btn btn-default" style="float:left;"><i
                                 class="ace-icon fa fa-arrow-circle-o-left"></i>Back to indicators </a>
                         <div style="float:right;">
                             {{Form::submit('update indicator', ['class'=>'btn btn-primary'])}}
@@ -200,6 +313,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection

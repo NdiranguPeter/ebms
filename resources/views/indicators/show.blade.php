@@ -16,24 +16,18 @@
                 /
                 <li class="active"></li>
             </ul><!-- /.breadcrumb -->
-
-
         </div>
 
         <div class="page-content">
-
-
             <div class="page-header">
                 <h1>
                     {{$project->name}} -
                     indicators
-
                 </h1>
             </div><!-- /.page-header -->
 
             <!-- PAGE CONTENT BEGINS -->
             <div class="container-fluid">
-
                 <div class="row">
                     <a href="/logframe/{{$project->id}}" class="btn btn-default" style="float:left; margin-bottom: 2%;">
                         <i class="ace-icon fa fa-arrow-circle-o-left"></i>
@@ -49,7 +43,6 @@
                     <div class="col-sm-12" style="min-height:20px !important;">
                         @include('layouts.messages')
                     </div>
-
                     @if (count($indicators) > 0)
                     <table class="table table-hover table-bordered">
                         <thead>
@@ -96,22 +89,18 @@
                                                     <i class="ace-icon fa fa-refresh bigger-130">after</i>
                                                 </a>
                                             </td>
-
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
-
                             <?php $i++; ?>
                             @endforeach
-
                         </tbody>
                     </table>
                     {{$indicators->links()}}
                     @else
                     <p>No indicator created yet</p>
                     @endif
-
                 </div>
                 <div class="modal fade" id="selectIndicator" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -126,21 +115,16 @@
                             <div class="modal-body">
                                 @if (count($indicators)>0)
                                 <table class="table table-bordered">
-
                                     @foreach ($indicators as $indicator)
-
                                     <tr style="font-size: smaller;">
                                         <td>
                                             <a
                                                 href="/verifiablesource/create/{{$indicator->id}}">{!!$indicator->name!!}</a>
                                         </td>
                                     </tr>
-
                                     @endforeach
                                 </table>
-
                                 @endif
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -148,6 +132,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

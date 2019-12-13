@@ -50,7 +50,7 @@
                     <div class="col-sm-6">
 
                         <input name="project_id" type="hidden" value={{$project->id}}>
-                        <input name="scoring" type="hidden" value=0>
+
                         <input name="output_id" type="hidden" value=0>
                         <input name="outcome_id" type="hidden" value=0>
                         <input name="i_order" type="hidden" value={{$indicator_order+1}}>
@@ -64,64 +64,58 @@
                         @if ($goal == 1)
                         <input name="goal_id" type="hidden" value={{$project->id}}>
                         @endif
-                        {{-- <div class="form-group">
-                            {{Form::label('scoring', 'Project scoring')}}
-                        <select name="scoring" id="scoring" class="form-control @error('scoring') is-invalid @enderror">
-                            <option value="value" selected>Value</option>
 
-                        </select>
-                    </div> --}}
 
-                    <div class="form-group">
-                        {{Form::label('indicator', 'Indicator name')}}
-                        {{Form::textarea('indicator', '', ['class' => 'form-control', 'placeholder' => 'Indicator name'])}}
+                        <div class="form-group">
+                            {{Form::label('indicator', 'Indicator name')}}
+                            {{Form::textarea('indicator', '', ['class' => 'form-control', 'placeholder' => 'Indicator name'])}}
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        {{Form::label('unit', 'Type of unit')}}
-                        <select name="unit" id="unit" class="form-control @error('unit') is-invalid @enderror">
-                            @if (count($units)>0)
-                            @foreach ($units as $unit)
-                            <option value="{{$unit->id}}">{{$unit->name}}</option>
-                            @endforeach
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{Form::label('unit', 'Type of unit')}}
+                            <select name="unit" id="unit" class="form-control @error('unit') is-invalid @enderror">
+                                @if (count($units)>0)
+                                @foreach ($units as $unit)
+                                <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                @endforeach
 
-                            @else
-                            <p>No units</p>
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        {{Form::label('target_baseline', 'Baseline')}}
-                        {{Form::number('target_baseline', '', ['class' => 'form-control', 'placeholder' => 'Baseline value'])}}
-                    </div>
-                    <div class="form-group">
-                        {{Form::label('project_target', 'Project target')}}
-                        {{Form::number('project_target', '', ['class' => 'form-control', 'placeholder' => ''])}}
-                    </div>
-                    <div class="form-group">
-                        {{Form::label('start', 'Start date')}}
-                        {{Form::date('start', '', ['class' => 'form-control', 'placeholder' => 'start'])}}
-                    </div>
-                    <div class="form-group">
-                        {{Form::label('end', 'End date')}}
-                        {{Form::date('end', '', ['class' => 'form-control', 'placeholder' => 'end'])}}
+                                @else
+                                <p>No units</p>
+                                @endif
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('target_baseline', 'Baseline')}}
+                            {{Form::number('target_baseline', '', ['class' => 'form-control', 'placeholder' => 'Baseline value'])}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('project_target', 'Project target')}}
+                            {{Form::number('project_target', '', ['class' => 'form-control', 'placeholder' => ''])}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('start', 'Start date')}}
+                            {{Form::date('start', $project->start, ['class' => 'form-control', 'placeholder' => 'start'])}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('end', 'End date')}}
+                            {{Form::date('end', $project->end, ['class' => 'form-control', 'placeholder' => 'end'])}}
+                        </div>
+
+                        <div style="float:right;">
+                            {{Form::submit('Save indicator', ['class'=>'btn btn-primary'])}}
+                        </div>
+                        <a href="/indicators/{{$project->id}}" class="btn btn-default" style="float:left;"><i
+                                class="ace-icon fa fa-arrow-circle-o-left"></i>Back to indicators</a>
                     </div>
 
-                    <div style="float:right;">
-                        {{Form::submit('Save indicator', ['class'=>'btn btn-primary'])}}
-                    </div>
-                    <a href="/indicators/{{$project->id}}" class="btn btn-default" style="float:left;"><i
-                            class="ace-icon fa fa-arrow-circle-o-left"></i>Back to indicators</a>
+
+                    {!! Form::close() !!}
                 </div>
 
-
-                {!! Form::close() !!}
             </div>
-
         </div>
     </div>
-</div>
 </div>
 
 

@@ -80,6 +80,7 @@ Route::get('/activities/before/{id}', 'ActivitiesController@before')->middleware
 Route::get('/activities/after/{id}', 'ActivitiesController@after')->middleware('auth');
 
 Route::get('/indicators/before/{id}', 'IndicatorsController@before')->middleware('auth');
+
 Route::get('/indicators/after/{id}', 'IndicatorsController@after')->middleware('auth');
 
 Route::get('downloadProjectProfle', 'PrintReportsController@index')->middleware('auth');
@@ -112,6 +113,7 @@ Route::get('/assumptions/activity/{id}', 'AssumptionsController@activity')->midd
 Route::get('/assumptions/activity/create/{id}', 'AssumptionsController@activityAssumption')->middleware('auth');
 
 Route::get('/indicators/outcome/create/{id}', 'IndicatorsController@createOutcomeIndicator')->middleware('auth');
+Route::get('/indicators/get/{id}', 'IndicatorsController@getIndicator')->middleware('auth');
 Route::get('/indicators/goal/create/{id}', 'IndicatorsController@createGoalIndicator')->middleware('auth');
 Route::get('/indicators/output/create/{id}', 'IndicatorsController@createOutputIndicator')->middleware('auth');
 
@@ -165,3 +167,5 @@ Route::resource('groups', 'GroupsController')->middleware('auth');
 Route::resource('targetgroups', 'TargetgoupsController')->middleware('auth');
 Route::resource('challenges', 'ChallengesController')->middleware('auth');
 Route::resource('skip', 'SkipController')->middleware('auth');
+
+Route::post('/before', 'IndicatorsController@before2');

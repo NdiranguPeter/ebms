@@ -9,7 +9,6 @@ use App\Output;
 use App\Project;
 use App\Unit;
 use DateTime;
-
 use Illuminate\Http\Request;
 
 class IndicatorsController extends Controller
@@ -24,6 +23,15 @@ class IndicatorsController extends Controller
         //
     }
 
+      public function getIndicator($id)
+    {
+        $years = \DB::table('indicatorafters')
+    ->select('indicatorafters.year')->where('indicatorafters.indicator_id', $id)
+    ->get();
+
+return json_encode($years);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +39,7 @@ class IndicatorsController extends Controller
      */
     public function create()
     {
-    
+
     }
 
     /**
@@ -44,41 +52,168 @@ class IndicatorsController extends Controller
     {
         $this->validate($request, [
             'indicator' => 'required',
-            'scoring' => 'required',
             'unit' => 'required',
             'target_baseline' => 'required',
             'project_target' => 'required',
             'start' => 'required',
             'end' => 'required',
-            ]);
+            'end' => 'after:start'
+        ]);
 
         $user_id = auth()->user()->id;
 
-        $indicator_name = $request->input('indicator');
-        $indicator_scoring = $request->input('scoring');
-        $indicator_unit = $request->input('unit');
-
-        $indicator_tb = $request->input('target_baseline');
-
         $indicator = new indicator();
         $indicator->user_id = $user_id;
-        $indicator->name = $indicator_name;
-        $indicator->scoring = $indicator_scoring;
-        $indicator->unit = $indicator_unit;
-        $indicator->baseline_target = $indicator_tb;
-
         $indicator->project_id = $request->input('project_id');
-        $indicator->project_target = $request->input('project_target');
-
         $indicator->goal_id = $request->input('goal_id');
         $indicator->outcome_id = $request->input('outcome_id');
         $indicator->output_id = $request->input('output_id');
-        $indicator->start = $request->input('start');
+        $indicator->name = $request->input('indicator');
+        $indicator->scoring = $request->input('unit');
+        $indicator->unit = $request->input('unit');
+        $indicator->baseline_target = $request->input('target_baseline');
+        $indicator->project_target = $request->input('project_target');
         $indicator->i_order = $request->input('i_order');
+        $indicator->start = $request->input('start');
         $indicator->end = $request->input('end');
-        $project_id = $request->input('project_id');
 
         $indicator->save();
+
+        $datetime1 = new DateTime($indicator->start);
+        $datetime2 = new DateTime($indicator->end);
+        $interval = $datetime1->diff($datetime2);
+        $years = $interval->format('%y');
+        $months = $interval->format('%m');
+        $days = $interval->format('%d');
+
+
+        $startyear = $datetime1->format('Y');
+        $startmonth = $datetime1->format('m'); 
+        
+        $endyear = $datetime2->format('Y');
+        $endmonth = $datetime2->format('m');
+
+
+        if ($startyear == $endyear) {
+
+            $indiibefore = new Indicatorafter();
+            $indiibefore->indicator_id = $indicator->id;
+            $indiibefore->person_responsible = auth()->user()->name;
+            $indiibefore->jan = 0;
+            $indiibefore->feb = 0;
+            $indiibefore->mar = 0;
+            $indiibefore->apr = 0;
+            $indiibefore->may = 0;
+            $indiibefore->jun = 0;
+            $indiibefore->jul = 0;
+            $indiibefore->aug = 0;
+            $indiibefore->sep = 0;
+            $indiibefore->oct = 0;
+            $indiibefore->nov = 0;
+            $indiibefore->dec = 0;
+            $indiibefore->start = $indicator->start;
+            $indiibefore->end = $indicator->end;
+            $indiibefore->ovi_date = $indicator->end;
+            $indiibefore->before_after = "before";
+            $indiibefore->year = $startyear;
+            $indiibefore->created_at = $indicator->created_at;
+            $indiibefore->updated_at = $indicator->updated_at;
+            $indiibefore->baseline_target = $request->input('target_baseline');
+            $indiibefore->project_target = $request->input('project_target');
+
+            $indiibefore->save();
+
+                $indiafter = new Indicatorafter();
+            $indiafter->indicator_id = $indicator->id;
+            $indiafter->person_responsible = auth()->user()->name;
+            $indiafter->jan = 0;
+            $indiafter->feb = 0;
+            $indiafter->mar = 0;
+            $indiafter->apr = 0;
+            $indiafter->may = 0;
+            $indiafter->jun = 0;
+            $indiafter->jul = 0;
+            $indiafter->aug = 0;
+            $indiafter->sep = 0;
+            $indiafter->oct = 0;
+            $indiafter->nov = 0;
+            $indiafter->dec = 0;
+            $indiafter->start = $indicator->start;
+            $indiafter->end = $indicator->end;
+            $indiafter->ovi_date = $indicator->end;
+            $indiafter->before_after = "before";
+            $indiafter->year = $startyear;
+            $indiafter->created_at = $indicator->created_at;
+            $indiafter->updated_at = $indicator->updated_at;
+            $indiafter->baseline_target = $request->input('target_baseline');
+            $indiafter->project_target = $request->input('project_target');
+
+            $indiafter->save();
+        
+
+        }
+        if ($startyear != $endyear) {
+            for ($i =$startyear; $i <= $endyear; $i++) {
+                
+            $indiibefore = new Indicatorafter();
+            $indiibefore->indicator_id = $indicator->id;
+            $indiibefore->person_responsible = auth()->user()->name;
+            $indiibefore->jan = 0;
+            $indiibefore->feb = 0;
+            $indiibefore->mar = 0;
+            $indiibefore->apr = 0;
+            $indiibefore->may = 0;
+            $indiibefore->jun = 0;
+            $indiibefore->jul = 0;
+            $indiibefore->aug = 0;
+            $indiibefore->sep = 0;
+            $indiibefore->oct = 0;
+            $indiibefore->nov = 0;
+            $indiibefore->dec = 0;
+            $indiibefore->start = $indicator->start;
+            $indiibefore->end = $indicator->end;
+            $indiibefore->ovi_date = $indicator->end;
+            $indiibefore->before_after = "before";
+            $indiibefore->year = $i;
+            $indiibefore->created_at = $indicator->created_at;
+            $indiibefore->updated_at = $indicator->updated_at;
+            $indiibefore->baseline_target = $request->input('target_baseline');
+            $indiibefore->project_target = $request->input('project_target');
+
+          $indiibefore->save();
+          
+          $indiafter = new Indicatorafter();
+$indiafter->indicator_id = $indicator->id;
+$indiafter->person_responsible = auth()->user()->name;
+$indiafter->jan = 0;
+$indiafter->feb = 0;
+$indiafter->mar = 0;
+$indiafter->apr = 0;
+$indiafter->may = 0;
+$indiafter->jun = 0;
+$indiafter->jul = 0;
+$indiafter->aug = 0;
+$indiafter->sep = 0;
+$indiafter->oct = 0;
+$indiafter->nov = 0;
+$indiafter->dec = 0;
+$indiafter->start = $indicator->start;
+$indiafter->end = $indicator->end;
+$indiafter->ovi_date = $indicator->end;
+$indiafter->before_after = "after";
+$indiafter->year = $i;
+$indiafter->created_at = $indicator->created_at;
+$indiafter->updated_at = $indicator->updated_at;
+$indiafter->baseline_target = $request->input('target_baseline');
+$indiafter->project_target = $request->input('project_target');
+
+$indiafter->save();
+
+
+
+            }
+
+        }
 
         $project = Project::find($indicator->project_id);
         $indicators = \DB::table('projects')
@@ -86,14 +221,14 @@ class IndicatorsController extends Controller
             ->select('indicators.*')->where('projects.id', $indicator->project_id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+
             
 
-            if($indicator->goal_id != 0){
-                
-return redirect('/projects')->with('success', 'Project successfully created');
+        if ($indicator->goal_id != 0) {
 
-            }
+            return redirect('/projects')->with('success', 'Project successfully created');
 
+        }
 
         return redirect('/indicators/' . $indicator->project_id)->with(['project' => $project, 'indicators' => $indicators]);
 
@@ -109,14 +244,12 @@ return redirect('/projects')->with('success', 'Project successfully created');
     {
         $project = Project::find($id);
         $indicators = \DB::table('projects')
-        ->join('indicators', 'indicators.project_id', 'projects.id')
-        ->select('indicators.*')->where('projects.id', $id)
-        ->orderBy('created_at', 'asc')
-        ->paginate(10);
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->select('indicators.*')->where('projects.id', $id)
+            ->orderBy('created_at', 'asc')
+            ->paginate(10);
 
-       
-
-            return view('indicators.show')->with(['project' => $project, 'indicators' => $indicators]);
+        return view('indicators.show')->with(['project' => $project, 'indicators' => $indicators]);
 
     }
 
@@ -162,7 +295,7 @@ return redirect('/projects')->with('success', 'Project successfully created');
 
         $project = Project::find($indicator->project_id);
 
-        return view('indicators.edit')->with(['output'=>$output,'outcome'=>$outcome, 'units'=>$units,'msg' => $msg, 'project' => $project, 'goal' => $goal, 'put' => $put, 'come' => $come, 'indicator' => $indicator]);
+        return view('indicators.edit')->with(['output' => $output, 'outcome' => $outcome, 'units' => $units, 'msg' => $msg, 'project' => $project, 'goal' => $goal, 'put' => $put, 'come' => $come, 'indicator' => $indicator]);
     }
 
     /**
@@ -186,29 +319,18 @@ return redirect('/projects')->with('success', 'Project successfully created');
 
         $user_id = auth()->user()->id;
         $indicator = indicator::find($id);
-
-        $indicator_name = $request->input('indicator');
-        $indicator_scoring = $request->input('scoring');
-        $indicator_unit = $request->input('unit');
-
-        $indicator_tb = $request->input('target_baseline');
         $indicator->project_target = $request->input('project_target');
-
         $indicator->user_id = $user_id;
-
-        $indicator->name = $indicator_name;
-        $indicator->scoring = $indicator_scoring;
-        $indicator->unit = $indicator_unit;
-        $indicator->baseline_target = $indicator_tb;
-
+        $indicator->name = $request->input('indicator');
+        $indicator->scoring = $request->input('scoring');
+        $indicator->unit = $request->input('scoring');
+        $indicator->baseline_target = $request->input('target_baseline');
         $indicator->project_id = $request->input('project_id');
-
         $indicator->goal_id = $request->input('goal_id');
         $indicator->outcome_id = $request->input('outcome_id');
         $indicator->output_id = $request->input('output_id');
         $indicator->start = $request->input('start');
         $indicator->end = $request->input('end');
-        $project_id = $request->input('project_id');
 
         $indicator->save();
 
@@ -236,6 +358,10 @@ return redirect('/projects')->with('success', 'Project successfully created');
         $project = Project::find($pro_id);
 
         $indicator->delete();
+
+        $indafter = Indicatorafter::where('indicator_id',$id)->delete();
+
+
         $indicators = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
             ->select('indicators.*')->where('projects.id', $indicator->project_id)
@@ -248,14 +374,13 @@ return redirect('/projects')->with('success', 'Project successfully created');
 
     public function createOutputIndicator($id)
     {
-        $units = Unit::all(); 
+        $units = Unit::all();
         $output = Output::find($id);
         $outcome = outcome::find($output->outcome_id);
         $project = project::find($outcome->project_id);
         $indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
 
-
-        return view('indicators.create')->with(['indicator_order'=>$indicator_order, 'output' => $output, 'msg' => 'output', 'goal' => 0, 'come' => 0, 'put' => 1, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
+        return view('indicators.create')->with(['indicator_order' => $indicator_order, 'output' => $output, 'msg' => 'output', 'goal' => 0, 'come' => 0, 'put' => 1, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
 
     }
     public function createOutcomeIndicator($id)
@@ -265,10 +390,9 @@ return redirect('/projects')->with('success', 'Project successfully created');
 
         $outcome = outcome::find($id);
         $project = project::find($outcome->project_id);
-$indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
+        $indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
 
-
-        return view('indicators.create')->with(['indicator_order'=>$indicator_order, 'msg' => 'outcome', 'goal' => 0, 'come' => 1, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
+        return view('indicators.create')->with(['indicator_order' => $indicator_order, 'msg' => 'outcome', 'goal' => 0, 'come' => 1, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
 
     }
     public function createGoalIndicator($id)
@@ -280,111 +404,69 @@ $indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
 
         $outcome = outcome::where('project_id', $project->id)->get();
 
-        
-$indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
+        $indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
 
-
-        return view('indicators.create')->with(['indicator_order'=>$indicator_order, 'msg' => 'goal', 'goal' => 1, 'come' => 0, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
+        return view('indicators.create')->with(['indicator_order' => $indicator_order, 'msg' => 'goal', 'goal' => 1, 'come' => 0, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
 
     }
 
     public function after($id)
     {
 
-        $actyafter = Indicatorafter::where('indicator_id', $id)->where('before_after', 'after')->first();
-        if ($actyafter === null) {
+$before_after = 'after';
+$ind = Indicator::find($id);
 
-            $indicator = Indicator::find($id);
-            // $output = Output::find($indicator->output_id);
-            $indicator->jan = 0;
-            $indicator->feb = 0;
-            $indicator->mar = 0;
-            $indicator->apr = 0;
-            $indicator->may = 0;
-            $indicator->jun = 0;
-            $indicator->jul = 0;
-            $indicator->aug = 0;
-            $indicator->sep = 0;
-            $indicator->oct = 0;
-            $indicator->nov = 0;
-            $indicator->dec = 0;
+$datetime1 = new DateTime($ind->start);
+$startyear = $datetime1->format('Y');
 
-        } else {
+$indicator = Indicatorafter::where('indicator_id', $id)->where('year', $startyear)->where('before_after', $before_after)->first();
 
-            $indicator = Indicatorafter::where('indicator_id', $id)->where('before_after', 'after')->first();
-            $act = Indicator::find($indicator->indicator_id);
-            $indicator->name = $act->name;
-            $indicator->output_id = $act->output_id;
-            $indicator->outcome_id = $act->outcome_id;
-            $indicator->goal_id = $act->goal_id;
-            $indicator->project_id = $act->project_id;
+return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
 
-            $indicator->start = $act->start;
-            $indicator->end = $act->end;
-            $indicator->id = $act->id;
-            $indicator->duration = $act->duration;
-            $indicator->project_id = $act->project_id;
-
-            // $output = Output::find($act->output_id);
-        }
-
-        // $units = Unit::all();
-
-        // $outcome = Outcome::find($output->outcome_id);
-
-        $before_after = 'after';
-
-        return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator]);
 
     }
 
     public function before($id)
-    {
-
-        $actyafter = Indicatorafter::where('indicator_id', $id)->where('before_after', 'before')->first();
-        if ($actyafter === null) {
-            $indicator = Indicator::find($id);
-            // $output = Output::find($indicator->output_id);
-            $indicator->jan = 0;
-            $indicator->feb = 0;
-            $indicator->mar = 0;
-            $indicator->apr = 0;
-            $indicator->may = 0;
-            $indicator->jun = 0;
-            $indicator->jul = 0;
-            $indicator->aug = 0;
-            $indicator->sep = 0;
-            $indicator->oct = 0;
-            $indicator->nov = 0;
-            $indicator->dec = 0;
-
-        } else {
-
-            $indicator = Indicatorafter::where('indicator_id', $id)->where('before_after', 'before')->first();
-            $act = Indicator::find($indicator->indicator_id);
-            $indicator->name = $act->name;
-            $indicator->output_id = $act->output_id;
-            $indicator->outcome_id = $act->outcome_id;
-            $indicator->goal_id = $act->goal_id;
-            $indicator->project_id = $act->project_id;
-            $indicator->start = $act->start;
-            $indicator->end = $act->end;
-            $indicator->id = $act->id;
-            $indicator->duration = $act->duration;
-
-            $indicator->project_id = $act->project_id;
-
-            // $output = Output::find($act->output_id);
-        }
-
-        // $units = Unit::all();
+   {
+       
+          
         $before_after = 'before';
+        $ind = Indicator::find($id);
 
-        // $outcome = Outcome::find($output->outcome_id);\
 
-        // dd($indicator);
+        $datetime1 = new DateTime($ind->start);
+        $startyear = $datetime1->format('Y');
+        
+        $indicator = Indicatorafter::where('indicator_id',$id)->where('year',$startyear)->where('before_after', $before_after)->first();
 
-        return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator]);
+        return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind'=>$ind, 'yr'=>$startyear]);
+
+
 
     }
+
+
+ public function before2(Request $request)
+   {
+                 
+        $before_after = $request->input('before_after');
+
+        $ind = Indicator::find($request->indicatorID);
+
+        
+        $datetime1 = new DateTime($ind->start);
+        $startyear = $datetime1->format('Y');
+                
+        $indicator = Indicatorafter::where('indicator_id',$request->indicatorID)->where('year',$request->year)->where('before_after', $before_after)->first();
+        if ($request->year > $startyear ) {
+        $indicator->start = $request->year.'-01-01';
+
+        }
+
+        return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind'=>$ind,'yr'=>$request->year]);
+
+
+
+    }
+  
 }

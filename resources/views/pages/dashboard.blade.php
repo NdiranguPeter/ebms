@@ -38,10 +38,10 @@
 					<a href="#">
 						<div class="col-md-4 dashcard" style="background-color:#d15b47 !important; ">
 							<i class="ace-icon fa fa-money"></i>
-							<h6>CVA</h6>
+							<h6>CASH AND VOUCHER ASSISTANCE (CVA)</h6>
 						</div>
 						<a href="/meal">
-							<div class="col-md-4 dashcard" style="background-color:#abbac3 !important; ">
+							<div class="col-md-4 dashcard" style="background-color:#577284 !important; ">
 								<i class="ace-icon fa fa-bar-chart-o "></i>
 
 								<h6>MEAL</h6>
@@ -53,7 +53,7 @@
 							<i class="ace-icon fa fa-list-alt"></i>
 							<h6>REAL TIME EVALUATION</h6>
 						</div>
-						<div class="col-md-4 dashcard" style="background-color:#415f8f !important; ">
+						<div class="col-md-4 dashcard" style="background-color:#2A4B7C !important; ">
 							<i class="ace-icon fa fa-fire "></i>
 							<h6>GSLA</h6>
 						</div>

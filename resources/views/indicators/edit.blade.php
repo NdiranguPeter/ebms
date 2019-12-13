@@ -49,7 +49,7 @@
                     <div class="col-sm-6">
 
                         <input name="project_id" type="hidden" value={{$project->id}}>
-                        <input name="scoring" type="hidden" value=0>
+
                         <input name="output_id" type="hidden" value={{$indicator->output_id}}>
                         <input name="outcome_id" type="hidden" value={{$indicator->outcome_id}}>
                         <input name="goal_id" type="hidden" value={{$indicator->goal_id}}>
@@ -73,9 +73,13 @@
                             {{Form::label('scoring', 'Project scoring')}}
                             <select name="scoring" id="scoring"
                                 class="form-control @error('scoring') is-invalid @enderror">
-                                <option value={{$indicator->scoring}} selected>{{$indicator->scoring}}</option>
                                 @foreach ($units as $unit)
-                                <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                @if ($unit->id == $indicator->unit)
+                                <option value={{$unit->id}} selected>{{$unit->name}}</option>
+                                @endif
+                                @if ($unit->id != $indicator->unit)
+                                <option value={{$unit->id}}>{{$unit->name}}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
