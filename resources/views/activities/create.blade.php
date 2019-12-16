@@ -170,8 +170,11 @@
                                 class="form-control @error('scoring') is-invalid @enderror">
 
                                 @foreach ($activityscoring as $activityscorin)
-                                <option value={{$activityscorin->name}}>{{$activityscorin->name}}</option>
+                                <option value="value" selected>Value</option>
                                 @endforeach
+
+                                <option value="percentage">Percentage</option>
+                                <option value="formula">Formula</option>
 
                             </select>
                         </div>
@@ -330,5 +333,12 @@
 	document.getElementById('budget').innerHTML = formInput;
     x.value = formInput*formInput2;
 }
+
+$(document).ready(function() {
+// show the alert
+setTimeout(function() {
+$(".alert").alert('close');
+}, 3600);
+});
 </script>
 @endsection
