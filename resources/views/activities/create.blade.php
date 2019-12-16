@@ -162,6 +162,8 @@
                         </div>
 
                         <div class="form-group">
+                            <a style="float:right;" data-toggle="modal" data-target="#scoringModal">Create new scoring
+                                unit</a>
                             <br />
                             {{Form::label('scoring', 'Activity scoring')}}
                             <select name="scoring" id="scoring"
@@ -173,6 +175,8 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <a style="float:right;" data-toggle="modal" data-target="#targetModal">Create new
+                                deliverable</a>
                             {{Form::label('deliverables', 'Type of deliverable')}}
                             <select name="deliverables" id="type"
                                 class="form-control @error('unit') is-invalid @enderror">
@@ -259,6 +263,63 @@
         </div>
     </div>
 </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="targetModal" tabindex="-1" role="dialog" aria-labelledby="targetModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="targetModalLabel">Create Activity Deliverable</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                {!! Form::open(['action'=>'DeliverablesController@store', 'method'=>'POST']) !!}
+                <input name="output_id" type="hidden" value={{$output->id}}>
+                {{Form::label('name', 'Deliverable name')}}
+                {{Form::text('name','', ['class' => 'form-control'])}}
+
+            </div>
+
+            <div class="modal-footer">
+                {{Form::submit('Save', ['class'=>'btn btn-primary right'])}}
+
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="scoringModal" tabindex="-1" role="dialog" aria-labelledby="targetModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="targetModalLabel">Create Activity Scoring Unit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                {!! Form::open(['action'=>'ActivityscoringController@store', 'method'=>'POST']) !!}
+                <input name="output_id" type="hidden" value={{$output->id}}>
+                {{Form::label('name', 'Unit name')}}
+                {{Form::text('name','', ['class' => 'form-control'])}}
+
+            </div>
+
+            <div class="modal-footer">
+                {{Form::submit('Save', ['class'=>'btn btn-primary right'])}}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     function changeThis(x){

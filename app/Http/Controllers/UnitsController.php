@@ -54,13 +54,13 @@ $unit->save();
 
 
 if ($goal != 0) {
-    return redirect('/indicators/'.$type.'/create/'.$goal);
+    return redirect('/indicators/'.$type.'/create/'.$goal)->with('success','Unit successfully created.');
 }
 if ($outcome != 0) {
-    return redirect('/indicators/'.$type.'/create/'.$outcome);
+    return redirect('/indicators/'.$type.'/create/'.$outcome)->with('success','Unit successfully created.');
 }
 if ($output != 0) {
-    return redirect('/indicators/'.$type.'/create/'.$output);
+    return redirect('/indicators/'.$type.'/create/'.$output)->with('success','Unit successfully created.');
 }
     }
 

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Deliverable extends Model
+class Activityscoring extends Model
 {
-    protected $table = "deliverables";
+    protected $table = "activityscorings";
 
     protected $fillable = ['name'];
 }

@@ -161,6 +161,7 @@ Route::resource('sectors', 'SectorsController')->middleware('auth');
 Route::resource('donors', 'DonorsController')->middleware('auth');
 Route::resource('currencies', 'CurrenciesController')->middleware('auth');
 Route::resource('deliverables', 'DeliverablesController')->middleware('auth');
+Route::resource('activityscoring', 'ActivityscoringController')->middleware('auth');
 Route::resource('risksafter', 'RisksAfterController')->middleware('auth');
 Route::resource('assumptionsafter', 'AssuptionsAfterController')->middleware('auth');
 Route::resource('groups', 'GroupsController')->middleware('auth');

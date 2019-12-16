@@ -106,7 +106,6 @@ class ProjectsController extends Controller
             'global_goal.*' => 'required',
             'global_goal_split.*' => 'required',
             'end' => 'after:start'
-
         ]);
 
         $global_goal_split_total = 0;

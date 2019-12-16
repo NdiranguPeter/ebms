@@ -34,7 +34,7 @@
 
                 <div class="well col-sm-12">
                     <div class="col-sm-12">
-                        <p style="text-align: left;font-size: x-large;font-weight: bold;">
+                        <p style="text-align: left;font-weight: bold;">
                             @if ($msg == "goal")
                             {{$project->goal}}
                             @endif

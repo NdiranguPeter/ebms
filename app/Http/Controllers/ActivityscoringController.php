@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Deliverable;
 use Illuminate\Http\Request;
+use App\Activityscoring;
 
-class DeliverablesController extends Controller
+class ActivityscoringController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class DeliverablesController extends Controller
      */
     public function index()
     {
-        $deliverables = Deliverable::orderBy('created_at', 'asc')->paginate(10);
-
-        return view('deliverables.index')->with('deliverables', $deliverables);
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class DeliverablesController extends Controller
      */
     public function create()
     {
-        return view('deliverables.create');
+        //
     }
 
     /**
@@ -42,15 +40,14 @@ class DeliverablesController extends Controller
 
         ]);
 
-        $deliverable = new Deliverable();
+        $activityscoring = new Activityscoring();
+        $activityscoring->name = $request->input('name');
 
-        $deliverable->name = $request->input('name');
         $outputid = $request->input('output_id');
+        $activityscoring->save();
 
-        $deliverable->save();
 
-
-        return redirect('activities/create/'.$outputid)->with('success','Deliverable successfully created.');
+        return redirect('activities/create/'.$outputid)->with('success','Scoring unit successfully created.');
 
     }
 
@@ -62,9 +59,7 @@ class DeliverablesController extends Controller
      */
     public function show($id)
     {
-        $deliverable = Deliverable::find($id);
-
-        return view('deliverables.show')->with('deliverable', $deliverable);
+        //
     }
 
     /**
@@ -75,10 +70,7 @@ class DeliverablesController extends Controller
      */
     public function edit($id)
     {
-        $deliverable = Deliverable::find($id);
-
-        return view('deliverables.edit')->with('deliverable', $deliverable);
-
+        //
     }
 
     /**
@@ -90,19 +82,7 @@ class DeliverablesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-
-        ]);
-
-        $deliverable = Deliverable::find($id);
-
-        $deliverable->name = $request->input('name');
-
-        $deliverable->save();
-
-        return redirect('/deliverables')->with('success', 'Deliverable successful updated');
-
+        //
     }
 
     /**
@@ -113,11 +93,6 @@ class DeliverablesController extends Controller
      */
     public function destroy($id)
     {
-        $deliverable = Deliverable::find($id);
-
-        $deliverable->delete();
-
-        return redirect('/deliverables')->with('error', 'Deliverable deleted');
-
+        //
     }
 }
