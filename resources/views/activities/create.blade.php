@@ -168,9 +168,10 @@
                             {{Form::label('scoring', 'Activity scoring')}}
                             <select name="scoring" id="scoring"
                                 class="form-control @error('scoring') is-invalid @enderror">
-                                <option value="value" selected>Value</option>
-                                <option value="percentage">Percentage</option>
-                                <option value="formula">Formula</option>
+
+                                @foreach ($activityscoring as $activityscorin)
+                                <option value={{$activityscorin->name}}>{{$activityscorin->name}}</option>
+                                @endforeach
 
                             </select>
                         </div>

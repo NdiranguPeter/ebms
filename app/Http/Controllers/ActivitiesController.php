@@ -13,6 +13,7 @@ use App\Project;
 use App\Unit;
 use App\Challenge;
 use App\Sector;
+use App\Activityscoring;
 use DateTime;
 
 
@@ -459,8 +460,10 @@ $endmonth = $datetime2->format('m');
         $partners = Partner::all();
         $currecies = Currency::all();
         $deliverables = Deliverable::all();
+        $activityscoring = Activityscoring::all();
 
-        return view('activities.create')->with(['deliverables' => $deliverables, 'project' => $project, 'partners' => $partners, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
+
+        return view('activities.create')->with(['activityscoring'=>$activityscoring,'deliverables' => $deliverables, 'project' => $project, 'partners' => $partners, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
 
     }
     public function after($id)
