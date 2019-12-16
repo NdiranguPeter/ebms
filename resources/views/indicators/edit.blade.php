@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {{Form::label('scoring', 'Project scoring')}}
+                            {{Form::label('scoring', 'Indicator Scoring Unit')}}
                             <select name="scoring" id="scoring"
                                 class="form-control @error('scoring') is-invalid @enderror">
                                 @foreach ($units as $unit)

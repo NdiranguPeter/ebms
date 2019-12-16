@@ -51,7 +51,7 @@
                     <br />
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {{Form::label('scoring', 'Project scoring')}}
+                            {{Form::label('scoring', 'Activity scoring')}}
                             <select name="scoring" id="scoring"
                                 class="form-control @error('scoring') is-invalid @enderror">
                                 <option value="{{$activity->scoring}}" selected>{{$activity->scoring}}</option>

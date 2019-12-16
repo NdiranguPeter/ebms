@@ -48,7 +48,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        {{Form::label('responsibility', 'Responsibility person')}}
+                        {{Form::label('responsibility', 'Responsible Person')}}
                         {{Form::text('responsibility','', ['class' => 'form-control', 'placeholder' => ''])}}
                     </div>
                     <div class="form-group">
@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="form-group">
-                        {{Form::label('source', 'Information source')}}
+                        {{Form::label('source', 'Information Source')}}
                         <select multiple name="source[]" id="source"
                             class="form-control @error('source') is-invalid @enderror">
 
@@ -91,7 +91,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        {{Form::label('collection_method', 'Collection method')}}
+                        {{Form::label('collection_method', 'Collection Method')}}
                         {{Form::text('collection_method','', ['class' => 'form-control', 'placeholder' => ''])}}
                     </div>
 

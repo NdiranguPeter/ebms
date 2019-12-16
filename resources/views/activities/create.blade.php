@@ -163,7 +163,7 @@
 
                         <div class="form-group">
                             <br />
-                            {{Form::label('scoring', 'Project scoring')}}
+                            {{Form::label('scoring', 'Activity scoring')}}
                             <select name="scoring" id="scoring"
                                 class="form-control @error('scoring') is-invalid @enderror">
                                 <option value="value" selected>Value</option>

@@ -111,7 +111,12 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <th>Period</th>
+                                    @if ($before_after == 'before')
                                     <th>Planned</th>
+                                    @endif
+                                    @if ($before_after == 'after')
+                                    <th>Achieved</th>
+                                    @endif
                                 </thead>
                                 <tbody>
                                     <tr>
