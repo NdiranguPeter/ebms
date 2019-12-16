@@ -15,7 +15,7 @@
                     <a href="/meal">MEAL</a>
                 </li>
                 /
-                <li class="active">{!!$output->name!!}</li>
+                {{-- <li class="active">{!!$output->name!!}</li> --}}
 
             </ul><!-- /.breadcrumb -->
 
@@ -39,6 +39,72 @@
             <!-- PAGE CONTENT BEGINS -->
             <div class="container-fluid">
                 @include('layouts.messages')
+                <div class="well col-sm-12">
+                    <p>{!!$act->name!!}</p>
+
+                    {!! Form::open(['action'=>'ActivitiesController@before2']) !!}
+                    <div class="form-group col-sm-6">
+                        <input name="before_after" type="hidden" value={{$before_after}}>
+                        <input type="hidden" name="activityID" value={{$act->id}}>
+                        {{Form::label('year', 'Select year')}}
+                        <select name="year" id="year" class="form-control @error('year') is-invalid @enderror">
+                            @php
+                            $datetime3 = new DateTime($act->start);
+                            $datetime1 = new DateTime($activity->start);
+                            $datetime2 = new DateTime($activity->end);
+                            $interval = $datetime1->diff($datetime2);
+                            $years = $interval->format('%y');
+                            $months = $interval->format('%m');
+                            $days = $interval->format('%d');
+                            $startyear = $datetime1->format('Y');
+                            $startyr = $datetime3->format('Y');
+                            $startmonth = $datetime1->format('m');
+                            $endyear = $datetime2->format('Y');
+                            $endmonth = $datetime2->format('m');
+                            @endphp
+                            @for ($i =$startyr; $i <= $endyear; $i++) <option value={{$i}} @if ($yr==$i) selected
+                                @endif>{{$i}}</option>
+                                @endfor
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{Form::label('month', 'Select month')}}
+                        <select name="month" id="month" class="form-control @error('year') is-invalid @enderror"
+                            onchange="this.form.submit()">
+                            @if($startmonth <= 1) <option value="1">January</option>
+                                @endif
+                                @if($startmonth <= 2) <option value="2">February</option>
+                                    @endif
+                                    @if($startmonth <= 3) <option value="3">March</option>
+                                        @endif
+                                        @if($startmonth <= 4) <option value="4">April</option>
+                                            @endif
+                                            @if($startmonth <= 5) <option value="5">May</option>
+                                                @endif
+                                                @if($startmonth <= 6) <option value="6">June</option>
+                                                    @endif
+                                                    @if($startmonth <= 7) <option value="7">July</option>
+                                                        @endif
+                                                        @if($startmonth <= 8) <option value="8">August</option>
+                                                            @endif
+                                                            @if($startmonth <= 9) <option value="9">September</option>
+                                                                @endif
+                                                                @if($startmonth <= 10) <option value="10">October
+                                                                    </option>
+                                                                    @endif
+                                                                    @if($startmonth <= 11) <option value="11">November
+                                                                        </option>
+                                                                        @endif
+                                                                        @if($startmonth <= 12) <option value="12">
+                                                                            December</option>
+                                                                            @endif
+
+                        </select>
+                    </div>
+
+                    {!! Form::close() !!}
+
+                </div>
 
                 <div class="well col-sm-12">
                     {!! Form::open(['action'=>'ActivitiesAfterController@store', 'method'=>'POST']) !!}
@@ -55,135 +121,8 @@
                         <p style="color: green; font-weight:bold;">{!!$activity->name!!}</p>
 
                     </div>
-                    <br />
-                    <br />
 
                     <div class="col-sm-6">
-                        <?php 
-                        $period = $activity->duration;
-                        if ($period<=365) {
-                            $datetime1 = new DateTime($activity->start);
-                            $datetime2 = new DateTime($activity->end);
-                            $interval = $datetime1->diff($datetime2);
-                            $years = $interval->format('%y');
-                            $months = $interval->format('%m');
-                            $days = $interval->format('%d');
-                        } else {
-                            $datetime1 = new DateTime($activity->start);
-                            $datetime2 = new DateTime($activity->end);
-                            $interval = $datetime1->diff($datetime2);
-                            $years = $interval->format('%y');
-                            $months = $interval->format('%m');
-                            $days = $interval->format('%d');
-                            $counter = 1;
-                        }
-                        
-                        if ($years>0 && $months >0) {
-                           $years ++;
-                        }                     
-                                                ?>
-
-                        {{-- <p style="color: green;">Duration: {{$interval->format('%y years %m months %d days')}}</p>
-                        --}}
-                        @if ($years >1)
-                        <div class="form-group">
-                            {{Form::label('the_year', 'Select year')}}
-                            <select name="the_year" id="the_year"
-                                class="form-control @error('the year') is-invalid @enderror">
-                                @for ($i = 1; $i <= $years; $i++) <option value={{$i}}>{{$i}}</option>
-                                    @endfor
-                            </select>
-                        </div>
-                        @endif
-                        <div class="form-group">
-                            <input name="start" type="hidden" value={{$activity->start}}>
-                            <input name="end" type="hidden" value={{$activity->end}}>
-                            <input name="years" type="hidden" value={{$years}}>
-                            <input name="months" type="hidden" value={{$months}}>
-                            <input name="before_after" type="hidden" value={{$before_after}}>
-
-                            {{Form::label('budget', 'Budget(USD)')}}
-                            {{Form::text('budget_end', $activity->budget, ['readonly'=>'true','class' => 'form-control', 'placeholder' => 'budget'])}}
-                        </div>
-
-                        <div class="form-group">
-                            {{Form::label('activities_distribution', 'Activity/Time distribution')}}
-                            <table class="table table-bordered">
-                                <thead>
-                                    <th>Period</th>
-                                    @if ($before_after == 'before')
-                                    <th>Planned</th>
-                                    @endif
-                                    @if ($before_after == 'after')
-                                    <th>Achieved</th>
-                                    @endif
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>January</td>
-                                        <td><input name="jan" type="number" value={{$activity->jan}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>February</td>
-                                        <td><input name="feb" type="number" value={{$activity->feb}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>March</td>
-                                        <td><input name="mar" type="number" value={{$activity->mar}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>April</td>
-                                        <td><input name="apr" type="number" value={{$activity->apr}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>May</td>
-                                        <td><input name="may" type="number" value={{$activity->may}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>June</td>
-                                        <td><input name="jun" type="number" value={{$activity->jun}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>July</td>
-                                        <td><input name="jul" type="number" value={{$activity->jul}}></td>
-                                    </tr>
-                                    <tr>
-                                        <td>August</td>
-                                        <td><input name="aug" type="number" value={{$activity->aug}}>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>September</td>
-                                        <td><input name="sep" type="number" value={{$activity->sep}}>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>October</td>
-                                        <td><input name="oct" type="number" value={{$activity->oct}}>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>November</td>
-                                        <td><input name="nov" type="number" value={{$activity->nov}}></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>December</td>
-                                        <td><input name="dec" type="number" value={{$activity->dec}}>
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-sm-6"><br>
-
 
                         <div class="form-group" style="margin-top:10px;">
                             <h5>Direct beneficiaries</h5>
@@ -286,7 +225,8 @@
                                 </tbody>
                             </table>
                         </div>
-
+                    </div>
+                    <div class="col-sm-6">
                         <h5>Indirect beneficiaries</h5>
                         <div class="form-group">
                             <div class="col-sm-6">
@@ -320,12 +260,16 @@
                             <p>&nbsp</p>
                         </div>
 
-                        <a href="/activities/output/{{$output->id}}" class="btn btn-default" style="float:left;"><i
-                                class="ace-icon fa fa-arrow-circle-o-left"></i>Back to activities</a>
-                        <div style="float:right;">
-                            {{Form::submit('update activity', ['class'=>'btn btn-primary'])}}
-                        </div>
                     </div>
+
+
+
+                    <a href="/activities/{{$project->id}}" class="btn btn-default" style="float:left;"><i
+                            class="ace-icon fa fa-arrow-circle-o-left"></i>Back to activities</a>
+                    <div style="float:right;">
+                        {{Form::submit('update activity', ['class'=>'btn btn-primary'])}}
+                    </div>
+
 
                     {!! Form::close() !!}
                 </div>
@@ -383,7 +327,7 @@
                 {!! Form::open(['action'=>'ChallengesController@store', 'method'=>'POST']) !!}
 
                 <input type="hidden" name="activity_id" value={{$activity->id}}>
-                <input type="hidden" name="project_id" value={{$project->id}}>
+                {{-- <input type="hidden" name="project_id" value={{$project->id}}> --}}
                 {{Form::label('challenge', 'State the Challenge', ['style'=>'color: #2da0ef;'])}}
                 {{Form::textarea('challenge','', ['class' => 'form-control'])}}
                 <hr>

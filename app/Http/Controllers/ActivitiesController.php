@@ -4,19 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Activity;
 use App\Activityafter;
+use App\Activityscoring;
+use App\Challenge;
 use App\Currency;
 use App\Deliverable;
 use App\Outcome;
 use App\Output;
 use App\Partner;
 use App\Project;
-use App\Unit;
-use App\Challenge;
 use App\Sector;
-use App\Activityscoring;
+use App\Unit;
 use DateTime;
-
-
 use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
@@ -58,7 +56,7 @@ class ActivitiesController extends Controller
             'scoring' => 'required',
             'deliverables' => 'required',
             'target_baseline' => 'required',
-            'end' => 'after:start'
+            'end' => 'after:start',
 
         ]);
 
@@ -156,30 +154,142 @@ class ActivitiesController extends Controller
         $activity->total_male = $total_male;
         $activity->total_female = $total_female;
 
-         $datetime1 = new DateTime($activity->start);
+        $datetime1 = new DateTime($activity->start);
         $datetime2 = new DateTime($activity->end);
 
-        
-$startyear = $datetime1->format('Y');
-$startmonth = $datetime1->format('m');
+        $startyear = $datetime1->format('Y');
+        $startmonth = $datetime1->format('m');
 
-$endyear = $datetime2->format('Y');
-$endmonth = $datetime2->format('m');
-
+        $endyear = $datetime2->format('Y');
+        $endmonth = $datetime2->format('m');
 
         if ($activity_tb >= $totol_beneficiaries) {
 
             $activity->save();
 
-            // if ($startyear == $endyear) {
+            if ($startyear == $endyear) {
 
-            //     $Activityafter = new Activityafter();
-            //     $Activityafter->activity_id = $activity->id;
+                for ($y = 1; $y <= 12; $y++) {
+                    $activitybefore = new Activityafter();
+                    $activitybefore->activity_id = $activity->id;
+                    $activitybefore->total_beneficiaries = $activity->total_beneficiaries;
+                    $activitybefore->total_male = $activity->total_male;
+                    $activitybefore->total_female = $activity->total_female;
+                    $activitybefore->budget = $activity->budget;
+                    $activitybefore->budget_diff = 0;
+                    $activitybefore->person_responsible = auth()->user()->name;
+                    $activitybefore->duration = $activity->duration;
+                    $activitybefore->zero_two_male = $zero_two_male;
+                    $activitybefore->three_five_male = $three_five_male;
+                    $activitybefore->six_twelve_male = $six_twelve_male;
+                    $activitybefore->thirteen_seventeen_male = $thirteen_seventeen_male;
+                    $activitybefore->eigteen_twentyfive_male = $eigteen_twentyfive_male;
+                    $activitybefore->twentysix_fourtynine_male = $twentysix_fourtynine_male;
+                    $activitybefore->fifty_fiftynine_male = $fifty_fiftynine_male;
+                    $activitybefore->sixty_sixtynine_male = $sixty_sixtynine_male;
+                    $activitybefore->seventy_seventynine_male = $seventy_seventynine_male;
+                    $activitybefore->above_eighty_male = $above_eighty_male;
+                    $activitybefore->zero_two_female = $zero_two_female;
+                    $activitybefore->three_five_female = $three_five_female;
+                    $activitybefore->six_twelve_female = $six_twelve_female;
+                    $activitybefore->thirteen_seventeen_female = $thirteen_seventeen_female;
+                    $activitybefore->eigteen_twentyfive_female = $eigteen_twentyfive_female;
+                    $activitybefore->twentysix_fourtynine_female = $twentysix_fourtynine_female;
+                    $activitybefore->fifty_fiftynine_female = $fifty_fiftynine_female;
+                    $activitybefore->sixty_sixtynine_female = $sixty_sixtynine_female;
+                    $activitybefore->seventy_seventynine_female = $seventy_seventynine_female;
+                    $activitybefore->above_eighty_female = $above_eighty_female;
+                    $activitybefore->indirect_male = $activity->indirect_male;
+                    $activitybefore->indirect_female = $activity->indirect_female;
+                    $activitybefore->start = $activity->start;
+                    $activitybefore->end = $activity->end;
+                    $activitybefore->month = $y;
+                    $activitybefore->jan = 0;
+                    $activitybefore->feb = 0;
+                    $activitybefore->mar = 0;
+                    $activitybefore->apr = 0;
+                    $activitybefore->may = 0;
+                    $activitybefore->jun = 0;
+                    $activitybefore->jul = 0;
+                    $activitybefore->aug = 0;
+                    $activitybefore->sep = 0;
+                    $activitybefore->oct = 0;
+                    $activitybefore->nov = 0;
+                    $activitybefore->dec = 0;
+                    $activitybefore->before_after = "before";
+                    $activitybefore->year = $startyear;
+                    $activitybefore->save();
+                    $activitybefore = $activitybefore->replicate();
+                    $activitybefore->before_after = "after";
+                    $activitybefore->save();
 
-            // }
+                }
 
+            }
+            if ($startyear != $endyear) {
+                for ($i = $startyear; $i <= $endyear; $i++) {
+                    for ($y = 1; $y <= 12; $y++) {
+                        $activitybefore = new Activityafter();
+                        $activitybefore->activity_id = $activity->id;
+                        $activitybefore->total_beneficiaries = $activity->total_beneficiaries;
+                        $activitybefore->total_male = $activity->total_male;
+                        $activitybefore->total_female = $activity->total_female;
+                        $activitybefore->budget = $activity->budget;
+                        $activitybefore->budget_diff = 0;
+                        $activitybefore->person_responsible = auth()->user()->name;
+                        $activitybefore->duration = $activity->duration;
+                        $activitybefore->zero_two_male = $zero_two_male;
+                        $activitybefore->three_five_male = $three_five_male;
+                        $activitybefore->six_twelve_male = $six_twelve_male;
+                        $activitybefore->thirteen_seventeen_male = $thirteen_seventeen_male;
+                        $activitybefore->eigteen_twentyfive_male = $eigteen_twentyfive_male;
+                        $activitybefore->twentysix_fourtynine_male = $twentysix_fourtynine_male;
+                        $activitybefore->fifty_fiftynine_male = $fifty_fiftynine_male;
+                        $activitybefore->sixty_sixtynine_male = $sixty_sixtynine_male;
+                        $activitybefore->seventy_seventynine_male = $seventy_seventynine_male;
+                        $activitybefore->above_eighty_male = $above_eighty_male;
+                        $activitybefore->zero_two_female = $zero_two_female;
+                        $activitybefore->three_five_female = $three_five_female;
+                        $activitybefore->six_twelve_female = $six_twelve_female;
+                        $activitybefore->thirteen_seventeen_female = $thirteen_seventeen_female;
+                        $activitybefore->eigteen_twentyfive_female = $eigteen_twentyfive_female;
+                        $activitybefore->twentysix_fourtynine_female = $twentysix_fourtynine_female;
+                        $activitybefore->fifty_fiftynine_female = $fifty_fiftynine_female;
+                        $activitybefore->sixty_sixtynine_female = $sixty_sixtynine_female;
+                        $activitybefore->seventy_seventynine_female = $seventy_seventynine_female;
+                        $activitybefore->above_eighty_female = $above_eighty_female;
+                        $activitybefore->indirect_male = $activity->indirect_male;
+                        $activitybefore->indirect_female = $activity->indirect_female;
+                        $activitybefore->start = $activity->start;
+                        $activitybefore->end = $activity->end;
+                        $activitybefore->month = $y;
+                        $activitybefore->jan = 0;
+                        $activitybefore->feb = 0;
+                        $activitybefore->mar = 0;
+                        $activitybefore->apr = 0;
+                        $activitybefore->may = 0;
+                        $activitybefore->jun = 0;
+                        $activitybefore->jul = 0;
+                        $activitybefore->aug = 0;
+                        $activitybefore->sep = 0;
+                        $activitybefore->oct = 0;
+                        $activitybefore->nov = 0;
+                        $activitybefore->dec = 0;
+                        $activitybefore->before_after = "before";
+                        $activitybefore->year = $i;
 
+                        $activitybefore->save();
 
+                        $activitybefore = $activitybefore->replicate();
+                        $activitybefore->before_after = "after";
+                        $activitybefore->save();
+
+                        $startyear++;
+
+                    }
+                }
+
+            }
 
             $activities = \DB::table('outcomes')
 
@@ -204,7 +314,7 @@ $endmonth = $datetime2->format('m');
             $project = Project::find($outcome->project_id);
             $deliverables = Deliverable::all();
 
-            return view('activities.create')->with(['deliverables'=>$deliverables, 'sectors' => $sectors, 'project' => $project, 'output' => $output, 'outcome' => $outcome, 'units' => $units, 'error' => 'Total Gender/Age distribution -' . $totol_beneficiaries . ' is greater than total beneficiaries target - ' . $activity_tb]);
+            return view('activities.create')->with(['deliverables' => $deliverables, 'sectors' => $sectors, 'project' => $project, 'output' => $output, 'outcome' => $outcome, 'units' => $units, 'error' => 'Total Gender/Age distribution -' . $totol_beneficiaries . ' is greater than total beneficiaries target - ' . $activity_tb]);
 
         }
 
@@ -439,6 +549,8 @@ $endmonth = $datetime2->format('m');
 
         $activity->delete();
 
+        $indafter = Activityafter::where('activity_id', $id)->delete();
+
         $activities = Activity::where('output_id', $output_id)->get();
         $output = Output::find($output_id);
         $outcome = Outcome::find($output->outcome_id);
@@ -462,8 +574,7 @@ $endmonth = $datetime2->format('m');
         $deliverables = Deliverable::all();
         $activityscoring = Activityscoring::all();
 
-
-        return view('activities.create')->with(['activityscoring'=>$activityscoring,'deliverables' => $deliverables, 'project' => $project, 'partners' => $partners, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
+        return view('activities.create')->with(['activityscoring' => $activityscoring, 'deliverables' => $deliverables, 'project' => $project, 'partners' => $partners, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
 
     }
     public function after($id)
@@ -503,62 +614,63 @@ $endmonth = $datetime2->format('m');
 
         $units = Unit::all();
 
-        $challenges = Challenge::where('activity_id',$id)->get();
+        $challenges = Challenge::where('activity_id', $id)->get();
 
         $outcome = Outcome::find($output->outcome_id);
 
         $project = Project::find($outcome->project_id);
-      
 
         $before_after = 'after';
 
-        return view('activities.after')->with(['project'=>$project, 'challenges'=>$challenges,'before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
+        return view('activities.after')->with(['project' => $project, 'challenges' => $challenges, 'before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
 
     }
 
     public function before($id)
     {
 
-        $actyafter = Activityafter::where('activity_id', $id)->where('before_after', 'before')->first();
-      
-        if ($actyafter === null) {
-            $activity = Activity::find($id);
-            $output = Output::find($activity->output_id);
-            $activity->jan = 0;
-            $activity->feb = 0;
-            $activity->mar = 0;
-            $activity->apr = 0;
-            $activity->may = 0;
-            $activity->jun = 0;
-            $activity->jul = 0;
-            $activity->aug = 0;
-            $activity->sep = 0;
-            $activity->oct = 0;
-            $activity->nov = 0;
-            $activity->dec = 0;
-
-        } else {
-
-            $activity = Activityafter::where('activity_id', $id)->where('before_after', 'before')->first();
-            $act = Activity::find($activity->activity_id);
-            $activity->name = $act->name;
-            $activity->output_id = $act->output_id;
-            $activity->start = $act->start;
-            $activity->end = $act->end;
-            $activity->id = $act->id;
-            $activity->duration = $act->duration;
-
-            $output = Output::find($act->output_id);
-        }
-
-        $units = Unit::all();
         $before_after = 'before';
+        $act = Activity::find($id);
 
+        $datetime1 = new DateTime($act->start);
+        $startyear = $datetime1->format('Y');
+        $startmonth = $datetime1->format('m');
+
+        $activity = Activityafter::where('activity_id', $id)->where('month', $startmonth)->where('year', $startyear)->where('before_after', $before_after)->first();
+
+        $output = Output::find($act->output_id);
         $outcome = Outcome::find($output->outcome_id);
+        $project = Project::find($outcome->project_id);
 
-         $project = Project::find($outcome->project_id);
+        // return view('activities.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
 
-             return view('activities.after')->with(['project'=>$project, 'before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
+        return view('activities.after')->with(['project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
 
     }
+
+    public function before2(Request $request)
+    {
+        
+        $before_after = $request->input('before_after');
+        $month = $request->input('month');
+        $act = Activity::find($request->activityID);
+        $datetime1 = new DateTime($act->start);
+        $startyear = $datetime1->format('Y');
+
+        $activity = Activityafter::where('month', $month)->where('activity_id', $request->activityID)->where('year', $startyear)->where('before_after', $before_after)->first();
+
+        $output = Output::find($act->output_id);
+        $outcome = Outcome::find($output->outcome_id);
+        $project = Project::find($outcome->project_id);
+
+        if ($request->year > $startyear) {
+            $activity->start = $request->year . '-01-01';
+
+        }
+
+        return view('activities.after')->with(['project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
+
+
+    }
+
 }

@@ -55,7 +55,7 @@
                         <thead>
                             <tr style="background: #349ba7 !important;color: #fff;">
                                 <th scope="col">ID</th>
-                                <th scope="col">activity</th>
+                                <th scope="col">activityy</th>
                                 <th scope="col">Created</th>
                                 <th scope="col"></th>
                             </tr>
@@ -119,4 +119,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+// show the alert
+setTimeout(function() {
+$(".alert").alert('close');
+}, 3600);
+});
+</script>
 @endsection

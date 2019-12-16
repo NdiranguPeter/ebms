@@ -141,7 +141,7 @@ return json_encode($years);
             $indiafter->start = $indicator->start;
             $indiafter->end = $indicator->end;
             $indiafter->ovi_date = $indicator->end;
-            $indiafter->before_after = "before";
+            $indiafter->before_after = "after";
             $indiafter->year = $startyear;
             $indiafter->created_at = $indicator->created_at;
             $indiafter->updated_at = $indicator->updated_at;
@@ -440,30 +440,6 @@ return view('indicators.after')->with(['before_after' => $before_after, 'indicat
         $indicator = Indicatorafter::where('indicator_id',$id)->where('year',$startyear)->where('before_after', $before_after)->first();
 
         return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind'=>$ind, 'yr'=>$startyear]);
-
-
-
-    }
-
-
- public function before2(Request $request)
-   {
-                 
-        $before_after = $request->input('before_after');
-
-        $ind = Indicator::find($request->indicatorID);
-
-        
-        $datetime1 = new DateTime($ind->start);
-        $startyear = $datetime1->format('Y');
-                
-        $indicator = Indicatorafter::where('indicator_id',$request->indicatorID)->where('year',$request->year)->where('before_after', $before_after)->first();
-        if ($request->year > $startyear ) {
-        $indicator->start = $request->year.'-01-01';
-
-        }
-
-        return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind'=>$ind,'yr'=>$request->year]);
 
 
 

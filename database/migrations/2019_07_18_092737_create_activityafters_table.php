@@ -23,8 +23,7 @@ class CreateActivityaftersTable extends Migration
             $table->string('budget_diff');
             $table->string('person_responsible');
             $table->string('duration');
-            $table->integer('years');
-
+            $table->integer('months');
             $table->integer('zero_two_male');
             $table->integer('three_five_male');
             $table->integer('six_twelve_male');

@@ -171,3 +171,4 @@ Route::resource('skip', 'SkipController')->middleware('auth');
 Route::resource('unit', 'UnitsController')->middleware('auth');
 
 Route::post('/before', 'IndicatorsController@before2');
+Route::post('/activity/before', 'ActivitiesController@before2');

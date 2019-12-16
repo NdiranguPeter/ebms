@@ -170,11 +170,8 @@
                                 class="form-control @error('scoring') is-invalid @enderror">
 
                                 @foreach ($activityscoring as $activityscorin)
-                                <option value="value" selected>Value</option>
+                                <option value={{$activityscorin->name}}> {{$activityscorin->name}} </option>
                                 @endforeach
-
-                                <option value="percentage">Percentage</option>
-                                <option value="formula">Formula</option>
 
                             </select>
                         </div>
