@@ -105,6 +105,7 @@ class ProjectsController extends Controller
             'sector_spli.*' => 'required',
             'global_goal.*' => 'required',
             'global_goal_split.*' => 'required',
+            'end' => 'after:start'
 
         ]);
 

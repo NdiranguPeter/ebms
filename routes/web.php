@@ -167,5 +167,6 @@ Route::resource('groups', 'GroupsController')->middleware('auth');
 Route::resource('targetgroups', 'TargetgoupsController')->middleware('auth');
 Route::resource('challenges', 'ChallengesController')->middleware('auth');
 Route::resource('skip', 'SkipController')->middleware('auth');
+Route::resource('unit', 'UnitsController')->middleware('auth');
 
 Route::post('/before', 'IndicatorsController@before2');

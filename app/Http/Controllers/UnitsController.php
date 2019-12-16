@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Unit;
 
 class UnitsController extends Controller
 {
@@ -34,7 +35,33 @@ class UnitsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $this->validate($request, [
+
+    'name' => 'required',
+], [
+    'name.required' => 'Indicator Scoring Unit name cannot be empty',
+]);
+
+$goal = $request->input('goal_id');
+$outcome  = $request->input('outcome_id');
+$output  = $request->input('output_id');
+$type  = $request->input('type');
+
+$unit = new Unit();
+$unit->name = $request->input('name');
+
+$unit->save();
+
+
+if ($goal != 0) {
+    return redirect('/indicators/'.$type.'/create/'.$goal);
+}
+if ($outcome != 0) {
+    return redirect('/indicators/'.$type.'/create/'.$outcome);
+}
+if ($output != 0) {
+    return redirect('/indicators/'.$type.'/create/'.$output);
+}
     }
 
     /**

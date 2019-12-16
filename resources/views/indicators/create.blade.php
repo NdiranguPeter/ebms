@@ -72,8 +72,9 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
+                        <a style="float:right;" data-toggle="modal" data-target="#targetModal">Create unit</a>
                         <div class="form-group">
-                            {{Form::label('unit', 'Type of unit')}}
+                            {{Form::label('unit', 'Indicator Scoring Unit')}}
                             <select name="unit" id="unit" class="form-control @error('unit') is-invalid @enderror">
                                 @if (count($units)>0)
                                 @foreach ($units as $unit)
@@ -114,6 +115,53 @@
                 </div>
 
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="targetModal" tabindex="-1" role="dialog" aria-labelledby="targetModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="targetModalLabel">Create Indicator Scoring Unit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                {!! Form::open(['action'=>'UnitsController@store', 'method'=>'POST']) !!}
+                <input type="hidden" name="type" value={{$msg}}>
+                @if ($come == 1)
+                <input name="outcome_id" type="hidden" value={{$outcome->id}}>
+                <input name="output_id" type="hidden" value=0>
+                <input name="goal_id" type="hidden" value=0>
+                @endif
+                @if ($put == 1)
+                <input name="outcome_id" type="hidden" value=0>
+                <input name="output_id" type="hidden" value={{$output->id}}>
+                <input name="goal_id" type="hidden" value=0>
+                @endif
+                @if ($goal == 1)
+                <input name="outcome_id" type="hidden" value=0>
+                <input name="output_id" type="hidden" value=0>
+                <input name="goal_id" type="hidden" value={{$project->id}}>
+                @endif
+
+                {{Form::label('name', 'Unit name')}}
+                {{Form::text('name','', ['class' => 'form-control'])}}
+
+            </div>
+
+            <div class="modal-footer">
+                {{Form::submit('Save', ['class'=>'btn btn-primary right'])}}
+
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
 </div>

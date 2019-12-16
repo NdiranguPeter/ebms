@@ -39,7 +39,7 @@ class TargetgoupsController extends Controller
 
     'name' => 'required',
 ], [
-    'name.required' => 'Group not saved, group name cannot be empty',
+    'name.required' => 'Indicator Scoring Unit name cannot be empty',
 ]);
 
 $group = new TargetGroup;
