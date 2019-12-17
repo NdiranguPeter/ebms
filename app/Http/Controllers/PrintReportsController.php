@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Activity;
 use App\Activityafter;
+
+use DateTime;
+
 use Illuminate\Http\Request;
 
 class PrintReportsController extends Controller
@@ -17,11 +20,17 @@ class PrintReportsController extends Controller
     {
         $activities = Activity::all();
 
-        dd($activities);
 
         foreach ($activities as $activity) {
-            $startyear = $activity->start;
-            $endyear = $activity->end;
+
+           $datetime1 = new DateTime($activity->start);
+        $datetime2 = new DateTime($activity->end);
+
+        $startyear = $datetime1->format('Y');
+        $startmonth = $datetime1->format('m');
+
+        $endyear = $datetime2->format('Y');
+        $endmonth = $datetime2->format('m');
 
             if ($startyear == $endyear) {
                 for ($y = 1; $y <= 12; $y++) {
