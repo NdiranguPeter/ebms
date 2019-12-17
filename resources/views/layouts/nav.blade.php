@@ -18,14 +18,14 @@
 		<b class="arrow"></b>
 	</li>
 
-	{{-- <li class="{{ (request()->is('projects')) ? 'active' : '' }}">
-	<a href="/projects">
-		<i class="menu-icon fa fa-info-circle"></i>
-		<span class="menu-text"> Project Profile </span>
-	</a>
+	<li class="{{ (request()->is('projects')) ? 'active' : '' }}">
+		<a href="#">
+			<i class="menu-icon fa fa-info-circle"></i>
+			<span class="menu-text"> CASH </span>
+		</a>
 
-	<b class="arrow"></b>
-	</li> --}}
+		<b class="arrow"></b>
+	</li>
 	<li class="{{ (request()->is('meal')) ? 'active' : '' }}">
 		<a href="/meal">
 			<i class="menu-icon fa fa-bar-chart-o"></i>
