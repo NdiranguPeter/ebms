@@ -15,7 +15,7 @@ class AddMonthsToActivityaftersTable extends Migration
     {
         Schema::table('activityafters', function (Blueprint $table) {
 
-            $table->string('jan')->nullable();
+             $table->string('jan')->nullable();
             $table->string('feb')->nullable();
             $table->string('mar')->nullable();
             $table->string('apr')->nullable();
@@ -27,6 +27,7 @@ class AddMonthsToActivityaftersTable extends Migration
             $table->string('oct')->nullable();
             $table->string('nov')->nullable();
             $table->string('dec')->nullable();
+         
 
         });
     }
@@ -39,19 +40,20 @@ class AddMonthsToActivityaftersTable extends Migration
     public function down()
     {
         Schema::table('activityafters', function (Blueprint $table) {
-            $table->dropColumn('jan');
-            $table->dropColumn('feb');
-            $table->dropColumn('mar');
-            $table->dropColumn('apr');
-            $table->dropColumn('may');
-            $table->dropColumn('jun');
-            $table->dropColumn('jul');
-            $table->dropColumn('aug');
-            $table->dropColumn('sep');
-            $table->dropColumn('oct');
-            $table->dropColumn('nov');
-            $table->dropColumn('dec');
+           $table->dropColumn('jan');
+$table->dropColumn('feb');
+$table->dropColumn('mar');
+$table->dropColumn('apr');
+$table->dropColumn('may');
+$table->dropColumn('jun');
+$table->dropColumn('jul');
+$table->dropColumn('aug');
+$table->dropColumn('sep');
+$table->dropColumn('oct');
+$table->dropColumn('nov');
+$table->dropColumn('dec');
 
+          
         });
     }
 }

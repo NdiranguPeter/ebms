@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Activity;
 use App\Activityafter;
 use App\Activityscoring;
-use App\Challenge;
 use App\Currency;
 use App\Deliverable;
 use App\Outcome;
@@ -14,6 +13,7 @@ use App\Partner;
 use App\Project;
 use App\Sector;
 use App\Unit;
+use App\Challenge;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -179,6 +179,7 @@ class ActivitiesController extends Controller
                     $activitybefore->budget_diff = 0;
                     $activitybefore->person_responsible = auth()->user()->name;
                     $activitybefore->duration = $activity->duration;
+
                     $activitybefore->zero_two_male = $zero_two_male;
                     $activitybefore->three_five_male = $three_five_male;
                     $activitybefore->six_twelve_male = $six_twelve_male;
@@ -201,6 +202,7 @@ class ActivitiesController extends Controller
                     $activitybefore->above_eighty_female = $above_eighty_female;
                     $activitybefore->indirect_male = $activity->indirect_male;
                     $activitybefore->indirect_female = $activity->indirect_female;
+
                     $activitybefore->start = $activity->start;
                     $activitybefore->end = $activity->end;
                     $activitybefore->month = $y;
@@ -580,49 +582,25 @@ class ActivitiesController extends Controller
     public function after($id)
     {
 
-        $actyafter = Activityafter::where('activity_id', $id)->where('before_after', 'after')->first();
-        if ($actyafter === null) {
+        
+        $before_after = 'after';
+        $act = Activity::find($id);
+        
+$challenges = Challenge::where('activity_id', $id)->get();
 
-            $activity = Activity::find($id);
-            $output = Output::find($activity->output_id);
-            $activity->jan = 0;
-            $activity->feb = 0;
-            $activity->mar = 0;
-            $activity->apr = 0;
-            $activity->may = 0;
-            $activity->jun = 0;
-            $activity->jul = 0;
-            $activity->aug = 0;
-            $activity->sep = 0;
-            $activity->oct = 0;
-            $activity->nov = 0;
-            $activity->dec = 0;
 
-        } else {
+        $datetime1 = new DateTime($act->start);
+        $startyear = $datetime1->format('Y');
+        $startmonth = $datetime1->format('m');
+        $month = $startmonth;
 
-            $activity = Activityafter::where('activity_id', $id)->where('before_after', 'after')->first();
-            $act = Activity::find($activity->activity_id);
-            $activity->name = $act->name;
-            $activity->output_id = $act->output_id;
-            $activity->start = $act->start;
-            $activity->end = $act->end;
-            $activity->id = $act->id;
-            $activity->duration = $act->duration;
+        $activity = Activityafter::where('activity_id', $id)->where('month', $startmonth)->where('year', $startyear)->where('before_after', $before_after)->first();
 
-            $output = Output::find($act->output_id);
-        }
-
-        $units = Unit::all();
-
-        $challenges = Challenge::where('activity_id', $id)->get();
-
+        $output = Output::find($act->output_id);
         $outcome = Outcome::find($output->outcome_id);
-
         $project = Project::find($outcome->project_id);
 
-        $before_after = 'after';
-
-        return view('activities.after')->with(['project' => $project, 'challenges' => $challenges, 'before_after' => $before_after, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
+        return view('activities.after')->with(['challenges'=>$challenges,'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
 
     }
 
@@ -635,6 +613,7 @@ class ActivitiesController extends Controller
         $datetime1 = new DateTime($act->start);
         $startyear = $datetime1->format('Y');
         $startmonth = $datetime1->format('m');
+        $month = $startmonth;
 
         $activity = Activityafter::where('activity_id', $id)->where('month', $startmonth)->where('year', $startyear)->where('before_after', $before_after)->first();
 
@@ -644,20 +623,38 @@ class ActivitiesController extends Controller
 
         // return view('activities.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
 
-        return view('activities.after')->with(['project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
+        return view('activities.after')->with(['month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
 
     }
 
     public function before2(Request $request)
     {
-        
+
         $before_after = $request->input('before_after');
         $month = $request->input('month');
+
+        $year = $request->input('year');
         $act = Activity::find($request->activityID);
+
         $datetime1 = new DateTime($act->start);
         $startyear = $datetime1->format('Y');
 
-        $activity = Activityafter::where('month', $month)->where('activity_id', $request->activityID)->where('year', $startyear)->where('before_after', $before_after)->first();
+        $datetime2 = new DateTime($act->end);
+        $endyear = $datetime2->format('Y');
+        $startmonth = $datetime1->format('m');
+
+        $yr = $request->year;
+
+        if ($year == "") {
+            $year = $startyear;
+            $yr = $startyear;
+
+        }
+        if ($month == "") {
+            $month = $startmonth;
+        }
+
+        $activity = Activityafter::where('month', $month)->where('activity_id', $request->activityID)->where('year', $year)->where('before_after', $before_after)->first();
 
         $output = Output::find($act->output_id);
         $outcome = Outcome::find($output->outcome_id);
@@ -665,12 +662,13 @@ class ActivitiesController extends Controller
 
         if ($request->year > $startyear) {
             $activity->start = $request->year . '-01-01';
-
         }
 
-        return view('activities.after')->with(['project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
+        
+$challenges = Challenge::where('activity_id', $act->id)->get();
 
 
+        return view('activities.after')->with(['challenges'=>$challenges,'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $yr, 'before_after' => $before_after]);
     }
 
 }

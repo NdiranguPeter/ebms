@@ -47,7 +47,9 @@
                         <input name="before_after" type="hidden" value={{$before_after}}>
                         <input type="hidden" name="activityID" value={{$act->id}}>
                         {{Form::label('year', 'Select year')}}
-                        <select name="year" id="year" class="form-control @error('year') is-invalid @enderror">
+                        <select name="year" id="year" class="form-control @error('year') is-invalid @enderror"
+                            onchange="this.form.submit()">
+                            <option value="">Select year</option>
                             @php
                             $datetime3 = new DateTime($act->start);
                             $datetime1 = new DateTime($activity->start);
@@ -62,41 +64,111 @@
                             $endyear = $datetime2->format('Y');
                             $endmonth = $datetime2->format('m');
                             @endphp
+
                             @for ($i =$startyr; $i <= $endyear; $i++) <option value={{$i}} @if ($yr==$i) selected
                                 @endif>{{$i}}</option>
                                 @endfor
                         </select>
+
                     </div>
                     <div class="form-group col-sm-6">
                         {{Form::label('month', 'Select month')}}
                         <select name="month" id="month" class="form-control @error('year') is-invalid @enderror"
                             onchange="this.form.submit()">
-                            @if($startmonth <= 1) <option value="1">January</option>
+                            <option value="">Select month</option>
+                            @if ($startyear != $endyear)
+                            @if($startmonth <= 1) <option value="1" @if ($month==1) selected @endif>January</option>
                                 @endif
-                                @if($startmonth <= 2) <option value="2">February</option>
+                                @if($startmonth <= 2) <option value="2" @if ($month==2) selected @endif>February
+                                    </option>
                                     @endif
-                                    @if($startmonth <= 3) <option value="3">March</option>
+                                    @if($startmonth <= 3) <option value="3" @if ($month==3) selected @endif>March
+                                        </option>
                                         @endif
-                                        @if($startmonth <= 4) <option value="4">April</option>
+                                        @if($startmonth <= 4) <option value="4" @if ($month==4) selected @endif>April
+                                            </option>
                                             @endif
-                                            @if($startmonth <= 5) <option value="5">May</option>
+                                            @if($startmonth <= 5) <option value="5" @if ($month==5) selected @endif>May
+                                                </option>
                                                 @endif
-                                                @if($startmonth <= 6) <option value="6">June</option>
+                                                @if($startmonth <= 6) <option value="6" @if ($month==6) selected @endif>
+                                                    June</option>
                                                     @endif
-                                                    @if($startmonth <= 7) <option value="7">July</option>
+                                                    @if($startmonth <= 7) <option value="7" @if ($month==7) selected
+                                                        @endif>July</option>
                                                         @endif
-                                                        @if($startmonth <= 8) <option value="8">August</option>
+                                                        @if($startmonth <= 8) <option value="8" @if ($month==8) selected
+                                                            @endif>August</option>
                                                             @endif
-                                                            @if($startmonth <= 9) <option value="9">September</option>
+                                                            @if($startmonth <= 9) <option value="9" @if ($month==9)
+                                                                selected @endif>September</option>
                                                                 @endif
-                                                                @if($startmonth <= 10) <option value="10">October
-                                                                    </option>
+                                                                @if($startmonth <= 10) <option @if ($month==10) selected
+                                                                    @endif value="10">
+                                                                    October</option>
                                                                     @endif
-                                                                    @if($startmonth <= 11) <option value="11">November
+                                                                    @if($startmonth <= 11) <option @if ($month==11)
+                                                                        selected @endif value="11">November
                                                                         </option>
                                                                         @endif
-                                                                        @if($startmonth <= 12) <option value="12">
+                                                                        @if($startmonth <= 12) <option @if ($month==12)
+                                                                            selected @endif value="12">
                                                                             December</option>
+                                                                            @endif
+                                                                            @endif
+
+                                                                            @if ($startyear == $endyear)
+
+                                                                            @if($startmonth <= 1 AND $endmonth >= 1) <option @if ($month==1)
+                                                                                selected @endif value="1">
+                                                                                January</option>
+                                                                            @endif
+                                                                            @if($startmonth <= 2 AND $endmonth >=2) <option @if ($month==2)
+                                                                                selected @endif value="2">
+                                                                                February</option>
+                                                                            @endif
+                                                                            @if($startmonth <= 3 AND $endmonth >=3) <option @if ($month==3)
+                                                                                selected @endif value="3">March
+                                                                            </option>
+                                                                            @endif
+                                                                            @if($startmonth <= 4 AND $endmonth >=4) <option @if ($month==4)
+                                                                                selected @endif value="4">April
+                                                                            </option>
+                                                                            @endif
+                                                                            @if($startmonth <= 5 AND $endmonth >=5) <option @if ($month==5)
+                                                                                selected @endif value="5">May
+                                                                            </option>
+                                                                            @endif
+                                                                            @if($startmonth <= 6 AND $endmonth >=6) <option @if ($month==6)
+                                                                                selected @endif value="6">June
+                                                                            </option>
+                                                                            @endif
+                                                                            @if($startmonth <= 7 AND $endmonth >=7) <option @if ($month==7)
+                                                                                selected @endif value="7">July
+                                                                            </option>
+                                                                            @endif
+                                                                            @if($startmonth <= 8 AND $endmonth >=8) <option @if ($month==8)
+                                                                                selected @endif value="8">August
+                                                                            </option>
+                                                                            @endif
+                                                                            @if($startmonth <= 9 AND $endmonth >=9) <option @if ($month==9)
+                                                                                selected @endif value="9">
+                                                                                September</option>
+                                                                            @endif
+                                                                            @if($startmonth <= 10 AND $endmonth >=10) <option @if ($month==10)
+                                                                                selected @endif value="10">
+                                                                                October
+                                                                            </option>
+                                                                            @endif
+                                                                            @if($startmonth <= 11 AND $endmonth >=11) <option @if ($month==11)
+                                                                                selected @endif value="11">
+                                                                                November
+                                                                            </option>
+                                                                            @endif
+                                                                            @if($startmonth <= 12 AND $endmonth >=12) <option @if ($month==12)
+                                                                                selected @endif value="12">
+                                                                                December</option>
+                                                                            @endif
                                                                             @endif
 
                         </select>
@@ -108,15 +180,12 @@
 
                 <div class="well col-sm-12">
                     {!! Form::open(['action'=>'ActivitiesAfterController@store', 'method'=>'POST']) !!}
-                    <input name="id" type="hidden" value="{{$activity->id}}">
+                    <input name="id" type="hidden" value="{{$activity->activity_id}}">
                     <input name="the_year" type="hidden" value=1>
-                    <input name="output_id" type="hidden" value="{{$activity->output_id}}">
+                    <input name="year" type="hidden" value={{$yr}}>
+                    <input name="month" type="hidden" value={{$month}}>
+                    <input name="before_after" type="hidden" value={{$activity->before_after}}>
 
-                    <input name="budget_start" type="hidden" value={{$activity->budget}}>
-                    <input name="duration" type="hidden" value={{$activity->duration}}>
-                    <input name="person_responsible" type="hidden" value={{$activity->person_responsible}}>
-
-                    <input name="total_beneficiaries" type="hidden" value={{$activity->total_beneficiaries}}>
                     <div class="col-sm-12">
                         <p style="color: green; font-weight:bold;">{!!$activity->name!!}</p>
 
@@ -247,12 +316,12 @@
 
                             <div class="col-sm-6">
                                 {{Form::label('disabled_male', 'Male')}}
-                                {{Form::number('disabled_male', 0, ['class' => 'form-control', 'placeholder' => ''])}}
+                                {{Form::number('disabled_male', $activity->disabled_male, ['class' => 'form-control', 'placeholder' => ''])}}
                             </div>
 
                             <div class="col-sm-6">
                                 {{Form::label('disabled_female', 'Female')}}
-                                {{Form::number('disabled_female', 0, ['class' => 'form-control', 'placeholder' => ''])}}
+                                {{Form::number('disabled_female', $activity->disabled_female, ['class' => 'form-control', 'placeholder' => ''])}}
                             </div>
 
                         </div>
@@ -355,6 +424,8 @@
     $(".alert").alert('close');
     }, 3600);
     });
+
+    
 </script>
 
 @endsection

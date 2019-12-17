@@ -444,5 +444,29 @@ return view('indicators.after')->with(['before_after' => $before_after, 'indicat
 
 
     }
+
+
+ public function before2(Request $request)
+   {
+                 
+        $before_after = $request->input('before_after');
+
+        $ind = Indicator::find($request->indicatorID);
+
+        
+        $datetime1 = new DateTime($ind->start);
+        $startyear = $datetime1->format('Y');
+                
+        $indicator = Indicatorafter::where('indicator_id',$request->indicatorID)->where('year',$request->year)->where('before_after', $before_after)->first();
+        if ($request->year > $startyear ) {
+        $indicator->start = $request->year.'-01-01';
+
+        }
+
+        return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind'=>$ind,'yr'=>$request->year]);
+
+
+
+    }
   
 }
