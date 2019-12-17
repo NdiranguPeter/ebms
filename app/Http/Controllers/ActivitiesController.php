@@ -202,6 +202,9 @@ class ActivitiesController extends Controller
                     $activitybefore->above_eighty_female = $above_eighty_female;
                     $activitybefore->indirect_male = $activity->indirect_male;
                     $activitybefore->indirect_female = $activity->indirect_female;
+                    $activitybefore->disable_male = $activity->disable_male;
+$activitybefore->disabled_female = $activity->disabled_female;
+
 
                     $activitybefore->start = $activity->start;
                     $activitybefore->end = $activity->end;
@@ -262,6 +265,9 @@ class ActivitiesController extends Controller
                         $activitybefore->above_eighty_female = $above_eighty_female;
                         $activitybefore->indirect_male = $activity->indirect_male;
                         $activitybefore->indirect_female = $activity->indirect_female;
+                        $activitybefore->disable_male = $activity->disable_male;
+$activitybefore->disabled_female = $activity->disabled_female;
+
                         $activitybefore->start = $activity->start;
                         $activitybefore->end = $activity->end;
                         $activitybefore->month = $y;
