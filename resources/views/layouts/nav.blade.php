@@ -20,8 +20,8 @@
 
 	<li class="{{ (request()->is('projects')) ? 'active' : '' }}">
 		<a href="#">
-			<i class="menu-icon fa fa-info-circle"></i>
-			<span class="menu-text"> CASH </span>
+			<i class="menu-icon fa fa-money"></i>
+			<span class="menu-text">CVA (Cash & Voucher)</span>
 		</a>
 
 		<b class="arrow"></b>

@@ -28,8 +28,8 @@
         <thead>
         <tbody>
             <tr style="font-size: smaller;">
-                <td>Project goal pp</td>
-                <th>{!!$project->goal!!}</th>
+                <td>{!!$project->goal!!}</td>
+                <th>{!!$project->description!!}</th>
                 <td>
                     <table class="table cdccw">
                         @php
@@ -46,7 +46,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="table cdccw">
+                    <table class="table">
                         @php
                         $y = 1;
                         @endphp
@@ -66,7 +66,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="table cdccw">
+                    <table class="table">
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($risks as $risk)
                         @if($goalindicator->goal_id == $risk->goal_id)
@@ -79,7 +79,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="table cdccw">
+                    <table class="table">
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($assumptions as $assumption)
                         @if($goalindicator->goal_id == $assumption->goal_id)

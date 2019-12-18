@@ -231,4 +231,25 @@ class RisksController extends Controller
 
     }
 
+     public function destroy($id)
+    {
+        $risk = Risk::find($id);
+        $risk->delete();
+
+ if ($risk->outcome_id != 0) {
+            return redirect('/risks/outcome/' . $risk->outcome_id);
+
+        }
+        if ($risk->output_id != 0) {
+            return redirect('/risks/output/' . $risk->output_id);
+        }
+        if ($risk->activity_id != 0) {
+            return redirect('/risks/activity/' . $risk->activity_id);
+        }
+        if ($risk->goal_id != 0) {
+            return redirect('/risks/goal/' . $risk->goal_id);
+        }
+    }
+
+
 }
