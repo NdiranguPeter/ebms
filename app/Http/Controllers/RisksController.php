@@ -263,6 +263,24 @@ $output = 0;
 $activity = 0;
 $goal = 0;
 
+$outcomes = \DB::table('projects')
+    ->join('outcomes', 'outcomes.project_id', 'projects.id')
+    ->select('outcomes.*')->where('projects.id', $risk->project_id)
+    ->get();
+
+$outputs = \DB::table('projects')
+    ->join('outcomes', 'outcomes.project_id', 'projects.id')
+    ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+    ->select('outputs.*')->where('projects.id', $risk->project_id)
+    ->orderBy('created_at', 'desc')->paginate(6);
+
+$activities = \DB::table('projects')
+    ->join('outcomes', 'outcomes.project_id', 'projects.id')
+    ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+    ->join('activities', 'activities.output_id', 'outputs.id')
+    ->select('activities.*')->where('projects.id', $risk->project_id)
+    ->get();
+
        
 if ($risk->outcome_id != 0) {
    
@@ -286,7 +304,7 @@ $msg = 'Goal';
 $goal = 1;
 }
 
-return view('risks.edit')->with(['risk'=>$risk,'output' => $output, 'outcome' => $outcome, 'goal' => $goal, 'activity' => $activity, 'project' => $project, 'msg' => $msg]);
+return view('risks.edit')->with(['outputs'=>$outputs,'activities'=>$activities,'outcomes'=>$outcomes,'risk'=>$risk,'output' => $output, 'outcome' => $outcome, 'goal' => $goal, 'activity' => $activity, 'project' => $project, 'msg' => $msg]);
 
     }
 

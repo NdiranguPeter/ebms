@@ -131,8 +131,8 @@ class AssumptionsController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-        $assumptions = Assumption::where('goal_id','=', $id)
-             ->get();
+        $assumptions = Assumption::where('goal_id', '=', $id)
+            ->get();
 
         return view('assumptions.index')->with(['assumptions' => $assumptions, 'goal' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -161,8 +161,8 @@ class AssumptionsController extends Controller
             ->get();
 
         $assumptions = Assumption::where('outcome_id', '!=', '0')
-          ->where('project_id','=', $id)
-        ->get();
+            ->where('project_id', '=', $id)
+            ->get();
 
         return view('assumptions.index')->with(['assumptions' => $assumptions, 'outcome' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -190,8 +190,8 @@ class AssumptionsController extends Controller
             ->get();
 
         $assumptions = Assumption::where('output_id', '!=', '0')
-        ->where('project_id','=', $id)
-        ->get();
+            ->where('project_id', '=', $id)
+            ->get();
 
         return view('assumptions.index')->with(['assumptions' => $assumptions, 'output' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -219,13 +219,12 @@ class AssumptionsController extends Controller
             ->get();
 
         $assumptions = Assumption::where('activity_id', '!=', '0')
-        ->where('project_id','=', $id)
-        ->get();
+            ->where('project_id', '=', $id)
+            ->get();
 
         return view('assumptions.index')->with(['assumptions' => $assumptions, 'activity' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
     }
-
 
     public function destroy($id)
     {
@@ -247,42 +246,58 @@ class AssumptionsController extends Controller
         }
     }
 
-
-
     public function edit($id)
     {
-       $assumption = Assumption::find($id);
-       
-$project = Project::find($assumption->project_id);
-$outcome = 0;
-$output = 0;
-$activity = 0;
-$goal = 0;
+        $assumption = Assumption::find($id);
 
-       
-if ($assumption->outcome_id != 0) {
-   
-$msg = 'Outcome';
-$outcome = 1;
+        $project = Project::find($assumption->project_id);
+        $outcome = 0;
+        $output = 0;
+        $activity = 0;
+        $goal = 0;
 
-}
-if ($assumption->output_id != 0) {
-   
-$msg = 'Output';
-$output = 1;
-}
-if ($assumption->activity_id != 0) {
-    
-$msg = 'Activity';
-$activity = 1;
-}
-if ($assumption->goal_id != 0) {
-    
-$msg = 'Goal';
-$goal = 1;
-}
+        $outcomes = \DB::table('projects')
+    ->join('outcomes', 'outcomes.project_id', 'projects.id')
+    ->select('outcomes.*')->where('projects.id', $assumption->project_id)
+    ->get();
 
-return view('assumptions.edit')->with(['assumption'=>$assumption,'output' => $output, 'outcome' => $outcome, 'goal' => $goal, 'activity' => $activity, 'project' => $project, 'msg' => $msg]);
+$outputs = \DB::table('projects')
+    ->join('outcomes', 'outcomes.project_id', 'projects.id')
+    ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+    ->select('outputs.*')->where('projects.id', $assumption->project_id)
+    ->orderBy('created_at', 'desc')->paginate(6);
+
+$activities = \DB::table('projects')
+    ->join('outcomes', 'outcomes.project_id', 'projects.id')
+    ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+    ->join('activities', 'activities.output_id', 'outputs.id')
+    ->select('activities.*')->where('projects.id', $assumption->project_id)
+    ->get();
+
+
+        if ($assumption->outcome_id != 0) {
+
+            $msg = 'Outcome';
+            $outcome = 1;
+
+        }
+        if ($assumption->output_id != 0) {
+
+            $msg = 'Output';
+            $output = 1;
+        }
+        if ($assumption->activity_id != 0) {
+
+            $msg = 'Activity';
+            $activity = 1;
+        }
+        if ($assumption->goal_id != 0) {
+
+            $msg = 'Goal';
+            $goal = 1;
+        }
+
+        return view('assumptions.edit')->with(['outputs'=>$outputs,'activities'=>$activities,'outcomes'=>$outcomes,'assumption' => $assumption, 'output' => $output, 'outcome' => $outcome, 'goal' => $goal, 'activity' => $activity, 'project' => $project, 'msg' => $msg]);
 
     }
 
@@ -294,7 +309,7 @@ return view('assumptions.edit')->with(['assumption'=>$assumption,'output' => $ou
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
+    {
         $this->validate($request, [
             'reason' => 'required',
             'validation' => 'required',
@@ -305,38 +320,36 @@ return view('assumptions.edit')->with(['assumption'=>$assumption,'output' => $ou
 
         ]);
 
+        $assumption = Assumption::find($id);
+        $assumption->goal_id = $request->input('goal_id');
+        $assumption->outcome_id = $request->input('outcome_id');
+        $assumption->output_id = $request->input('output_id');
+        $assumption->activity_id = $request->input('activity_id');
+        $assumption->reason = $request->input('reason');
+        $assumption->validation = $request->input('validation');
+        $assumption->description = $request->input('description');
+        $assumption->response = $request->input('response');
+        $assumption->owner = $request->input('owner');
+        $assumption->name = $request->input('name');
+        $assumption->project_id = $request->input('project_id');
+        $id = $request->input('project_id');
 
-$assumption = Assumption::find($id);
-$assumption->goal_id = $request->input('goal_id');
-$assumption->outcome_id = $request->input('outcome_id');
-$assumption->output_id = $request->input('output_id');
-$assumption->activity_id = $request->input('activity_id');
-$assumption->reason = $request->input('reason');
-$assumption->validation = $request->input('validation');
-$assumption->description = $request->input('description');
-$assumption->response = $request->input('response');
-$assumption->owner = $request->input('owner');
-$assumption->name = $request->input('name');
-$assumption->project_id = $request->input('project_id');
-$id = $request->input('project_id');
+        $assumption->save();
 
-$assumption->save();
+        if ($assumption->outcome_id != 0) {
+            return redirect('/assumptions/outcome/' . $id);
 
-if ($assumption->outcome_id != 0) {
-    return redirect('/assumptions/outcome/' . $id);
-
-}
-if ($assumption->output_id != 0) {
-    return redirect('/assumptions/output/' . $id);
-}
-if ($assumption->activity_id != 0) {
-    return redirect('/assumptions/activity/' . $id);
-}
-if ($assumption->goal_id != 0) {
-    return redirect('/assumptions/goal/' . $id);
-}
+        }
+        if ($assumption->output_id != 0) {
+            return redirect('/assumptions/output/' . $id);
+        }
+        if ($assumption->activity_id != 0) {
+            return redirect('/assumptions/activity/' . $id);
+        }
+        if ($assumption->goal_id != 0) {
+            return redirect('/assumptions/goal/' . $id);
+        }
 
     }
-
 
 }
