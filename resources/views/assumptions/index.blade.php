@@ -96,9 +96,33 @@
                                 <td>{{$assumption->response}} </td>
                                 <td>{{$assumption->owner}} </td>
                                 <td>
-                                    <a class="blue" href="/assumptionsafter/{{$assumption->id}}">
-                                        <i class="ace-icon fa fa-refresh bigger-130">after</i>
-                                    </a>
+                                    <table>
+                                        <tr>
+                                            <td style="padding:10px;">
+                                                <a class="green" href="/assumptions/{{$assumption->id}}/edit">
+                                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                                </a>
+                                            </td>
+                                            <td style="padding:10px;">
+                                                {!!
+                                                Form::open(['action'=>['AssumptionsController@destroy',$assumption->id],
+                                                'method'=>'POST']) !!}
+
+                                                {{Form::button('<i class="red ace-icon fa fa-trash-o"></i>', ['type'=>'submit', 'onClick'=>'return confirm("Are you sure you want to delete?")'])}}
+
+                                                {{Form::hidden('_method','DELETE')}}
+                                                {!!Form::close()!!}
+                                            </td>
+
+                                            <td style="padding:10px;">
+                                                <a class="blue" href="/assumptionsafter/{{$assumption->id}}">
+                                                    <i class="ace-icon fa fa-refresh bigger-130">after</i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+
                                 </td>
                             </tr>
                             <?php $count++; ?>

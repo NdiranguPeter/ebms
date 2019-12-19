@@ -18,7 +18,7 @@
 		<b class="arrow"></b>
 	</li>
 
-	<li class="{{ (request()->is('projects')) ? 'active' : '' }}">
+	<li class="{{ (request()->is('cash')) ? 'active' : '' }}">
 		<a href="#">
 			<i class="menu-icon fa fa-money"></i>
 			<span class="menu-text">CVA (Cash & Voucher)</span>
