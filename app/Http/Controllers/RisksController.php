@@ -166,8 +166,8 @@ class RisksController extends Controller
             ->get();
 
         $risks = Risk::where('outcome_id', '!=', '0')
-        ->where('project_id','=', $id)
-        ->get();
+            ->where('project_id', '=', $id)
+            ->get();
 
         return view('risks.index')->with(['risks' => $risks, 'outcome' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -195,8 +195,8 @@ class RisksController extends Controller
             ->get();
 
         $risks = Risk::where('output_id', '!=', '0')
-        ->where('project_id','=', $id)
-        ->get();
+            ->where('project_id', '=', $id)
+            ->get();
 
         return view('risks.index')->with(['risks' => $risks, 'output' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
@@ -223,20 +223,20 @@ class RisksController extends Controller
             ->select('activities.*')->where('projects.id', $id)
             ->get();
 
-      $risks = Risk::where('activity_id', '!=', '0')
-        ->where('project_id','=', $id)
-        ->get();
+        $risks = Risk::where('activity_id', '!=', '0')
+            ->where('project_id', '=', $id)
+            ->get();
 
         return view('risks.index')->with(['risks' => $risks, 'activity' => 1, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs, 'activities' => $activities]);
 
     }
 
-     public function destroy($id)
+    public function destroy($id)
     {
         $risk = Risk::find($id);
         $risk->delete();
 
- if ($risk->outcome_id != 0) {
+        if ($risk->outcome_id != 0) {
             return redirect('/risks/outcome/' . $risk->outcome_id);
 
         }
@@ -251,5 +251,103 @@ class RisksController extends Controller
         }
     }
 
+
+
+    public function edit($id)
+    {
+       $risk = Risk::find($id);
+       
+$project = Project::find($risk->project_id);
+$outcome = 0;
+$output = 0;
+$activity = 0;
+$goal = 0;
+
+       
+if ($risk->outcome_id != 0) {
+   
+$msg = 'Outcome';
+$outcome = 1;
+
+}
+if ($risk->output_id != 0) {
+   
+$msg = 'Output';
+$output = 1;
+}
+if ($risk->activity_id != 0) {
+    
+$msg = 'Activity';
+$activity = 1;
+}
+if ($risk->goal_id != 0) {
+    
+$msg = 'Goal';
+$goal = 1;
+}
+
+return view('risks.edit')->with(['risk'=>$risk,'output' => $output, 'outcome' => $outcome, 'goal' => $goal, 'activity' => $activity, 'project' => $project, 'msg' => $msg]);
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+       $this->validate($request, [
+    'category' => 'required',
+    'level' => 'required',
+    'likelihood' => 'required',
+    'impact' => 'required',
+    'response' => 'required',
+    'owner' => 'required',
+    'description' => 'required',
+    'strategy' => 'required',
+    'name' => 'required',
+
+]);
+
+
+$risk = Risk::find($id);
+
+
+
+       $risk->goal_id = $request->input('goal_id');
+        $risk->outcome_id = $request->input('outcome_id');
+        $risk->output_id = $request->input('output_id');
+        $risk->activity_id = $request->input('activity_id');
+        $risk->category = $request->input('category');
+        $risk->level = $request->input('level');
+        $risk->likelihood = $request->input('likelihood');
+        $risk->impact = $request->input('impact');
+        $risk->description = $request->input('description');
+        $risk->response = $request->input('response');
+        $risk->strategy = $request->input('strategy');
+        $risk->owner = $request->input('owner');
+        $risk->name = $request->input('name');
+        $risk->project_id = $request->input('project_id');
+        $id = $request->input('project_id');
+  
+        $risk->save();
+
+        if ($risk->outcome_id != 0) {
+            return redirect('/risks/outcome/' . $id);
+
+        }
+        if ($risk->output_id != 0) {
+            return redirect('/risks/output/' . $id);
+        }
+        if ($risk->activity_id != 0) {
+            return redirect('/risks/activity/' . $id);
+        }
+        if ($risk->goal_id != 0) {
+            return redirect('/risks/goal/' . $id);
+        }
+    }
 
 }

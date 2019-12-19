@@ -104,7 +104,7 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('level', 'Risk level')}}
-                            {{Form::text('level','', ['class' => 'form-control', 'placeholder' => '0%'])}}
+                            {{Form::number('level','', ['class' => 'form-control', 'placeholder' => '0%'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('likelihood', 'Likelihood')}}

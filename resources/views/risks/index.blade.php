@@ -108,7 +108,7 @@
                                     <table>
                                         <tr>
                                             <td style="padding:10px;">
-                                                <a class="green" href="#">
+                                                <a class="green" href="/risks/{{$risk->id}}/edit">
                                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                 </a>
                                             </td>
