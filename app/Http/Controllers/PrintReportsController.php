@@ -22,7 +22,7 @@ class PrintReportsController extends Controller
             ->select('activities.*')->where('projects.id', 28)
             ->get();
 
-        $order = 1;
+        $order = 0;
         foreach ($activities as $activity) {
             
             $activity = Activity::find($activity->id);
