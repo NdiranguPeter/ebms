@@ -21,8 +21,7 @@ class PrintReportsController extends Controller
             $actitivities = Activity::where('user_id', $user->id)->get();
 
             foreach ($actitivities as $activity) {
-                $order = Activity::where('user_id', $user->id)->max("order");
-               
+                $order = Activity::where('user_id', $user->id)->max("order");               
                 $activity->order = $order + 1;
                 $activity->save();
             }

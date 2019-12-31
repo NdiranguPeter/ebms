@@ -70,7 +70,7 @@
                             <?php $i = 1; ?>
                             @foreach ($activities as $activity)
                             <tr style="font-size: smaller;">
-                                <th scope="row">{{$i}}</th>
+                                <th scope="row">{{$activity->order}}</th>
                                 <td scope="row"><a href="/activities/{{$activity->id}}/edit">{!!$activity->name!!}</a>
                                 </td>
                                 <td scope="row">{!!$activity->created_at!!}</td>
