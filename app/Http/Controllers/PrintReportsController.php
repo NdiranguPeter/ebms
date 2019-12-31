@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+use App\Outcome;
+use App\Output;
 use App\Activity;
-use App\User;
 use Illuminate\Http\Request;
 
 class PrintReportsController extends Controller
@@ -15,15 +17,26 @@ class PrintReportsController extends Controller
      */
     public function index()
     {
-        $users = User::all();
 
-        foreach ($users as $user) {
-            $actitivities = Activity::where('user_id', $user->id)->get();
+        $projects = Project::all();
 
-            foreach ($actitivities as $activity) {
-                $order = Activity::where('user_id', $user->id)->max("order");               
+        foreach ($projects as $project) {
+
+            $outcomes = Outcome::where('project_id', $project->id)->get();
+            foreach ($outcomes as $outcome) {
+                $outputs = Output::where('outcome_id', $outcome->id)->get();
+
+                foreach($outputs as $output){
+                    $activities = Activity::where('output_id',$output->id)->get();
+
+                    
+            foreach ($activities as $activity) {
+                $order = Activity::where('output_id', $output->id)->max("order");               
                 $activity->order = $order + 1;
                 $activity->save();
+            }
+                }
+
             }
 
         }

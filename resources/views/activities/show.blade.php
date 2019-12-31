@@ -39,9 +39,7 @@
                     <i class="ace-icon glyphicon glyphicon-plus"></i>
                     Add Resource
                 </a>
-            </div><!-- /.page-header -->
-
-            <!-- PAGE CONTENT BEGINS -->
+            </div>
             <div class="container-fluid">
                 @isset($error)
                 <div class="alert alert-danger">
