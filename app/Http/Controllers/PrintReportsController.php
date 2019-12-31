@@ -22,22 +22,22 @@ class PrintReportsController extends Controller
 
         foreach ($projects as $project) {
 
-            $outcomes = Outcome::where('project_id', $project->id)->get();
-            foreach ($outcomes as $outcome) {
-                $outputs = Output::where('outcome_id', $outcome->id)->get();
+             $activities = \DB::table('projects')
+            ->join('outcomes', 'outcomes.project_id', 'projects.id')
+            ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+            ->join('activities', 'activities.output_id', 'outputs.id')
+            ->select('activities.*')->where('projects.id', $project->id)
+            ->get();
 
-                foreach($outputs as $output){
-                    $activities = Activity::where('output_id',$output->id)->get();
-
-                    
             foreach ($activities as $activity) {
-                $order = Activity::where('output_id', $output->id)->max("order");               
-                $activity->order = $order + 1;
-                $activity->save();
-            }
-                }
+    $order = Activity::where('output_id', $activity->output_id)->max("order");
+   $activity = Activity::find($activity->id);
+    $activity->order = $order + 1;
+    $activity->save();
+    
+}
 
-            }
+
 
         }
     }
