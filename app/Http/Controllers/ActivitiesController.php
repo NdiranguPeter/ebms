@@ -164,6 +164,20 @@ class ActivitiesController extends Controller
         $endmonth = $datetime2->format('m');
 
         if ($activity_tb >= $totol_beneficiaries) {
+            $output = Output::find($output_id);
+$outcome = Outcome::find($output->outcome_id);
+$project = Project::find($outcome->project_id);
+
+            $uyp = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->select('activities.*')->where('projects.id', $project->id)
+                ->get();
+
+$order = count($uyp);
+$activity->order = $order+1;
+
 
             $activity->save();
 
@@ -309,6 +323,8 @@ class ActivitiesController extends Controller
             $project = Project::find($outcome->project_id);
 
             $units = Unit::all();
+
+
 
             return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'activity created']);
 
@@ -564,9 +580,6 @@ class ActivitiesController extends Controller
 
         $output_id = $activity->output_id;
 
-        $activity->delete();
-
-        $indafter = Activityafter::where('activity_id', $id)->delete();
 
         $activities = Activity::where('output_id', $output_id)->get();
         $output = Output::find($output_id);
@@ -574,6 +587,28 @@ class ActivitiesController extends Controller
 
         $units = Unit::all();
         $project = Project::find($outcome->project_id);
+
+        $dsg = \DB::table('projects')
+    ->join('outcomes', 'outcomes.project_id', 'projects.id')
+    ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+    ->join('activities', 'activities.output_id', 'outputs.id')
+    ->select('activities.*')->where('projects.id', $project->id)
+    ->get();
+    foreach($dsg as $ds){
+        $acr = Activity::find($ds->id);
+        if($ds->order > $activity->order){
+            $acr->order = $acr->order-1;
+$acr->save();
+
+        }
+    }
+
+    
+$activity->delete();
+
+$indafter = Activityafter::where('activity_id', $id)->delete();
+
+
 
         return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'error' => 'activity deleted']);
 
