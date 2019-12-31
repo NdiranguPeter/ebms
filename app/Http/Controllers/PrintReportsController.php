@@ -22,10 +22,9 @@ class PrintReportsController extends Controller
             ->select('activities.*')->where('projects.id', 28)
             ->get();
 
-        dd($activities);
-
+        $order = 1;
         foreach ($activities as $activity) {
-            $order = Activity::where('output_id', $activity->output_id)->max("order");
+            
             $activity = Activity::find($activity->id);
             $activity->order = $order + 1;
             $activity->save();
