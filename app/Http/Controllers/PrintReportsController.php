@@ -21,10 +21,8 @@ class PrintReportsController extends Controller
             ->join('activities', 'activities.output_id', 'outputs.id')
             ->select('activities.*')->where('projects.id', 28)
             ->get();
-
         $order = 0;
-        foreach ($activities as $activity) {
-            
+        foreach ($activities as $activity) {            
             $activity = Activity::find($activity->id);
             $activity->order = $order + 1;
             $activity->save();
