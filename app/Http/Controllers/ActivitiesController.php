@@ -356,9 +356,20 @@ class ActivitiesController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
+             $activitiescount = \DB::table('projects')
+            ->join('outcomes', 'outcomes.project_id', 'projects.id')
+            ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+            ->join('activities', 'activities.output_id', 'outputs.id')
+            ->select('activities.*')->where('projects.id', $id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+
+            $numbering = count($activitiescount);
+
         $units = Unit::all();
 
-        return view('activities.show')->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'activity created']);
+        return view('activities.show')->with(['numbering'=>$numbering,'project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'activity created']);
 
     }
 
