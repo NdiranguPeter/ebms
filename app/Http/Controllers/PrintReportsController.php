@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Activity;
+use App\Project;
 use Illuminate\Http\Request;
 
 class PrintReportsController extends Controller
@@ -15,17 +16,24 @@ class PrintReportsController extends Controller
     public function index()
     {
 
-        $activities = \DB::table('projects')
-            ->join('outcomes', 'outcomes.project_id', 'projects.id')
-            ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
-            ->join('activities', 'activities.output_id', 'outputs.id')
-            ->select('activities.*')->where('projects.id', 28)
-            ->get();
-        $order = 0;
-        foreach ($activities as $activity) {            
-            $activity = Activity::find($activity->id);
-            $activity->order = $order + 1;
-            $activity->save();
+        $projects = Project::all();
+
+        foreach ($projects as $project) {
+
+            $activities = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->select('activities.*')->where('projects.id', $project->id)
+                ->get();
+            $order = 1;
+            foreach ($activities as $activity) {
+                $activity = Activity::find($activity->id);
+                $activity->order = $order;
+                $activity->save();
+                $order++;
+            }
+
         }
     }
 
