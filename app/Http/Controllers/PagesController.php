@@ -148,7 +148,7 @@ class PagesController extends Controller
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
             ->select('outputs.*')->where('projects.id', $id)
-            ->orderBy('created_at', 'desc')->get();
+            ->get();
 
         // $activities = Activity::where('project_id', $id)->get();
 

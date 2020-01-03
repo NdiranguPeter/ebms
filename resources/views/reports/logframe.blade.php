@@ -18,18 +18,18 @@
 <table class="cdcc table table-bordered">
     <thead>
         <tr style="background: #349ba7 !important;color: #fff;">
-            <th>Goal</th>
-            <th>Description</th>
-            <th>Indicators</th>
-            <th>Means of Verification</th>
-            <th>Risks</th>
-            <th>Assumptions</th>
+            <th style="padding:5px;">Goal</th>
+            <th style="padding:5px;">Description</th>
+            <th style="padding:5px;">Indicators</th>
+            <th style="padding:5px;">Means of Verification</th>
+            <th style="padding:5px;">Risks</th>
+            <th style="padding:5px;">Assumptions</th>
         </tr>
         <thead>
         <tbody>
             <tr style="font-size: smaller;">
-                <td>{!!$project->goal!!}</td>
-                <th>{!!$project->description!!}</th>
+                <th style="padding:5px;">{!!$project->goal!!}</td>
+                <td style="padding:5px;">{!!$project->description!!}</th>
                 <td>
                     <table class="table cdccw">
                         @php
@@ -95,14 +95,12 @@
 
         </tbody>
         <tr style="background: #349ba7 !important;color: #fff;">
-            <th>
-                Outcomes
-            </th>
-            <th>Description</th>
-            <th>Indicators</th>
-            <th>Means of Verification</th>
-            <th>Risks</th>
-            <th>Assumptions</th>
+            <th style="padding:5px;">Outcomes</th>
+            <th style="padding:5px;">Description</th>
+            <th style="padding:5px;">Indicators</th>
+            <th style="padding:5px;">Means of Verification</th>
+            <th style="padding:5px;">Risks</th>
+            <th style="padding:5px;">Assumptions</th>
         </tr>
         @php
         $counter = 1;
@@ -110,8 +108,8 @@
         @foreach ($outcomes as $outcome)
     <tbody>
         <tr style="font-size: smaller;">
-            <td>Outcome {{$counter}}</td>
-            <th>{!!$outcome->name!!}</th>
+            <th style="padding:5px;">Outcome {{$counter}}</td>
+            <td style="padding:5px;">{!!$outcome->name!!}</th>
             <td>
                 <table class="table cdccw">
                     @foreach ($outcomeindicators as $outcomeindicator)
@@ -183,14 +181,12 @@
 
     </tbody>
     <tr style="background: #349ba7 !important;color: #fff;">
-        <th>
-            Outputs
-        </th>
-        <th>Description</th>
-        <th>Indicators</th>
-        <th>Means of Verification</th>
-        <th>Risks</th>
-        <th>Assumptions</th>
+        <th style="padding:5px;"> Outputs </th>
+        <th style="padding:5px;">Description</th>
+        <th style="padding:5px;">Indicators</th>
+        <th style="padding:5px;">Means of Verification</th>
+        <th style="padding:5px;">Risks</th>
+        <th style="padding:5px;">Assumptions</th>
     </tr>
     @php
     $fgrt = 1;
@@ -203,8 +199,8 @@
     @if ($outcome->id == $output->outcome_id)
     <tbody>
         <tr style="font-size: smaller;">
-            <td>Output {{$fgrt}}.{{$coer}}</td>
-            <th rowspan=" {{count($outputindicators)}}">{!!$output->name!!}</th>
+            <th style="padding:5px;">Output {{$fgrt}}.{{$coer}}</td>
+            <td style="padding:5px;" rowspan=" {{count($outputindicators)}}">{!!$output->name!!}</th>
             <td>
                 <table class="table cdccw">
                     @foreach ($outputindicators as $outputindicator)
@@ -267,14 +263,12 @@
 
 
     <tr style="background: #349ba7 !important;color: #fff;">
-        <th>
-            activities
-        </th>
-        <th>Activities associated with Outputs</th>
-        <th>Resources</th>
-        <th style="width:100px;">Budget</th>
-        <th>Risks</th>
-        <th>Assumptions</th>
+        <th style="padding:5px;">Activities </th>
+        <th style="padding:5px;">Activities associated with Outputs</th>
+        <th style="padding:5px;">Resources</th>
+        <th style="padding:5px;" style="width:100px;">Budget</th>
+        <th style="padding:5px;">Risks</th>
+        <th style="padding:5px;">Assumptions</th>
     </tr>
     @php
     $fgrt = 1;
@@ -288,8 +282,8 @@
 
     <tbody>
         <tr style="font-size: smaller;">
-            <td rowspan="{{count($activityresources)}}">Activity:{{$fgrt}}.{{$coer}}.{{$cer}}</td>
-            <th rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
+            <th rowspan="{{count($activityresources)}}">Activity:{{$fgrt}}.{{$coer}}.{{$cer}}</td>
+            <td style="padding-left:5px;" rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
             <td rowspan="{{count($activityresources)}}">
                 <table class="table cdccw">
                     @foreach ($activityresources as $activityresource)
