@@ -188,7 +188,6 @@
 
                     <div class="col-sm-12">
                         <p style="color: green; font-weight:bold;">{!!$activity->name!!}</p>
-
                     </div>
 
                     <div class="col-sm-6">

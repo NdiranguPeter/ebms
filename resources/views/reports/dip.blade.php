@@ -7,7 +7,7 @@
         DETAILED IMPLEMENTATION PLAN (DIP)
 
     </b></center>
-<div class="col-sm-12" style="padding:50px; border: 1px solid #2da0ef;">
+<div class="col-sm-12" style="padding-bottom:10px; padding-top:10px; padding-left:30px; border: 1px solid #2da0ef;">
 
     <div class="col-sm-6">
         <p>Project title: <b>{!!$project->name!!}</b></p>
@@ -29,49 +29,26 @@
     </div>
     <div class="col-sm-6">
         <p>Locattion: <b>{{$project->location}} </b></p>
-        <p>Start: <b>{{$project->start}} </b></p>
-        <p>End: <b>{{$project->end}} </b></p>
+        <p>Start: <b>January {{$period}} </b></p>
+        <p>End: <b>December {{$period}} </b></p>
         @php
         $end = \Carbon\Carbon::parse($project->end);
         $start = \Carbon\Carbon::parse($project->start);
         $diff = $end->diffInMonths($start);
         @endphp
         <p>Duration: <b>{{$diff}}</b> Months</p>
-        <p><b>Total beneficiaries: </b>{{$activities->sum('total_beneficiaries')}}</p>
+        <p><b>Total beneficiaries: </b>{{$activitiesafter->sum('total_beneficiaries')}}</p>
     </div>
 
-    <div class="col-sm-12">
-        <b>Overall perfomance</b>
-
-        @php
-        $target_total = 1;
-        if ($target_total > 0) {
-        $perc = 0;
-        }else{
-        $perc = 0;
-        }
-        $perc = sprintf('%0.2f', $perc);
-        if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 && $perc
-                <75) { $color='blue' ; } if ($perc> 74) {
-                    $color = 'green';
-                    }
-                    @endphp
-                    <div
-                        style="font-weight: bold; font-size: xx-large; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
-                        {{$perc}}%
-                    </div>
-
-    </div>
 </div>
-
-<table class="fgff table-bordered" style="font-size: smaller;">
+<table class="fgff table-bordered col-sm-12" style="font-size: smaller;">
     <thead>
         <tr style="background: #349ba7 !important;color: #fff;">
-            <th scope="col" style="width:100px;">Output</th>
-            <th style="min-width: 200px;" scope="col">Description of activities</th>
-            <th scope="col">Unit</th>
+            <th scope="col" style="width:100px;padding-left:5px;">Output</th>
+            <th style="min-width: 200px;padding-left:5px;" scope="col">Description of activities</th>
+            <th scope="col" style="padding-left:5px;">Unit</th>
             {{-- <th scope="col">Baseline</th> --}}
-            <th scope="col">Project target</th>
+            <th scope="col" style="padding-left:5px;">Project target</th>
             <th style="padding: 2px;">JAN</th>
             <th style="padding: 2px;">FEB</th>
             <th style="padding: 2px;">MAR</th>
@@ -87,16 +64,23 @@
             <th style="padding: 2px;">Total </th>
             <th style="padding: 2px;">Responsible</th>
             <th style="padding: 2px;">Budget</th>
+            @if ($when == "after")
+            <th>Peformance</th>
+            @endif
         </tr>
     </thead>
-    <tbody>
-        <?php $i =1;?>
 
-        @foreach ($outputs as $output)
+    @php
+    $i =1;
+    @endphp
+    @foreach ($outputs as $output)
+    @php
+    $y=1;
+    @endphp
     <tbody>
         <tr>
-            <th style="color:#0081c3;">output {{$i}}</th>
-            <th style="min-width: 200px;">
+            <th style="color:#0081c3; padding-left:5px;"> Output {{$i}}</th>
+            <th style="min-width: 200px; padding-left:5px;">
                 {!!$output->name!!}
             </th>
             <th></th>
@@ -116,82 +100,108 @@
             <th></th>
             <th></th>
             <th></th>
-
+            @if ($when == "after")
+            <th></th>
+            @endif
         </tr>
     </tbody>
-    @php
-    $y=1;
-    @endphp
+
+
     @foreach ($activities as $activity)
     @if ($activity->output_id == $output->id)
-    @foreach ($activitiesafter as $activityafter)
-    @if ($activityafter->activity_id === $activity->id)
-    <tbody>
-        <tr>
-            <th>
-                <b> activity {{$i}}.{{$y}}</b>
-            </th>
-            <td style="min-width: 200px;">
-                {!!$activity->name!!}
-            </td>
-            <td>
-                @foreach ($units as $unit)
-                @if ($unit->id == $activity->unit)
-                {{$unit->name}}
-                @endif
-                @endforeach
 
-            </td>
+    <tr>
+        <th style="padding-left:5px">
+            Activity {{$i}}.{{$y}}
+        </th>
+        <td style="min-width: 200px;padding-left:5px;">
+            {!!$activity->name!!}
+        </td>
+        <td>
+            @foreach ($units as $unit)
+            @if ($unit->id == $activity->unit)
+            {{$unit->name}}
+            @endif
+            @endforeach
 
-            <td>
-                {!!$activity->project_target!!}
-            </td>
+        </td>
+        <td>
+            {!!$activity->project_target!!}
+        </td>
+        @php
+        $total = 0;
+        @endphp
+        @foreach ($activitiesafter as $activityafter)
+
+        @if ($activityafter->activity_id == $activity->id)
+        @php
+        $total = $total + $activityafter->total_beneficiaries;
+        @endphp
+        @if ($activityafter->month == 1)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+
+        @if ($activityafter->month == 2)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 3)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 4)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 5)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 6)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+
+        @if ($activityafter->month == 7)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 8)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 9)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 10)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 11)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @if ($activityafter->month == 12)
+        <th>{{$activityafter->total_beneficiaries}}</th>
+        @endif
+        @endif
+        @endforeach
+        <th>
+            {{$total}}
+        </th>
+        <th>{{$activity->person_responsible}}</th>
+        <th>{{$activity->budget}}</th>
+        @if ($when == "after")
+        @php
+        $perfo = $total/$activity->project_target*100;
+        if ($perfo <26) { $color="red" ; } if ($perfo>25 && $perfo <51) { $color="blue" ; } if ($perfo>50 && $perfo <76)
+                    { $color="blue" ; } if ($perfo>75) {
+                    $color = "green";
+                    }
+                    @endphp
+                    <th style="background-color:{{$color}};color: azure; padding-left:10px;">
+                        {{sprintf('%.2f', $perfo)}}%
+                    </th>
+                    @endif
+    </tr>
 
 
 
-            <th> {{$activityafter->jan}}</th>
-
-            <th> {{$activityafter->feb}}</th>
-
-            <th> {{$activityafter->mar}}</th>
-
-            <th> {{$activityafter->apr}}</th>
-
-            <th> {{$activityafter->may}}</th>
-
-            <th> {{$activityafter->jun}}</th>
-
-            <th> {{$activityafter->jul}}</th>
-
-            <th>{{$activityafter->aug}}</th>
-
-            <th> {{$activityafter->sep}}</th>
-
-            <th> {{$activityafter->oct}}</th>
-
-            <th> {{$activityafter->nov}}</th>
-
-            <th> {{$activityafter->dec}}</th>
-
-            @php
-            $total_reached = $activityafter->jan + $activityafter->feb + $activityafter->mar + $activityafter->apr +
-            $activityafter->may + $activityafter->jun + $activityafter->jul + $activityafter->aug +
-            $activityafter->sep + $activityafter->oct + $activityafter->nov + $activityafter->dec;
-            @endphp
-            <th> {{$total_reached}}</th>
-
-            <th> {{$activityafter->person_responsible}}</th>
-
-            <th style="width:100px;"> {{$activityafter->budget}}</th>
-
-
-        </tr>
-    </tbody>
     <?php $y++; ?>
     @endif
     @endforeach
-    @endif
-    @endforeach
+
 
     <?php $i++; ?>
     @endforeach

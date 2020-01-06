@@ -12,11 +12,9 @@
     <tbody>
         @if (count($activities)>0)
         @foreach ($activities as $activity)
-        @if (count($activitiesafter)>0)
-        @foreach ($activitiesafter as $activityafter)
-        @if ($activityafter->activity_id == $activity->id)
+
         <?php
-$budget_diff = $activity->budget - $activityafter->budget;
+$budget_diff = $activity->budget - $activity->budget;
 
 $variace = 0;
 if ($budget_diff > 0 && $activity->budget >0) {
@@ -37,18 +35,16 @@ if ($budget_diff > 0 && $activity->budget >0) {
             </td>
             <td>
                 @php
-                $number = number_format($activityafter->budget);
+                $number = number_format($activity->budget);
 
                 @endphp
                 {{$number}}</td>
             <td>{{$budget_diff}}</td>
             <td>{{$variace}}%</td>
         </tr>
-        @endif
-        @endforeach
-        @endif
 
         @endforeach
+
 
         @else
         <tr>

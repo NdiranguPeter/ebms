@@ -18,6 +18,8 @@ use App\Project;
 use App\Risk;
 use App\Risksafter;
 use App\Unit;
+use Illuminate\Http\Request;
+
 
 class PagesController extends Controller
 {
@@ -196,25 +198,44 @@ class PagesController extends Controller
         return view('reports.templates.logframe')->with(['risks' => $risks, 'assumptions' => $assumptions, 'verificationsources' => $verificationsources, 'curs' => $curs, 'activityresources' => $activityresources, 'outputindicators' => $outputindicators, 'outcomeindicators' => $outcomeindicators, 'goalindicators' => $goalindicators, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
-    public function dipbefore($id)
+    public function dipbefore(Request $request)
     {
-        $project = Project::find($id);
+        
+        $project = Project::find($request->project_id);
+    
+
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
-            ->select('outcomes.*')->where('projects.id', $id)
+            ->select('outcomes.*')->where('projects.id', $request->project_id)
             ->get();
+
+
 
         $outputs = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
-            ->select('outputs.*')->where('projects.id', $id)
+            ->select('outputs.*')->where('projects.id', $request->project_id)
             ->get();
 
         $activities = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
             ->join('activities', 'activities.output_id', 'outputs.id')
-            ->select('activities.*')->where('projects.id', $id)
+            ->select('activities.*')
+            ->whereYear('activities.start', '=', $request->year)
+            ->where('projects.id', $request->project_id)
+            ->get();
+
+
+        $acrr = \DB::table('projects')
+            ->join('outcomes', 'outcomes.project_id', 'projects.id')
+            ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+            ->join('activities', 'activities.output_id', 'outputs.id')
+            ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+            ->select('activityafters.year')
+            ->where('activityafters.before_after', 'before')
+            ->where('projects.id', $request->project_id)
+            ->groupBy('year')
             ->get();
 
         $activitiesafter = \DB::table('projects')
@@ -222,8 +243,12 @@ class PagesController extends Controller
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
             ->join('activities', 'activities.output_id', 'outputs.id')
             ->join('activityafters', 'activityafters.activity_id', 'activities.id')
-            ->select('activityafters.*')->where('activityafters.before_after', 'before')->where('projects.id', $id)
+            ->select('activityafters.*')
+            ->where('activityafters.before_after', 'before')
+            ->where('activityafters.year', $request->year)
+            ->where('projects.id', $request->project_id)
             ->get();
+
 
         $units = Unit::all();
         $ir_office = IR_Office::find($project->ir_office);
@@ -234,31 +259,47 @@ class PagesController extends Controller
 
         $cur = Currency::all();
 
-        return view('reports.templates.dip')->with(['alldonors' => $alldonors, 'donors' => $donors, 'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.dip')->with(['when'=>$request->before_after,'period'=>$request->year, 'alldonors' => $alldonors, 'donors' => $donors, 'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
-    public function dipafter($id)
+    public function dipafter(Request $request)
     {
+        
+        $project = Project::find($request->project_id);
+    
 
-        $project = Project::find($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
-            ->select('outcomes.*')->where('projects.id', $id)
+            ->select('outcomes.*')->where('projects.id', $request->project_id)
             ->get();
+
+
 
         $outputs = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
-            ->select('outputs.*')->where('projects.id', $id)
-            ->orderBy('created_at', 'desc')->paginate(6);
-
-// $activities = Activity::where('project_id', $id)->get();
+            ->select('outputs.*')->where('projects.id', $request->project_id)
+            ->get();
 
         $activities = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
             ->join('activities', 'activities.output_id', 'outputs.id')
-            ->select('activities.*')->where('projects.id', $id)
+            ->select('activities.*')
+            ->whereYear('activities.start', '=', $request->year)
+            ->where('projects.id', $request->project_id)
+            ->get();
+
+
+        $acrr = \DB::table('projects')
+            ->join('outcomes', 'outcomes.project_id', 'projects.id')
+            ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+            ->join('activities', 'activities.output_id', 'outputs.id')
+            ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+            ->select('activityafters.year')
+            ->where('activityafters.before_after', 'after')
+            ->where('projects.id', $request->project_id)
+            ->groupBy('year')
             ->get();
 
         $activitiesafter = \DB::table('projects')
@@ -268,8 +309,10 @@ class PagesController extends Controller
             ->join('activityafters', 'activityafters.activity_id', 'activities.id')
             ->select('activityafters.*')
             ->where('activityafters.before_after', 'after')
-            ->where('projects.id', $id)
+            ->where('activityafters.year', $request->year)
+            ->where('projects.id', $request->project_id)
             ->get();
+
 
         $units = Unit::all();
         $ir_office = IR_Office::find($project->ir_office);
@@ -280,7 +323,7 @@ class PagesController extends Controller
 
         $cur = Currency::all();
 
-        return view('reports.templates.dip')->with(['alldonors' => $alldonors, 'donors' => $donors, 'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.dip')->with(['when'=>'after','period'=>$request->year, 'alldonors' => $alldonors, 'donors' => $donors, 'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function repo($id)

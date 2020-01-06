@@ -186,9 +186,9 @@ $activity->order = $order+1;
                 for ($y = 1; $y <= 12; $y++) {
                     $activitybefore = new Activityafter();
                     $activitybefore->activity_id = $activity->id;
-                    $activitybefore->total_beneficiaries = $activity->total_beneficiaries;
-                    $activitybefore->total_male = $activity->total_male;
-                    $activitybefore->total_female = $activity->total_female;
+                    $activitybefore->total_beneficiaries = 0;
+                    $activitybefore->total_male = 0;
+                    $activitybefore->total_female = 0;
                     $activitybefore->budget = $activity->budget;
                     $activitybefore->budget_diff = 0;
                     $activitybefore->person_responsible = auth()->user()->name;
