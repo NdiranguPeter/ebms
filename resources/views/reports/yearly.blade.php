@@ -95,7 +95,7 @@
                         @endphp
                         <div
                             style="font-weight: bold; font-size: xx-large; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
-                            {{$perc}}%
+                            {{sprintf('%0.2f',$perc)}}%
                         </div>
 
         </td>

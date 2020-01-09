@@ -39,6 +39,7 @@
         <p>Duration: <b>12</b> Months</p>
         <p>Total beneficiaries: <b>{{$activitiesafter->sum('total_beneficiaries')}}</b></p>
     </div>
+    @if ($when == "after")
 
     @php
     $a = 0;
@@ -78,10 +79,10 @@
     color: white;
     max-height: 40px; padding-top: 8px;
     font-size: large;">
-                    <p> Overall perfomance: {{$perfom}}%</p>
+                    <p> Overall perfomance: {{sprintf('%0.2f',$perfom)}}%</p>
                 </div>
 
-
+                @endif
 
 </div>
 <table class="fgff table-bordered col-sm-12" style="font-size: smaller;">
@@ -224,7 +225,7 @@
             {{$total}}
         </th>
         <th>{{$activity->person_responsible}}</th>
-        <th>{{$activity->budget}}</th>
+        <th>{{number_format($activity->budget)}}</th>
         @if ($when == "after")
         @php
         $perfo = $total/$activity->project_target*100;
