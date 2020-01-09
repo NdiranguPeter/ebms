@@ -62,7 +62,20 @@
         <td>Expenditure for this year</td>
         <td>#</td>
         <td>Total beneficiaries served</td>
-        <td>{{$gtotal}}</td>
+        @php
+        $tt = 0;
+        @endphp
+        @foreach ($indicatorsafter as $indicatorafter)
+        @php
+        $tt = $tt + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep
+        + $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
+        @endphp
+        @endforeach
+
+        <td>
+            {{$tt}}
+        </td>
     </tr>
     <tr>
         <td colspan="4">

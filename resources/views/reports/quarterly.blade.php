@@ -11,7 +11,7 @@
     .cdcc>thead>tr>th {
         padding: 0px;
         line-height: 1.42857143;
-        vertical-align: top;
+        vertical-align: middle;
         border-top: 1px solid #bfdeec
     }
 </style>
@@ -72,39 +72,133 @@
         <td>{{$total}}</td>
     </tr>
     <tr>
-        <td colspan="4">
-            <b>Overall perfomance</b>
-            @foreach ($outputindicators as $outputindicator)
-            @php
-            $target_total = $target_total + $outputindicator->project_target;
-            @endphp
-            @endforeach
-            @php
-            if ($qrt == 'QRT 1' && $target_total > 0) {
-            $perc = $total1/($target_total/4);
-            }
-            if ($qrt == 'QRT 2' && $target_total > 0) {
-            $perc = $total2/($target_total/4);
-            }
-            if ($qrt == 'QRT 3' && $target_total > 0) {
-            $perc = $total3/($target_total/4);
-            }
-            if ($qrt == 'QRT 4' && $target_total > 0) {
-            $perc = $total4/($target_total/4);
-            }
-            if (($qrt == 'QRT 1' || $qrt == 'QRT 2' || $qrt == 'QRT 3' || $qrt == 'QRT 4') && $target_total < 0) {
-                $perc=0; } $perc=sprintf('%0.2f', $perc); if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50)
-                    { $color='yellow' ; } if ($perc> 49 && $perc
-                    <75) { $color='blue' ; } if ($perc> 74) {
-                        $color = 'green';
-                        }
-                        @endphp
-                        <div
-                            style="font-weight: bold; font-size: xx-large; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
-                            {{$perc}}%
-                        </div>
 
-        </td>
+        @if ($qrt == 'QRT 1')
+        @php
+        $a = 0;
+        $b = 0;
+        @endphp
+        @foreach ($indicatorsafter as $indicatorafter)
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
+        @endphp
+        @endforeach
+
+        @foreach ($indicatorsbefore as $indicatorbefore)
+        @php
+        $b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar;
+        @endphp
+        @endforeach
+        @php
+        if ($b < 1) { $b=1; } $perfom=$a/$b * 100; if ($perfom <26) { $cr="red" ; } if ($perfom>
+            25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                    $cr = "green";
+                    }
+                    @endphp
+                    <td colspan="4" style="background-color:{{$cr}}; font-weight:bold; color:white;">
+                        Overall perfomance: {{sprintf('%0.2f',$perfom)}}%
+                    </td>
+                    @endif
+
+                    @if ($qrt == 'QRT 2')
+                    @php
+                    $a = 0;
+                    $b = 0;
+                    @endphp
+                    @foreach ($indicatorsafter as $indicatorafter)
+                    @php
+                    $a = $a + $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun;
+
+
+                    @endphp
+                    @endforeach
+
+                    @foreach ($indicatorsbefore as $indicatorbefore)
+                    @php
+                    $b = $b + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun;
+
+                    @endphp
+                    @endforeach
+                    @php
+
+                    if ($b < 1) { $b=1; } $perfom=$a/$b * 100; if ($perfom <26) { $cr="red" ; } if ($perfom>
+                        25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                            $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                $cr = "green";
+                                }
+                                @endphp
+                                <td colspan="4" style="background-color:{{$cr}}; font-weight:bold; color:white;">
+                                    Overall perfomance: {{sprintf('%0.2f',$perfom)}}%
+                                </td>
+
+                                @endif
+
+                                @if ($qrt == 'QRT 3')
+                                @php
+                                $a = 0;
+                                $b = 0;
+                                @endphp
+                                @foreach ($indicatorsafter as $indicatorafter)
+                                @php
+                                $a = $a + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
+                                @endphp
+                                @endforeach
+
+                                @foreach ($indicatorsbefore as $indicatorbefore)
+                                @php
+                                $b = $b + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep;
+
+                                @endphp
+                                @endforeach
+                                @php
+                                if ($b < 1) { $b=1; } $perfom=$a/$b * 100; if ($perfom <26) { $cr="red" ; } if ($perfom>
+                                    25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                                        $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                            $cr = "green";
+                                            }
+                                            @endphp
+                                            <td colspan="4"
+                                                style="background-color:{{$cr}}; font-weight:bold; color:white;">
+                                                Overall perfomance: {{sprintf('%0.2f',$perfom)}}%
+                                            </td>
+
+                                            @endif
+
+                                            @if ($qrt == 'QRT 4')
+                                            @php
+                                            $a = 0;
+                                            $b = 0;
+                                            @endphp
+                                            @foreach ($indicatorsafter as $indicatorafter)
+                                            @php
+                                            $a = $a + $indicatorafter->oct + $indicatorafter->nov +
+                                            $indicatorafter->dec;
+                                            @endphp
+                                            @endforeach
+
+                                            @foreach ($indicatorsbefore as $indicatorbefore)
+                                            @php
+                                            $b = $b + $indicatorbefore->oct + $indicatorbefore->nov +
+                                            $indicatorbefore->dec;
+                                            @endphp
+                                            @endforeach
+                                            @php
+                                            if ($b < 1) { $b=1; } $perfom=$a/$b * 100; if ($perfom <26) { $cr="red" ; }
+                                                if ($perfom>
+                                                25 &&
+                                                $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                                                    $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                                        $cr = "green";
+                                                        }
+                                                        @endphp
+                                                        <td colspan="4"
+                                                            style="background-color:{{$cr}}; font-weight:bold; color:white;">
+                                                            Overall perfomance: {{sprintf('%0.2f',$perfom)}}%
+                                                        </td>
+
+                                                        @endif
+
     </tr>
 </table>
 <h2>SECTION 1. TECHNICAL ACCOMPLISHMENT AGAINST PLAN DURING THE QUARTER </h2>
@@ -115,7 +209,7 @@
         <th>Value at start</th>
         <th>Total targeted for the quarter</th>
         <th>Achievement for the quarter of {{$qrt}}</th>
-        {{-- <th>RYGB</th> --}}
+        <th>RYGB</th>
     </tr>
     @php
     $y = 1;
@@ -123,7 +217,7 @@
     @foreach ($outcomes as $outcome)
 
     <tr>
-        <td style="color:#0081c3; font-size:bold;">outcome {{$y}} - {!!$outcome->name!!} </td>
+        <td style="color:#0081c3; font-size:bold;">Outcome {{$y}} - {!!$outcome->name!!} </td>
 
         <td style="padding:0px !important;">
             <table class="table cdcc">
@@ -132,7 +226,7 @@
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outcomeindicator->id == $indicatorafter->indicator_id)
                 <tr>
-                    <td>{!!$outcomeindicator->name!!}</td>
+                    <td style="padding-left:5px !important;">{!!$outcomeindicator->name!!}</td>
                 </tr>
                 @endif
                 @endforeach
@@ -156,45 +250,195 @@
             </table>
         </td>
         <td style="padding:0px !important;">
-            <table class="table cdcc" id="liss">
+
+            <table class="table cdcc">
                 @foreach ($outcomeindicators as $outcomeindicator)
                 @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
+                @foreach ($indicatorsbefore as $indicatorbefore)
+                @if ($outcomeindicator->id == $indicatorbefore->indicator_id)
+                @if ($qrt == 'QRT 1')
                 <tr>
-                    <td>{{sprintf('%0.0f', $outcomeindicator->project_target/4)}}</td>
+                    <td>{{$indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar}}</td>
                 </tr>
+                @endif
+                @if ($qrt == 'QRT 2')
+                <tr>
+                    <td>{{$indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun}}</td>
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 3')
+                <tr>
+                    <td>{{$indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep}}</td>
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 4')
+                <tr>
+                    <td>{{$indicatorbefore->oct + $indicatorbefore->nov + $indicatorbefore->dec}}</td>
+                </tr>
+                @endif
                 @endif
                 @endforeach
                 @endif
                 @endforeach
             </table>
+
         </td>
         <td style="padding:0px !important;">
-            <table class="table cdcc" id="liss">
-                @php
-                if($qrt == 'QRT 1'){
-                $tqrt1 = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
-                }if($qrt == 'QRT 2'){
-                $tqrt1 = $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun;
-                }if($qrt == 'QRT 3'){
-                $tqrt1 = $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
-                }if($qrt == 'QRT 4'){
-                $tqrt1 = $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-                }
-                @endphp
+
+            <table class="table cdcc">
                 @foreach ($outcomeindicators as $outcomeindicator)
                 @if ($outcome->id == $outcomeindicator->outcome_id)
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outcomeindicator->id == $indicatorafter->indicator_id)
+                @if ($qrt == 'QRT 1')
                 <tr>
-                    <td>{{$tqrt1}}</td>
+                    <td>{{$indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar}}</td>
                 </tr>
+                @endif
+                @if ($qrt == 'QRT 2')
+                <tr>
+                    <td>{{$indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun}}</td>
+
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 3')
+                <tr>
+                    <td>{{$indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep}}</td>
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 4')
+                <tr>
+                    <td>{{$indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec}}</td>
+                </tr>
+                @endif
                 @endif
                 @endforeach
                 @endif
                 @endforeach
             </table>
+
+        </td>
+
+        <td style="padding:0px !important;">
+            <table class="table cdcc">
+                @foreach ($outcomeindicators as $outcomeindicator)
+                @if ($outcome->id == $outcomeindicator->outcome_id)
+                @foreach ($indicatorsafter as $indicatorafter)
+                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
+                @if ($qrt == 'QRT 1')
+                @foreach ($indicatorsbefore as $indicatorbefore)
+                @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
+                @php
+                $bb = $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar;
+                if ($bb == 0) {
+                $bb = 1;
+                }
+                @endphp
+                @endif
+                @endforeach
+                @php
+                $bf = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
+                $perfom = $bf/$bb * 100;
+                if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                        $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                            $cr = "green";
+                            }
+
+                            @endphp
+                            <tr>
+                                <td style="background-color:{{$cr}}; font-weight:bold;color:white;">
+                                    {{sprintf('%0.0f',$perfom)}}%</td>
+                            </tr>
+                            @endif
+                            @if ($qrt == 'QRT 2')
+                            @foreach ($indicatorsbefore as $indicatorbefore)
+                            @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
+                            @php
+                            $bb = $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun;
+                            if ($bb == 0) {
+                            $bb = 1;
+                            }
+                            @endphp
+                            @endif
+                            @endforeach
+                            @php
+                            $bf = $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun;
+                            $perfom = $bf/$bb * 100;
+                            if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if
+                                    ($perfom>50 &&
+                                    $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                        $cr = "green";
+                                        }
+
+                                        @endphp
+                                        <tr>
+                                            <td style="background-color:{{$cr}}; font-weight:bold;color:white;">
+                                                {{sprintf('%0.0f',$perfom)}}%</td>
+                                        </tr>
+                                        @endif
+                                        @if ($qrt == 'QRT 3')
+                                        @foreach ($indicatorsbefore as $indicatorbefore)
+                                        @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
+                                        @php
+                                        $bb = $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep;
+                                        if ($bb == 0) {
+                                        $bb = 1;
+                                        }
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                        @php
+                                        $bf = $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
+                                        $perfom = $bf/$bb * 100;
+                                        if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
+                                                } if ($perfom>50 &&
+                                                $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                                    $cr = "green";
+                                                    }
+
+                                                    @endphp
+                                                    <tr>
+                                                        <td
+                                                            style="background-color:{{$cr}}; font-weight:bold;color:white;">
+                                                            {{sprintf('%0.0f',$perfom)}}%</td>
+                                                    </tr>
+                                                    @endif
+                                                    @if ($qrt == 'QRT 4')
+                                                    @foreach ($indicatorsbefore as $indicatorbefore)
+                                                    @if ($indicatorbefore->indicator_id ==
+                                                    $indicatorafter->indicator_id)
+                                                    @php
+                                                    $bb = $indicatorbefore->oct + $indicatorbefore->nov +
+                                                    $indicatorbefore->dec;
+                                                    if ($bb == 0) {
+                                                    $bb = 1;
+                                                    }
+                                                    @endphp
+                                                    @endif
+                                                    @endforeach
+                                                    @php
+                                                    $bf = $indicatorafter->oct + $indicatorafter->nov +
+                                                    $indicatorafter->dec;
+                                                    $perfom = $bf/$bb * 100;
+                                                    if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) {
+                                                            $cr="yellow" ; } if ($perfom>50 &&
+                                                            $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                                                $cr = "green";
+                                                                }
+
+                                                                @endphp
+                                                                <tr>
+                                                                    <td
+                                                                        style="background-color:{{$cr}}; font-weight:bold;color:white;">
+                                                                        {{sprintf('%0.0f',$perfom)}}%</td>
+                                                                </tr>
+                                                                @endif
+                                                                @endif
+                                                                @endforeach
+                                                                @endif
+                                                                @endforeach
+            </table>
+
         </td>
 
     </tr>
@@ -205,7 +449,7 @@
     @foreach ($outputs as $output)
     @if ($outcome->id == $output->outcome_id)
     <tr>
-        <td><b>output {{$y}}.{{$i}}</b> - {!!$output->name!!} </td>
+        <td><b>Output {{$y}}.{{$i}}</b> - {!!$output->name!!} </td>
 
         <td style="padding:0px !important;">
 
@@ -213,7 +457,7 @@
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
                 <tr>
-                    <td>{!!$outputindicator->name!!}</td>
+                    <td style="padding-left:5px !important;">{!!$outputindicator->name!!}</td>
                 </tr>
                 @endif
                 @endforeach
@@ -236,85 +480,209 @@
             </table>
         </td>
         <td style="padding:0px !important;">
-            <table class="table cdcc" id="liss">
+            <table class="table cdcc" id="liss" style="padding:0px !important;">
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
+                @foreach ($indicatorsbefore as $indicatorbefore)
+                @if ($outputindicator->id == $indicatorbefore->indicator_id)
+                @if ($qrt == 'QRT 1')
+                <tr>
+                    <td>{{$indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar}}</td>
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 2')
+                <tr>
+                    <td>{{$indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun}}</td>
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 3')
+                <tr>
+                    <td>{{$indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep}}</td>
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 4')
+                <tr>
+                    <td>{{$indicatorbefore->oct + $indicatorbefore->nov + $indicatorbefore->dec}}</td>
+                </tr>
+                @endif
+                @endif
+                @endforeach
+                @endif
+                @endforeach
 
+            </table>
+        </td>
+        <td style="padding:0px !important;">
+            <table class="table cdcc" id="liss" style="padding:0px !important;">
+                @foreach ($outputindicators as $outputindicator)
+                @if ($output->id == $outputindicator->output_id)
+                @foreach ($indicatorsafter as $indicatorafter)
+                @if ($outputindicator->id == $indicatorafter->indicator_id)
+                @if ($qrt == 'QRT 1')
+                <tr>
+                    <td>{{$indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar}}</td>
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 2')
+                <tr>
+                    <td>{{$indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun}}</td>
+
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 3')
+                <tr>
+                    <td>{{$indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep}}</td>
+                </tr>
+                @endif
+                @if ($qrt == 'QRT 4')
+                <tr>
+                    <td>{{$indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec}}</td>
+                </tr>
+                @endif
+                @endif
+                @endforeach
+                @endif
+                @endforeach
+
+            </table>
+        </td>
+
+        <td style="padding:0px !important;">
+            <table class="table cdcc">
+                @foreach ($outputindicators as $outputindicator)
+                @if ($output->id == $outputindicator->output_id)
+                @foreach ($indicatorsafter as $indicatorafter)
+                @if ($outputindicator->id == $indicatorafter->indicator_id)
+                @if ($qrt == 'QRT 1')
+                @foreach ($indicatorsbefore as $indicatorbefore)
+                @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                 @php
-                $tqt1 = $outputindicator->project_target/4;
-                if($tqt1 < 1){ $tqt1=1; } @endphp <tr>
-        <td><b>{{$tqt1}}</b></td>
+                $bb = $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar;
+                if ($bb == 0) {
+                $bb = 1;
+                }
+                @endphp
+                @endif
+                @endforeach
+                @php
+                $bf = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
+                $perfom = $bf/$bb * 100;
+                if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                        $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                            $cr = "green";
+                            }
+
+                            @endphp
+                            <tr>
+                                <td style="background-color:{{$cr}}; font-weight:bold;color:white;">
+                                    {{sprintf('%0.0f',$perfom)}}%</td>
+                            </tr>
+                            @endif
+                            @if ($qrt == 'QRT 2')
+                            @foreach ($indicatorsbefore as $indicatorbefore)
+                            @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
+                            @php
+                            $bb = $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun;
+                            if ($bb == 0) {
+                            $bb = 1;
+                            }
+                            @endphp
+                            @endif
+                            @endforeach
+                            @php
+                            $bf = $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun;
+                            $perfom = $bf/$bb * 100;
+                            if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if
+                                    ($perfom>50 &&
+                                    $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                        $cr = "green";
+                                        }
+
+                                        @endphp
+                                        <tr>
+                                            <td style="background-color:{{$cr}}; font-weight:bold;color:white;">
+                                                {{sprintf('%0.0f',$perfom)}}%</td>
+                                        </tr>
+                                        @endif
+                                        @if ($qrt == 'QRT 3')
+                                        @foreach ($indicatorsbefore as $indicatorbefore)
+                                        @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
+                                        @php
+                                        $bb = $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep;
+                                        if ($bb == 0) {
+                                        $bb = 1;
+                                        }
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                        @php
+                                        $bf = $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
+                                        $perfom = $bf/$bb * 100;
+                                        if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
+                                                } if ($perfom>50 &&
+                                                $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                                    $cr = "green";
+                                                    }
+
+                                                    @endphp
+                                                    <tr>
+                                                        <td
+                                                            style="background-color:{{$cr}}; font-weight:bold;color:white;">
+                                                            {{sprintf('%0.0f',$perfom)}}%</td>
+                                                    </tr>
+                                                    @endif
+                                                    @if ($qrt == 'QRT 4')
+                                                    @foreach ($indicatorsbefore as $indicatorbefore)
+                                                    @if ($indicatorbefore->indicator_id ==
+                                                    $indicatorafter->indicator_id)
+                                                    @php
+                                                    $bb = $indicatorbefore->oct + $indicatorbefore->nov +
+                                                    $indicatorbefore->dec;
+                                                    if ($bb == 0) {
+                                                    $bb = 1;
+                                                    }
+                                                    @endphp
+                                                    @endif
+                                                    @endforeach
+                                                    @php
+                                                    $bf = $indicatorafter->oct + $indicatorafter->nov +
+                                                    $indicatorafter->dec;
+                                                    $perfom = $bf/$bb * 100;
+                                                    if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) {
+                                                            $cr="yellow" ; } if ($perfom>50 &&
+                                                            $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                                                $cr = "green";
+                                                                }
+
+                                                                @endphp
+                                                                <tr>
+                                                                    <td
+                                                                        style="background-color:{{$cr}}; font-weight:bold;color:white;">
+                                                                        {{sprintf('%0.0f',$perfom)}}%</td>
+                                                                </tr>
+                                                                @endif
+                                                                @endif
+                                                                @endforeach
+                                                                @endif
+                                                                @endforeach
+            </table>
+
+        </td>
+
+
+
     </tr>
+    @php
+    $i++;
+    @endphp
     @endif
     @endforeach
 
 
-</table>
-</td>
-<td colspan="2" style="min-width:200px; padding:0px !important;">
-    <table class="table cdcc" id="liss">
-
-        @foreach ($outputindicators as $outputindicator)
-        @if ($output->id == $outputindicator->output_id)
-        @foreach ($indicatorsafter as $indicatorafter)
-        @if ($outputindicator->id == $indicatorafter->indicator_id)
-        @php
-        if($outputindicator->project_target == 0){
-        $tqt1 = 0;
-        }else{
-        $tqt1 = $outputindicator->project_target/4;
-        }
-        if($tqt1 < 1){ $tqt1=1; } @endphp @php $t=0; if($qrt=='QRT 1' ){ $t=$indicatorafter->jan +
-            $indicatorafter->feb + $indicatorafter->mar;
-            }
-            if($qrt == 'QRT 2'){
-            $t = $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun;
-            }
-            if($qrt == 'QRT 3'){
-            $t = $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
-            }
-            if($qrt == 'QRT 4'){
-            $t = $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-            }
-            $prc = $t/$tqt1;
-
-            $perc=sprintf('%0.2f', $prc*100);
-
-            if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 &&
-                    $perc <75) { $color='blue' ; } if ($perc> 74) {
-                        $color = 'green';
-                        }
-                        @endphp
-                        <tr>
-                            <td>{{$t}}</td>
-
-                            <td
-                                style="border:1px solid #fff;width:100px; padding:0px 0px 0px 10px; color:#fff; margin-left: 20px; background-color:{{$color}};font-weight: bold;">
-                                <span>
-                                    {{$perc}}% </span></td>
-
-                        </tr>
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-
-    </table>
-</td>
-
-
-</tr>
-@php
-$i++;
-@endphp
-@endif
-@endforeach
-
-
-@php
-$y++;
-@endphp
-@endforeach
+    @php
+    $y++;
+    @endphp
+    @endforeach
 </table>
 <hr>
 <h2>Section 2: Major challenges and solutions</h2>

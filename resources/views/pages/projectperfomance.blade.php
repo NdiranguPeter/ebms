@@ -83,32 +83,150 @@
                                 </button>
                             </div>
                             <div class="modal-body col-sm-12">
-                                <a style="width:100px;" href="/jan/repo/{{$project->id}}/{{$year}}"
+                                @php
+                                $datetime1 = new DateTime($project->start);
+                                $datetime2 = new DateTime($project->end);
+                                $interval = $datetime1->diff($datetime2);
+                                $years = $interval->format('%y');
+                                $startyear = $datetime1->format('Y');
+                                $startmonth = $datetime1->format('m');
+                                $endyear = $datetime2->format('Y');
+                                $endmonth = $datetime2->format('m');
+                                $months = $interval->format('%m');
+
+                                @endphp
+                                @if ($year == $startyear)
+                                @if ($startmonth <= 1)                                
+                                
+                                <a style="width:100px;margin-top: 2px;" href="/jan/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-success">January</a>
-                                <a style="width:100px;" href="/feb/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 2)
+                                <a style="width:100px;margin-top: 2px;" href="/feb/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-primary">February</a>
-                                <a style="width:100px;" href="/mar/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 3)
+                                <a style="width:100px;margin-top: 2px;" href="/mar/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-success">March</a>
-                                <a style="width:100px;" href="/apr/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 4)
+                                <a style="width:100px;margin-top: 2px;" href="/apr/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-primary">April</a>
-                                <a style="width:100px;" href="/may/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 5)
+                                <a style="width:100px;margin-top: 2px;" href="/may/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-success">May</a>
-                                <a style="width:100px;" href="/jun/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 6)
+                                <a style="width:100px;margin-top: 2px;" href="/jun/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-primary">June</a>
-                                <a style="width:100px;" href="/jul/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 7)
+                                <a style="width:100px;margin-top: 2px;" href="/jul/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-success">July</a>
-                                <a style="width:100px;" href="/aug/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 8)
+                                <a style="width:100px;margin-top: 2px;" href="/aug/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-primary">August</a>
-                                <a style="width:100px;" href="/sep/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 9)
+                                <a style="width:100px;margin-top: 2px;" href="/sep/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-success">September</a>
-                                <a style="width:100px;" href="/oct/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 10)
+                                <a style="width:100px;margin-top: 2px;" href="/oct/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-primary">October</a>
-                                <a style="width:100px;" href="/nov/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 11)
+                                <a style="width:100px;margin-top: 2px;" href="/nov/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-success">November</a>
-                                <a style="width:100px;" href="/dec/repo/{{$project->id}}/{{$year}}"
+                                    @endif
+                                    @if ($startmonth <= 12)
+                                <a style="width:100px;margin-top: 2px;" href="/dec/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">December</a>
+                                    @endif
+
+                                @endif
+
+                                @if ($year != $startyear && $year != $endyear)
+
+                                <a style="width:100px;margin-top: 2px;" href="/jan/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">January</a>
+                                <a style="width:100px;margin-top: 2px;" href="/feb/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">February</a>
+                                <a style="width:100px;margin-top: 2px;" href="/mar/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">March</a>
+                                <a style="width:100px;margin-top: 2px;" href="/apr/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">April</a>
+                                <a style="width:100px;margin-top: 2px;" href="/may/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">May</a>
+                                <a style="width:100px;margin-top: 2px;" href="/jun/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">June</a>
+                                <a style="width:100px;margin-top: 2px;" href="/jul/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">July</a>
+                                <a style="width:100px;margin-top: 2px;" href="/aug/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">August</a>
+                                <a style="width:100px;margin-top: 2px;" href="/sep/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">September</a>
+                                <a style="width:100px;margin-top: 2px;" href="/oct/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">October</a>
+                                <a style="width:100px;margin-top: 2px;" href="/nov/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">November</a>
+                                <a style="width:100px;margin-top: 2px;" href="/dec/repo/{{$project->id}}/{{$year}}"
                                     class="btn btn-primary">December</a>
 
+                                @endif
 
+                                @if ($year == $endyear)
+                                @if ($endmonth >= 1)
+                                <a style="width:100px;margin-top: 2px;" href="/jan/repo/{{$project->id}}/{{$year}}"
+                                class="btn btn-success">January</a>                                    
+                                    @endif
+                                    @if ($endmonth >= 2)
+                                <a style="width:100px;margin-top: 2px;" href="/feb/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">February</a>
+                                    @endif
+                                    @if ($endmonth >= 3)
+                                <a style="width:100px;margin-top: 2px;" href="/mar/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">March</a>
+                                    @endif
+                                    @if ($endmonth >= 4)
+                                <a style="width:100px;margin-top: 2px;" href="/apr/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">April</a>
+                                    @endif
+                                    @if ($endmonth >= 5)
+                                <a style="width:100px;margin-top: 2px;" href="/may/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">May</a>
+                                    @endif
+                                    @if ($endmonth >= 6)
+                                <a style="width:100px;margin-top: 2px;" href="/jun/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">June</a>
+                                    @endif
+                                    @if ($endmonth >= 7)
+                                <a style="width:100px;margin-top: 2px;" href="/jul/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">July</a>
+                                    @endif
+                                    @if ($endmonth >= 8)
+                                <a style="width:100px;margin-top: 2px;" href="/aug/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">August</a>
+                                    @endif
+                                    @if ($endmonth >= 9)
+                                <a style="width:100px;margin-top: 2px;" href="/sep/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">September</a>
+                                    @endif
+                                    @if ($endmonth >= 10)
+                                <a style="width:100px;margin-top: 2px;" href="/oct/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">October</a>
+                                    @endif
+                                    @if ($endmonth >= 11)
+                                <a style="width:100px;margin-top: 2px;" href="/nov/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-success">November</a>
+                                    @endif
+                                    @if ($endmonth >= 12)
+                                <a style="width:100px;margin-top: 2px;" href="/dec/repo/{{$project->id}}/{{$year}}"
+                                    class="btn btn-primary">December</a>
+                                @endif
+                                @endif
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -121,20 +239,65 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Select Month</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Select Quarter</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body col-sm-12">
-                                <a style="width:100px;" href="/qrt1/repo/{{$project->id}}/{{$year}}"
-                                    class="btn btn-success">QRT 1</a>
-                                <a style="width:100px;" href="/qrt2/repo/{{$project->id}}/{{$year}}"
-                                    class="btn btn-primary">QRT 2</a>
-                                <a style="width:100px;" href="/qrt3/repo/{{$project->id}}/{{$year}}"
-                                    class="btn btn-success">QRT 3</a>
-                                <a style="width:100px;" href="/qrt4/repo/{{$project->id}}/{{$year}}"
-                                    class="btn btn-primary">QRT 4</a>
+
+                                @php
+                                $datetime1 = new DateTime($project->start);
+                                $datetime2 = new DateTime($project->end);
+                                $interval = $datetime1->diff($datetime2);
+                                $years = $interval->format('%y');
+                                $startyear = $datetime1->format('Y');
+                                $startmonth = $datetime1->format('m');
+                                $endyear = $datetime2->format('Y');
+                                $endmonth = $datetime2->format('m');
+                                $months = $interval->format('%m');                                
+                                @endphp
+                                
+                                @if ($year == $startyear)
+                                @if ($startmonth <= 3) 
+                                <a style="width:100px;" href="/qrt1/repo/{{$project->id}}/{{$year}}" class="btn btn-success">QRT
+                                    1</a>
+                                    @endif
+                                    @if ($startmonth <= 6) <a style="width:100px;" href="/qrt2/repo/{{$project->id}}/{{$year}}" class="btn btn-primary">
+                                        QRT 2</a>
+                                        @endif
+                                        @if ($startmonth <= 9) <a style="width:100px;" href="/qrt3/repo/{{$project->id}}/{{$year}}"
+                                            class="btn btn-success">QRT 3</a>
+                                            @endif
+                                            @if ($startmonth <= 12) <a style="width:100px;" href="/qrt4/repo/{{$project->id}}/{{$year}}"
+                                                class="btn btn-primary">QRT 4</a>
+                                                @endif
+                                
+                                                @endif
+                                
+                                                @if ($year != $startyear && $year != $endyear)
+                                                <a style="width:100px;" href="/qrt1/repo/{{$project->id}}/{{$year}}" class="btn btn-success">QRT 1</a>
+                                                <a style="width:100px;" href="/qrt2/repo/{{$project->id}}/{{$year}}" class="btn btn-primary">QRT 2</a>
+                                                <a style="width:100px;" href="/qrt3/repo/{{$project->id}}/{{$year}}" class="btn btn-success">QRT 3</a>
+                                                <a style="width:100px;" href="/qrt4/repo/{{$project->id}}/{{$year}}" class="btn btn-primary">QRT 4</a>
+                                                @endif
+                                
+                                               @if ($year == $endyear)
+                                                <a style="width:100px;" href="/qrt1/repo/{{$project->id}}/{{$year}}" class="btn btn-success">QRT
+                                                    1</a>
+                                                   
+                                                    @if ($endmonth > 3 && $endmonth <= 6) <a style="width:100px;" href="/qrt2/repo/{{$project->id}}/{{$year}}" class="btn btn-primary">
+                                                        QRT 2</a>
+                                                        @endif
+                                                        @if ($endmonth > 6 && $endmonth <= 9) <a style="width:100px;" href="/qrt3/repo/{{$project->id}}/{{$year}}"
+                                                        class="btn btn-success">QRT 3 {{$endmonth}}</a>
+                                                            @endif
+                                                             @if ($endmonth > 9 && $startmonth <=12) 
+                                                                <a style="width:100px;" href="/qrt4/repo/{{$project->id}}/{{$year}}" class="btn btn-primary">QRT
+                                                                4</a>
+                                                                @endif
+                                                
+                                                                @endif
 
                             </div>
                             <div class="modal-footer">

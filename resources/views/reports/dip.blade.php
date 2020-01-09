@@ -185,8 +185,8 @@
         @if ($when == "after")
         @php
         $perfo = $total/$activity->project_target*100;
-        if ($perfo <26) { $color="red" ; } if ($perfo>25 && $perfo <51) { $color="blue" ; } if ($perfo>50 && $perfo <76)
-                    { $color="blue" ; } if ($perfo>75) {
+        if ($perfo <26) { $color="red" ; } if ($perfo>25 && $perfo <51) { $color="yellow" ; } if ($perfo>50 && $perfo
+                <76) { $color="blue" ; } if ($perfo>75) {
                     $color = "green";
                     }
                     @endphp
