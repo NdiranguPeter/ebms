@@ -170,7 +170,7 @@
                                     </select>
                                 </div>
 
-                                {{Form::submit('Save', ['class'=>'btn btn-primary right','style'=>'margin-left: 88% !important;'])}}
+                                {{Form::submit('Open', ['class'=>'btn btn-primary right','style'=>'margin-left: 88% !important;'])}}
                                 {!! Form::close() !!}
 
                             </div>

@@ -295,6 +295,26 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
+                        <div style="min-height:10px;">
+                            <p>&nbsp</p>
+                        </div>
+                        <h5>Type of deriverable: 
+                            
+                            @foreach ($units as $unit)
+                              @if ($act->unit == $unit->id)
+                                  {{$unit->name}}
+                              @endif
+                            @endforeach
+                            </h5>
+<div style="min-height:10px;">
+    <p>&nbsp</p>
+</div>
+                        <h5>Target: {{$act->project_target}}</h5>
+<div style="min-height:10px;">
+    <p>&nbsp</p>
+</div>
+                    </div>
+                    <div class="col-sm-6">
                         <h5>Indirect beneficiaries</h5>
                         <div class="form-group">
                             <div class="col-sm-6">
@@ -324,6 +344,25 @@
                             </div>
 
                         </div>
+
+                        @if ($before_after == "after")
+                        
+                        <div style="min-height:10px;">
+                            <p>&nbsp</p>
+                        </div>
+
+                        <div class="col-sm-12">
+                            {{Form::label('achieved', 'Actual target achieved')}}
+                            {{Form::number('achieved', $activity->total_beneficiaries, ['class' => 'form-control',])}}
+                        </div>
+                        <div style="min-height:10px;">
+                            <p>&nbsp</p>
+                        </div>
+                        <div class="col-sm-12">
+                            {{Form::label('cost', 'Activity cost')}}
+                            {{Form::number('cost', $activity->budget, ['class' => 'form-control',])}}
+                        </div>
+                        @endif
                         <div style="min-height:10px;">
                             <p>&nbsp</p>
                         </div>

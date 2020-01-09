@@ -77,12 +77,12 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('start', 'start')}}
-                            {{Form::date('start', $activity->start, ['class' => 'form-control', 'placeholder' => 'Start date'])}}
+                            {{Form::date('start', $activity->start, ['class' => 'form-control', 'placeholder' => 'Start date', 'readonly'=>'true'])}}
                         </div>
 
                         <div class="form-group">
                             {{Form::label('end', 'end')}}
-                            {{Form::date('end', $activity->end, ['class' => 'form-control', 'placeholder' => 'End date'])}}
+                            {{Form::date('end', $activity->end, ['class' => 'form-control', 'placeholder' => 'End date', 'readonly'=>'true'])}}
                         </div>
                         {{-- <div class="form-group">
                             {{Form::label('target_baseline', 'Target at baseline')}}

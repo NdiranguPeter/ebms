@@ -75,7 +75,8 @@ class ActivitiesAfterController extends Controller
         $cativityafter->total_female = $cativityafter->zero_two_male + $cativityafter->three_five_male + $cativityafter->six_twelve_male + $cativityafter->thirteen_seventeen_male + $cativityafter->eigteen_twentyfive_male + $cativityafter->twentysix_fourtynine_male + $cativityafter->fifty_fiftynine_male + $cativityafter->sixty_sixtynine_male + $cativityafter->above_eighty_male + $cativityafter->seventy_seventynine_male;
         $cativityafter->total_male = $cativityafter->zero_two_female + $cativityafter->three_five_female + $cativityafter->six_twelve_female + $cativityafter->thirteen_seventeen_female + $cativityafter->eigteen_twentyfive_female + $cativityafter->twentysix_fourtynine_female + $cativityafter->fifty_fiftynine_female + $cativityafter->sixty_sixtynine_female + $cativityafter->above_eighty_female + $cativityafter->seventy_seventynine_female;
 
-        $cativityafter->total_beneficiaries = $cativityafter->total_male + $cativityafter->total_female;
+        $cativityafter->total_beneficiaries = $request->input('achieved');
+        $cativityafter->budget = $request->input('cost');
         $cativityafter->save();      
         
         $activity = Activity::find($cativityafter->activity_id);

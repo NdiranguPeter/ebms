@@ -650,7 +650,10 @@ $challenges = Challenge::where('activity_id', $id)->get();
         $outcome = Outcome::find($output->outcome_id);
         $project = Project::find($outcome->project_id);
 
-        return view('activities.after')->with(['challenges'=>$challenges,'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
+        $units = Unit::all();
+
+
+        return view('activities.after')->with(['units'=>$units, 'challenges'=>$challenges,'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
 
     }
 
@@ -672,8 +675,9 @@ $challenges = Challenge::where('activity_id', $id)->get();
         $project = Project::find($outcome->project_id);
 
         // return view('activities.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
+$units = Unit::all();
 
-        return view('activities.after')->with(['month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
+        return view('activities.after')->with(['units'=>$units, 'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
 
     }
 

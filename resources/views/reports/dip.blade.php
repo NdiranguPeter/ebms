@@ -90,7 +90,7 @@
         <tr style="background: #349ba7 !important;color: #fff;">
             <th scope="col" style="width:100px;padding-left:5px;">Output</th>
             <th style="min-width: 200px;padding-left:5px;" scope="col">Description of activities</th>
-            <th scope="col" style="padding-left:5px;">Unit</th>
+            <th scope="col" style="padding-left:5px;">Type of deliverable</th>
             {{-- <th scope="col">Baseline</th> --}}
             <th scope="col" style="padding-left:5px;">Project target</th>
             <th style="padding: 2px;">JAN</th>

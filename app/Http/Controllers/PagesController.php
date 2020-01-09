@@ -228,7 +228,7 @@ class PagesController extends Controller
             ->join('activities', 'activities.output_id', 'outputs.id')
             ->join('activityafters', 'activityafters.activity_id', 'activities.id')
             ->select('activityafters.year')
-            ->where('activityafters.before_after', 'before')
+            ->where('activityafters.before_after', $request->before_after)
             ->where('projects.id', $request->project_id)
             ->groupBy('year')
             ->get();
@@ -239,7 +239,7 @@ class PagesController extends Controller
             ->join('activities', 'activities.output_id', 'outputs.id')
             ->join('activityafters', 'activityafters.activity_id', 'activities.id')
             ->select('activityafters.*')
-            ->where('activityafters.before_after', 'before')
+            ->where('activityafters.before_after', $request->before_after)
             ->where('activityafters.year', $request->year)
             ->where('projects.id', $request->project_id)
             ->get();

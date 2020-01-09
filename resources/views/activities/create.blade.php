@@ -189,12 +189,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            {{Form::label('start', 'start')}}
+                            {{Form::label('start', 'Start')}}
                             {{Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'Start date'])}}
                         </div>
 
                         <div class="form-group">
-                            {{Form::label('end', 'end')}}
+                            {{Form::label('end', 'End')}}
                             {{Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'End date'])}}
                         </div>
                         {{-- <div class="form-group">
