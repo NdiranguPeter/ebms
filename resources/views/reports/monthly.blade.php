@@ -104,82 +104,210 @@
         <th>{{$total}}</th>
     </tr>
     <tr>
-        <td colspan="4">
-            <b>Overall perfomance</b>
-            @foreach ($outputindicators as $outputindicator)
-            @php
-            $target_total = $target_total + $outputindicator->project_target;
-            @endphp
-            @endforeach
-            @foreach ($outputs as $output)
-            @foreach ($outputindicators as $outputindicator)
-            @if ($output->id == $outputindicator->output_id)
-            @foreach ($indicatorsafter as $indicatorafter)
-            @if ($outputindicator->id == $indicatorafter->indicator_id)
-            @php
-            if($month == 'January'){
-            $total = $indicatorafter->jan;
-            }
-            if($month == 'February'){
-            $total = $indicatorafter->jan + $indicatorafter->feb;
-            }
-            if($month == 'March'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
-            }
-            if($month == 'April'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr;
-            }
-            if($month == 'May'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may;
-            }
-            if($month == 'June'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun;
-            }if($month == 'July'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul;
-            }if($month == 'August'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug;
-            }if($month == 'September'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-            $indicatorafter->sep;
-            }if($month == 'October'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-            $indicatorafter->sep
-            + $indicatorafter->oct;
-            }if($month == 'November'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-            $indicatorafter->sep
-            +
-            $indicatorafter->oct + $indicatorafter->nov;
-            }
-            if($month == 'December'){
-            $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-            $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug +
-            $indicatorafter->sep
-            +
-            $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-            }
-            $perc=$total/$target_total;
+        @php
+        $a = 0;
+        $b = 0;
+        @endphp
+        @foreach ($outputs as $output)
+      @foreach ($outputindicators as $outputindicator)
+        @if ($output->id == $outputindicator->output_id)
+        @foreach ($indicatorsbefore as $indicatorbefore)
+        @if ($outputindicator->id == $indicatorbefore->indicator_id)
+        @if ($month == "January")
+        @php
+            $b = $b + $indicatorbefore->jan;
+        @endphp
+        @endif
+        @if ($month == "February")
+        @php
+        $b = $b + $indicatorbefore->jan + $indicatorbefore->feb;
+        @endphp
+        @endif
 
-            @endphp
+@if ($month == "March")
+@php
+$b = $b + $indicatorbefore->jan  + $indicatorbefore->feb + $indicatorbefore->mar;
+@endphp
+@endif
 
-            @endif
-            @endforeach
-            @endif
-            @endforeach
-            @endforeach
 
-            <div
-                style="font-weight: bold; font-size: xx-large; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:red;">
-                {{sprintf('%0.4f', 100)}}%
-            </div>
-        </td>
+@if ($month == "April")
+@php
+$b = $b + $indicatorbefore->jan  + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr;
+@endphp
+@endif
+
+@if ($month == "May")
+@php
+$b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may;
+@endphp
+@endif
+
+@if ($month == "June")
+@php
+$b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun;
+@endphp
+@endif
+
+@if ($month == "July")
+@php
+$b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun + $indicatorbefore->jul;
+@endphp
+@endif
+
+@if ($month == "August")
+@php
+$b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug;
+@endphp
+@endif
+
+@if ($month == "September")
+@php
+$b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep;
+@endphp
+@endif
+
+@if ($month == "October")
+@php
+$b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep + $indicatorbefore->oct;
+@endphp
+@endif
+
+@if ($month == "November")
+@php
+$b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep
++ $indicatorbefore->oct + $indicatorbefore->nov;
+@endphp
+@endif
+
+@if ($month == "December")
+@php
+$b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep
++ $indicatorbefore->oct + $indicatorbefore->nov + $indicatorbefore->dec;
+@endphp
+@endif
+
+
+        @endif
+        @endforeach
+        @endif
+        @endforeach
+        @endforeach
+
+
+        @foreach ($outputs as $output)
+        @foreach ($outputindicators as $outputindicator)
+        @if ($output->id == $outputindicator->output_id)
+        @foreach ($indicatorsafter as $indicatorafter)
+        @if ($outputindicator->id == $indicatorafter->indicator_id)
+        @if ($month == "January")
+        @php
+        $a = $a + $indicatorafter->jan;
+        @endphp
+        @endif
+        @if ($month == "February")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb;
+        @endphp
+        @endif
+        
+        @if ($month == "March")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
+        @endphp
+        @endif
+        
+        
+        @if ($month == "April")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr;
+        @endphp
+        @endif
+        
+        @if ($month == "May")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may;
+        @endphp
+        @endif
+        
+        @if ($month == "June")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun;
+        @endphp
+        @endif
+        
+        @if ($month == "July")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul;
+        @endphp
+        @endif
+        
+        @if ($month == "August")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug;
+        @endphp
+        @endif
+        
+        @if ($month == "September")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
+        @endphp
+        @endif
+        
+        @if ($month == "October")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep +
+        $indicatorafter->oct;
+        @endphp
+        @endif
+        
+        @if ($month == "November")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep
+        + $indicatorafter->oct + $indicatorafter->nov;
+        @endphp
+        @endif
+        
+        @if ($month == "December")
+        @php
+        $a = $a + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
+        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep
+        + $indicatorafter->oct + $indicatorafter->nov + $indicatorbefore->dec;
+        @endphp
+        @endif
+        
+        
+        @endif
+        @endforeach
+        @endif
+        @endforeach
+        @endforeach
+
+
+
+
+                                            @php
+                                            if ($b < 1) { $b=1; } $perfom=$a/$b * 100; if ($perfom <26) { $cr="red" ; }
+                                                if ($perfom>
+                                                25 &&
+                                                $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                                                    $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                                                        $cr = "green";
+                                                        }
+                                                        @endphp
+                                                        <td colspan="4"
+                                                            style="background-color:{{$cr}}; font-weight:bold; color:white;">
+                                                            Overall perfomance: {{sprintf('%0.2f',$perfom)}}%
+                                                        </td>
+
+
     </tr>
 </table>
 

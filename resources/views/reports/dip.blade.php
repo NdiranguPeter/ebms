@@ -28,7 +28,7 @@
         <p>Type of project: <b>{!!$project->type!!}</b></p>
     </div>
     <div class="col-sm-6">
-        <p>Locattion: <b>{{$project->location}} </b></p>
+        <p>Location: <b>{{$project->location}} </b></p>
         <p>Start: <b>January {{$period}} </b></p>
         <p>End: <b>December {{$period}} </b></p>
         @php
@@ -36,9 +36,52 @@
         $start = \Carbon\Carbon::parse($project->start);
         $diff = $end->diffInMonths($start);
         @endphp
-        <p>Duration: <b>{{$diff}}</b> Months</p>
-        <p><b>Total beneficiaries: </b>{{$activitiesafter->sum('total_beneficiaries')}}</p>
+        <p>Duration: <b>12</b> Months</p>
+        <p>Total beneficiaries: <b>{{$activitiesafter->sum('total_beneficiaries')}}</b></p>
     </div>
+
+    @php
+    $a = 0;
+    $b = 0;
+    @endphp
+
+    @foreach ($activities as $activity)
+    @foreach ($activitiesafter as $activityafter)
+    @if ($activityafter->activity_id == $activity->id)
+    @php
+    $a = $a + $activityafter->total_beneficiaries;
+    @endphp
+    @endif
+    @endforeach
+    @endforeach
+
+    @foreach ($outputs as $output)
+    @foreach ($activities as $activity)
+    @if ($activity->output_id == $output->id)
+    @php
+    $b = $b + $activity->project_target;
+    @endphp
+    @endif
+    @endforeach
+    @endforeach
+
+
+    @php
+    if ($b < 1) { $b=1; } $perfom=$a/$b * 100; if ($perfom <26) { $cr="red" ; } if ($perfom>
+        25 &&
+        $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+            $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                $cr = "green";
+                }
+                @endphp
+                <div class="col-sm-12" style="background-color:{{$cr}};font-weight: bold;
+    color: white;
+    max-height: 40px; padding-top: 8px;
+    font-size: large;">
+                    <p> Overall perfomance: {{$perfom}}%</p>
+                </div>
+
+
 
 </div>
 <table class="fgff table-bordered col-sm-12" style="font-size: smaller;">
