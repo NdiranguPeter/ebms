@@ -316,7 +316,7 @@ $b = $b + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar 
     <tr style="background: #349ba7 !important;color: #fff;">
         <th style="max-width:200px;padding: 8px;">Outputs</th>
         <th style="max-width:600px;padding: 8px;">Indicator description</th>
-        <th style="padding: 8px;">Value at start</th>
+        <th style="padding: 8px;">Baseline</th>
         <th style="padding: 8px;">Total targeted for the month</th>
         <th style="padding: 8px;">Achievement for the month of {{$month}}</th>
         <th style="padding: 8px;">RYBG</th>
@@ -800,7 +800,7 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
 
     </tbody>
 </table>
-<h2>Section 3: General observation and recommendation</h2>
+<h2>Section 3: General observations and recommendations</h2>
 <hr>
 <table class="table table-bordered">
     <thead>

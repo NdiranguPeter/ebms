@@ -106,7 +106,7 @@
     <tr style="background: #349ba7 !important;color: #fff;">
         <th>Goal | Outcome | Outputs</th>
         <th>Indicator description</th>
-        <th>Value at start</th>
+        <th>Baseline</th>
         <th>Total targeted for the year</th>
         <th>QRT 1</th>
         <th>QRT 2</th>
@@ -674,7 +674,7 @@
 
     </tbody>
 </table>
-<h2>Section 3: General observation and recommendation</h2>
+<h2>Section 3: General observations and recommendations</h2>
 <hr>
 <table class="table table-bordered">
     <thead>
