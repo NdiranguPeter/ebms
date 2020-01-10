@@ -173,3 +173,6 @@ Route::get('copy', 'PrintReportsController@index');
 
 Route::post('/before', 'IndicatorsController@before2');
 Route::post('/activity/before', 'ActivitiesController@before2');
+Route::get('/sendemail', 'SendEmailController@index');
+Route::post('/sendemail/send', 'SendEmailController@send');
+
