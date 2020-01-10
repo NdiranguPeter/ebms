@@ -22,7 +22,7 @@
                 <h1>
                     Monthly Peformance Report
                 </h1>
-                <p style="float:right;">Date: @php
+                <p style="float:right;">Date of update: @php
                     $mytime = new DateTime();
                     echo $mytime->format('Y-m-d');
                     @endphp
@@ -50,8 +50,9 @@
                         <strong>{{ $message }}</strong>
                     </div>
                     @endif
-                    <div class="col-sm-12">
-                        <form method="post" action="{{url('sendemail/send')}}">
+                    <div class="col-sm-12" style="border:1px solid #ddd;">
+                        <form method="post" action="#">
+                            {{-- {{url('sendemail/send')}} --}}
                             {{ csrf_field() }}
                             <div class="form-group col-sm-6">
                                 <label>Staff Name</label>
@@ -71,18 +72,216 @@
                             </div>
 
                             <div class="form-group col-sm-12">
-                                <label><b>Key Achievements/Tasks Completed</b> <i>(Endeavour to discuss your
+                                <label><b>1. Key Achievements/Tasks Completed</b> <i>(Endeavour to discuss your
                                         achievements and
                                         completed tasks in the context of your performance/development objectives
                                         and/or the organisational strategy.)</i></label>
                                 <textarea name="achievements" class="form-control"></textarea>
                             </div>
                             <div class="form-group col-sm-12">
-                                <label><b>Key Challenges and Proposed Solutions/Need for Support</b> </label>
+                                <label><b>2. Key Challenges and Proposed Solutions/Need for Support</b> </label>
                                 <textarea name="challenges" class="form-control"></textarea>
                             </div>
+                            <div class="form-group col-sm-12">
+                                <label><b>3. Monthly Deliverables</b>
+                                    <i> If not submitted, please state reasons below and expected submission date
+                                        For regional level, state the number of submissions and the number of
+                                        non-submissions, state reasons for
+                                        non-submissions
+                                        and expected submission dates</i> </label>
+
+                                <table class="">
+                                    <tr>
+                                        <td style="min-width: 300px;
+    padding: 10px;">Employee Screening Update</td>
+                                        <td colspan="2" style="min-width: 200px;
+    padding: 10px;">
+                                            <select name="screening" id="">
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </td>
+                                        <td style="min-width: 300px;
+    padding: 10px;">
+                                            <textarea name="screening_reason" class="form-control"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Income Targets</td>
+                                        <td colspan="2" style="min-width: 200px;
+    padding: 10px;">
+                                            <select name="targets" id="">
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </td>
+                                        <td style="min-width: 300px;
+    padding: 10px;">
+                                            <textarea name="target_reason" class="form-control"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Project Monitoring Template</td>
+                                        <td colspan="2" style="min-width: 200px;
+    padding: 10px;">
+                                            <select name="monitoring" id="">
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </td>
+                                        <td style="min-width: 300px;
+    padding: 10px;">
+                                            <textarea name="mornitoring_reason" class="form-control"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Audit/M&E Plans (if applicable)</td>
+                                        <td colspan="2" style="min-width: 200px;
+    padding: 10px;">
+                                            <select name="me" id="">
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </td>
+                                        <td style="min-width: 300px;
+    padding: 10px;">
+                                            <textarea name="me_reason" class="form-control"></textarea>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                <label><b>4. Income Targets</b>
+                                    <i> Income should only consider the cash / in-kind that will be received by the
+                                        respective Field Offices during the year</i> </label>
+
+                                <table class="col-sm-12" style="table-layout:fixed;">
+                                    <tr>
+                                        <th rowspan="2" style="border:1px solid #ddd;">Country(ies)</th>
+                                        <th colspan="2" style="border:1px solid #ddd;">Income Target (Current Year) -
+                                            GBP</th>
+                                        <th colspan="2" style="border:1px solid #ddd;">Actual Income Received (YTD) -
+                                            GBP</th>
+                                        <th colspan="2" style="border:1px solid #ddd;">Forecast Income (YTD -> End of
+                                            Year) - GBP</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="border:1px solid #ddd;">Inc. IFDD and IR UK</th>
+                                        <th style="border:1px solid #ddd;">Exc. IFDD and IR UK</th>
+                                        <th style="border:1px solid #ddd;">Inc. IFDD and IR UK</th>
+                                        <th style="border:1px solid #ddd;">Exc. IFDD and IR UK</th>
+                                        <th style="border:1px solid #ddd;">Inc. IFDD and IR UK</th>
+                                        <th style="border:1px solid #ddd;">Exc. IFDD and IR UK</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" value="Kenya"></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" value="Ethiopia"></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" value="Somalia"></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" value="Sudan"></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" value="South Sudan"></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label><b>5. External Audits/M&E Visits Due in Next 3 Months</b>
+                                    <i>Include details of body conducting the external audit, reason(s) for external
+                                        audit/M&E visit and expected date of
+                                        visit(s)</i></label>
+                                <textarea name="achievements" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label><b>6. External Audits/M&E Visits Completed Last Month</b>
+                                    <i>Include details of the body that conducted the external audit, reason(s) for
+                                        external audit/M&E visit, the date the
+                                        external audit/M&E visit took place and outcome/recommended actions. Share the
+                                        action plans with the audit/M&E team and
+                                        line manager or provide a date you expect the action plan to be prepared by
+                                    </i></label>
+                                <textarea name="achievements" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label><b>7. Cases of Misconduct (Fraud, Complaints, Harassment, Child Protection Policy
+                                        Violation or Abuse)</b></label>
+                                <table>
+                                    <tr>
+                                        <th style="border:1px solid #ddd;">Incident Type</th>
+                                        <th style="border:1px solid #ddd;">Date of Occurrence</th>
+                                        <th style="border:1px solid #ddd;">Actions (to be) Taken and Deadline</th>
+                                        <th style="border:1px solid #ddd;">Informed IRW? (Yes/No, if yes, who?)</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label><b>8. Accidents and Deaths</b></label>
+                                <table>
+                                    <tr>
+                                        <th style="border:1px solid #ddd;">Incident Type</th>
+                                        <th style="border:1px solid #ddd;">Date of Occurrence</th>
+                                        <th style="border:1px solid #ddd;">Actions (to be) Taken and Deadline</th>
+                                        <th style="border:1px solid #ddd;">Informed IRW? (Yes/No, if yes, who?)</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                        <td><input type="text" value=""></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label><b>9. Any other discussions points (optional)</b></label>
+                                <textarea name="achievements" class="form-control"></textarea>
+                            </div>
                             <div class="form-group">
-                                <input type="submit" name="send" class="btn btn-info" value="Send" />
+                                <input type="submit" name="send" class="btn btn-info" value="Submit Report"
+                                    style="float:right" />
                             </div>
                         </form>
                     </div>
