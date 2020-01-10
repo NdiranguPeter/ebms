@@ -107,7 +107,7 @@
             <th style="padding: 2px;">DEC</th>
             <th style="padding: 2px;">Total </th>
             <th style="padding: 2px;">Responsible</th>
-            <th style="padding: 2px;">Budget</th>
+            {{-- <th style="padding: 2px;">Budget</th> --}}
             @if ($when == "after")
             <th>Peformance</th>
             @endif
@@ -225,7 +225,7 @@
             {{$total}}
         </th>
         <th>{{$activity->person_responsible}}</th>
-        <th>{{number_format($activity->budget)}}</th>
+        {{-- <th>{{number_format($activity->budget)}}</th> --}}
         @if ($when == "after")
         @php
         $perfo = $total/$activity->project_target*100;
