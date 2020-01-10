@@ -345,7 +345,6 @@
 
                         </div>
 
-                        @if ($before_after == "after")
                         
                         <div style="min-height:10px;">
                             <p>&nbsp</p>
@@ -355,6 +354,7 @@
                             {{Form::label('achieved', 'Actual target achieved')}}
                             {{Form::number('achieved', $activity->total_beneficiaries, ['class' => 'form-control',])}}
                         </div>
+                        @if ($before_after == "after")
                         <div style="min-height:10px;">
                             <p>&nbsp</p>
                         </div>

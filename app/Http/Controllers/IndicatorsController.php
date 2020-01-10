@@ -23,13 +23,13 @@ class IndicatorsController extends Controller
         //
     }
 
-      public function getIndicator($id)
+    public function getIndicator($id)
     {
         $years = \DB::table('indicatorafters')
-    ->select('indicatorafters.year')->where('indicatorafters.indicator_id', $id)
-    ->get();
+            ->select('indicatorafters.year')->where('indicatorafters.indicator_id', $id)
+            ->get();
 
-return json_encode($years);
+        return json_encode($years);
     }
 
     /**
@@ -57,7 +57,7 @@ return json_encode($years);
             'project_target' => 'required',
             'start' => 'required',
             'end' => 'required',
-            'end' => 'after:start'
+            'end' => 'after:start',
         ]);
 
         $user_id = auth()->user()->id;
@@ -86,13 +86,11 @@ return json_encode($years);
         $months = $interval->format('%m');
         $days = $interval->format('%d');
 
-
         $startyear = $datetime1->format('Y');
-        $startmonth = $datetime1->format('m'); 
-        
+        $startmonth = $datetime1->format('m');
+
         $endyear = $datetime2->format('Y');
         $endmonth = $datetime2->format('m');
-
 
         if ($startyear == $endyear) {
 
@@ -123,7 +121,7 @@ return json_encode($years);
 
             $indiibefore->save();
 
-                $indiafter = new Indicatorafter();
+            $indiafter = new Indicatorafter();
             $indiafter->indicator_id = $indicator->id;
             $indiafter->person_responsible = auth()->user()->name;
             $indiafter->jan = 0;
@@ -149,67 +147,64 @@ return json_encode($years);
             $indiafter->project_target = $request->input('project_target');
 
             $indiafter->save();
-        
 
         }
         if ($startyear != $endyear) {
-            for ($i =$startyear; $i <= $endyear; $i++) {
-                
-            $indiibefore = new Indicatorafter();
-            $indiibefore->indicator_id = $indicator->id;
-            $indiibefore->person_responsible = auth()->user()->name;
-            $indiibefore->jan = 0;
-            $indiibefore->feb = 0;
-            $indiibefore->mar = 0;
-            $indiibefore->apr = 0;
-            $indiibefore->may = 0;
-            $indiibefore->jun = 0;
-            $indiibefore->jul = 0;
-            $indiibefore->aug = 0;
-            $indiibefore->sep = 0;
-            $indiibefore->oct = 0;
-            $indiibefore->nov = 0;
-            $indiibefore->dec = 0;
-            $indiibefore->start = $indicator->start;
-            $indiibefore->end = $indicator->end;
-            $indiibefore->ovi_date = $indicator->end;
-            $indiibefore->before_after = "before";
-            $indiibefore->year = $i;
-            $indiibefore->created_at = $indicator->created_at;
-            $indiibefore->updated_at = $indicator->updated_at;
-            $indiibefore->baseline_target = $request->input('target_baseline');
-            $indiibefore->project_target = $request->input('project_target');
+            for ($i = $startyear; $i <= $endyear; $i++) {
 
-          $indiibefore->save();
-          
-          $indiafter = new Indicatorafter();
-$indiafter->indicator_id = $indicator->id;
-$indiafter->person_responsible = auth()->user()->name;
-$indiafter->jan = 0;
-$indiafter->feb = 0;
-$indiafter->mar = 0;
-$indiafter->apr = 0;
-$indiafter->may = 0;
-$indiafter->jun = 0;
-$indiafter->jul = 0;
-$indiafter->aug = 0;
-$indiafter->sep = 0;
-$indiafter->oct = 0;
-$indiafter->nov = 0;
-$indiafter->dec = 0;
-$indiafter->start = $indicator->start;
-$indiafter->end = $indicator->end;
-$indiafter->ovi_date = $indicator->end;
-$indiafter->before_after = "after";
-$indiafter->year = $i;
-$indiafter->created_at = $indicator->created_at;
-$indiafter->updated_at = $indicator->updated_at;
-$indiafter->baseline_target = $request->input('target_baseline');
-$indiafter->project_target = $request->input('project_target');
+                $indiibefore = new Indicatorafter();
+                $indiibefore->indicator_id = $indicator->id;
+                $indiibefore->person_responsible = auth()->user()->name;
+                $indiibefore->jan = 0;
+                $indiibefore->feb = 0;
+                $indiibefore->mar = 0;
+                $indiibefore->apr = 0;
+                $indiibefore->may = 0;
+                $indiibefore->jun = 0;
+                $indiibefore->jul = 0;
+                $indiibefore->aug = 0;
+                $indiibefore->sep = 0;
+                $indiibefore->oct = 0;
+                $indiibefore->nov = 0;
+                $indiibefore->dec = 0;
+                $indiibefore->start = $indicator->start;
+                $indiibefore->end = $indicator->end;
+                $indiibefore->ovi_date = $indicator->end;
+                $indiibefore->before_after = "before";
+                $indiibefore->year = $i;
+                $indiibefore->created_at = $indicator->created_at;
+                $indiibefore->updated_at = $indicator->updated_at;
+                $indiibefore->baseline_target = $request->input('target_baseline');
+                $indiibefore->project_target = $request->input('project_target');
 
-$indiafter->save();
+                $indiibefore->save();
 
+                $indiafter = new Indicatorafter();
+                $indiafter->indicator_id = $indicator->id;
+                $indiafter->person_responsible = auth()->user()->name;
+                $indiafter->jan = 0;
+                $indiafter->feb = 0;
+                $indiafter->mar = 0;
+                $indiafter->apr = 0;
+                $indiafter->may = 0;
+                $indiafter->jun = 0;
+                $indiafter->jul = 0;
+                $indiafter->aug = 0;
+                $indiafter->sep = 0;
+                $indiafter->oct = 0;
+                $indiafter->nov = 0;
+                $indiafter->dec = 0;
+                $indiafter->start = $indicator->start;
+                $indiafter->end = $indicator->end;
+                $indiafter->ovi_date = $indicator->end;
+                $indiafter->before_after = "after";
+                $indiafter->year = $i;
+                $indiafter->created_at = $indicator->created_at;
+                $indiafter->updated_at = $indicator->updated_at;
+                $indiafter->baseline_target = $request->input('target_baseline');
+                $indiafter->project_target = $request->input('project_target');
 
+                $indiafter->save();
 
             }
 
@@ -221,8 +216,6 @@ $indiafter->save();
             ->select('indicators.*')->where('projects.id', $indicator->project_id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-
-            
 
         if ($indicator->goal_id != 0) {
 
@@ -359,8 +352,7 @@ $indiafter->save();
 
         $indicator->delete();
 
-        $indafter = Indicatorafter::where('indicator_id',$id)->delete();
-
+        $indafter = Indicatorafter::where('indicator_id', $id)->delete();
 
         $indicators = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -413,60 +405,55 @@ $indiafter->save();
     public function after($id)
     {
 
-$before_after = 'after';
-$ind = Indicator::find($id);
+        $before_after = 'after';
+        $ind = Indicator::find($id);
 
-$datetime1 = new DateTime($ind->start);
-$startyear = $datetime1->format('Y');
+        $datetime1 = new DateTime($ind->start);
+        $startyear = $datetime1->format('Y');
 
-$indicator = Indicatorafter::where('indicator_id', $id)->where('year', $startyear)->where('before_after', $before_after)->first();
+        $units = Unit::all();
 
-return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
+        $indicator = Indicatorafter::where('indicator_id', $id)->where('year', $startyear)->where('before_after', $before_after)->first();
 
+        return view('indicators.after')->with(['units' => $units, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
 
     }
 
     public function before($id)
-   {
-       
-          
+    {
+
         $before_after = 'before';
         $ind = Indicator::find($id);
 
-
         $datetime1 = new DateTime($ind->start);
         $startyear = $datetime1->format('Y');
-        
-        $indicator = Indicatorafter::where('indicator_id',$id)->where('year',$startyear)->where('before_after', $before_after)->first();
+        $units = Unit::all();
 
-        return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind'=>$ind, 'yr'=>$startyear]);
+        $indicator = Indicatorafter::where('indicator_id', $id)->where('year', $startyear)->where('before_after', $before_after)->first();
 
-
+        return view('indicators.after')->with(['units' => $units, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
 
     }
 
+    public function before2(Request $request)
+    {
 
- public function before2(Request $request)
-   {
-                 
         $before_after = $request->input('before_after');
 
         $ind = Indicator::find($request->indicatorID);
 
-        
+        $units = Unit::all();
         $datetime1 = new DateTime($ind->start);
         $startyear = $datetime1->format('Y');
-                
-        $indicator = Indicatorafter::where('indicator_id',$request->indicatorID)->where('year',$request->year)->where('before_after', $before_after)->first();
-        if ($request->year > $startyear ) {
-        $indicator->start = $request->year.'-01-01';
+
+        $indicator = Indicatorafter::where('indicator_id', $request->indicatorID)->where('year', $request->year)->where('before_after', $before_after)->first();
+        if ($request->year > $startyear) {
+            $indicator->start = $request->year . '-01-01';
 
         }
 
-        return view('indicators.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind'=>$ind,'yr'=>$request->year]);
-
-
+        return view('indicators.after')->with(['units' => $units, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $request->year]);
 
     }
-  
+
 }

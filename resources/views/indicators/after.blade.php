@@ -71,6 +71,21 @@
                     <input name="before_after" type="hidden" value={{$before_after}}>
 
                     <div class="col-sm-6">
+                        <p>Scoring unit:
+                        @foreach ($units as $unit)
+                            @if ($unit->id == $ind->unit)
+                            {{$unit->name}}
+                            @endif
+                        @endforeach
+                      </p>
+                    </div>
+                    <div class="col-sm-6">
+                        Target: {{$ind->project_target}}
+                    </div>
+<div style="min-height:10px;">
+    <p>&nbsp</p>
+</div>
+                    <div class="col-sm-6">
 
                         <div class="form-group">
                             {{Form::label('person_responsible', 'Person responsible')}}
