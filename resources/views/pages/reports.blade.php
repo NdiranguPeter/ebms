@@ -47,7 +47,7 @@
                     <a href="/projects/{{$project->id}}">
                         <div class="col-md-4 dashcard " style="background-color:#428bca !important; ">
                             <i class="ace-icon fa fa-desktop "></i>
-                            <h6>Print Project Profile </h6>
+                            <h6>Project Profile </h6>
                             {{-- <span class="badge badge-white" style="float:right;">{{$number_outcomes}}</span> --}}
                         </div>
                     </a>

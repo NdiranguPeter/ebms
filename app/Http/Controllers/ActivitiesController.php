@@ -717,12 +717,12 @@ $units = Unit::all();
         if ($request->year > $startyear) {
             $activity->start = $request->year . '-01-01';
         }
-
+$units = Unit::all();
         
 $challenges = Challenge::where('activity_id', $act->id)->get();
 
 
-        return view('activities.after')->with(['challenges'=>$challenges,'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $yr, 'before_after' => $before_after]);
+        return view('activities.after')->with(['units'=>$units,'challenges'=>$challenges,'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $yr, 'before_after' => $before_after]);
     }
 
 }

@@ -253,7 +253,7 @@ class PagesController extends Controller
 
         $cur = Currency::all();
 
-        return view('reports.templates.dip')->with(['when' => $request->before_after, 'period' => $request->year, 'alldonors' => $alldonors, 'donors' => $donors, 'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.dip')->with(['units'=>$units,'when' => $request->before_after, 'period' => $request->year, 'alldonors' => $alldonors, 'donors' => $donors, 'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function dipafter(Request $request)
