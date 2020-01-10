@@ -95,12 +95,12 @@
 
                         <div class="form-group">
                             {{Form::label('baseline_target', 'Baseline')}}
-                            {{Form::text('baseline_target',$indicator->baseline_target , ['class' =>
+                            {{Form::text('baseline_target',$ind->baseline_target , ['class' =>
                                                     'form-control', 'placeholder' => '','readonly' => 'true'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('project_target', 'Project target')}}
-                            {{Form::text('project_target',$indicator->project_target , ['class' =>
+                            {{Form::text('project_target',$ind->project_target , ['class' =>
                                                     'form-control', 'placeholder' => '','readonly' => 'true'])}}
                         </div>
                         <div class="form-group">

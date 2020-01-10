@@ -73,12 +73,14 @@
 		<b class="arrow"></b>
 	</li>
 
-	{{-- <li class="{{ (request()->is('settings')) ? 'active' : '' }}">
-	<a href="/settings">
-		<i class="menu-icon fa fa-cogs"></i>
-		<span class="menu-text"> Settings </span>
-	</a>
+	<li class="{{ (request()->is('monthly_perfomance_report')) ? 'active' : '' }}">
+		<a href="/monthly_perfomance_report">
+			<i class="menu-icon fa fa-circle"></i>
+			<span class="menu-text">Performance Report</span>
+		</a>
 
-	<b class="arrow"></b>
-	</li> --}}
+		<b class="arrow"></b>
+	</li>
+	<li>
+	</li>
 </ul><!-- /.nav-list -->

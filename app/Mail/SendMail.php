@@ -28,7 +28,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('ebms@islamicrelief.org')->subject('New Customer Equiry')->view('dynamic_email_template')->with('data', $this->data);
+        return $this->from('ebms@islamicrelief.org')->subject('Monthly Performance Report')->view('dynamic_email_template')->with('data', $this->data);
     }
 }
 
