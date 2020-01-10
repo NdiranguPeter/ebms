@@ -438,10 +438,10 @@
                 {{Form::label('challenge', 'State the Challenge', ['style'=>'color: #2da0ef;'])}}
                 {{Form::textarea('challenge','', ['class' => 'form-control'])}}
                 <hr>
-                {{Form::label('solution', 'Solution Implemented', ['style'=>'color: #2da0ef;'])}}
+                {{Form::label('solution', 'State Solution Implemented', ['style'=>'color: #2da0ef;'])}}
                 {{Form::textarea('solution','', ['class' => 'form-control'])}}
                 <hr>
-                {{Form::label('observation', 'General Observation and Recommendation', ['style'=>'color: #2da0ef;'])}}
+                {{Form::label('observation', 'State General Observation and Recommendation', ['style'=>'color: #2da0ef;'])}}
                 {{Form::textarea('observation','', ['class' => 'form-control'])}}
 
             </div>

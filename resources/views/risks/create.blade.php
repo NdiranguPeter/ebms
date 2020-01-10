@@ -157,7 +157,7 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('strategy', 'Response Strategy')}}
-                            {{Form::textarea('strategy', '', ['class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
+                            {{Form::textarea('strategy', '', ['class' => 'form-control', 'placeholder' => 'Response strategy'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Save Risk', ['class'=>'btn btn-primary'])}}

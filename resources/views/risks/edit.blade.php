@@ -177,7 +177,7 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('strategy', 'Response Strategy')}}
-                            {{Form::textarea('strategy', $risk->strategy, ['class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
+                            {{Form::textarea('strategy', $risk->strategy, ['class' => 'form-control', 'placeholder' => 'Response strategy'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::hidden('_method','PUT')}}

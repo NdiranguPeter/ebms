@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('response', 'Response Strategy')}}
-                            {{Form::textarea('response', '', ['class' => 'form-control', 'placeholder' => 'Responce strategy'])}}
+                            {{Form::textarea('response', '', ['class' => 'form-control', 'placeholder' => 'Response strategy'])}}
                         </div>
                         <div style="float:right;">
                             {{Form::submit('Update Risk', ['class'=>'btn btn-primary'])}}
