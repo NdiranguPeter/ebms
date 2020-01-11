@@ -75,6 +75,7 @@ Route::get('/reports/monthly/{id}', 'ProjectsController@export_monthly')->name('
 
 Route::get('/projects/export/{id}', 'ProjectsController@export_Project')->name('exportproject')->middleware('auth');
 Route::get('/allprojects', 'ProjectsController@allprojects')->middleware('auth');
+// Route::get('/regional', 'ProjectsController@regional')->middleware('auth');
 
 Route::get('/activities/before/{id}', 'ActivitiesController@before')->middleware('auth');
 Route::get('/activities/after/{id}', 'ActivitiesController@after')->middleware('auth');

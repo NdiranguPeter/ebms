@@ -54,6 +54,7 @@ class ProjectsController extends Controller
         return view('projects.allprojects')->with(['users' => $users, 'projects' => $projects]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
