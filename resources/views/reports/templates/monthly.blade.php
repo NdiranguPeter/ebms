@@ -29,7 +29,7 @@
                 {{-- {{route('exportmonthly',$project->id)}} --}}
                 <a href="/export_report" class="btn btn-primary" style="float:right; margin-left: 20px;">
                     <i class="ace-icon fa fa-download"></i>
-                    download monthly report
+
                 </a>
                 <a href="/perfomance/{{$project->id}}/{{$year}}" class="btn btn-success" style=" float:right;">
                     <i class="ace-icon fa fa-arrow-circle-o-left"></i>

@@ -28,7 +28,7 @@
             <div class="page-header">
                 <a href="/export_report" class="btn btn-primary" style="float:right; margin-left: 20px;">
                     <i class="ace-icon fa fa-download"></i>
-                    Download Partners Details
+
                 </a>
                 <a href="/reports/{{$project->id}}" class="btn btn-success" style=" float:right;">
                     <i class="ace-icon fa fa-arrow-circle-o-left"></i>

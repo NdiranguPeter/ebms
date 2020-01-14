@@ -35,7 +35,6 @@
                     {{-- {{route('exportdip',$outcome->id)}} --}}
                     <a href="/export_report" class="btn btn-success" style="float:right; margin-bottom: 2%;">
                         <i class="ace-icon fa fa-download"></i>
-                        Download DIP
                     </a>
                     @include('planning.table',$outputs)
 
