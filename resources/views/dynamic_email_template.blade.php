@@ -156,7 +156,7 @@ $m = "December";
                 <p>Project Monitoring Template</p>
             </td>
             <td width="227">
-                <p>{{$data['mornitoring']}}</p>
+                <p>{{$data['monitoring']}}</p>
             </td>
             <td width="819">
                 <p>{{$data['mornitoring_reason']}}</p>

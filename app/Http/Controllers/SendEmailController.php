@@ -29,7 +29,7 @@ class SendEmailController extends Controller
 
         $data = $request->all();
 
-        dd($data);
+        // dd($data);
 
      Mail::to($user)->send(new SendMail($data));
      return back()->with('success', 'Report successfully submitted!');
