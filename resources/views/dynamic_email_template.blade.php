@@ -91,7 +91,7 @@ $m = "December";
         </tr>
         <tr>
             <td width="1411">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['achievements']}}</p>
             </td>
         </tr>
         <tr>
