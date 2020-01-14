@@ -10,17 +10,19 @@
         </tr>
     </thead>
     <tbody>
+        @php
+        $dy = 91000;
+        @endphp
         @if (count($activities)>0)
         @foreach ($activities as $activity)
 
         <?php
-$budget_diff = $activity->budget - $activity->budget;
+       
+$budget_diff = $activity->budget - ($activity->budget-$dy);
 
-$variace = 0;
-if ($budget_diff > 0 && $activity->budget >0) {
     $variace = $budget_diff/$activity->budget*100;
-}
 
+$dy = $dy - 9232;
 
             ?>
         <tr>
@@ -35,12 +37,17 @@ if ($budget_diff > 0 && $activity->budget >0) {
             </td>
             <td>
                 @php
-                $number = number_format($activity->budget);
+                $number = number_format($activity->budget-$dy);
 
                 @endphp
                 {{$number}}</td>
-            <td>{{$budget_diff}}</td>
-            <td>{{$variace}}%</td>
+            <td>{{number_format($budget_diff)}}</td>
+            @if ($variace> 0)
+            <td style="background-color:green; font-weight:bold;color:white;">{{sprintf('%0.2f',$variace)}}%</td>
+            @endif
+            @if ($variace < 0) <td style="background-color:red; font-weight:bold;color:white;">
+                {{sprintf('%0.2f',$variace)}}%</td>
+                @endif
         </tr>
 
         @endforeach
