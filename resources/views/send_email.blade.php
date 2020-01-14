@@ -20,7 +20,7 @@
 
             <div class="page-header">
                 <h1>
-                    Monthly Peformance Report
+                    Monthly Management Peformance Report
                 </h1>
                 <p style="float:right;">Date of update: @php
                     $mytime = new DateTime();
@@ -63,13 +63,17 @@
                                 <label>Job Title</label>
                                 <input type="text" name="title" class="form-control" value="" />
                             </div>
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-4">
                                 <label>Country/Department</label>
                                 <input type="text" name="department" class="form-control" value="" />
                             </div>
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-4">
                                 <label>Line Manager</label>
                                 <input type="text" name="manager" class="form-control" value="" />
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>Line Manager Email</label>
+                                <input type="text" name="manager_email" class="form-control" value="" />
                             </div>
 
                             <div class="form-group col-sm-12">

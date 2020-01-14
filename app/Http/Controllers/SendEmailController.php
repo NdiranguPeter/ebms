@@ -25,11 +25,12 @@ class SendEmailController extends Controller
 
 
         $user = auth()->user()->email;
-        $manager = $request->input("line_manager");
-
         $data = $request->all();
 
      Mail::to($user)->send(new SendMail($data));
+
+     Mail::to($request->manager_email)->send(new SendMail($data));
+
      return back()->with('success', 'Report successfully submitted!');
 
     }
