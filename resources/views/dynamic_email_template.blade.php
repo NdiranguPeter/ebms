@@ -50,7 +50,7 @@
     @endphp
     <h3>Monthly Management Update: {{$m}}</h3>
 
-    <table>
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <td width="236">
@@ -89,7 +89,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <table>
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <td width="1411">
@@ -117,7 +117,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <table>
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <td colspan="3" width="1411">
@@ -183,7 +183,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <table>
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <td colspan="7" width="1417">
@@ -251,7 +251,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <table>
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <td width="1414">
@@ -269,7 +269,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <table>
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <td width="1414">
@@ -286,7 +286,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <table width="1419">
+    <table width="1419" class="table table-bordered">
         <tbody>
             <tr>
                 <td colspan="4" width="1419">
@@ -325,7 +325,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <table width="1419">
+    <table width="1419" class="table table-bordered">
         <tbody>
             <tr>
                 <td colspan="4" width="1419">
@@ -363,7 +363,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <table width="1422">
+    <table width="1422" class="table table-bordered">
         <tbody>
             <tr>
                 <td width="1422">
