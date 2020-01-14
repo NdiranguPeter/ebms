@@ -36,7 +36,6 @@
                 {{number_format($activity->budget)}}
             </td>
         </tr>
-
         @endforeach
 
         @else
