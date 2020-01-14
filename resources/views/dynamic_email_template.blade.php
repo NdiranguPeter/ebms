@@ -85,8 +85,7 @@ $m = "December";
             <td width="1411">
                 <p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Key Achievements/Tasks
                         Completed</strong></p>
-                <p><em>Endeavour to discuss your achievements and completed tasks in the context of your
-                        performance/development objectives and/or the organisational strategy. </em></p>
+
             </td>
         </tr>
         <tr>
@@ -113,9 +112,7 @@ $m = "December";
         <tr>
             <td colspan="3" width="1411">
                 <p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Monthly Deliverables</strong></p>
-                <p><em>If not submitted, please state reasons below and expected submission date</em></p>
-                <p><em>For regional level, state the number of submissions and the number of non-submissions, state
-                        reasons for non-submissions and expected submission dates</em></p>
+
             </td>
         </tr>
         <tr>
@@ -181,11 +178,7 @@ $m = "December";
         <tr>
             <td colspan="7" width="1417">
                 <p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Income Targets</strong></p>
-                <p><em>Income should only consider the cash / in-kind that will be received by the respective Field
-                        Offices during the
-                        year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </em></p>
+
             </td>
         </tr>
         <tr>
@@ -254,8 +247,7 @@ $m = "December";
             <td width="1414">
                 <p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>External Audits/M&amp;E Visits Due in
                         Next 3 Months</strong></p>
-                <p><em>Include details of body conducting the external audit, reason(s) for external audit/M&amp;E visit
-                        and expected date of visit(s)</em></p>
+
             </td>
         </tr>
         <tr>
@@ -272,10 +264,7 @@ $m = "December";
             <td width="1414">
                 <p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>External Audits/M&amp;E Visits
                         Completed Last Month</strong></p>
-                <p><em>Include details of the body that conducted the external audit, reason(s) for external
-                        audit/M&amp;E visit, the date the external audit/M&amp;E visit took place and
-                        outcome/recommended actions. Share the action plans with the audit/M&amp;E team and line manager
-                        or provide a date you expect the action plan to be prepared by</em></p>
+
             </td>
         </tr>
         <tr>
