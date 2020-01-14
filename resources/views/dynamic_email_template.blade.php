@@ -1,5 +1,5 @@
 @php
-$datetime1 = new \DateTime($request->date);
+$datetime1 = new \DateTime($data['date']);
 $month = $datetime1->format('m');
 if ($month == 1) {
 $m = "January";
@@ -47,19 +47,19 @@ $m = "December";
                 <p><strong>Staff Name</strong></p>
             </td>
             <td width="236">
-                <p>{{$data->name}}</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="236">
                 <p><strong>Job Title</strong></p>
             </td>
             <td width="236">
-                <p>{{$data->title}}</p>
+                <p>{{$data['title']}}</p>
             </td>
             <td rowspan="2" width="236">
                 <p><strong>Date of Update</strong></p>
             </td>
             <td rowspan="2" width="236">
-                <p>{{$data->date}}</p>
+                <p>{{$data['date']}}</p>
             </td>
         </tr>
         <tr>
@@ -67,13 +67,13 @@ $m = "December";
                 <p><strong>Country/Department</strong></p>
             </td>
             <td width="236">
-                <p>&nbsp;</p>
+                <p>{{$data['department']}}</p>
             </td>
             <td width="236">
                 <p><strong>Line Manager</strong></p>
             </td>
             <td width="236">
-                <p>&nbsp;</p>
+                <p>{{$data['manager']}}</p>
             </td>
         </tr>
     </tbody>
@@ -91,7 +91,7 @@ $m = "December";
         </tr>
         <tr>
             <td width="1411">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
         <tr>
@@ -102,7 +102,7 @@ $m = "December";
         </tr>
         <tr>
             <td width="1411">
-                <p>&nbsp;</p>
+                <p>{{$data['challenges']}}</p>
             </td>
         </tr>
     </tbody>
@@ -134,10 +134,10 @@ $m = "December";
                 <p>Employee Screening Update</p>
             </td>
             <td width="227">
-                <p>&nbsp;</p>
+                <p>{{$data['screening']}}</p>
             </td>
             <td width="819">
-                <p>&nbsp;</p>
+                <p>{{$data['screening_reason']}}</p>
             </td>
         </tr>
         <tr>
@@ -145,10 +145,10 @@ $m = "December";
                 <p>Income Targets</p>
             </td>
             <td width="227">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="819">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
         <tr>
@@ -156,10 +156,10 @@ $m = "December";
                 <p>Project Monitoring Template</p>
             </td>
             <td width="227">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="819">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
         <tr>
@@ -167,10 +167,10 @@ $m = "December";
                 <p>Audit/M&amp;E Plans (if applicable)</p>
             </td>
             <td width="227">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="819">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
     </tbody>
@@ -224,25 +224,25 @@ $m = "December";
         </tr>
         <tr>
             <td width="272">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="191">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="191">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="191">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="191">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="191">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="191">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
     </tbody>
@@ -260,7 +260,7 @@ $m = "December";
         </tr>
         <tr>
             <td width="1414">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
     </tbody>
@@ -280,7 +280,7 @@ $m = "December";
         </tr>
         <tr>
             <td width="1414">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
     </tbody>
@@ -310,16 +310,16 @@ $m = "December";
         </tr>
         <tr>
             <td width="339">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="339">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="371">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="371">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
     </tbody>
@@ -348,16 +348,16 @@ $m = "December";
         </tr>
         <tr>
             <td width="339">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="339">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="371">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
             <td width="371">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
     </tbody>
@@ -373,10 +373,8 @@ $m = "December";
         </tr>
         <tr>
             <td width="1422">
-                <p>&nbsp;</p>
+                <p>{{$data['name']}}</p>
             </td>
         </tr>
     </tbody>
 </table>
-<p>&nbsp;</p>
-<p><em>Remember to forward this form (soft copy only) to your Line Manager</em></p>
