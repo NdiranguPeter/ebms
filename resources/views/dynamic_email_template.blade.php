@@ -145,7 +145,7 @@ $m = "December";
                 <p>Income Targets</p>
             </td>
             <td width="227">
-                <p>{{$data['target']}}</p>
+                <p>{{$data['targets']}}</p>
             </td>
             <td width="819">
                 <p>{{$data['target_reason']}}</p>
