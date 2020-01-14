@@ -145,10 +145,10 @@ $m = "December";
                 <p>Income Targets</p>
             </td>
             <td width="227">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['target']}}</p>
             </td>
             <td width="819">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['target_reason']}}</p>
             </td>
         </tr>
         <tr>
@@ -156,10 +156,10 @@ $m = "December";
                 <p>Project Monitoring Template</p>
             </td>
             <td width="227">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['mornitoring']}}</p>
             </td>
             <td width="819">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['mornitoring_reason']}}</p>
             </td>
         </tr>
         <tr>
@@ -167,10 +167,10 @@ $m = "December";
                 <p>Audit/M&amp;E Plans (if applicable)</p>
             </td>
             <td width="227">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['me']}}</p>
             </td>
             <td width="819">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['me_reason']}}</p>
             </td>
         </tr>
     </tbody>
@@ -224,25 +224,25 @@ $m = "December";
         </tr>
         <tr>
             <td width="272">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['country']}}</p>
             </td>
             <td width="191">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['I_T_Inc_IFDD']}}</p>
             </td>
             <td width="191">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['I_T_Enc_IFDD']}}</p>
             </td>
             <td width="191">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['A_I_Inc_IFDD']}}</p>
             </td>
             <td width="191">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['A_I_Enc_IFDD']}}</p>
             </td>
             <td width="191">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['F_I_Inc_IFDD']}}</p>
             </td>
             <td width="191">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['F_I_Enc_IFDD']}}</p>
             </td>
         </tr>
     </tbody>
@@ -260,7 +260,7 @@ $m = "December";
         </tr>
         <tr>
             <td width="1414">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['external_audit_next_3months']}}</p>
             </td>
         </tr>
     </tbody>
@@ -280,7 +280,7 @@ $m = "December";
         </tr>
         <tr>
             <td width="1414">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['external_audit_last_month']}}</p>
             </td>
         </tr>
     </tbody>
@@ -310,16 +310,16 @@ $m = "December";
         </tr>
         <tr>
             <td width="339">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['case_type']}}</p>
             </td>
             <td width="339">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['case_occurrence_date']}}</p>
             </td>
             <td width="371">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['case_actions']}}</p>
             </td>
             <td width="371">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['case_informed_irw']}}</p>
             </td>
         </tr>
     </tbody>
@@ -348,16 +348,16 @@ $m = "December";
         </tr>
         <tr>
             <td width="339">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['accident_type']}}</p>
             </td>
             <td width="339">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['accident_date']}}</p>
             </td>
             <td width="371">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['accident_actions']}}</p>
             </td>
             <td width="371">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['accident_informed_irw']}}</p>
             </td>
         </tr>
     </tbody>
@@ -373,7 +373,7 @@ $m = "December";
         </tr>
         <tr>
             <td width="1422">
-                <p>{{$data['name']}}</p>
+                <p>{{$data['aob']}}</p>
             </td>
         </tr>
     </tbody>
