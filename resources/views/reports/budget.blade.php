@@ -33,7 +33,7 @@
             </td>
 
             <td>
-                {{$activity->budget}}
+                {{number_format($activity->budget)}}
             </td>
         </tr>
 
