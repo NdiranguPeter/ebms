@@ -85,7 +85,7 @@
                         <div class="col-md-4 dashcard" style="background-color:#415f8f !important; ">
                             <i class="ace-icon fa fa-lemon-o "></i>
 
-                            <h6>Assumptions table</h6>
+                            <h6>Assumptions Table</h6>
                             {{-- <span class="badge badge-success" style="float:right;">{{$number_activities}}</span>
                             --}}
 

@@ -225,7 +225,6 @@
             {{$total}}
         </th>
         <th>{{$activity->person_responsible}}</th>
-        {{-- <th>{{number_format($activity->budget)}}</th> --}}
         @if ($when == "after")
         @php
         $perfo = $total/$activity->project_target*100;

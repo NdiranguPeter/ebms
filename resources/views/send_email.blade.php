@@ -9,7 +9,7 @@
                     <a href="/home">Home</a>
                 </li>
                 /
-                <li class="active">Monthly Peformance Report</li>
+                <li class="active">Monthly Management Peformance Report</li>
             </ul><!-- /.breadcrumb -->
 
 
@@ -50,10 +50,11 @@
                         <strong>{{ $message }}</strong>
                     </div>
                     @endif
-                    <div class="col-sm-12" style="border:1px solid #ddd;">
-                        <form method="post" action="#">
-                            {{-- {{url('sendemail/send')}} --}}
+                    <div class="col-sm-12" style="border: 1px solid #bfdeec;">
+                        <form method="post" action="{{url('sendemail/send')}}">
+
                             {{ csrf_field() }}
+                            <input type="hidden" name="date" value={{$mytime->format('Y-m-d')}}>
                             <div class="form-group col-sm-6">
                                 <label>Staff Name</label>
                                 <input type="text" name="name" class="form-control" value="" />
@@ -176,50 +177,23 @@
                                         <th style="border:1px solid #ddd;">Exc. IFDD and IR UK</th>
                                     </tr>
                                     <tr>
-                                        <td><input type="text" value="Kenya"></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
+                                        <td>
+                                            <select name="country">
+                                                <option value="Kenya">Kenya</option>
+                                                <option value="Somalia">Somalia</option>
+                                                <option value="Ethiopia">Ethiopia</option>
+                                                <option value="Sudan">Sudan</option>
+                                                <option value="SouthSudan">SouthSudan</option>
+                                            </select>
+                                        </td>
+                                        <td><input name="I_T_Inc_IFDD" type="text" value=""></td>
+                                        <td><input name="I_T_Enc_IFDD" type="text" value=""></td>
+                                        <td><input name="A_I_Inc_IFDD" type="text" value=""></td>
+                                        <td><input name="A_I_Enc_IFDD" type="text" value=""></td>
+                                        <td><input name="F_I_Inc_IFDD" type="text" value=""></td>
+                                        <td><input name="F_I_Enc_IFDD" type="text" value=""></td>
                                     </tr>
-                                    <tr>
-                                        <td><input type="text" value="Ethiopia"></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="text" value="Somalia"></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="text" value="Sudan"></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="text" value="South Sudan"></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                    </tr>
+
                                 </table>
 
                             </div>
@@ -228,7 +202,7 @@
                                     <i>Include details of body conducting the external audit, reason(s) for external
                                         audit/M&E visit and expected date of
                                         visit(s)</i></label>
-                                <textarea name="achievements" class="form-control"></textarea>
+                                <textarea name="external_audit_next_3months" class="form-control"></textarea>
                             </div>
                             <div class="form-group col-sm-12">
                                 <label><b>6. External Audits/M&E Visits Completed Last Month</b>
@@ -238,7 +212,7 @@
                                         action plans with the audit/M&E team and
                                         line manager or provide a date you expect the action plan to be prepared by
                                     </i></label>
-                                <textarea name="achievements" class="form-control"></textarea>
+                                <textarea name="external_audit_last_month" class="form-control"></textarea>
                             </div>
                             <div class="form-group col-sm-12">
                                 <label><b>7. Cases of Misconduct (Fraud, Complaints, Harassment, Child Protection Policy
@@ -251,10 +225,10 @@
                                         <th style="border:1px solid #ddd;">Informed IRW? (Yes/No, if yes, who?)</th>
                                     </tr>
                                     <tr>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
+                                        <td><input name="case_type" type="text" value=""></td>
+                                        <td><input name="case_occurrence_date" type="text" value=""></td>
+                                        <td><input name="case_actions" type="text" value=""></td>
+                                        <td><input name="case_informed_irw" type="text" value=""></td>
                                     </tr>
                                 </table>
                             </div>
@@ -268,16 +242,16 @@
                                         <th style="border:1px solid #ddd;">Informed IRW? (Yes/No, if yes, who?)</th>
                                     </tr>
                                     <tr>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
-                                        <td><input type="text" value=""></td>
+                                        <td><input name="accident_type" type="text" value=""></td>
+                                        <td><input name="accident_date" type="text" value=""></td>
+                                        <td><input name="accident_actions" type="text" value=""></td>
+                                        <td><input name="accident_informed_irw" type="text" value=""></td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="form-group col-sm-12">
                                 <label><b>9. Any other discussions points (optional)</b></label>
-                                <textarea name="achievements" class="form-control"></textarea>
+                                <textarea name="aob" class="form-control"></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="send" class="btn btn-info" value="Submit Report"
