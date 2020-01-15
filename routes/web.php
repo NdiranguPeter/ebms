@@ -124,7 +124,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/regional', 'HomeController@regional')->middleware('auth');
-// Route::get('/unauthenticated', 'PagesController@unauthenticated');
+Route::get('/kenya', 'HomeController@kenya');
 
 Route::resource('countries', 'CountriesController')->middleware('auth');
 

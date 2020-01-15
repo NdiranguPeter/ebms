@@ -28,6 +28,8 @@ class HomeController extends Controller
     }
     public function regional()
     {
+        return view('regional');
+
         $projects = Project::all();
 
         $min_year = \DB::table('projects')->select("projects.start")->get();
@@ -134,6 +136,12 @@ class HomeController extends Controller
 
         $countries = Country::all();
         return view('regional')->with(['projects'=>$projects,'sudana'=>$sudana,'sudanb'=>$sudanb, 'southsudana'=>$southsudana,'southsudanb'=>$southsudanb,'somaliaa'=>$somaliaa,'somaliab'=>$somaliab,'ethiopiaa'=>$ethiopiaa,'ethiopiab'=>$ethiopiab,'kenyaa'=>$kenyaa, 'kenyab'=>$kenyab,'activities' => $activities, 'countries' => $countries]);
+    }
+
+     public function kenya()
+    {
+         return view('kenya');
+
     }
 
 }
