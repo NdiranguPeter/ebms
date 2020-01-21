@@ -210,7 +210,7 @@ class IndicatorsController extends Controller
 
         }
 
-        $project = Project::find($indicator->project_id);
+        $project = Project::findOrFail($indicator->project_id);
         $indicators = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
             ->select('indicators.*')->where('projects.id', $indicator->project_id)
@@ -235,7 +235,7 @@ class IndicatorsController extends Controller
      */
     public function show($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $indicators = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
             ->select('indicators.*')->where('projects.id', $id)
@@ -254,7 +254,7 @@ class IndicatorsController extends Controller
      */
     public function edit($id)
     {
-        $indicator = Indicator::find($id);
+        $indicator = Indicator::findOrFail($id);
         $msg = '';
         $goal = $indicator->goal_id;
         $put = $indicator->output_id;
@@ -282,11 +282,11 @@ class IndicatorsController extends Controller
             $come = 1;
 
         }
-        $outcome = Outcome::find($indicator->outcome_id);
-        $output = Output::find($indicator->output_id);
+        $outcome = Outcome::findOrFail($indicator->outcome_id);
+        $output = Output::findOrFail($indicator->output_id);
         $units = Unit::all();
 
-        $project = Project::find($indicator->project_id);
+        $project = Project::findOrFail($indicator->project_id);
 
         return view('indicators.edit')->with(['output' => $output, 'outcome' => $outcome, 'units' => $units, 'msg' => $msg, 'project' => $project, 'goal' => $goal, 'put' => $put, 'come' => $come, 'indicator' => $indicator]);
     }
@@ -311,7 +311,7 @@ class IndicatorsController extends Controller
         ]);
 
         $user_id = auth()->user()->id;
-        $indicator = indicator::find($id);
+        $indicator = indicator::findOrFail($id);
         $indicator->project_target = $request->input('project_target');
         $indicator->user_id = $user_id;
         $indicator->name = $request->input('indicator');
@@ -327,7 +327,7 @@ class IndicatorsController extends Controller
 
         $indicator->save();
 
-        $project = Project::find($indicator->project_id);
+        $project = Project::findOrFail($indicator->project_id);
         $indicators = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
             ->select('indicators.*')->where('projects.id', $indicator->project_id)
@@ -346,9 +346,9 @@ class IndicatorsController extends Controller
      */
     public function destroy($id)
     {
-        $indicator = Indicator::find($id);
+        $indicator = Indicator::findOrFail($id);
         $pro_id = $indicator->project_id;
-        $project = Project::find($pro_id);
+        $project = Project::findOrFail($pro_id);
 
         $indicator->delete();
 
@@ -367,9 +367,9 @@ class IndicatorsController extends Controller
     public function createOutputIndicator($id)
     {
         $units = Unit::all();
-        $output = Output::find($id);
-        $outcome = outcome::find($output->outcome_id);
-        $project = project::find($outcome->project_id);
+        $output = Output::findOrFail($id);
+        $outcome = outcome::findOrFail($output->outcome_id);
+        $project = project::findOrFail($outcome->project_id);
         $indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
 
         return view('indicators.create')->with(['indicator_order' => $indicator_order, 'output' => $output, 'msg' => 'output', 'goal' => 0, 'come' => 0, 'put' => 1, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
@@ -380,8 +380,8 @@ class IndicatorsController extends Controller
 
         $units = Unit::all();
 
-        $outcome = outcome::find($id);
-        $project = project::find($outcome->project_id);
+        $outcome = outcome::findOrFail($id);
+        $project = project::findOrFail($outcome->project_id);
         $indicator_order = Indicator::where('project_id', $project->id)->max("i_order");
 
         return view('indicators.create')->with(['indicator_order' => $indicator_order, 'msg' => 'outcome', 'goal' => 0, 'come' => 1, 'put' => 0, 'project' => $project, 'outcome' => $outcome, 'units' => $units]);
@@ -392,7 +392,7 @@ class IndicatorsController extends Controller
 
         $units = Unit::all();
 
-        $project = project::find($id);
+        $project = project::findOrFail($id);
 
         $outcome = outcome::where('project_id', $project->id)->get();
 
@@ -406,7 +406,7 @@ class IndicatorsController extends Controller
     {
 
         $before_after = 'after';
-        $ind = Indicator::find($id);
+        $ind = Indicator::findOrFail($id);
 
         $datetime1 = new DateTime($ind->start);
         $startyear = $datetime1->format('Y');
@@ -423,7 +423,7 @@ class IndicatorsController extends Controller
     {
 
         $before_after = 'before';
-        $ind = Indicator::find($id);
+        $ind = Indicator::findOrFail($id);
 
         $datetime1 = new DateTime($ind->start);
         $startyear = $datetime1->format('Y');
@@ -440,7 +440,7 @@ class IndicatorsController extends Controller
 
         $before_after = $request->input('before_after');
 
-        $ind = Indicator::find($request->indicatorID);
+        $ind = Indicator::findOrFail($request->indicatorID);
 
         $units = Unit::all();
         $datetime1 = new DateTime($ind->start);

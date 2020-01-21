@@ -58,7 +58,7 @@ class QuestionsController extends Controller
 
         $qn = Question::create($request->all());
 
-        $survey = Survey::find($request->survey_id);
+        $survey = Survey::findOrFail($request->survey_id);
 
         $type = $request->type;
 
@@ -81,7 +81,7 @@ class QuestionsController extends Controller
      */
     public function show($id)
     {
- $survey = Survey::find($id);
+ $survey = Survey::findOrFail($id);
         $groups = Group::where('survey_id', $survey->id)->get();
         // dd($groups);
         $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->get();
@@ -114,7 +114,7 @@ class QuestionsController extends Controller
     public function data($id)
     {
 
-        $survey = Survey::find($id);
+        $survey = Survey::findOrFail($id);
 
         $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->paginate(10);
 
@@ -137,7 +137,7 @@ class QuestionsController extends Controller
     public function edit($id)
     {
 
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
         $groups = Group::where('survey_id', $question->survey_id)->get();
 
         return view('questions.edit')->with(['groups' => $groups, 'question' => $question]);
@@ -167,7 +167,7 @@ class QuestionsController extends Controller
 
         $qn_order = $request->input('qn_order');
         $in_order = $request->input('in_order');
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
 
         DB::table('questions')
             ->where('qn_order', '>=', $qn_order)
@@ -176,7 +176,7 @@ class QuestionsController extends Controller
 
         $request = $request->all();
 
-        Question::find($id)->update($request);
+        Question::findOrFail($id)->update($request);
 
         return redirect('/questions/' . $question->survey_id)->with('success', $question->name . ' updated successfully');
 
@@ -190,7 +190,7 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
 
         $survey_id = $question->survey_id;
         $name = $question->name;
@@ -208,7 +208,7 @@ class QuestionsController extends Controller
 
     public function duplicate($id)
     {
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
         $name = $question->name;
 
         $survey_id = $question->survey_id;
@@ -235,7 +235,7 @@ class QuestionsController extends Controller
     }
     public function qntype($id)
     {
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
 
         return view('questions.type')->with('question', $question);
 

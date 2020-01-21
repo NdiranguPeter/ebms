@@ -57,7 +57,7 @@ class RisksAfterController extends Controller
 
         $riskafter->save();
 
-        $risk = Risk::find($riskafter->risk_id);
+        $risk = Risk::findOrFail($riskafter->risk_id);
 
         $project_id = $risk->project_id;
         if ($risk->goal_id != 0) {
@@ -84,7 +84,7 @@ class RisksAfterController extends Controller
     public function show($id)
     {
 
-        $risk = Risk::find($id);
+        $risk = Risk::findOrFail($id);
         return view('risks.after')->with(['id'=>$id,'risk'=>$risk]);
     }
 

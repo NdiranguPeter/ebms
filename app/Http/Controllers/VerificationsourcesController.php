@@ -111,7 +111,7 @@ class VerificationsourcesController extends Controller
     public function selectIndicator($id)
     {
 
-        $indicator = Indicator::find($id);
+        $indicator = Indicator::findOrFail($id);
         return view('/verifiablesource/create')->with('indicator', $indicator);
     }
 }

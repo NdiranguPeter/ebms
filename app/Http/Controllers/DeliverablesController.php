@@ -62,7 +62,7 @@ class DeliverablesController extends Controller
      */
     public function show($id)
     {
-        $deliverable = Deliverable::find($id);
+        $deliverable = Deliverable::findOrFail($id);
 
         return view('deliverables.show')->with('deliverable', $deliverable);
     }
@@ -75,7 +75,7 @@ class DeliverablesController extends Controller
      */
     public function edit($id)
     {
-        $deliverable = Deliverable::find($id);
+        $deliverable = Deliverable::findOrFail($id);
 
         return view('deliverables.edit')->with('deliverable', $deliverable);
 
@@ -95,7 +95,7 @@ class DeliverablesController extends Controller
 
         ]);
 
-        $deliverable = Deliverable::find($id);
+        $deliverable = Deliverable::findOrFail($id);
 
         $deliverable->name = $request->input('name');
 
@@ -113,7 +113,7 @@ class DeliverablesController extends Controller
      */
     public function destroy($id)
     {
-        $deliverable = Deliverable::find($id);
+        $deliverable = Deliverable::findOrFail($id);
 
         $deliverable->delete();
 

@@ -60,8 +60,8 @@ class OutputsController extends Controller
         $output->save();
 
         $outputs = Output::where('outcome_id', $outcome_id)->get();
-        $outcome = outcome::find($outcome_id);
-        $project = Project::find($outcome->project_id);
+        $outcome = outcome::findOrFail($outcome_id);
+        $project = Project::findOrFail($outcome->project_id);
 
         return view('outputs.show')->with(['project' => $project, 'outputs' => $outputs, 'outcome' => $outcome, 'success' => 'output created']);
 
@@ -77,9 +77,9 @@ class OutputsController extends Controller
     {
         $outputs = Output::where('outcome_id', $id)->get();
 
-        $outcome = outcome::find($id);
+        $outcome = outcome::findOrFail($id);
 
-        $project = Project::find($outcome->project_id);
+        $project = Project::findOrFail($outcome->project_id);
 
         return view('outputs.show')->with(['outputs' => $outputs, 'outcome' => $outcome, 'project' => $project]);
 
@@ -94,7 +94,7 @@ class OutputsController extends Controller
     public function edit($id)
     {
 
-        $output = Output::find($id);
+        $output = Output::findOrFail($id);
     
     }
 
@@ -111,7 +111,7 @@ class OutputsController extends Controller
             'output' => 'required'
             ]);
 
-       $output = Output::find($id);
+       $output = Output::findOrFail($id);
        $output->name = $request->output;
 
        $output->save();
@@ -129,7 +129,7 @@ class OutputsController extends Controller
      */
     public function destroy($id)
     {
-          $output = Output::find($id);
+          $output = Output::findOrFail($id);
         $output->delete();
         return redirect('/outputs/'.$output->outcome_id)->with('error', 'output deleted');
     
@@ -138,7 +138,7 @@ class OutputsController extends Controller
     public function createOutput($id)
     {
 
-        $outcome = outcome::find($id);
+        $outcome = outcome::findOrFail($id);
 
         return view('outputs.create')->with('outcome', $outcome);
     }

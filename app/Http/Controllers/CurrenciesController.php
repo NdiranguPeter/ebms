@@ -75,7 +75,7 @@ class CurrenciesController extends Controller
      */
     public function edit($id)
     {
-        $currency = Currency::find($id);
+        $currency = Currency::findOrFail($id);
 
         return view('currencies.edit')->with('currency', $currency);
     }
@@ -97,7 +97,7 @@ class CurrenciesController extends Controller
 
         ]);
 
-        $currency = Currency::find($id);
+        $currency = Currency::findOrFail($id);
 
         $currency->symbol = $request->input('symbol');
         $currency->name = $request->input('name');
@@ -117,7 +117,7 @@ class CurrenciesController extends Controller
      */
     public function destroy($id)
     {
-        $currency = Currency::find($id);
+        $currency = Currency::findOrFail($id);
         $currency->delete();
 
         return redirect('/currencies')->with('error', 'currency deleted');

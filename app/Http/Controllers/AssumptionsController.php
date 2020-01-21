@@ -61,14 +61,14 @@ class AssumptionsController extends Controller
     public function goalAssumption($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $msg = 'Goal';
         return view('assumptions.create')->with(['output' => 0, 'outcome' => 0, 'goal' => 1, 'activity' => 0, 'project' => $project, 'msg' => $msg]);
 
     }
     public function outcomeAssumption($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $msg = 'Outcome';
 
         $outcomes = \DB::table('projects')
@@ -81,7 +81,7 @@ class AssumptionsController extends Controller
     }
     public function outputAssumption($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $msg = 'Output';
 
         $outputs = \DB::table('projects')
@@ -95,7 +95,7 @@ class AssumptionsController extends Controller
     }
     public function activityAssumption($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $msg = 'Activity';
         $activities = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -111,7 +111,7 @@ class AssumptionsController extends Controller
     public function goal($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -141,7 +141,7 @@ class AssumptionsController extends Controller
     public function outcome($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -170,7 +170,7 @@ class AssumptionsController extends Controller
     public function output($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -199,7 +199,7 @@ class AssumptionsController extends Controller
     public function activity($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -228,7 +228,7 @@ class AssumptionsController extends Controller
 
     public function destroy($id)
     {
-        $assumption = Assumption::find($id);
+        $assumption = Assumption::findOrFail($id);
         $assumption->delete();
 
         if ($assumption->outcome_id != 0) {
@@ -248,9 +248,9 @@ class AssumptionsController extends Controller
 
     public function edit($id)
     {
-        $assumption = Assumption::find($id);
+        $assumption = Assumption::findOrFail($id);
 
-        $project = Project::find($assumption->project_id);
+        $project = Project::findOrFail($assumption->project_id);
         $outcome = 0;
         $output = 0;
         $activity = 0;
@@ -320,7 +320,7 @@ $activities = \DB::table('projects')
 
         ]);
 
-        $assumption = Assumption::find($id);
+        $assumption = Assumption::findOrFail($id);
         $assumption->goal_id = $request->input('goal_id');
         $assumption->outcome_id = $request->input('outcome_id');
         $assumption->output_id = $request->input('output_id');

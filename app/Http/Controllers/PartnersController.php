@@ -79,7 +79,7 @@ return redirect('/partners')->with('success', 'Partner created');
      */
     public function show($id)
     {
-        $partner = Partner::find($id);
+        $partner = Partner::findOrFail($id);
 
         return view('partners.show')->with(['partner' => $partner]);
     }
@@ -92,7 +92,7 @@ return redirect('/partners')->with('success', 'Partner created');
      */
     public function edit($id)
     {
-        $partner = Partner::find($id);
+        $partner = Partner::findOrFail($id);
 
         return view('partners.edit')->with(['partner' => $partner]);
 
@@ -118,7 +118,7 @@ return redirect('/partners')->with('success', 'Partner created');
             'description' => 'required',
 
         ]);
-        $partner = Partner::find($id);
+        $partner = Partner::findOrFail($id);
         $partner->name = $request->input('name');
         $partner->acronym = $request->input('acronym');
         $partner->type = $request->input('type');
@@ -142,7 +142,7 @@ return redirect('/partners')->with('success', 'Partner created');
      */
     public function destroy($id)
     {
-        $partner = Partner::find($id);
+        $partner = Partner::findOrFail($id);
         $partner->delete();
 
         return redirect('/partners')->with(['error' => 'Patner deleted']);

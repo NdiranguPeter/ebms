@@ -103,11 +103,11 @@ class QuestionsController extends Controller
         $actyafter = Indicatorafter::where('indicator_id', $request->id)->where('before_after', "after")->first();
 
         if ($actyafter === null) {
-            $indicator = Indicator::find($request->id);
+            $indicator = Indicator::findOrFail($request->id);
         } else {
 
             $indicator = Indicatorafter::where('indicator_id', $request->id)->where('before_after', 'after')->first();
-            $act = Indicator::find($indicator->indicator_id);
+            $act = Indicator::findOrFail($indicator->indicator_id);
             $indicator->name = $act->name;
             $indicator->output_id = $act->output_id;
             $indicator->outcome_id = $act->outcome_id;
@@ -202,8 +202,8 @@ class QuestionsController extends Controller
 
         $actyafter = Activityafter::where('activity_id', $request->activity_id)->where('before_after', 'after')->first();
         if ($actyafter === null) {
-            $activity = Activity::find($id);
-            $output = Output::find($activity->output_id);
+            $activity = Activity::findOrFail($id);
+            $output = Output::findOrFail($activity->output_id);
             $activity->jan = 0;
             $activity->feb = 0;
             $activity->mar = 0;
@@ -220,7 +220,7 @@ class QuestionsController extends Controller
         } else {
 
             $activity = Activityafter::where('activity_id', $request->activity_id)->where('before_after', 'after')->first();
-            $act = Activity::find($activity->activity_id);
+            $act = Activity::findOrFail($activity->activity_id);
             $activity->name = $act->name;
             $activity->output_id = $act->output_id;
             $activity->start = $act->start;
@@ -228,14 +228,14 @@ class QuestionsController extends Controller
             $activity->id = $act->id;
             $activity->duration = $act->duration;
 
-            $output = Output::find($act->output_id);
+            $output = Output::findOrFail($act->output_id);
         }
 
         $units = Unit::all();
 
-        $outcome = Outcome::find($output->outcome_id);
+        $outcome = Outcome::findOrFail($output->outcome_id);
 
-        $project = Project::find($outcome->project_id);
+        $project = Project::findOrFail($outcome->project_id);
 
         $before_after = 'after';
 

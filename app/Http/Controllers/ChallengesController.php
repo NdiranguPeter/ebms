@@ -102,7 +102,7 @@ class ChallengesController extends Controller
      */
     public function destroy($id)
     {
-        $challenge = Challenge::find($id);
+        $challenge = Challenge::findOrFail($id);
         $challenge->delete();
 
         return redirect('/activities/after/' . $challenge->activity_id)->with('success', 'Challenge deleted');

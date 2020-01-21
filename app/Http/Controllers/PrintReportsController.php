@@ -28,7 +28,7 @@ class PrintReportsController extends Controller
                 ->get();
             $order = 1;
             foreach ($activities as $activity) {
-                $activity = Activity::find($activity->id);
+                $activity = Activity::findOrFail($activity->id);
                 $activity->order = $order;
                 $activity->save();
                 $order++;

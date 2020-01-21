@@ -15,7 +15,7 @@ class ProjectExport implements FromView
     public function view(): View
     {
         $projectid = $this->id;
-        $project = Project::find($projectid);
+        $project = Project::findOrFail($projectid);
 
         return view('projects.table', [
             'project' => $project,

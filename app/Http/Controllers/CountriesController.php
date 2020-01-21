@@ -47,7 +47,7 @@ class CountriesController extends Controller
      */
     public function show($id)
     {
-        $country = Country::find($id);
+        $country = Country::findOrFail($id);
 
         return view('countries.show')->with('country', $country);
     }

@@ -74,9 +74,9 @@ class SurveysController extends Controller
      */
     public function show($id)
     {
-        $survey = Survey::find($id);
+        $survey = Survey::findOrFail($id);
 
-        $county = Country::find($survey->country);
+        $county = Country::findOrFail($survey->country);
 
         return view('surveys.show')->with(['survey' => $survey, 'country' => $county]);
     }
@@ -89,7 +89,7 @@ class SurveysController extends Controller
      */
     public function edit($id)
     {
-        $survey = Survey::find($id);
+        $survey = Survey::findOrFail($id);
 
         return view('surveys.edit')->with('survey', $survey);
 
@@ -112,7 +112,7 @@ class SurveysController extends Controller
 
         ]);
 
-        $survey = Survey::find($id);
+        $survey = Survey::findOrFail($id);
         $survey->user_id = auth()->user()->id;
 
         $survey->country = auth()->user()->country;
@@ -135,7 +135,7 @@ class SurveysController extends Controller
      */
     public function destroy($id)
     {
-        $survey = Survey::find($id);
+        $survey = Survey::findOrFail($id);
         $survey->delete();
         return redirect('/surveys')->with('error', 'Survey deleted');
 

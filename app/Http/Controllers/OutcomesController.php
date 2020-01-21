@@ -59,7 +59,7 @@ class OutcomesController extends Controller
         $outcome->save();
 
         $outcomes = outcome::where('project_id', $project_id)->get();
-        $project = Project::find($project_id);
+        $project = Project::findOrFail($project_id);
 
         return view('outcomes.show')->with(['outcomes' => $outcomes, 'project' => $project, 'success' => 'outcome created']);
 
@@ -75,7 +75,7 @@ class OutcomesController extends Controller
     {
         $outcomes = outcome::where('project_id', $id)->get();
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         return view('outcomes.show')->with(['outcomes' => $outcomes, 'project' => $project]);
 
@@ -105,7 +105,7 @@ class OutcomesController extends Controller
     'outcome' => 'required',
 ]);
 
-$outcome = Outcome::find($id);
+$outcome = Outcome::findOrFail($id);
 $outcome->name = $request->outcome;
 
 $outcome->save();
@@ -122,7 +122,7 @@ return redirect('/outcomes/' . $outcome->project_id)->with('success', 'outcome u
      */
     public function destroy($id)
     {
-         $outcome = Outcome::find($id);
+         $outcome = Outcome::findOrFail($id);
         $outcome->delete();
         return redirect('/outcomes/'.$outcome->project_id)->with('error', 'Outcome deleted');
     }
@@ -130,7 +130,7 @@ return redirect('/outcomes/' . $outcome->project_id)->with('success', 'outcome u
     public function createoutcome($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         return view('outcomes.create')->with('project', $project);
     }
 }

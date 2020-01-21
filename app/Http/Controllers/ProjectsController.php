@@ -30,7 +30,7 @@ class ProjectsController extends Controller
 
         $user_id = auth()->user()->id;
 
-        $user = User::find($user_id);
+        $user = User::findOrFail($user_id);
         // return $user->projects;
         $users = User::all();
 
@@ -44,7 +44,7 @@ class ProjectsController extends Controller
 
         $user_id = auth()->user()->id;
 
-        $user = User::find($user_id);
+        $user = User::findOrFail($user_id);
         // return $user->projects;
 
         $projects = Project::orderBy('project_counter', 'asc')->paginate(10);
@@ -191,13 +191,13 @@ class ProjectsController extends Controller
     public function show($id)
     {
 
-        $project = Project::find($id);
-        $donor = Donor::find($project->donors);
+        $project = Project::findOrFail($id);
+        $donor = Donor::findOrFail($project->donors);
         $project->donors = $donor->name;
-        $partner = Partner::find($project->partners);
+        $partner = Partner::findOrFail($project->partners);
         $project->partners = $partner->name;
-        $target_group = TargetGroup::find($project->target_group);
-        $ir_office = IR_Office::find($project->ir_office);
+        $target_group = TargetGroup::findOrFail($project->target_group);
+        $ir_office = IR_Office::findOrFail($project->ir_office);
         $sectors = explode('|', $project->sector);
         $sdgs = explode('|', $project->sdg);
         $global_goals = explode('|', $project->global_goal);
@@ -206,7 +206,7 @@ class ProjectsController extends Controller
         $sdgs_split = explode('|', $project->sdg_split);
         $global_goals_split = explode('|', $project->globalgoal_split);
 
-        $county = Country::find($project->country);
+        $county = Country::findOrFail($project->country);
 
         return view('projects.show')->with(['sectors' => $sectors, 'sdgs' => $sdgs, 'global_goals' => $global_goals, 'sectors_split' => $sectors_split, 'sdgs_split' => $sdgs_split, 'global_goals_split' => $global_goals_split, 'project' => $project, 'country' => $county, 'office' => $ir_office, 'target_group' => $target_group]);
     }
@@ -219,23 +219,23 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
-        $target_group = TargetGroup::find($project->target_group);
+        $target_group = TargetGroup::findOrFail($project->target_group);
         $tg = TargetGroup::all();
 
-        $ir_office = IR_Office::find($project->ir_office);
+        $ir_office = IR_Office::findOrFail($project->ir_office);
         $currencies = Currency::all();
         $sectors = Sector::all();
 
         $partners = Partner::all();
         $donors = Donor::all();
 
-        $sd = Donor::find($project->donors);
+        $sd = Donor::findOrFail($project->donors);
 
         $project->donors = $sd->name;
 
-        $sp = Partner::find($project->partners);
+        $sp = Partner::findOrFail($project->partners);
         $project->partners = $sp->name;
 
         return view('projects.edit')->with(['office' => $ir_office, 'project' => $project, 'donors' => $donors, 'partners' => $partners, 'sectors' => $sectors, 'currencies' => $currencies, 'target_group' => $target_group, 'target_groups' => $tg]);
@@ -303,7 +303,7 @@ class ProjectsController extends Controller
 
         }
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $project->global_goal = implode('|', $request->input('global_goal'));
         $project->globalgoal_split = implode('|', $request->input('global_goal_split'));
@@ -354,7 +354,7 @@ class ProjectsController extends Controller
      */
     public function destroy($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $project->delete();
         return redirect('/projects')->with('error', 'Project deleted');
 

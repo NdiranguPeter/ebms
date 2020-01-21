@@ -95,7 +95,7 @@ class GroupsController extends Controller
      */
     public function destroy($id)
     {
-        $group = Group::find($id);
+        $group = Group::findOrFail($id);
         $survey_id = $group->survey_id;
 
         DB::table('questions')

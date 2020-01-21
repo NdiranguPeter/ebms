@@ -67,14 +67,14 @@ class RisksController extends Controller
     public function goalRisk($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $msg = 'Goal';
         return view('risks.create')->with(['output' => 0, 'outcome' => 0, 'goal' => 1, 'activity' => 0, 'project' => $project, 'msg' => $msg]);
 
     }
     public function outcomeRisk($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $msg = 'Outcome';
 
         $outcomes = \DB::table('projects')
@@ -87,7 +87,7 @@ class RisksController extends Controller
     }
     public function outputRisk($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $msg = 'Output';
 
         $outputs = \DB::table('projects')
@@ -101,7 +101,7 @@ class RisksController extends Controller
     }
     public function activityRisk($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $msg = 'Activity';
         $activities = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -117,7 +117,7 @@ class RisksController extends Controller
     public function goal($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -146,7 +146,7 @@ class RisksController extends Controller
     public function outcome($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -175,7 +175,7 @@ class RisksController extends Controller
     public function output($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -204,7 +204,7 @@ class RisksController extends Controller
     public function activity($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -233,7 +233,7 @@ class RisksController extends Controller
 
     public function destroy($id)
     {
-        $risk = Risk::find($id);
+        $risk = Risk::findOrFail($id);
         $risk->delete();
 
         if ($risk->outcome_id != 0) {
@@ -255,9 +255,9 @@ class RisksController extends Controller
 
     public function edit($id)
     {
-       $risk = Risk::find($id);
+       $risk = Risk::findOrFail($id);
        
-$project = Project::find($risk->project_id);
+$project = Project::findOrFail($risk->project_id);
 $outcome = 0;
 $output = 0;
 $activity = 0;
@@ -331,7 +331,7 @@ return view('risks.edit')->with(['outputs'=>$outputs,'activities'=>$activities,'
 ]);
 
 
-$risk = Risk::find($id);
+$risk = Risk::findOrFail($id);
 
 
 

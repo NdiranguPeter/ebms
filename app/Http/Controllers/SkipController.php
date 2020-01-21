@@ -55,7 +55,7 @@ class SkipController extends Controller
 
         $skip = $qn_id . "|" . $question . "|" . $operator . "|" . $option;
 
-        $qn = Question::find($qn_id);
+        $qn = Question::findOrFail($qn_id);
 
         $qn->skip = $skip;
 
@@ -75,9 +75,9 @@ class SkipController extends Controller
     public function show($id)
     {
 
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
 
-        $survey = Survey::find($question->survey_id);
+        $survey = Survey::findOrFail($question->survey_id);
 
         // dd($survey->id);
       
@@ -120,10 +120,10 @@ class SkipController extends Controller
      */
     public function edit($id)
     {
-     $question = Question::find($id);
+     $question = Question::findOrFail($id);
    
      
-        $survey = Survey::find($question->survey_id);
+        $survey = Survey::findOrFail($question->survey_id);
 
         // dd($survey->id);
       
@@ -177,7 +177,7 @@ class SkipController extends Controller
             'options.required' => 'answer cannot be empty',
         ]);
 
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
 
     $qn_id = $request->input('qnid');
     $ques = $request->input('questions');
@@ -204,7 +204,7 @@ return redirect('/questions/' . $question->survey_id)->with('success', $question
      */
     public function destroy($id)
     {
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
         $question->skip = null;
         $question->save();
        

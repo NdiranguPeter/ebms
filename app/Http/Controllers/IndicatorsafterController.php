@@ -67,9 +67,9 @@ class IndicatorsafterController extends Controller
 
         $indicatorafter->save();
 
-        $indica = Indicator::find($indicatorafter->indicator_id);
+        $indica = Indicator::findOrFail($indicatorafter->indicator_id);
 
-        $project = Project::find($indica->project_id);
+        $project = Project::findOrFail($indica->project_id);
 
         
 $indicators = indicator::where('project_id', $project->id)->paginate(10);

@@ -79,10 +79,10 @@ class ActivitiesAfterController extends Controller
         $cativityafter->budget = $request->input('cost');
         $cativityafter->save();      
         
-        $activity = Activity::find($cativityafter->activity_id);
-        $output = Output::find($activity->output_id);
-        $outcome = Outcome::find($output->outcome_id);
-        $project = Project::find($outcome->project_id);
+        $activity = Activity::findOrFail($cativityafter->activity_id);
+        $output = Output::findOrFail($activity->output_id);
+        $outcome = Outcome::findOrFail($output->outcome_id);
+        $project = Project::findOrFail($outcome->project_id);
         $units = Unit::all();
 
         return redirect('/activities/' . $project->id);

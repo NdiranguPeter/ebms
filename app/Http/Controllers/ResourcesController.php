@@ -101,7 +101,7 @@ class ResourcesController extends Controller
     public function selectActivity($id)
     {
 
-        $activity = Activity::find($id);
+        $activity = Activity::findOrFail($id);
         return view('/resources/create')->with('activity', $activity);
     }
 }

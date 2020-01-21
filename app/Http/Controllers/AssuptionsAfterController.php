@@ -60,7 +60,7 @@ class AssuptionsAfterController extends Controller
 
         $assumptionafter->save();
 
-        $assumption = Assumption::find($a_id);
+        $assumption = Assumption::findOrFail($a_id);
         $project_id = $assumption->project_id;
         if ($assumption->goal_id != 0) {
             return redirect('/assumptions/goal/' . $project_id)->with(['success' => 'assumption updated']);
@@ -86,7 +86,7 @@ class AssuptionsAfterController extends Controller
     public function show($id)
     {
 
-        $assumption = Assumption::find($id);
+        $assumption = Assumption::findOrFail($id);
         return view('assumptions.after')->with(['id'=>$id,'assumption'=>$assumption]);
 
     }

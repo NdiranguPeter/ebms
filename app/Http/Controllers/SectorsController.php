@@ -17,7 +17,7 @@ class SectorsController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        $user = User::find($user_id);
+        $user = User::findOrFail($user_id);
         // return $user->projects;
 
         $sectors = Sector::orderBy('created_at', 'asc')->paginate(10);
@@ -67,7 +67,7 @@ class SectorsController extends Controller
      */
     public function show($id)
     {
-     $sector = Sector::find($id);
+     $sector = Sector::findOrFail($id);
 
     return view('sectors.show')->with('sector', $sector);
 
@@ -81,7 +81,7 @@ class SectorsController extends Controller
      */
     public function edit($id)
     {
-        $sector = Sector::find($id);
+        $sector = Sector::findOrFail($id);
 
         return view('sectors.edit')->with('sector', $sector);
     }
@@ -100,7 +100,7 @@ class SectorsController extends Controller
 
         ]);
 
-            $sector = Sector::find($id);
+            $sector = Sector::findOrFail($id);
 
             $sector->name = $request->input('name');
 
@@ -118,7 +118,7 @@ class SectorsController extends Controller
      */
     public function destroy($id)
     {
-        $sector = Sector::find($id);
+        $sector = Sector::findOrFail($id);
         $sector->delete();
 
         return redirect('/sectors')->with('error', 'sector deleted');

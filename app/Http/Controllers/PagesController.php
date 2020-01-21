@@ -38,7 +38,7 @@ class PagesController extends Controller
     }
     public function planning($id)
     {
-        $outcome = outcome::find($id);
+        $outcome = outcome::findOrFail($id);
         $outputs = Output::where('outcome_id', $id)->get();
         $activities = Activity::all();
         return view('pages.planning')->with(['outputs' => $outputs, 'activities' => $activities, 'outcome' => $outcome]);
@@ -46,7 +46,7 @@ class PagesController extends Controller
 
     public function me($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -112,7 +112,7 @@ class PagesController extends Controller
 
     public function logframe($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -130,7 +130,7 @@ class PagesController extends Controller
 
     public function logfr($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $goalindicators = Indicator::where('goal_id', $id)->get();
 
@@ -200,7 +200,7 @@ class PagesController extends Controller
     public function dipbefore(Request $request)
     {
 
-        $project = Project::find($request->project_id);
+        $project = Project::findOrFail($request->project_id);
 
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -245,7 +245,7 @@ class PagesController extends Controller
             ->get();
 
         $units = Unit::all();
-        $ir_office = IR_Office::find($project->ir_office);
+        $ir_office = IR_Office::findOrFail($project->ir_office);
 
         $donors = explode(',', $project->donors);
 
@@ -259,7 +259,7 @@ class PagesController extends Controller
     public function dipafter(Request $request)
     {
 
-        $project = Project::find($request->project_id);
+        $project = Project::findOrFail($request->project_id);
 
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -304,7 +304,7 @@ class PagesController extends Controller
             ->get();
 
         $units = Unit::all();
-        $ir_office = IR_Office::find($project->ir_office);
+        $ir_office = IR_Office::findOrFail($project->ir_office);
 
         $donors = explode(',', $project->donors);
 
@@ -317,7 +317,7 @@ class PagesController extends Controller
 
     public function repo($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -355,7 +355,7 @@ class PagesController extends Controller
     public function janrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -399,7 +399,7 @@ class PagesController extends Controller
     public function febrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -440,7 +440,7 @@ class PagesController extends Controller
     public function marrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -482,7 +482,7 @@ class PagesController extends Controller
     public function aprrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -524,7 +524,7 @@ class PagesController extends Controller
     public function mayrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -565,7 +565,7 @@ class PagesController extends Controller
     public function junrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -606,7 +606,7 @@ class PagesController extends Controller
     public function julrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -647,7 +647,7 @@ class PagesController extends Controller
     public function augrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -688,7 +688,7 @@ class PagesController extends Controller
     public function seprepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -729,7 +729,7 @@ class PagesController extends Controller
     public function octrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -770,7 +770,7 @@ class PagesController extends Controller
     public function novrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -810,7 +810,7 @@ class PagesController extends Controller
     public function decrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -852,7 +852,7 @@ class PagesController extends Controller
     public function qrt1repo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -894,7 +894,7 @@ class PagesController extends Controller
     public function qrt2repo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -937,7 +937,7 @@ class PagesController extends Controller
     public function qrt3repo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -979,7 +979,7 @@ class PagesController extends Controller
     public function qrt4repo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -1026,7 +1026,7 @@ class PagesController extends Controller
     public function yearlyrepo($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -1069,7 +1069,7 @@ $indicatorsbefore = \DB::table('projects')
     public function budget($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -1103,7 +1103,7 @@ $indicatorsbefore = \DB::table('projects')
 
     public function bva($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -1137,7 +1137,7 @@ $indicatorsbefore = \DB::table('projects')
 
     public function beneficiary($id, $year)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -1171,7 +1171,7 @@ $indicatorsbefore = \DB::table('projects')
 
     public function benefi($id, $year)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -1203,7 +1203,7 @@ $indicatorsbefore = \DB::table('projects')
 
     public function riskbefore($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $risks = Risk::where('project_id', $id)->orderBy('created_at', 'desc')->paginate(5);
         $when = 'before';
 
@@ -1214,7 +1214,7 @@ $indicatorsbefore = \DB::table('projects')
 
     public function riskafter($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $risks = \DB::table('risks')
             ->join('risksafters', 'risks.id', 'risksafters.risk_id')
             ->select('risks.*')->where('risks.project_id', $id)
@@ -1229,7 +1229,7 @@ $indicatorsbefore = \DB::table('projects')
 
     public function assumptionbefore($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $assumptions = Assumption::where('project_id', $id)->orderBy('created_at', 'desc')->paginate(5);
         $when = 'before';
         $assumptionsafter = AssumptionAfter::all();
@@ -1241,7 +1241,7 @@ $indicatorsbefore = \DB::table('projects')
     {
         $assumptionsafter = AssumptionAfter::all();
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $when = 'after';
         $assumptions = \DB::table('assumptions')
             ->join('assumption_afters', 'assumptions.id', 'assumption_afters.assumption_id')
@@ -1253,7 +1253,7 @@ $indicatorsbefore = \DB::table('projects')
 
     public function pars($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->select('outcomes.*')->where('projects.id', $id)
@@ -1289,18 +1289,18 @@ $indicatorsbefore = \DB::table('projects')
     public function outputdetails($id)
     {
 
-        $output = Output::find($id);
+        $output = Output::findOrFail($id);
 
-        $project = Project::find($output->project_id);
+        $project = Project::findOrFail($output->project_id);
 
         return view('details.output')->with(['output' => $output, 'project' => $project]);
 
     }
     public function outcomedetails($id)
     {
-        $outcome = outcome::find($id);
+        $outcome = outcome::findOrFail($id);
 
-        $project = Project::find($outcome->project_id);
+        $project = Project::findOrFail($outcome->project_id);
 
         return view('details.outcome')->with(['outcome' => $outcome, 'project' => $project]);
 
@@ -1308,7 +1308,7 @@ $indicatorsbefore = \DB::table('projects')
     public function reports($id)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = outcome::where('project_id', $id)->get();
 
         $datetime1 = new \DateTime($project->start);
@@ -1338,7 +1338,7 @@ $indicatorsbefore = \DB::table('projects')
     public function perfomance($id, $year)
     {
 
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $outcomes = outcome::where('project_id', $id)->get();
 
         return view('pages.projectperfomance')->with(['year' => $year, 'project' => $project, 'outcomes' => $outcomes]);
@@ -1347,10 +1347,10 @@ $indicatorsbefore = \DB::table('projects')
 
     public function activitydetails($id)
     {
-        $activity = Activity::find($id);
-        $output = Output::find($activity->output_id);
-        $outcome = outcome::find($output->outcome_id);
-        $project = Project::find($outcome->project_id);
+        $activity = Activity::findOrFail($id);
+        $output = Output::findOrFail($activity->output_id);
+        $outcome = outcome::findOrFail($output->outcome_id);
+        $project = Project::findOrFail($outcome->project_id);
 
         return view('details.activity')->with(['activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'project' => $project]);
 

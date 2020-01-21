@@ -15,7 +15,7 @@ class MonthlyReportExport implements FromView
     public function view(): View
     {
         $projectid = $this->id;
-        $project = Project::find($projectid);
+        $project = Project::findOrFail($projectid);
 
         return view('reports.monthly', [
             'project' => $project,
