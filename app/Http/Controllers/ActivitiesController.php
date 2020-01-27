@@ -409,20 +409,24 @@ $activity->order = $order+1;
      */
     public function edit($id)
     {
+
         $activity = Activity::findOrFail($id);
+        
         $units = Unit::all();
         $output = Output::findOrFail($activity->output_id);
 
         $outcome = Outcome::findOrFail($output->outcome_id);
+        
         $partners = Partner::all();
         $currencies = Currency::all();
-        $cur = Currency::findOrFail($activity->currency);
+        // $cur = Currency::findOrFail($activity->currency);
 
         $uni = Unit::findOrFail($activity->unit);
 
         $activity->unit = $uni->name;
         $activity->unit_id = $uni->id;
         $project = Project::findOrFail($outcome->project_id);
+        
 
         return view('activities.edit')->with(['project' => $project, 'currencies' => $currencies, 'partners' => $partners, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
     }
