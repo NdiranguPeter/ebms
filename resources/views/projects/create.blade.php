@@ -69,11 +69,16 @@
                                     IR South Sudan
                                     @endif
                                 </option>
-                                <option value="1">IR Kenya</option>
-                                <option value="2">IR Somalia</option>
-                                <option value="3">IR Ethiopia</option>
-                                <option value="4">IR Sudan</option>
-                                <option value="5">IR South Sudan</option>
+                                <option value="1" @if (old('ir_office')==1) style="display:none;" @endif>IR Kenya
+                                </option>
+                                <option value="2" @if (old('ir_office')==2) style="display:none;" @endif>IR Somalia
+                                </option>
+                                <option value="3" @if (old('ir_office')==3) style="display:none;" @endif>IR Ethiopia
+                                </option>
+                                <option value="4" @if (old('ir_office')==4) style="display:none;" @endif>IR Sudan
+                                </option>
+                                <option value="5" @if (old('ir_office')==5) style="display:none;" @endif>IR South Sudan
+                                </option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -106,12 +111,18 @@
                                     Archived
                                     @endif
                                 </option>
-                                <option value="Identification">Identification (The project is being scooped)</option>
-                                <option value="Implementation">Implementation (currently being implemented)</option>
-                                <option value="Completion">Completion (Final activity has been completed)</option>
-                                <option value="Cancelled">Cancelled</option>
-                                <option value="Suspended">Suspended (temporarily suspended) </option>
-                                <option value="Archived">Archived</option>
+                                <option value="Identification" @if (old('stage')=="Identification" )
+                                    style="display:none;" @endif>Identification (The project is being scooped)</option>
+                                <option value="Implementation" @if (old('stage')=="Implementation" )
+                                    style="display:none;" @endif>Implementation (currently being implemented)</option>
+                                <option value="Completion" @if (old('stage')=="Completion" ) style="display:none;"
+                                    @endif>Completion (Final activity has been completed)</option>
+                                <option value="Cancelled" @if (old('stage')=="Cancelled" ) style="display:none;" @endif>
+                                    Cancelled</option>
+                                <option value="Suspended" @if (old('stage')=="Suspended" ) style="display:none;" @endif>
+                                    Suspended (temporarily suspended) </option>
+                                <option value="Archived" @if (old('stage')=="Archived" ) style="display:none;" @endif>
+                                    Archived</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -131,10 +142,14 @@
                                     Disaster risk reduction
                                     @endif
                                 </option>
-                                <option value="Humanitarian Assistance">Humanitarian Assistance</option>
-                                <option value="Development Assistance">Development Assistance</option>
-                                <option value="Confrict Prevention">Conflict Prevention</option>
-                                <option value="Disaster risk reduction">Disaster Risk Reduction</option>
+                                <option value="Humanitarian Assistance" @if (old('type')=="Humanitarian Assistance" )
+                                    style="display:none;" @endif>Humanitarian Assistance</option>
+                                <option value="Development Assistance" @if (old('type')=="Development Assistance" )
+                                    style="display:none;" @endif>Development Assistance</option>
+                                <option value="Confrict Prevention" @if (old('type')=="Confrict Prevention" )
+                                    style="display:none;" @endif>Conflict Prevention</option>
+                                <option value="Disaster risk reduction" @if (old('type')=="Disaster risk reduction" )
+                                    style="display:none;" @endif>Disaster Risk Reduction</option>
                             </select>
                         </div>
 
@@ -259,16 +274,16 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             {{Form::label('start', 'Start date')}}
-                            {{Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'Start date'])}}
+                            {{Form::date('start',  old('start') != "" ? old('start') : \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'Start date'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('end', 'End date')}}
-                            {{Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'End date'])}}
+                            {{Form::date('end', old('start') != "" ? old('start') : \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'End date'])}}
                         </div>
 
                         <div class="form-group" id="field">
                             {{Form::label('location', 'Location')}}
-                            {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Actual location the project is conducted'])}}
+                            {{Form::text('location', old('location'), ['class' => 'form-control', 'placeholder' => 'Actual location the project is conducted'])}}
                         </div>
                         <div class="form-group">
                             <a style="float:right;" data-toggle="modal" data-target="#targetModal">Create target
@@ -321,31 +336,36 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('budget', 'Project budget')}}
-                            {{Form::number('budget', '', ['class' => 'form-control', 'placeholder' => 'project fund'])}}
+                            {{Form::number('budget', old('budget'), ['class' => 'form-control', 'placeholder' => 'project fund'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('currency', 'Project currency')}}
                             <select name="currency" id="currency"
                                 class="form-control @error('currency') is-invalid @enderror">
+                                @if(old('currency') != "")
+                                <option value="old('currency')" selected>{{old('currency')}}</option>
+                                @endif
                                 @foreach ($currencies as $currency)
-                                <option value="{{$currency->name}}">{{$currency->name}}</option>
+                                <option value="{{$currency->name}}" @if (old('currency')==="$currency->name" )
+                                    style="display:none;" @endif>{{$currency->name}}</option>
                                 @endforeach
 
                             </select>
                         </div>
                         <div class="form-group">
                             {{Form::label('goal', 'Project Goal')}}
-                            {{Form::textarea('goal', '', [ 'class' => 'form-control', 'placeholder' => 'project goal'])}}
+                            {{Form::textarea('goal', old('goal'), [ 'class' => 'form-control', 'placeholder' => 'project goal'])}}
                         </div>
                         <div class="form-group">
                             {{Form::label('description', 'Project description')}}
-                            {{Form::textarea('description', '', [ 'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
-                        </div>
-                        <div style="float:right;">
-                            {{Form::submit('Save project', ['class'=>'btn btn-primary'])}}
+                            {{Form::textarea('description', old('description'), [ 'class' => 'form-control', 'placeholder' => 'project description. e.g objectives'])}}
                         </div>
                         <input type="hidden" name="project_counter" value={{$project_counter+1}}>
                         <input type="hidden" name="project_order" value={{$project_order+1}}>
+                        <div style="float:right;">
+                            {{Form::submit('Save project', ['class'=>'btn btn-primary'])}}
+                        </div>
+
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -536,7 +556,7 @@
                             <div class="modal-body">
 
 
-                                {!! Form::open(['action'=>'TargetgoupsController@store', 'method'=>'POST']) !!}
+                                {!! Form::open(['action'=>'ProjectsController@targetGroup', 'method'=>'POST']) !!}
 
                                 {{Form::label('name', 'Group name')}}
                                 {{Form::text('name','', ['class' => 'form-control'])}}
@@ -564,7 +584,7 @@
         // show the alert
         setTimeout(function() {
         $(".alert").alert('close');
-        }, 3600);
+        }, 6600);
         });
         
 </script>

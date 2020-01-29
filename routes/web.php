@@ -166,7 +166,8 @@ Route::resource('activityscoring', 'ActivityscoringController')->middleware('aut
 Route::resource('risksafter', 'RisksAfterController')->middleware('auth');
 Route::resource('assumptionsafter', 'AssuptionsAfterController')->middleware('auth');
 Route::resource('groups', 'GroupsController')->middleware('auth');
-Route::resource('targetgroups', 'TargetgoupsController')->middleware('auth');
+Route::post('/targetgroups','ProjectsController@targetGroup');
+// Route::resource('targetgroups', 'TargetgoupsController')->middleware('auth');
 Route::resource('challenges', 'ChallengesController')->middleware('auth');
 Route::resource('skip', 'SkipController')->middleware('auth');
 Route::resource('unit', 'UnitsController')->middleware('auth');

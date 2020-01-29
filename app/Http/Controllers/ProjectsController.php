@@ -54,7 +54,6 @@ class ProjectsController extends Controller
         return view('projects.allprojects')->with(['users' => $users, 'projects' => $projects]);
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -69,14 +68,30 @@ class ProjectsController extends Controller
         $sectors = Sector::all();
         $partners = Partner::all();
         $donors = Donor::all();
-        $project_order = Project::where('user_id',$user_id)->max("project_order");
+        $project_order = Project::where('user_id', $user_id)->max("project_order");
         $project_counter = Project::max("project_counter");
 
-
-        return view('projects.create')->with(['project_counter'=>$project_counter,'project_order'=>$project_order, 'donors' => $donors, 'partners' => $partners, 'sectors' => $sectors, 'currencies' => $currencies, 'target_groups' => $target_groups]);
+        return view('projects.create')->with(['project_counter' => $project_counter, 'project_order' => $project_order, 'donors' => $donors, 'partners' => $partners, 'sectors' => $sectors, 'currencies' => $currencies, 'target_groups' => $target_groups]);
 
     }
 
+    public function targetGroup(Request $request)
+    {
+        $this->validate($request, [
+
+            'name' => 'required',
+        ], [
+            'name.required' => 'Group name cannot be emptys',
+        ]);
+
+        $group = new TargetGroup;
+        $group->name = $request->input('name');
+
+        $group->save();
+
+        return redirect('/projects/create')->with('success', 'Group created successfully');
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -107,7 +122,7 @@ class ProjectsController extends Controller
             'sector_spli.*' => 'required',
             'global_goal.*' => 'required',
             'global_goal_split.*' => 'required',
-            'end' => 'after:start'
+            'end' => 'after:start',
         ]);
 
         $global_goal_split_total = 0;
@@ -172,14 +187,12 @@ class ProjectsController extends Controller
         $project->budget = $request->input('budget');
         $project->currency = $request->input('currency');
         $project->fo_pin = $request->input('fo_pin');
-        $project->project_counter =$request->input('project_counter');
-        $project->project_order =$request->input('project_order');
+        $project->project_counter = $request->input('project_counter');
+        $project->project_order = $request->input('project_order');
 
         $project->save();
 
-        
-
-        return redirect('/indicators/goal/create/'.$project->id);
+        return redirect('/indicators/goal/create/' . $project->id);
 
     }
 
