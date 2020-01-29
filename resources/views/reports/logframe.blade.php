@@ -270,19 +270,25 @@
         <th style="padding:5px;">Risks</th>
         <th style="padding:5px;">Assumptions</th>
     </tr>
+
     @php
     $fgrt = 1;
     @endphp
-    @foreach ($outputs as $output)
+    @foreach ($outcomes as $outcome)
     @php
-    $cer = 1;
+    $coer = 1;
+    @endphp
+    @foreach ($outputs as $output)
+    @if ($outcome->id == $output->outcome_id)
+    @php
+    $activ = 1;
     @endphp
     @foreach ($activities as $activity)
     @if ($output->id == $activity->output_id)
 
     <tbody>
         <tr style="font-size: smaller;">
-            <th rowspan="{{count($activityresources)}}">Activity:{{$fgrt}}.{{$coer}}.{{$cer}}</td>
+            <th rowspan="{{count($activityresources)}}">Activity: {{$fgrt}}.{{$coer}}.{{$activ}}</td>
             <td style="padding-left:5px;" rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
             <td rowspan="{{count($activityresources)}}">
                 <table class="table cdccw">
@@ -312,14 +318,28 @@
             <td rowspan="{{count($activityresources)}}"></td>
             <td rowspan="{{count($activityresources)}}"></td>
         </tr>
-        @php
-        $cer++;
-        @endphp
+
     </tbody>
     @endif
+    @php
+    $activ++;
+
+    @endphp
+    @endforeach
+
+    @php
+    $coer++;
+
+    @endphp
+    @endif
+
     @endforeach
     @php
     $fgrt++;
     @endphp
     @endforeach
+
+
+
+
 </table>
