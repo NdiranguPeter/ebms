@@ -27,10 +27,10 @@
 
             <div class="page-header">
                 {{-- {{route('exportdip',$project->id)}} --}}
-                <a href="/export_report" class="btn btn-primary" style="float:right; margin-left: 20px;">
+                {{-- <a href="/export_report" class="btn btn-primary" style="float:right; margin-left: 20px;">
                     <i class="ace-icon fa fa-download"></i>
 
-                </a>
+                </a> --}}
                 <a href="/reports/{{$project->id}}" class="btn btn-success" style=" float:right;">
                     <i class="ace-icon fa fa-arrow-circle-o-left"></i>
                     Back to Reports

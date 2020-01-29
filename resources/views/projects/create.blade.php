@@ -39,18 +39,36 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             {{Form::label('name', 'Project Name')}}
-                            {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Project name'])}}
+                            {{Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'Project name'])}}
                         </div>
 
                         <div class="form-group">
                             {{Form::label('irw_pin', 'IRW Pin Code')}}
-                            {{Form::text('irw_pin', '', ['class' => 'form-control', 'placeholder' => 'Project irw_pin'])}}
+                            {{Form::text('irw_pin', old('irw_pin'), ['class' => 'form-control', 'placeholder' =>
+                            'Project irw_pin'])}}
                         </div>
 
                         <div class="form-group">
                             {{Form::label('ir_office', 'IR Country Office')}}
                             <select name="ir_office" id="ir_office"
                                 class="form-control @error('ir_office') is-invalid @enderror">
+                                <option value="{{old('ir_office')}}" selected>
+                                    @if (old('ir_office') == 1)
+                                    IR Kenya
+                                    @endif
+                                    @if (old('ir_office') == 2)
+                                    IR Somalia
+                                    @endif
+                                    @if (old('ir_office') == 3)
+                                    IR Ethiopia
+                                    @endif
+                                    @if (old('ir_office') == 4)
+                                    IR Sudan
+                                    @endif
+                                    @if (old('ir_office') == 5)
+                                    IR South Sudan
+                                    @endif
+                                </option>
                                 <option value="1">IR Kenya</option>
                                 <option value="2">IR Somalia</option>
                                 <option value="3">IR Ethiopia</option>
@@ -60,15 +78,35 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('fo_pin', 'FO Pin')}}
-                            {{Form::text('fo_pin', '', ['class' => 'form-control', 'placeholder' => ''])}}
+                            {{Form::text('fo_pin', old('fo_pin'), ['class' => 'form-control', 'placeholder' =>
+                            ''])}}
                         </div>
 
 
                         <div class="form-group">
                             {{Form::label('stage', 'Project Stage')}}
                             <select name="stage" id="stage" class="form-control @error('stage') is-invalid @enderror">
-                                <option value="Identification">Identification (The project is being
-                                    scooped)</option>
+                                <option value="{{old('stage')}}" selected>
+                                    @if (old('stage') == "Identification")
+                                    Identification
+                                    @endif
+                                    @if (old('stage') == "Implementation")
+                                    Implementation
+                                    @endif
+                                    @if (old('stage') == "Completion")
+                                    Completion
+                                    @endif
+                                    @if (old('stage') == "Cancelled")
+                                    Cancelled
+                                    @endif
+                                    @if (old('stage') == "Suspended")
+                                    Suspended
+                                    @endif
+                                    @if (old('stage') == "Archived")
+                                    Archived
+                                    @endif
+                                </option>
+                                <option value="Identification">Identification (The project is being scooped)</option>
                                 <option value="Implementation">Implementation (currently being implemented)</option>
                                 <option value="Completion">Completion (Final activity has been completed)</option>
                                 <option value="Cancelled">Cancelled</option>
@@ -78,7 +116,21 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('type', 'Project Type')}}
-                            <select name="type" id="type" class="form-control @error('stage') is-invalid @enderror">
+                            <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                <option value="{{old('type')}}" selected>
+                                    @if (old('type') == "Humanitarian Assistance")
+                                    Humanitarian Assistance
+                                    @endif
+                                    @if (old('type') == "Development Assistance")
+                                    Development Assistance
+                                    @endif
+                                    @if (old('type') == "Confrict Prevention")
+                                    Confrict Prevention
+                                    @endif
+                                    @if (old('type') == "Disaster risk reduction")
+                                    Disaster risk reduction
+                                    @endif
+                                </option>
                                 <option value="Humanitarian Assistance">Humanitarian Assistance</option>
                                 <option value="Development Assistance">Development Assistance</option>
                                 <option value="Confrict Prevention">Conflict Prevention</option>

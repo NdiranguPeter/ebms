@@ -27,9 +27,9 @@
                     Reports
                 </a>
                 {{-- {{route('exportproject',$project->id)}} --}}
-                <a class="btn btn-primary" href="/export_report">
+                {{-- <a class="btn btn-primary" href="/export_report">
                     <i class="ace-icon fa fa-download"></i>
-                </a>
+                </a> --}}
 
                 <a class="btn btn-success" href="/logframe/{{$project->id}}">
                     <i class="ace-icon fa fa-desktop"></i>

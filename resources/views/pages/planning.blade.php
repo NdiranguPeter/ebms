@@ -33,9 +33,9 @@
                         Back to Outputs
                     </a>
                     {{-- {{route('exportdip',$outcome->id)}} --}}
-                    <a href="/export_report" class="btn btn-success" style="float:right; margin-bottom: 2%;">
+                    {{-- <a href="/export_report" class="btn btn-success" style="float:right; margin-bottom: 2%;">
                         <i class="ace-icon fa fa-download"></i>
-                    </a>
+                    </a> --}}
                     @include('planning.table',$outputs)
 
                 </div>
