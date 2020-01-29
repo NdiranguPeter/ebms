@@ -326,7 +326,7 @@ $activity->order = $order+1;
 
 
 
-            return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'activity created']);
+            return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'Activity created']);
 
         } else {
             $units = Unit::all();
@@ -385,7 +385,7 @@ $activity->order = $order+1;
 
         $units = Unit::all();
 
-        return view('activities.show')->with(['numbering'=>$numbering,'project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'activity created']);
+        return view('activities.show')->with(['numbering'=>$numbering,'project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'Activity created']);
 
     }
 
@@ -397,7 +397,7 @@ $activity->order = $order+1;
         $project = Project::findOrFail($outcome->project_id);
         $activities = Activity::where('output_id', $id)->paginate(10);
 
-        return view('activities.outputactivities')->with(['project' => $project, 'activities' => $activities, 'output' => $output, 'outcome' => $outcome, 'success' => 'activity created']);
+        return view('activities.outputactivities')->with(['project' => $project, 'activities' => $activities, 'output' => $output, 'outcome' => $outcome, 'success' => 'Activity created']);
 
     }
 
@@ -558,7 +558,7 @@ $activity->order = $order+1;
             $units = Unit::all();
             $project = Project::findOrFail($outcome->project_id);
 
-            return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'activity updated']);
+            return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'Activity updated']);
 
         } else {
             $activity = Activity::findOrFail($id);
@@ -614,7 +614,7 @@ $indafter = Activityafter::where('activity_id', $id)->delete();
 
 
 
-        return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'error' => 'activity deleted']);
+        return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'error' => 'Activity deleted']);
 
     }
 
