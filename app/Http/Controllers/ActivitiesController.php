@@ -646,9 +646,9 @@ $challenges = Challenge::where('activity_id', $id)->get();
         $datetime1 = new DateTime($act->start);
         $startyear = $datetime1->format('Y');
         $startmonth = $datetime1->format('m');
-        $month = $startmonth;
+        $month = (int) $startmonth;
 
-        $activity = Activityafter::where('activity_id', $id)->where('month', $startmonth)->where('year', $startyear)->where('before_after', $before_after)->first();
+        $activity = Activityafter::where('activity_id', $id)->where('month', $month)->where('year', $startyear)->where('before_after', $before_after)->first();
 
         $output = Output::findOrFail($act->output_id);
         $outcome = Outcome::findOrFail($output->outcome_id);
@@ -666,13 +666,12 @@ $challenges = Challenge::where('activity_id', $id)->get();
 
         $before_after = 'before';
         $act = Activity::findOrFail($id);
-
         $datetime1 = new DateTime($act->start);
         $startyear = $datetime1->format('Y');
         $startmonth = $datetime1->format('m');
-        $month = $startmonth;
+        $month = (int)$startmonth;
 
-        $activity = Activityafter::where('activity_id', $id)->where('month', $startmonth)->where('year', $startyear)->where('before_after', $before_after)->first();
+        $activity = Activityafter::where('activity_id', $id)->where('month', $month)->where('year', $startyear)->where('before_after', $before_after)->first();
 
         $output = Output::findOrFail($act->output_id);
         $outcome = Outcome::findOrFail($output->outcome_id);
@@ -699,7 +698,7 @@ $units = Unit::all();
 
         $datetime2 = new DateTime($act->end);
         $endyear = $datetime2->format('Y');
-        $startmonth = $datetime1->format('m');
+        $startmonth = (int) $datetime1->format('m');
 
         $yr = $request->year;
 

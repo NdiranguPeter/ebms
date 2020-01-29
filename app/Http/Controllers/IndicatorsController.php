@@ -8,6 +8,8 @@ use App\Outcome;
 use App\Output;
 use App\Project;
 use App\Unit;
+use DB;
+
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -254,11 +256,14 @@ class IndicatorsController extends Controller
      */
     public function edit($id)
     {
+// dd($id);
         $indicator = Indicator::findOrFail($id);
         $msg = '';
         $goal = $indicator->goal_id;
         $put = $indicator->output_id;
         $come = $indicator->outcome_id;
+        $output = "";
+        $outcome = "";
 
         if ($goal != 0) {
             $msg = 'Goal';
@@ -273,6 +278,8 @@ class IndicatorsController extends Controller
             $put = 1;
             $come = 0;
 
+            $output = Output::findOrFail($indicator->output_id);
+
         }
 
         if ($come != 0) {
@@ -281,9 +288,11 @@ class IndicatorsController extends Controller
             $put = 0;
             $come = 1;
 
+            $outcome = Outcome::findOrFail($indicator->outcome_id);
+
         }
-        $outcome = Outcome::findOrFail($indicator->outcome_id);
-        $output = Output::findOrFail($indicator->output_id);
+
+
         $units = Unit::all();
 
         $project = Project::findOrFail($indicator->project_id);
@@ -351,6 +360,12 @@ class IndicatorsController extends Controller
         $project = Project::findOrFail($pro_id);
 
         $indicator->delete();
+
+          DB::table('indicators')
+    ->where('user_id', $project->user_id)
+    ->where('i_order', '>', $indicator->i_order)
+    ->decrement('i_order', 1);
+
 
         $indafter = Indicatorafter::where('indicator_id', $id)->delete();
 

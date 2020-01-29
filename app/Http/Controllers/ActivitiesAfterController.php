@@ -47,6 +47,7 @@ class ActivitiesAfterController extends Controller
 
         $cativityafter = Activityafter::where('activity_id', $id)->where('month', $month)->where('year', $year)->where('before_after', $before_after)->first();
 
+
         $cativityafter->zero_two_male = $request->input('zero_two_male');
         $cativityafter->three_five_male = $request->input('three_five_male');
         $cativityafter->six_twelve_male = $request->input('six_twelve_male');

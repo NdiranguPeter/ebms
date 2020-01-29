@@ -335,12 +335,12 @@
 
                             <div class="col-sm-6">
                                 {{Form::label('disabled_male', 'Male')}}
-                                {{Form::number('disabled_male', $activity->disabled_male, ['class' => 'form-control', 'placeholder' => ''])}}
+                                {{Form::number('disabled_male', $act->disabled_male, ['class' => 'form-control', 'placeholder' => ''])}}
                             </div>
 
                             <div class="col-sm-6">
                                 {{Form::label('disabled_female', 'Female')}}
-                                {{Form::number('disabled_female', $activity->disabled_female, ['class' => 'form-control', 'placeholder' => ''])}}
+                                {{Form::number('disabled_female', $act->disabled_female, ['class' => 'form-control', 'placeholder' => ''])}}
                             </div>
 
                         </div>
