@@ -288,7 +288,9 @@
 
     <tbody>
         <tr style="font-size: smaller;">
-            <th rowspan="{{count($activityresources)}}">Activity: {{$fgrt}}.{{$coer}}.{{$activ}}</td>
+            <th rowspan="{{count($activityresources)}}" style="padding-left:5px;">Activity:
+                {{$fgrt}}.{{$coer}}.{{$activ}}
+                </td>
             <td style="padding-left:5px;" rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
             <td rowspan="{{count($activityresources)}}">
                 <table class="table cdccw">
@@ -301,7 +303,7 @@
                     @endforeach
                 </table>
             </td>
-            <td style="width:100px;" rowspan="{{count($activityresources)}}">
+            <td style="width:100px; padding-left:5px;" rowspan="{{count($activityresources)}}">
 
                 @foreach ($curs as $curr)
                 @if ($activity->currency == $curr->id)
@@ -320,11 +322,12 @@
         </tr>
 
     </tbody>
-    @endif
     @php
     $activ++;
 
     @endphp
+    @endif
+
     @endforeach
 
     @php
