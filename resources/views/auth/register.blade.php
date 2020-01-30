@@ -50,6 +50,7 @@
                                     <option value="3">Ethiopia</option>
                                     <option value="4">Sudan</option>
                                     <option value="5">South Sudan</option>
+                                    <option value="6">Global MEAL</option>
                                 </select>
                                 @error('country')
                                 <span class="invalid-feedback" role="alert">
