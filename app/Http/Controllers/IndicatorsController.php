@@ -448,9 +448,7 @@ class IndicatorsController extends Controller
         }
 
         $indicator = Indicatorafter::where('month', $month)->where('indicator_id', $request->indicatorID)->where('year', $request->year)->where('before_after', $before_after)->first();
-        
-        
-        dd($request->indicatorID);
+                
         
         if ($request->year > $startyear) {
             $indicator->start = $request->year . '-01-01';
