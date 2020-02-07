@@ -14,9 +14,8 @@ use App\Project;
 use App\Sector;
 use App\TargetGroup;
 use App\User;
-use DB;
-
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -47,13 +46,21 @@ class ProjectsController extends Controller
         $user_id = auth()->user()->id;
 
         $user = User::findOrFail($user_id);
-        // return $user->projects;
 
-        $projects = Project::orderBy('project_counter', 'asc')->paginate(10);
+        if ($user->role == 1) {
 
-        $users = User::all();
+            $projects = Project::orderBy('project_counter', 'asc')->paginate(10);
 
-        return view('projects.allprojects')->with(['users' => $users, 'projects' => $projects]);
+            $users = User::all();
+
+            return view('projects.allprojects')->with(['users' => $users, 'projects' => $projects]);
+        }
+        if ($user->role == 0) {
+
+            return redirect('/home');
+
+        }
+
     }
 
     /**
@@ -371,14 +378,13 @@ class ProjectsController extends Controller
     public function destroy($id)
     {
         $project = Project::findOrFail($id);
-    
+
         $project->delete();
 
         DB::table('projects')
-    ->where('user_id', $project->user_id)
-    ->where('project_order', '>', $project->project_order)
-    ->decrement('project_order', 1);
-
+            ->where('user_id', $project->user_id)
+            ->where('project_order', '>', $project->project_order)
+            ->decrement('project_order', 1);
 
         return redirect('/projects')->with('error', 'Project deleted');
 

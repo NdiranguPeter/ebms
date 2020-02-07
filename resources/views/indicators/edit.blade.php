@@ -23,7 +23,7 @@
 
             <div class="page-header">
                 <h1>
-                    Add {{$msg}} indicator
+                    Edit {{$msg}} indicator
                 </h1>
             </div><!-- /.page-header -->
 
