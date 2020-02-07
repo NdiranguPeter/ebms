@@ -298,18 +298,20 @@
                         <div style="min-height:10px;">
                             <p>&nbsp</p>
                         </div>
-                        <h5>Type of deriverable: 
+                       <p style="font-size: large;
+                                                    font-weight: bold;">Type of deriverable: 
                             
                             @foreach ($units as $unit)
                               @if ($act->unit == $unit->id)
                                   {{$unit->name}}
                               @endif
                             @endforeach
-                            </h5>
+                    </p>
 <div style="min-height:10px;">
     <p>&nbsp</p>
 </div>
-                        <h5>Target: {{$act->project_target}}</h5>
+                      <p style="font-size: large;
+                                                font-weight: bold;">Target: {{$act->project_target}}</p>
 <div style="min-height:10px;">
     <p>&nbsp</p>
 </div>
@@ -349,11 +351,18 @@
                         <div style="min-height:10px;">
                             <p>&nbsp</p>
                         </div>
-
+                        @if ($before_after == "before")
                         <div class="col-sm-12">
-                            {{Form::label('achieved', 'Actual target achieved')}}
+                            {{Form::label('achieved', 'Actual target planned for the month')}}
                             {{Form::number('achieved', $activity->total_beneficiaries, ['class' => 'form-control',])}}
                         </div>
+                        @endif
+@if ($before_after == "after")
+                        <div class="col-sm-12">
+                            {{Form::label('achieved', 'Actual target achieved for the month')}}
+                            {{Form::number('achieved', $activity->total_beneficiaries, ['class' => 'form-control',])}}
+                        </div>
+                        @endif
                         @if ($before_after == "after")
                         <div style="min-height:10px;">
                             <p>&nbsp</p>

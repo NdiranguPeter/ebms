@@ -253,7 +253,7 @@ class PagesController extends Controller
 
         $cur = Currency::all();
 
-        return view('reports.templates.dip')->with(['units'=>$units,'when' => $request->before_after, 'period' => $request->year, 'alldonors' => $alldonors, 'donors' => $donors, 'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.dip')->with(['units' => $units, 'when' => $request->before_after, 'period' => $request->year, 'alldonors' => $alldonors, 'donors' => $donors, 'currency' => $cur, 'ir_office' => $ir_office, 'units' => $units, 'activitiesafter' => $activitiesafter, 'activities' => $activities, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function dipafter(Request $request)
@@ -379,6 +379,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 1)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -387,13 +388,33 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 1)
             ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 1)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 1)
+            ->get();
+
 
         $month = 'January';
 
         $challenges = Challenge::where('project_id', $id)->get();
 
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'month' => $month, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'month' => $month, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function febrepo($id, $year)
@@ -412,7 +433,9 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+        $outputindicators = Indicator::where('project_id', $id)
+        ->where('output_id','!=',0)
+        ->get();
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -420,7 +443,10 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 2)
             ->get();
+
+            // dd($outputindicators);
 
         $indicatorsbefore = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -428,13 +454,33 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 2)
             ->get();
 
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 2)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 2)
+            ->get();
+
+     
         $month = 'February';
         $challenges = Challenge::where('project_id', $id)->get();
 
         // $activities = Activity::where('project_id', $id)->get();
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function marrepo($id, $year)
@@ -453,7 +499,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+        $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -461,6 +510,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 3)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -469,6 +519,25 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 3)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 3)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 3)
             ->get();
 
         $month = 'March';
@@ -476,7 +545,7 @@ class PagesController extends Controller
 
         $challenges = Challenge::where('project_id', $id)->get();
 
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function aprrepo($id, $year)
@@ -495,7 +564,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+       $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -503,6 +575,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 4)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -511,6 +584,25 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 4)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 4)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 4)
             ->get();
 
         $month = 'April';
@@ -518,7 +610,7 @@ class PagesController extends Controller
 
         $challenges = Challenge::where('project_id', $id)->get();
 
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function mayrepo($id, $year)
@@ -537,7 +629,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+       $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -545,6 +640,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 5)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -553,13 +649,32 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 5)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 5)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 5)
             ->get();
 
         $month = 'May';
 
         // $activities = Activity::where('project_id', $id)->get();
         $challenges = Challenge::where('project_id', $id)->get();
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function junrepo($id, $year)
@@ -578,7 +693,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+        $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -586,6 +704,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 6)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -594,13 +713,32 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 6)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 6)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 6)
             ->get();
 
         $month = 'June';
         $challenges = Challenge::where('project_id', $id)->get();
 
         // $activities = Activity::where('project_id', $id)->get();
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function julrepo($id, $year)
@@ -619,7 +757,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+        $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -627,6 +768,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 7)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -635,13 +777,32 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 7)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 7)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 7)
             ->get();
 
         $month = 'July';
 
         $challenges = Challenge::where('project_id', $id)->get();
         // $activities = Activity::where('project_id', $id)->get();
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function augrepo($id, $year)
@@ -660,7 +821,12 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+         $outputindicators = Indicator::where('project_id', $id)
+        ->where('output_id','!=',0)
+        ->get();$outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -668,6 +834,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 8)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -676,13 +843,32 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 8)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 8)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 8)
             ->get();
 
         $month = 'August';
         $challenges = Challenge::where('project_id', $id)->get();
 
         // $activities = Activity::where('project_id', $id)->get();
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function seprepo($id, $year)
@@ -701,7 +887,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+        $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -709,6 +898,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 9)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -717,13 +907,32 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 9)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 9)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 9)
             ->get();
 
         $month = 'September';
         $challenges = Challenge::where('project_id', $id)->get();
 
         // $activities = Activity::where('project_id', $id)->get();
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function octrepo($id, $year)
@@ -742,7 +951,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+        $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -750,6 +962,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 10)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -758,13 +971,32 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 10)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 10)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 10)
             ->get();
 
         $month = 'October';
         $challenges = Challenge::where('project_id', $id)->get();
 
         // $activities = Activity::where('project_id', $id)->get();
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function novrepo($id, $year)
@@ -783,7 +1015,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+        $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -791,6 +1026,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 11)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -799,12 +1035,31 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 11)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 11)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 11)
             ->get();
 
         $month = 'November';
         $challenges = Challenge::where('project_id', $id)->get();
 
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function decrepo($id, $year)
@@ -823,7 +1078,10 @@ class PagesController extends Controller
             ->select('outputs.*')->where('projects.id', $id)
             ->get();
 
-        $outputindicators = Indicator::where('project_id', $id)->get();
+        $outputindicators = Indicator::where('project_id', $id)
+    ->where('output_id', '!=', 0)
+    ->get();
+
 
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -831,6 +1089,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 12)
             ->get();
 
         $indicatorsbefore = \DB::table('projects')
@@ -839,6 +1098,25 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', 12)
+            ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 12)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 12)
             ->get();
 
         $month = 'December';
@@ -846,7 +1124,7 @@ class PagesController extends Controller
 
         // $activities = Activity::where('project_id', $id)->get();
 
-        return view('reports.templates.monthly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.monthly')->with(['cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'year' => $year, 'month' => $month, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function qrt1repo($id, $year)
@@ -876,7 +1154,20 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 3)
             ->get();
+
+               $indicatorsaftergrouped = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 3)
+            ->groupBy('indicatorafters.indicator_id')
+            ->get();
+
+
 
         $indicatorsbefore = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -884,14 +1175,35 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 3)
             ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 3)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 3)
+            ->get();
+
+            // dd($outcomeindicators);
 
         $qrt = 'QRT 1';
         $challenges = Challenge::where('project_id', $id)->get();
-        return view('reports.templates.quarterly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.quarterly')->with(['indicatorsaftergrouped'=>$indicatorsaftergrouped,'indicatorsaftergrouped'=>$indicatorsaftergrouped,'cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
-    public function qrt2repo($id, $year)
+     public function qrt2repo($id, $year)
     {
 
         $project = Project::findOrFail($id);
@@ -910,7 +1222,6 @@ class PagesController extends Controller
 
         $outcomeindicators = Indicator::where('project_id', $id)->where('outcome_id', '!=', 0)->get();
 
-
         $goalindicators = Indicator::where('project_id', $id)->where('goal_id', '!=', 0)->get();
 
         $indicatorsafter = \DB::table('projects')
@@ -919,7 +1230,20 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 6)
             ->get();
+
+               $indicatorsaftergrouped = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 6)
+            ->groupBy('indicatorafters.indicator_id')
+            ->get();
+
+
 
         $indicatorsbefore = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -927,14 +1251,36 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 6)
             ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 6)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 6)
+            ->get();
+
+            // dd($outcomeindicators);
 
         $qrt = 'QRT 2';
-
         $challenges = Challenge::where('project_id', $id)->get();
-        return view('reports.templates.quarterly')->with(['indicatorsbefore' => $indicatorsbefore,'challenges' => $challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.quarterly')->with(['indicatorsaftergrouped'=>$indicatorsaftergrouped,'indicatorsaftergrouped'=>$indicatorsaftergrouped,'cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
-    public function qrt3repo($id, $year)
+
+
+     public function qrt3repo($id, $year)
     {
 
         $project = Project::findOrFail($id);
@@ -961,7 +1307,20 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 6)
             ->get();
+
+               $indicatorsaftergrouped = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 9)
+            ->groupBy('indicatorafters.indicator_id')
+            ->get();
+
+
 
         $indicatorsbefore = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -969,14 +1328,35 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 9)
             ->get();
+
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 9)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 9)
+            ->get();
+
+            // dd($outcomeindicators);
+
         $qrt = 'QRT 3';
-
         $challenges = Challenge::where('project_id', $id)->get();
-        return view('reports.templates.quarterly')->with(['indicatorsbefore' => $indicatorsbefore,'challenges' => $challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.quarterly')->with(['indicatorsaftergrouped'=>$indicatorsaftergrouped,'indicatorsaftergrouped'=>$indicatorsaftergrouped,'cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
-    public function qrt4repo($id, $year)
+     public function qrt4repo($id, $year)
     {
 
         $project = Project::findOrFail($id);
@@ -1003,7 +1383,19 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 12)
             ->get();
+
+               $indicatorsaftergrouped = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 12)
+            ->groupBy('indicatorafters.indicator_id')
+            ->get();
+
 
 
         $indicatorsbefore = \DB::table('projects')
@@ -1012,15 +1404,32 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 12)
             ->get();
 
-            
-            // dd($indicatorsbefore);
+        $cumulativeindicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 12)
+            ->get();
+
+        $cumulativeindicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->where('indicatorafters.month', '<=', 12)
+            ->get();
+
+            // dd($outcomeindicators);
 
         $qrt = 'QRT 4';
         $challenges = Challenge::where('project_id', $id)->get();
-
-        return view('reports.templates.quarterly')->with(['indicatorsbefore' => $indicatorsbefore,'challenges' => $challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.quarterly')->with(['indicatorsaftergrouped'=>$indicatorsaftergrouped,'indicatorsaftergrouped'=>$indicatorsaftergrouped,'cumulativeindicatorsbefore' => $cumulativeindicatorsbefore, 'cumulativeindicatorsafter' => $cumulativeindicatorsafter, 'indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'qrt' => $qrt, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function yearlyrepo($id, $year)
@@ -1044,26 +1453,25 @@ class PagesController extends Controller
 
         $goalindicators = Indicator::where('project_id', $id)->where('goal_id', '!=', 0)->get();
 
-       
-$indicatorsafter = \DB::table('projects')
-    ->join('indicators', 'indicators.project_id', 'projects.id')
-    ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
-    ->select('indicatorafters.*')->where('projects.id', $id)
-    ->where('indicatorafters.before_after', 'after')
-    ->where('indicatorafters.year', $year)
-    ->get();
+        $indicatorsafter = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'after')
+            ->where('indicatorafters.year', $year)
+            ->get();
 
-$indicatorsbefore = \DB::table('projects')
-    ->join('indicators', 'indicators.project_id', 'projects.id')
-    ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
-    ->select('indicatorafters.*')->where('projects.id', $id)
-    ->where('indicatorafters.before_after', 'before')
-    ->where('indicatorafters.year', $year)
-    ->get();
+        $indicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+            ->get();
 
         $challenges = Challenge::where('project_id', $id)->get();
 
-        return view('reports.templates.yearly')->with(['indicatorsbefore' => $indicatorsbefore,'challenges' => $challenges, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
+        return view('reports.templates.yearly')->with(['indicatorsbefore' => $indicatorsbefore, 'challenges' => $challenges, 'goalindicators' => $goalindicators, 'outcomeindicators' => $outcomeindicators, 'year' => $year, 'indicatorsafter' => $indicatorsafter, 'outputindicators' => $outputindicators, 'project' => $project, 'outcomes' => $outcomes, 'outputs' => $outputs]);
     }
 
     public function budget($id)

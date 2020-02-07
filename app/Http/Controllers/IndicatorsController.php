@@ -8,9 +8,8 @@ use App\Outcome;
 use App\Output;
 use App\Project;
 use App\Unit;
-use DB;
-
 use DateTime;
+use DB;
 use Illuminate\Http\Request;
 
 class IndicatorsController extends Controller
@@ -96,63 +95,7 @@ class IndicatorsController extends Controller
 
         if ($startyear == $endyear) {
 
-            $indiibefore = new Indicatorafter();
-            $indiibefore->indicator_id = $indicator->id;
-            $indiibefore->person_responsible = auth()->user()->name;
-            $indiibefore->jan = 0;
-            $indiibefore->feb = 0;
-            $indiibefore->mar = 0;
-            $indiibefore->apr = 0;
-            $indiibefore->may = 0;
-            $indiibefore->jun = 0;
-            $indiibefore->jul = 0;
-            $indiibefore->aug = 0;
-            $indiibefore->sep = 0;
-            $indiibefore->oct = 0;
-            $indiibefore->nov = 0;
-            $indiibefore->dec = 0;
-            $indiibefore->start = $indicator->start;
-            $indiibefore->end = $indicator->end;
-            $indiibefore->ovi_date = $indicator->end;
-            $indiibefore->before_after = "before";
-            $indiibefore->year = $startyear;
-            $indiibefore->created_at = $indicator->created_at;
-            $indiibefore->updated_at = $indicator->updated_at;
-            $indiibefore->baseline_target = $request->input('target_baseline');
-            $indiibefore->project_target = $request->input('project_target');
-
-            $indiibefore->save();
-
-            $indiafter = new Indicatorafter();
-            $indiafter->indicator_id = $indicator->id;
-            $indiafter->person_responsible = auth()->user()->name;
-            $indiafter->jan = 0;
-            $indiafter->feb = 0;
-            $indiafter->mar = 0;
-            $indiafter->apr = 0;
-            $indiafter->may = 0;
-            $indiafter->jun = 0;
-            $indiafter->jul = 0;
-            $indiafter->aug = 0;
-            $indiafter->sep = 0;
-            $indiafter->oct = 0;
-            $indiafter->nov = 0;
-            $indiafter->dec = 0;
-            $indiafter->start = $indicator->start;
-            $indiafter->end = $indicator->end;
-            $indiafter->ovi_date = $indicator->end;
-            $indiafter->before_after = "after";
-            $indiafter->year = $startyear;
-            $indiafter->created_at = $indicator->created_at;
-            $indiafter->updated_at = $indicator->updated_at;
-            $indiafter->baseline_target = $request->input('target_baseline');
-            $indiafter->project_target = $request->input('project_target');
-
-            $indiafter->save();
-
-        }
-        if ($startyear != $endyear) {
-            for ($i = $startyear; $i <= $endyear; $i++) {
+            for ($y = 1; $y <= 12; $y++) {
 
                 $indiibefore = new Indicatorafter();
                 $indiibefore->indicator_id = $indicator->id;
@@ -169,11 +112,12 @@ class IndicatorsController extends Controller
                 $indiibefore->oct = 0;
                 $indiibefore->nov = 0;
                 $indiibefore->dec = 0;
+                $indiibefore->month = $y;
                 $indiibefore->start = $indicator->start;
                 $indiibefore->end = $indicator->end;
                 $indiibefore->ovi_date = $indicator->end;
                 $indiibefore->before_after = "before";
-                $indiibefore->year = $i;
+                $indiibefore->year = $startyear;
                 $indiibefore->created_at = $indicator->created_at;
                 $indiibefore->updated_at = $indicator->updated_at;
                 $indiibefore->baseline_target = $request->input('target_baseline');
@@ -181,32 +125,51 @@ class IndicatorsController extends Controller
 
                 $indiibefore->save();
 
-                $indiafter = new Indicatorafter();
-                $indiafter->indicator_id = $indicator->id;
-                $indiafter->person_responsible = auth()->user()->name;
-                $indiafter->jan = 0;
-                $indiafter->feb = 0;
-                $indiafter->mar = 0;
-                $indiafter->apr = 0;
-                $indiafter->may = 0;
-                $indiafter->jun = 0;
-                $indiafter->jul = 0;
-                $indiafter->aug = 0;
-                $indiafter->sep = 0;
-                $indiafter->oct = 0;
-                $indiafter->nov = 0;
-                $indiafter->dec = 0;
-                $indiafter->start = $indicator->start;
-                $indiafter->end = $indicator->end;
-                $indiafter->ovi_date = $indicator->end;
-                $indiafter->before_after = "after";
-                $indiafter->year = $i;
-                $indiafter->created_at = $indicator->created_at;
-                $indiafter->updated_at = $indicator->updated_at;
-                $indiafter->baseline_target = $request->input('target_baseline');
-                $indiafter->project_target = $request->input('project_target');
+                $indiibefore = $indiibefore->replicate();
+                $indiibefore->before_after = "after";
 
-                $indiafter->save();
+                $indiibefore->save();
+
+            }
+
+        }
+        if ($startyear != $endyear) {
+            for ($i = $startyear; $i <= $endyear; $i++) {
+                for ($y = 1; $y <= 12; $y++) {
+
+                    $indiibefore = new Indicatorafter();
+                    $indiibefore->indicator_id = $indicator->id;
+                    $indiibefore->person_responsible = auth()->user()->name;
+                    $indiibefore->jan = 0;
+                    $indiibefore->feb = 0;
+                    $indiibefore->mar = 0;
+                    $indiibefore->apr = 0;
+                    $indiibefore->may = 0;
+                    $indiibefore->jun = 0;
+                    $indiibefore->jul = 0;
+                    $indiibefore->aug = 0;
+                    $indiibefore->sep = 0;
+                    $indiibefore->oct = 0;
+                    $indiibefore->nov = 0;
+                    $indiibefore->dec = 0;
+                    $indiibefore->month = $y;
+                    $indiibefore->start = $indicator->start;
+                    $indiibefore->end = $indicator->end;
+                    $indiibefore->ovi_date = $indicator->end;
+                    $indiibefore->before_after = "before";
+                    $indiibefore->year = $i;
+                    $indiibefore->created_at = $indicator->created_at;
+                    $indiibefore->updated_at = $indicator->updated_at;
+                    $indiibefore->baseline_target = $request->input('target_baseline');
+                    $indiibefore->project_target = $request->input('project_target');
+
+                    $indiibefore->save();
+
+                    $indiibefore = $indiibefore->replicate();
+                    $indiibefore->before_after = "after";
+
+                    $indiibefore->save();
+                }
 
             }
 
@@ -292,7 +255,6 @@ class IndicatorsController extends Controller
 
         }
 
-
         $units = Unit::all();
 
         $project = Project::findOrFail($indicator->project_id);
@@ -361,11 +323,10 @@ class IndicatorsController extends Controller
 
         $indicator->delete();
 
-          DB::table('indicators')
-    ->where('user_id', $project->user_id)
-    ->where('i_order', '>', $indicator->i_order)
-    ->decrement('i_order', 1);
-
+        DB::table('indicators')
+            ->where('user_id', $project->user_id)
+            ->where('i_order', '>', $indicator->i_order)
+            ->decrement('i_order', 1);
 
         $indafter = Indicatorafter::where('indicator_id', $id)->delete();
 
@@ -425,12 +386,14 @@ class IndicatorsController extends Controller
 
         $datetime1 = new DateTime($ind->start);
         $startyear = $datetime1->format('Y');
+        $startmonth = $datetime1->format('m');
+        $month = (int) $startmonth;
 
         $units = Unit::all();
 
-        $indicator = Indicatorafter::where('indicator_id', $id)->where('year', $startyear)->where('before_after', $before_after)->first();
+        $indicator = Indicatorafter::where('indicator_id', $id)->where('month', $month)->where('year', $startyear)->where('before_after', $before_after)->first();
 
-        return view('indicators.after')->with(['units' => $units, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
+        return view('indicators.after')->with(['units' => $units, 'month' => $month, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
 
     }
 
@@ -442,11 +405,15 @@ class IndicatorsController extends Controller
 
         $datetime1 = new DateTime($ind->start);
         $startyear = $datetime1->format('Y');
+
+        $startmonth = $datetime1->format('m');
+        $month = (int) $startmonth;
+
         $units = Unit::all();
 
-        $indicator = Indicatorafter::where('indicator_id', $id)->where('year', $startyear)->where('before_after', $before_after)->first();
+        $indicator = Indicatorafter::where('indicator_id', $id)->where('month', $month)->where('year', $startyear)->where('before_after', $before_after)->first();
 
-        return view('indicators.after')->with(['units' => $units, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
+        return view('indicators.after')->with(['units' => $units, 'month' => $month, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
 
     }
 
@@ -454,6 +421,10 @@ class IndicatorsController extends Controller
     {
 
         $before_after = $request->input('before_after');
+        $month = $request->input('month');
+
+        $year = $request->input('year');
+
 
         $ind = Indicator::findOrFail($request->indicatorID);
 
@@ -461,13 +432,145 @@ class IndicatorsController extends Controller
         $datetime1 = new DateTime($ind->start);
         $startyear = $datetime1->format('Y');
 
-        $indicator = Indicatorafter::where('indicator_id', $request->indicatorID)->where('year', $request->year)->where('before_after', $before_after)->first();
+        $datetime2 = new DateTime($ind->end);
+        $endyear = $datetime2->format('Y');
+        $startmonth = (int) $datetime1->format('m');
+
+        $yr = $request->year;
+
+        if ($year == "") {
+            $year = $startyear;
+            $yr = $startyear;
+
+        }
+        if ($month == "") {
+            $month = $startmonth;
+        }
+
+        $indicator = Indicatorafter::where('month', $month)->where('indicator_id', $request->indicatorID)->where('year', $request->year)->where('before_after', $before_after)->first();
+        
+        
+        dd($request->indicatorID);
+        
         if ($request->year > $startyear) {
             $indicator->start = $request->year . '-01-01';
 
         }
 
-        return view('indicators.after')->with(['units' => $units, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $request->year]);
+        return view('indicators.after')->with(['units' => $units, 'month' => $month, 'before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $request->year]);
+
+    }
+
+    public function indc()
+    {
+
+        // $min = Indicator::where('year(start)','>','2018');
+
+        $min = Indicator::all();
+
+        foreach ($min as $indicator) {
+
+            $datetime1 = new DateTime($indicator->start);
+            $datetime2 = new DateTime($indicator->end);
+
+            $interval = $datetime1->diff($datetime2);
+            $years = $interval->format('%y');
+            $months = $interval->format('%m');
+            $days = $interval->format('%d');
+
+            $startyear = $datetime1->format('Y');
+            $startmonth = $datetime1->format('m');
+
+            $endyear = $datetime2->format('Y');
+            $endmonth = $datetime2->format('m');
+            
+
+            if ($startyear == $endyear) {
+
+                for ($y = $startmonth; $y <= $endmonth; $y++) {
+
+                    $indiibefore = new Indicatorafter();
+                    $indiibefore->indicator_id = $indicator->id;
+                    $indiibefore->person_responsible = auth()->user()->name;
+                    $indiibefore->jan = 0;
+                    $indiibefore->feb = 0;
+                    $indiibefore->mar = 0;
+                    $indiibefore->apr = 0;
+                    $indiibefore->may = 0;
+                    $indiibefore->jun = 0;
+                    $indiibefore->jul = 0;
+                    $indiibefore->aug = 0;
+                    $indiibefore->sep = 0;
+                    $indiibefore->oct = 0;
+                    $indiibefore->nov = 0;
+                    $indiibefore->dec = 0;
+                    $indiibefore->month = $y;
+                    $indiibefore->start = $indicator->start;
+                    $indiibefore->end = $indicator->end;
+                    $indiibefore->ovi_date = $indicator->end;
+                    $indiibefore->before_after = "before";
+                    $indiibefore->year = $startyear;
+                    $indiibefore->created_at = $indicator->created_at;
+                    $indiibefore->updated_at = $indicator->updated_at;
+                    $indiibefore->baseline_target = $indicator->baseline_target;
+                    $indiibefore->project_target = $indicator->project_target;
+
+                    $indiibefore->save();
+
+                    $indiibefore = $indiibefore->replicate();
+                    $indiibefore->before_after = "after";
+
+                    $indiibefore->save();
+
+                }
+
+            }
+
+            if ($startyear != $endyear) {
+                for ($i = $startyear; $i <= $endyear; $i++) {
+                    for ($y = $startmonth;
+                        $y <= 12;
+                        $y++) {
+
+                        $indiibefore = new Indicatorafter();
+                        $indiibefore->indicator_id = $indicator->id;
+                        $indiibefore->person_responsible = auth()->user()->name;
+                        $indiibefore->jan = 0;
+                        $indiibefore->feb = 0;
+                        $indiibefore->mar = 0;
+                        $indiibefore->apr = 0;
+                        $indiibefore->may = 0;
+                        $indiibefore->jun = 0;
+                        $indiibefore->jul = 0;
+                        $indiibefore->aug = 0;
+                        $indiibefore->sep = 0;
+                        $indiibefore->oct = 0;
+                        $indiibefore->nov = 0;
+                        $indiibefore->dec = 0;
+                        $indiibefore->month = $y;
+                        $indiibefore->start = $indicator->start;
+                        $indiibefore->end = $indicator->end;
+                        $indiibefore->ovi_date = $indicator->end;
+                        $indiibefore->before_after = "before";
+                        $indiibefore->year = $i;
+                        $indiibefore->created_at = $indicator->created_at;
+                        $indiibefore->updated_at = $indicator->updated_at;
+                        $indiibefore->baseline_target = $indicator->baseline_target;
+                        $indiibefore->project_target = $indicator->project_target;
+
+                        $indiibefore->save();
+
+                        $indiibefore = $indiibefore->replicate();
+                        $indiibefore->before_after = "after";
+
+                        $indiibefore->save();
+                    }
+
+                }
+
+            }
+
+        }
 
     }
 

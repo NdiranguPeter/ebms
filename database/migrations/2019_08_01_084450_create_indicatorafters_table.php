@@ -15,7 +15,7 @@ class CreateIndicatoraftersTable extends Migration
     {
         Schema::create('indicatorafters', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('indicator_id');
+            $table->unsignedBigInteger('indicator_id');
             $table->string('person_responsible')->nullable();
             $table->string('jan')->nullable();
             $table->string('feb')->nullable();
@@ -39,6 +39,8 @@ class CreateIndicatoraftersTable extends Migration
             $table->integer('year');
 
             $table->timestamps();
+
+            $table->foreign('indicator_id')->references('id')->on('indicators')->onDelete('cascade');
         });
     }
 

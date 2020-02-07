@@ -43,26 +43,29 @@ class IndicatorsafterController extends Controller
 
         $id = $request->input('id');
         $year = $request->input('year');
+        $month = $request->input('month');
+
         $before_after = $request->input('before_after');
 
-        $indicatorafter = indicatorafter::where('indicator_id', $id)->where('year', $year)->where('before_after', $before_after)->first();
+        $indicatorafter = indicatorafter::where('indicator_id', $id)->where('month', $month)->where('year', $year)->where('before_after', $before_after)->first();
 
         $indicatorafter->indicator_id = $request->input('id');
         $indicatorafter->person_responsible = $request->input('person_responsible');
         $indicatorafter->jan =0;
 
-        $indicatorafter->jan = $request->input('jan');
-        $indicatorafter->feb = $request->input('feb');
-        $indicatorafter->mar = $request->input('mar');
-        $indicatorafter->apr = $request->input('apr');
-        $indicatorafter->may = $request->input('may');
-        $indicatorafter->jun = $request->input('jun');
-        $indicatorafter->jul = $request->input('jul');
-        $indicatorafter->aug = $request->input('aug');
-        $indicatorafter->sep = $request->input('sep');
-        $indicatorafter->oct = $request->input('oct');
-        $indicatorafter->nov = $request->input('nov');
-        $indicatorafter->dec = $request->input('dec');
+        $indicatorafter->jan = 0;
+        $indicatorafter->feb = 0;
+        $indicatorafter->mar = 0;
+        $indicatorafter->apr = 0;
+        $indicatorafter->may = 0;
+        $indicatorafter->jun = 0;
+        $indicatorafter->jul = 0;
+        $indicatorafter->aug = 0;
+        $indicatorafter->sep = 0;
+        $indicatorafter->oct = 0;
+        $indicatorafter->nov = 0;
+        $indicatorafter->dec = 0;
+        $indicatorafter->monthly_total = $request->input('achieved');
         $indicatorafter->ovi_date = $request->input('ovi_date');
 
         $indicatorafter->save();

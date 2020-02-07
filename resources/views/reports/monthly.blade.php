@@ -35,46 +35,15 @@
         <th> 
             @php
                 $gt = 0; 
-        @endphp
+        @endphp       
         @foreach ($indicatorsafter as $indicatorafter)
+        @foreach ($outputindicators as $outputindicator)
+        @if ($outputindicator->id == $indicatorafter->indicator_id)         
         @php
-        if ($month == "January") {
-          $gt = $gt + $indicatorafter->jan;
-        }
-        if ($month == "February") {
-          $gt = $gt+ $indicatorafter->feb;
-        }
-        if ($month == "March") {
-        $gt = $gt+ $indicatorafter->mar;
-        }
-        if ($month == "April") {
-        $gt = $gt+ $indicatorafter->apr;
-        }
-        if ($month == "May") {
-        $gt = $gt+ $indicatorafter->may;
-        }
-        if ($month == "June") {
-        $gt = $gt+ $indicatorafter->jun;
-        }
-        if ($month == "July") {
-        $gt = $gt+ $indicatorafter->jul;
-        }
-        if ($month == "August") {
-        $gt = $gt+ $indicatorafter->aug;
-        }
-        if ($month == "September") {
-        $gt = $gt+ $indicatorafter->sep;
-        }
-        if ($month == "October") {
-        $gt = $gt+ $indicatorafter->oct;
-        }
-        if ($month == "November") {
-        $gt = $gt+ $indicatorafter->nov;
-        }
-        if ($month == "December") {
-        $gt = $gt+ $indicatorafter->dec;
-        }
-        @endphp                                
+          $gt = $gt + $indicatorafter->monthly_total;
+             @endphp 
+             @endif                               
+        @endforeach
         @endforeach
         {{$gt}}
             
@@ -85,45 +54,13 @@
         $gtb = 0;
         @endphp
         @foreach ($indicatorsbefore as $indicatorbefore)
-        @php
-        if ($month == "January") {
-        $gtb = $gtb + $indicatorbefore->jan;
-        }
-        if ($month == "February") {
-        $gtb = $gtb+ $indicatorbefore->feb;
-        }
-        if ($month == "March") {
-        $gtb = $gtb+ $indicatorbefore->mar;
-        }
-        if ($month == "April") {
-        $gtb = $gtb+ $indicatorbefore->apr;
-        }
-        if ($month == "May") {
-        $gtb = $gtb+ $indicatorbefore->may;
-        }
-        if ($month == "June") {
-        $gtb = $gtb+ $indicatorbefore->jun;
-        }
-        if ($month == "July") {
-        $gtb = $gtb+ $indicatorbefore->jul;
-        }
-        if ($month == "August") {
-        $gtb = $gtb+ $indicatorbefore->aug;
-        }
-        if ($month == "September") {
-        $gtb = $gtb+ $indicatorbefore->sep;
-        }
-        if ($month == "October") {
-        $gtb = $gtb+ $indicatorbefore->oct;
-        }
-        if ($month == "November") {
-        $gtb = $gtb+ $indicatorbefore->nov;
-        }
-        if ($month == "December") {
-        $gtb = $gtb+ $indicatorbefore->dec;
-        }
-
-        @endphp
+        @foreach ($outputindicators as $outputindicator)
+                @if ($outputindicator->id == $indicatorbefore->indicator_id)
+        @php       
+        $gtb = $gtb + $indicatorbefore->monthly_total;
+               @endphp
+                 @endif                               
+        @endforeach
         @endforeach
 
         @php
@@ -136,17 +73,17 @@
             if ($mp <26) {
                 $cl = "red";
             }
-            if ($mp >25 && $mp <50) {
+            if ($mp >25 && $mp <51) {
                 $cl = "yellow";
             }
-            if ($mp >50 && $mp <75) {
+            if ($mp >50 && $mp <76) {
                 $cl = "blue";
             }
             if ($mp >75) {
                 $cl = "green";
             }
         @endphp
-       <td colspan="4" style="background-color:{{$cl}}; font-weight:bold; color:white;">
+       <td colspan="4" style="background-color:{{$cl}}; font-weight:bold; color:#000;font-size: large;">
        {{$month}} perfomance: {{sprintf('%0.02f', $mp)}}%
         </td>
     </tr>
@@ -154,51 +91,14 @@
          @php
              $gtt = 0;
          @endphp
-         @foreach ($indicatorsafter as $indicatorafter)
+         @foreach ($cumulativeindicatorsafter as $cumulativeindicatorafter)
+         @foreach ($outputindicators as $outputindicator)
+        @if ($outputindicator->id == $cumulativeindicatorafter->indicator_id)
         @php
-        if ($month == "January") {
-        $gtt = $gtt + $indicatorafter->jan;
-        }
-        if ($month == "February") {
-        $gtt = $gtt + $indicatorafter->jan + $indicatorafter->feb;
-        }
-        if ($month == "March") {
-        $gtt = $gtt + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar;
-        }
-        if ($month == "April") {
-        $gtt = $gtt + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr;
-        }
-        if ($month == "May") {
-        $gtt = $gtt + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may;
-        }
-        if ($month == "June") {
-        $gtt = $gtt  + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun;
-        }
-        if ($month == "July") {
-        $gtt = $gtt + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may +
-        $indicatorafter->jun + $indicatorafter->jul;
-        }
-        if ($month == "August") {
-        $gtt = $gtt + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may +
-        $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug;
-        }
-        if ($month == "September") {
-        $gtt = $gtt + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may +
-        $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
-        }
-        if ($month == "October") {
-        $gtt = $gtt  + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may +
-        $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep + $indicatorafter->oct;
-        }
-        if ($month == "November") {
-        $gtt = $gtt   + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may +
-        $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep + $indicatorafter->oct + $indicatorafter->nov;
-        }
-        if ($month == "December") {
-        $gtt = $gtt   + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may +
-        $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep + $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-        }
+        $gtt = $gtt + $cumulativeindicatorafter->monthly_total;       
         @endphp
+        @endif
+            @endforeach
         @endforeach
 
 
@@ -206,51 +106,15 @@
         @php
              $grg = 0;
          @endphp
-         @foreach ($indicatorsbefore as $indicatorbefore)
+         @foreach ($cumulativeindicatorsbefore as $cumulativeindicatorbefore)
+         @foreach ($outputindicators as $outputindicator)
+        @if ($outputindicator->id == $cumulativeindicatorbefore->indicator_id)
         @php
-        if ($month == "January") {
-        $grg = $grg + $indicatorbefore->jan;
-        }
-        if ($month == "February") {
-        $grg = $grg + $indicatorbefore->jan + $indicatorbefore->feb;
-        }
-        if ($month == "March") {
-        $grg = $grg + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar;
-        }
-        if ($month == "April") {
-        $grg = $grg + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr;
-        }
-        if ($month == "May") {
-        $grg = $grg + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may;
-        }
-        if ($month == "June") {
-        $grg = $grg  + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may + $indicatorbefore->jun;
-        }
-        if ($month == "July") {
-        $grg = $grg + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may +
-        $indicatorbefore->jun + $indicatorbefore->jul;
-        }
-        if ($month == "August") {
-        $grg = $grg + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may +
-        $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug;
-        }
-        if ($month == "September") {
-        $grg = $grg + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may +
-        $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep;
-        }
-        if ($month == "October") {
-        $grg = $grg  + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may +
-        $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep + $indicatorbefore->oct;
-        }
-        if ($month == "November") {
-        $grg = $grg   + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may +
-        $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep + $indicatorbefore->oct + $indicatorbefore->nov;
-        }
-        if ($month == "December") {
-        $grg = $grg   + $indicatorbefore->jan + $indicatorbefore->feb + $indicatorbefore->mar + $indicatorbefore->apr + $indicatorbefore->may +
-        $indicatorbefore->jun + $indicatorbefore->jul + $indicatorbefore->aug + $indicatorbefore->sep + $indicatorbefore->oct + $indicatorbefore->nov + $indicatorbefore->dec;
-        }
+        $grg = $grg + $cumulativeindicatorbefore->monthly_total;
+        
         @endphp
+        @endif
+            @endforeach
         @endforeach
 @php
 $cl = ""; 
@@ -260,13 +124,13 @@ $mmp = $gtt/$grg*100;
 }else {
 $mmp = $gtt*100;
 }
-if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <50) { $cl="yellow" ; } if ($mmp>50 && $mmp <75) { $cl="blue" ; } if ($mmp>
+if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <51) { $cl="yellow" ; } if ($mmp>50 && $mmp <76) { $cl="blue" ; } if ($mmp>
             75) {
             $cl = "green";
             }
             @endphp
         
-       <td colspan="4" style="background-color:{{$cl}}; font-weight:bold; color:white;">
+       <td colspan="4" style="background-color:{{$cl}}; font-weight:bold; color:#000;font-size: large;">
        Cumulative perfomance: {{sprintf('%0.02f',$mmp)}}%
         </td>
     </tr>
@@ -332,62 +196,62 @@ if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <50) { $cl="yellow" ; } if (
 
                     @if ($month == "January")
                     <td>
-                        {{$indicatorbefore->jan}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "February")
                     <td>
-                        {{$indicatorbefore->feb}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "March")
                     <td>
-                        {{$indicatorbefore->mar}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "April")
                     <td>
-                        {{$indicatorbefore->apr}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "May")
                     <td>
-                        {{$indicatorbefore->may}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "June")
                     <td>
-                        {{$indicatorbefore->jun}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "July")
                     <td>
-                        {{$indicatorbefore->jul}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "August")
                     <td>
-                        {{$indicatorbefore->aug}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "September")
                     <td>
-                        {{$indicatorbefore->sep}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "October")
                     <td>
-                        {{$indicatorbefore->oct}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "November")
                     <td>
-                        {{$indicatorbefore->nov}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "December")
                     <td>
-                        {{$indicatorbefore->dec}}
+                        {{$indicatorbefore->monthly_total}}
                     </td>
                     @endif
 
@@ -409,62 +273,62 @@ if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <50) { $cl="yellow" ; } if (
                 
                     @if ($month == "January")
                     <td>
-                        {{$indicatorafter->jan}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "February")
                     <td>
-                        {{$indicatorafter->feb}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "March")
                     <td>
-                        {{$indicatorafter->mar}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "April")
                     <td>
-                        {{$indicatorafter->apr}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "May")
                     <td>
-                        {{$indicatorafter->may}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "June")
                     <td>
-                        {{$indicatorafter->jun}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "July")
                     <td>
-                        {{$indicatorafter->jul}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "August")
                     <td>
-                        {{$indicatorafter->aug}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "September")
                     <td>
-                        {{$indicatorafter->sep}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "October")
                     <td>
-                        {{$indicatorafter->oct}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "November")
                     <td>
-                        {{$indicatorafter->nov}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                     @if ($month == "December")
                     <td>
-                        {{$indicatorafter->dec}}
+                        {{$indicatorafter->monthly_total}}
                     </td>
                     @endif
                 
@@ -487,17 +351,17 @@ if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <50) { $cl="yellow" ; } if (
                     @foreach ($indicatorsbefore as $indicatorbefore)
                     @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                     @php
-                    if ($indicatorbefore->jan == 0 ) {
-                    $indicatorbefore->jan = 1;
+                    if ($indicatorbefore->monthly_total == 0 ) {
+                    $indicatorbefore->monthly_total = 1;
                     }
-                    $perfom = $indicatorafter->jan / $indicatorbefore->jan * 100;
+                    $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                     if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                             $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                                 $cr = "green";
                                 }
                                 @endphp
                                 <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                    {{sprintf('%0.0f',$perfom)}}%
+                                    {{sprintf('%0.02f',$perfom)}}%
                                 </td>
                                 @endif
                                 @endforeach
@@ -507,9 +371,9 @@ if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <50) { $cl="yellow" ; } if (
                                 @foreach ($indicatorsbefore as $indicatorbefore)
                                 @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                                 @php
-                               if ($indicatorbefore->feb == 0 ) { $indicatorbefore->feb = 1;
+                               if ($indicatorbefore->monthly_total == 0 ) { $indicatorbefore->monthly_total = 1;
                                 }
-                                $perfom = $indicatorafter->feb / $indicatorbefore->feb * 100;
+                                $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                                 if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if
                                         ($perfom>50 &&
                                         $perfom <76) { $cr="blue" ; } if ($perfom>75) {
@@ -517,7 +381,7 @@ if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <50) { $cl="yellow" ; } if (
                                             }
                                             @endphp
                                             <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                                {{sprintf('%0.0f',$perfom)}}%
+                                                {{sprintf('%0.02f',$perfom)}}%
                                             </td>
                                             @endif
                                             @endforeach
@@ -527,17 +391,17 @@ if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <50) { $cl="yellow" ; } if (
                                             @foreach ($indicatorsbefore as $indicatorbefore)
                                             @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                                             @php
-                                            if ($indicatorbefore->mar==0 ) {
-                                            $indicatorbefore->mar = 1;
+                                            if ($indicatorbefore->monthly_total==0 ) {
+                                            $indicatorbefore->monthly_total = 1;
                                             }
-                                            $perfom = $indicatorafter->mar / $indicatorbefore->mar * 100;
+                                            $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                                             if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                                                     $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                                                         $cr = "green";
                                                         }
                                                         @endphp
                                                         <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                                            {{sprintf('%0.0f',$perfom)}}%
+                                                            {{sprintf('%0.02f',$perfom)}}%
                                                         </td>
                                                         @endif
                                                         @endforeach
@@ -547,17 +411,17 @@ if ($mmp < 26) { $cl="red" ; } if ($mmp >25 && $mmp <50) { $cl="yellow" ; } if (
 @foreach ($indicatorsbefore as $indicatorbefore)
 @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
 @php
-if ($indicatorbefore->apr==0 ) {
-$indicatorbefore->apr = 1;
+if ($indicatorbefore->monthly_total==0 ) {
+$indicatorbefore->monthly_total = 1;
 }
-$perfom = $indicatorafter->apr / $indicatorbefore->apr * 100;
+$perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
 if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
         $perfom <76) { $cr="blue" ; } if ($perfom>75) {
             $cr = "green";
             }
             @endphp
             <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                {{sprintf('%0.0f',$perfom)}}%
+                {{sprintf('%0.02f',$perfom)}}%
             </td>
             @endif
             @endforeach
@@ -568,17 +432,17 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
             @foreach ($indicatorsbefore as $indicatorbefore)
             @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
             @php
-            if ($indicatorbefore->may==0 ) {
-            $indicatorbefore->may = 1;
+            if ($indicatorbefore->monthly_total==0 ) {
+            $indicatorbefore->monthly_total = 1;
             }
-            $perfom = $indicatorafter->may / $indicatorbefore->may * 100;
+            $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
             if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                     $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                         $cr = "green";
                         }
                         @endphp
                         <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                           {{sprintf('%0.0f',$perfom)}}%
+                           {{sprintf('%0.02f',$perfom)}}%
                         </td>
                         @endif
                         @endforeach
@@ -588,17 +452,17 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
                         @foreach ($indicatorsbefore as $indicatorbefore)
                         @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                         @php
-                        if ($indicatorbefore->jun==0 ) {
-                        $indicatorbefore->jun = 1;
+                        if ($indicatorbefore->monthly_total==0 ) {
+                        $indicatorbefore->monthly_total = 1;
                         }
-                        $perfom = $indicatorafter->jun / $indicatorbefore->jun * 100;
+                        $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                         if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                                 $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                                     $cr = "green";
                                     }
                                     @endphp
                                     <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                       {{sprintf('%0.0f',$perfom)}}%
+                                       {{sprintf('%0.02f',$perfom)}}%
                                     </td>
                                     @endif
                                     @endforeach
@@ -608,17 +472,17 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
                                     @foreach ($indicatorsbefore as $indicatorbefore)
                                     @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                                     @php
-                                    if ($indicatorbefore->jul==0 ) {
-                                    $indicatorbefore->jul = 1;
+                                    if ($indicatorbefore->monthly_total==0 ) {
+                                    $indicatorbefore->monthly_total = 1;
                                     }
-                                    $perfom = $indicatorafter->jul / $indicatorbefore->jul * 100;
+                                    $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                                     if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                                             $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                                                 $cr = "green";
                                                 }
                                                 @endphp
                                                 <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                                   {{sprintf('%0.0f',$perfom)}}%
+                                                   {{sprintf('%0.02f',$perfom)}}%
                                                 </td>
                                                 @endif
                                                 @endforeach
@@ -629,17 +493,17 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
                                                 @foreach ($indicatorsbefore as $indicatorbefore)
                                                 @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                                                 @php
-                                                if ($indicatorbefore->aug==0 ) {
-                                                $indicatorbefore->aug = 1;
+                                                if ($indicatorbefore->monthly_total==0 ) {
+                                                $indicatorbefore->monthly_total = 1;
                                                 }
-                                                $perfom = $indicatorafter->aug / $indicatorbefore->aug * 100;
+                                                $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                                                 if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                                                         $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                                                             $cr = "green";
                                                             }
                                                             @endphp
                                                             <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                                               {{sprintf('%0.0f',$perfom)}}%
+                                                               {{sprintf('%0.02f',$perfom)}}%
                                                             </td>
                                                             @endif
                                                             @endforeach
@@ -649,10 +513,10 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
                                             @foreach ($indicatorsbefore as $indicatorbefore)
                                             @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                                             @php
-                                            if ($indicatorbefore->sep==0 ) {
-                                            $indicatorbefore->sep = 1;
+                                            if ($indicatorbefore->monthly_total==0 ) {
+                                            $indicatorbefore->monthly_total = 1;
                                             }
-                                            $perfom = $indicatorafter->sep / $indicatorbefore->sep * 100;
+                                            $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                                             if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) {
                                                     $cr="yellow" ; } if ($perfom>50 &&
                                                     $perfom <76) { $cr="blue" ; } if ($perfom>75) {
@@ -661,7 +525,7 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
                                                         @endphp
                                                         <td
                                                             style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                                           {{sprintf('%0.0f',$perfom)}}%
+                                                           {{sprintf('%0.02f',$perfom)}}%
                                                         </td>
                                                         @endif
                                                         @endforeach
@@ -671,17 +535,17 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
                                                         @foreach ($indicatorsbefore as $indicatorbefore)
                                                         @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                                                         @php
-                                                        if ($indicatorbefore->oct==0 ) {
-                                                        $indicatorbefore->oct = 1;
+                                                        if ($indicatorbefore->monthly_total==0 ) {
+                                                        $indicatorbefore->monthly_total = 1;
                                                         }
-                                                        $perfom = $indicatorafter->oct / $indicatorbefore->oct * 100;
+                                                        $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                                                         if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                                                                 $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                                                                     $cr = "green";
                                                                     }
                                                                     @endphp
                                                                     <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                                                       {{sprintf('%0.0f',$perfom)}}%
+                                                                       {{sprintf('%0.02f',$perfom)}}%
                                                                     </td>
                                                                     @endif
                                                                     @endforeach
@@ -691,17 +555,17 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
                                                                     @foreach ($indicatorsbefore as $indicatorbefore)
                                                                     @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                                                                     @php
-                                                                    if ($indicatorbefore->nov==0 ) {
-                                                                    $indicatorbefore->nov = 1;
+                                                                    if ($indicatorbefore->monthly_total==0 ) {
+                                                                    $indicatorbefore->monthly_total = 1;
                                                                     }
-                                                                    $perfom = $indicatorafter->nov / $indicatorbefore->nov * 100;
+                                                                    $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                                                                     if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                                                                             $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                                                                                 $cr = "green";
                                                                                 }
                                                                                 @endphp
                                                                                 <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                                                                   {{sprintf('%0.0f',$perfom)}}%
+                                                                                   {{sprintf('%0.02f',$perfom)}}%
                                                                                 </td>
                                                                                 @endif
                                                                                 @endforeach
@@ -711,17 +575,17 @@ if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ;
                                                                                 @foreach ($indicatorsbefore as $indicatorbefore)
                                                                                 @if ($indicatorbefore->indicator_id == $indicatorafter->indicator_id)
                                                                                 @php
-                                                                                if ($indicatorbefore->dec==0 ) {
-                                                                                    $indicatorbefore->dec = 1;
+                                                                                if ($indicatorbefore->monthly_total==0 ) {
+                                                                                    $indicatorbefore->monthly_total = 1;
                                                                                 }
-                                                                                $perfom = $indicatorafter->dec / $indicatorbefore->dec * 100;
+                                                                                $perfom = $indicatorafter->monthly_total / $indicatorbefore->monthly_total * 100;
                                                                                 if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
                                                                                         $perfom <76) { $cr="blue" ; } if ($perfom>75) {
                                                                                             $cr = "green";
                                                                                             }
                                                                                             @endphp
                                                                                             <td style="background-color:{{$cr}}; color:white; font-weight:bold;">
-                                                                                               {{sprintf('%0.0f',$perfom)}}%
+                                                                                               {{sprintf('%0.02f',$perfom)}}%
                                                                                             </td>
                                                                                             @endif
                                                                                             @endforeach

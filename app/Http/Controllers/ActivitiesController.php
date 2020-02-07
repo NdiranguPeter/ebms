@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use App\Activityafter;
 use App\Activityscoring;
+use App\Challenge;
 use App\Currency;
 use App\Deliverable;
 use App\Outcome;
@@ -13,7 +14,6 @@ use App\Partner;
 use App\Project;
 use App\Sector;
 use App\Unit;
-use App\Challenge;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -165,8 +165,8 @@ class ActivitiesController extends Controller
 
         if ($activity_tb >= $totol_beneficiaries) {
             $output = Output::findOrFail($output_id);
-$outcome = Outcome::findOrFail($output->outcome_id);
-$project = Project::findOrFail($outcome->project_id);
+            $outcome = Outcome::findOrFail($output->outcome_id);
+            $project = Project::findOrFail($outcome->project_id);
 
             $uyp = \DB::table('projects')
                 ->join('outcomes', 'outcomes.project_id', 'projects.id')
@@ -175,9 +175,8 @@ $project = Project::findOrFail($outcome->project_id);
                 ->select('activities.*')->where('projects.id', $project->id)
                 ->get();
 
-$order = count($uyp);
-$activity->order = $order+1;
-
+            $order = count($uyp);
+            $activity->order = $order + 1;
 
             $activity->save();
 
@@ -216,8 +215,6 @@ $activity->order = $order+1;
                     $activitybefore->above_eighty_female = $above_eighty_female;
                     $activitybefore->indirect_male = $activity->indirect_male;
                     $activitybefore->indirect_female = $activity->indirect_female;
-                   
-
 
                     $activitybefore->start = $activity->start;
                     $activitybefore->end = $activity->end;
@@ -278,7 +275,6 @@ $activity->order = $order+1;
                         $activitybefore->above_eighty_female = $above_eighty_female;
                         $activitybefore->indirect_male = $activity->indirect_male;
                         $activitybefore->indirect_female = $activity->indirect_female;
-                       
 
                         $activitybefore->start = $activity->start;
                         $activitybefore->end = $activity->end;
@@ -323,8 +319,6 @@ $activity->order = $order+1;
             $project = Project::findOrFail($outcome->project_id);
 
             $units = Unit::all();
-
-
 
             return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'Activity created']);
 
@@ -372,7 +366,7 @@ $activity->order = $order+1;
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-             $activitiescount = \DB::table('projects')
+        $activitiescount = \DB::table('projects')
             ->join('outcomes', 'outcomes.project_id', 'projects.id')
             ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
             ->join('activities', 'activities.output_id', 'outputs.id')
@@ -380,12 +374,11 @@ $activity->order = $order+1;
             ->orderBy('created_at', 'desc')
             ->get();
 
-
-            $numbering = count($activitiescount);
+        $numbering = count($activitiescount);
 
         $units = Unit::all();
 
-        return view('activities.show')->with(['numbering'=>$numbering,'project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'Activity created']);
+        return view('activities.show')->with(['numbering' => $numbering, 'project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'success' => 'Activity created']);
 
     }
 
@@ -411,12 +404,12 @@ $activity->order = $order+1;
     {
 
         $activity = Activity::findOrFail($id);
-        
+
         $units = Unit::all();
         $output = Output::findOrFail($activity->output_id);
 
         $outcome = Outcome::findOrFail($output->outcome_id);
-        
+
         $partners = Partner::all();
         $currencies = Currency::all();
         // $cur = Currency::findOrFail($activity->currency);
@@ -426,7 +419,6 @@ $activity->order = $order+1;
         $activity->unit = $uni->name;
         $activity->unit_id = $uni->id;
         $project = Project::findOrFail($outcome->project_id);
-        
 
         return view('activities.edit')->with(['project' => $project, 'currencies' => $currencies, 'partners' => $partners, 'activity' => $activity, 'output' => $output, 'outcome' => $outcome, 'units' => $units]);
     }
@@ -584,7 +576,6 @@ $activity->order = $order+1;
 
         $output_id = $activity->output_id;
 
-
         $activities = Activity::where('output_id', $output_id)->get();
         $output = Output::findOrFail($output_id);
         $outcome = Outcome::findOrFail($output->outcome_id);
@@ -593,26 +584,23 @@ $activity->order = $order+1;
         $project = Project::findOrFail($outcome->project_id);
 
         $dsg = \DB::table('projects')
-    ->join('outcomes', 'outcomes.project_id', 'projects.id')
-    ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
-    ->join('activities', 'activities.output_id', 'outputs.id')
-    ->select('activities.*')->where('projects.id', $project->id)
-    ->get();
-    foreach($dsg as $ds){
-        $acr = Activity::findOrFail($ds->id);
-        if($ds->order > $activity->order){
-            $acr->order = $acr->order-1;
-$acr->save();
+            ->join('outcomes', 'outcomes.project_id', 'projects.id')
+            ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+            ->join('activities', 'activities.output_id', 'outputs.id')
+            ->select('activities.*')->where('projects.id', $project->id)
+            ->get();
+        foreach ($dsg as $ds) {
+            $acr = Activity::findOrFail($ds->id);
+            if ($ds->order > $activity->order) {
+                $acr->order = $acr->order - 1;
+                $acr->save();
 
+            }
         }
-    }
 
-    
-$activity->delete();
+        $activity->delete();
 
-$indafter = Activityafter::where('activity_id', $id)->delete();
-
-
+        $indafter = Activityafter::where('activity_id', $id)->delete();
 
         return redirect('/activities/' . $project->id)->with(['project' => $project, 'activities' => $activities, 'units' => $units, 'output' => $output, 'outcome' => $outcome, 'error' => 'Activity deleted']);
 
@@ -636,12 +624,10 @@ $indafter = Activityafter::where('activity_id', $id)->delete();
     public function after($id)
     {
 
-        
         $before_after = 'after';
         $act = Activity::findOrFail($id);
-        
-$challenges = Challenge::where('activity_id', $id)->get();
 
+        $challenges = Challenge::where('activity_id', $id)->get();
 
         $datetime1 = new DateTime($act->start);
         $startyear = $datetime1->format('Y');
@@ -656,8 +642,7 @@ $challenges = Challenge::where('activity_id', $id)->get();
 
         $units = Unit::all();
 
-
-        return view('activities.after')->with(['units'=>$units, 'challenges'=>$challenges,'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
+        return view('activities.after')->with(['units' => $units, 'challenges' => $challenges, 'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
 
     }
 
@@ -669,7 +654,7 @@ $challenges = Challenge::where('activity_id', $id)->get();
         $datetime1 = new DateTime($act->start);
         $startyear = $datetime1->format('Y');
         $startmonth = $datetime1->format('m');
-        $month = (int)$startmonth;
+        $month = (int) $startmonth;
 
         $activity = Activityafter::where('activity_id', $id)->where('month', $month)->where('year', $startyear)->where('before_after', $before_after)->first();
 
@@ -678,9 +663,9 @@ $challenges = Challenge::where('activity_id', $id)->get();
         $project = Project::findOrFail($outcome->project_id);
 
         // return view('activities.after')->with(['before_after' => $before_after, 'indicator' => $indicator, 'ind' => $ind, 'yr' => $startyear]);
-$units = Unit::all();
+        $units = Unit::all();
 
-        return view('activities.after')->with(['units'=>$units, 'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
+        return view('activities.after')->with(['units' => $units, 'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $startyear, 'before_after' => $before_after]);
 
     }
 
@@ -720,12 +705,11 @@ $units = Unit::all();
         if ($request->year > $startyear) {
             $activity->start = $request->year . '-01-01';
         }
-$units = Unit::all();
-        
-$challenges = Challenge::where('activity_id', $act->id)->get();
+        $units = Unit::all();
 
+        $challenges = Challenge::where('activity_id', $act->id)->get();
 
-        return view('activities.after')->with(['units'=>$units,'challenges'=>$challenges,'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $yr, 'before_after' => $before_after]);
+        return view('activities.after')->with(['units' => $units, 'challenges' => $challenges, 'month' => $month, 'project' => $project, 'activity' => $activity, 'act' => $act, 'yr' => $yr, 'before_after' => $before_after]);
     }
 
 }

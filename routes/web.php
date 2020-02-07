@@ -172,6 +172,7 @@ Route::resource('challenges', 'ChallengesController')->middleware('auth');
 Route::resource('skip', 'SkipController')->middleware('auth');
 Route::resource('unit', 'UnitsController')->middleware('auth');
 Route::get('copy', 'PrintReportsController@index');
+Route::get('indc', 'IndicatorsController@indc');
 
 Route::post('/before', 'IndicatorsController@before2');
 Route::post('/activity/before', 'ActivitiesController@before2');
