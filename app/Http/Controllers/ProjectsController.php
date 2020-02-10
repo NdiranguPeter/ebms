@@ -413,4 +413,84 @@ class ProjectsController extends Controller
 
     }
 
+
+
+
+  public function kenya()
+    {
+        $user = auth()->user();
+
+        if ($user->role == 1) {
+            $projects = Project::where('country',1)->orderBy('created_at', 'desc')->paginate(10);
+            // dd($projects);
+            return view('kenya')->with(['projects'=>$projects]);
+        }
+        if ($user->role == 0) {
+            return redirect('/home');
+        }
+
+    }  
+
+
+       public function sudan()
+    {
+        $user = auth()->user();
+
+        if ($user->role == 1) {
+             $projects = Project::where('country',4)->orderBy('created_at', 'desc')->paginate(10);
+            // dd($projects);
+            return view('sudan')->with(['projects'=>$projects]);
+        }
+        if ($user->role == 0) {
+            return redirect('/home');
+        }
+
+    }
+
+       public function somalia()
+    {
+        $user = auth()->user();
+
+        if ($user->role == 1) {
+            $projects = Project::where('country',2)->orderBy('created_at', 'desc')->paginate(10);
+            // dd($projects);
+            return view('somalia')->with(['projects'=>$projects]);
+        }
+        if ($user->role == 0) {
+            return redirect('/home');
+        }
+
+    }
+
+       public function ethiopia()
+    {
+        $user = auth()->user();
+
+        if ($user->role == 1) {
+             $projects = Project::where('country',3)->orderBy('created_at', 'desc')->paginate(10);
+            // dd($projects);
+            return view('ethiopia')->with(['projects'=>$projects]);
+        }
+        if ($user->role == 0) {
+            return redirect('/home');
+        }
+
+    }
+
+       public function southsudan()
+    {
+        $user = auth()->user();
+
+        if ($user->role == 1) {
+            $projects = Project::where('country',5)->orderBy('created_at', 'desc')->paginate(10);
+            // dd($projects);
+            return view('southsudan')->with(['projects'=>$projects]);
+        }
+        if ($user->role == 0) {
+            return redirect('/home');
+        }
+
+    }
+
+
 }

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
-use App\Country;
 use App\Project;
+
+namespace App\Http\Controllers;
 
 class HomeController extends Controller
 {
@@ -26,30 +27,22 @@ class HomeController extends Controller
     {
         return view('pages.dashboard');
     }
+    public function admin()
+    {
+        return view('pages.admin');
+    }
     public function regional()
     {
-       $user = auth()->user();
-
-      if ($user->role == 1) {
-          return view('regional');
-      }
-         if ($user->role == 0) {
-          return redirect('/home');
-      }
-
-    }
-
-     public function kenya()
-    {
         $user = auth()->user();
-        
-      if ($user->role == 1) {
-          return view('kenya');
-      }
-         if ($user->role == 0) {
-          return redirect('/home');
-      }
+
+        if ($user->role == 1) {
+            return view('regional');
+        }
+        if ($user->role == 0) {
+            return redirect('/home');
+        }
 
     }
+
 
 }

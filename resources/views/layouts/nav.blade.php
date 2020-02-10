@@ -1,13 +1,24 @@
 <ul class="nav nav-list">
-	<li class="{{ (request()->is('home')) ? 'active' : '' }}">
-		<a href="/home">
+@if (auth()->user()->role == 1)
+<li class="{{ (request()->is('admin')) ? 'active' : '' }}">
+		<a href="/admin">
 			<i class="menu-icon fa fa-tachometer"></i>
-			<span class="menu-text"> Dashboard </span>
+			<span class="menu-text"> Admin</span>
 		</a>
-
+	
 		<b class="arrow"></b>
 	</li>
+	
+@endif
 
+<li class="{{ (request()->is('home')) ? 'active' : '' }}">
+		<a href="/home">
+			<i class="menu-icon fa fa-home"></i>
+			<span class="menu-text"> Dashboard </span>
+		</a>
+	
+		<b class="arrow"></b>
+	</li>
 
 	<li class="{{ (request()->is('surveys')) ? 'active' : '' }}">
 		<a href="/surveys">

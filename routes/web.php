@@ -123,8 +123,13 @@ Route::get('/activities/output/{id}', 'ActivitiesController@showOutputActivities
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/admin', 'HomeController@admin')->name('admin')->middleware('auth');
 Route::get('/regional', 'HomeController@regional')->middleware('auth');
-Route::get('/kenya', 'HomeController@kenya');
+Route::get('/kenya', 'ProjectsController@kenya');
+Route::get('/sudan', 'ProjectsController@sudan');
+Route::get('/southsudan', 'ProjectsController@southsudan');
+Route::get('/ethiopia', 'ProjectsController@ethiopia');
+Route::get('/somalia', 'ProjectsController@somalia');
 
 Route::resource('countries', 'CountriesController')->middleware('auth');
 
