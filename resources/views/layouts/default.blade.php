@@ -103,14 +103,14 @@
 
 					<li class="light-blue dropdown-modal">
 						<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-							<img style="width:50px; height:50px; margin-top:1px;" class="nav-user-photo"
-								src="{{ asset('storage/images/user.png') }}" alt="" />
+							{{-- <img style="width:50px; height:50px; margin-top:1px;" class="nav-user-photo"
+								src="{{ asset('storage/images/user.png') }}" alt="" /> --}}
 							<span class="user-info">
 								<small>Welcome,</small>
 								{{ Auth::user()->name }}
 							</span>
 
-							<i class="ace-icon fa fa-caret-down"></i>
+							{{-- <i class="ace-icon fa fa-caret-down"></i> --}}
 						</a>
 
 						<ul
