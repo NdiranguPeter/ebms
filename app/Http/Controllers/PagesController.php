@@ -1315,7 +1315,8 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 6)
+              ->where('indicatorafters.month', '>', 6)
+            ->orWhere('indicatorafters.month', '<=', 9)
             ->get();
 
                $indicatorsaftergrouped = \DB::table('projects')
@@ -1324,7 +1325,8 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 9)
+              ->where('indicatorafters.month', '>', 6)
+            ->orWhere('indicatorafters.month', '<=', 9)
             ->groupBy('indicatorafters.indicator_id')
             ->get();
 
@@ -1336,7 +1338,8 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 9)
+              ->where('indicatorafters.month', '>', 6)
+            ->orWhere('indicatorafters.month', '<=', 9)
             ->get();
 
         $cumulativeindicatorsafter = \DB::table('projects')
@@ -1391,7 +1394,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 12)
+            ->where('indicatorafters.month', '>', 9)
             ->get();
 
                $indicatorsaftergrouped = \DB::table('projects')
@@ -1400,7 +1403,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 12)
+            ->where('indicatorafters.month', '>', 9)
             ->groupBy('indicatorafters.indicator_id')
             ->get();
 
@@ -1412,7 +1415,7 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'before')
             ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 12)
+            ->where('indicatorafters.month', '>', 9)
             ->get();
 
         $cumulativeindicatorsafter = \DB::table('projects')
