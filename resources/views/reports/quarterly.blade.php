@@ -70,7 +70,7 @@
         }else {
         $mp = $gt*100;
         }
-        if ($mp <26) { $cl="red" ; } if ($mp>25 && $mp <50) { $cl="yellow" ; } if ($mp>50 && $mp <75) { $cl="blue" ; }
+        if ($mp <26) { $cl="red" ; } if ($mp>25 && $mp <51) { $cl="yellow" ; } if ($mp>50 && $mp <75) { $cl="blue" ; }
                     if ($mp>75) {
                     $cl = "green";
                     }
@@ -122,7 +122,7 @@
         if ($mmp < 26) { 
             $cl="red" ; 
         } 
-        if ($mmp>25 && $mmp <50) {
+        if ($mmp>25 && $mmp <51) {
              $cl="yellow" ;
              } 
         if ($mmp>50 && $mmp <75) { 
