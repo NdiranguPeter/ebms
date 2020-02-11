@@ -1224,14 +1224,29 @@ class PagesController extends Controller
 
         $goalindicators = Indicator::where('project_id', $id)->where('goal_id', '!=', 0)->get();
 
+
         $indicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
             ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 6)
+            ->where('indicatorafters.month', '>', 3)
+            ->orWhere('indicatorafters.month', '<=', 6)
             ->get();
+
+            
+        $indicatorsbefore = \DB::table('projects')
+            ->join('indicators', 'indicators.project_id', 'projects.id')
+            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+            ->select('indicatorafters.*')->where('projects.id', $id)
+            ->where('indicatorafters.before_after', 'before')
+            ->where('indicatorafters.year', $year)
+             ->where('indicatorafters.month', '>', 3)
+            ->orWhere('indicatorafters.month', '<=', 6)
+            ->get();
+
+
 
                $indicatorsaftergrouped = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
@@ -1239,20 +1254,13 @@ class PagesController extends Controller
             ->select('indicatorafters.*')->where('projects.id', $id)
             ->where('indicatorafters.before_after', 'after')
             ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 6)
+           ->where('indicatorafters.month', '>', 3)
+            ->orWhere('indicatorafters.month', '<=', 6)
             ->groupBy('indicatorafters.indicator_id')
             ->get();
 
 
 
-        $indicatorsbefore = \DB::table('projects')
-            ->join('indicators', 'indicators.project_id', 'projects.id')
-            ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
-            ->select('indicatorafters.*')->where('projects.id', $id)
-            ->where('indicatorafters.before_after', 'before')
-            ->where('indicatorafters.year', $year)
-            ->where('indicatorafters.month', '<=', 6)
-            ->get();
 
         $cumulativeindicatorsafter = \DB::table('projects')
             ->join('indicators', 'indicators.project_id', 'projects.id')
