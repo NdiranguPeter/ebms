@@ -20,86 +20,62 @@
         <td>Project name: </td>
         <td colspan="3"> {{$project->name}} </td>
     </tr>
-    <tr>
-        <td>Total Budget </td>
-        <td>{{$project->budget}}</td>
-        <td>Total female reached</td>
-        <td></td>
-    </tr>
+
     <tr>
         <td>Reporting year</td>
-        <td> {{$year}} </td>
-        <td>Total male reached</td>
-        @php
-        $total = 0;
-        $gtotal = 0;
-        $target_total = 0;
-        @endphp
-        @foreach ($outputindicators as $outputindicator)
-        @php
-        $target_total = $target_total + $outputindicator->project_target;
-        @endphp
-        @endforeach
-        @foreach ($indicatorsafter as $indicatorafter)
-        @php
-        $total1 = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar ;
-        $total2 = $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun ;
-
-        $total3 = $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep;
-
-        $total4 = $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-
-
-        $total = $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep
-        + $total = $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-        $gtotal = $gtotal + $total;
-        @endphp
-        @endforeach
-        <td> {{$gtotal}} </td>
-    </tr>
-    <tr>
-        <td>Expenditure for this year</td>
-        <td>#</td>
-        <td>Total beneficiaries served</td>
-        @php
-        $tt = 0;
-        @endphp
-        @foreach ($indicatorsafter as $indicatorafter)
-        @php
-        $tt = $tt + $indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-        $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep
-        + $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec;
-        @endphp
-        @endforeach
-
-        <td>
-            {{$tt}}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <b>Overall perfomance</b>
-
+        <th> {{$year}} </th>
+     
+        <td>Total beneficiaries reached</td>
+      <th>
             @php
-            if ($target_total > 0) {
-            $perc = $gtotal/$target_total * 100;
-            }else{
-            $perc = $gtotal * 100;
-            }
-            $perc = sprintf('%0.2f', $perc);
-            if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 && $perc
-                    <75) { $color='blue' ; } if ($perc> 74) {
-                        $color = 'green';
-                        }
-                        @endphp
-                        <div
-                            style="font-weight: bold; font-size: xx-large; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
-                            {{sprintf('%0.2f',$perc)}}%
-                        </div>
-
-        </td>
+            $gt = 0;
+            @endphp
+            @foreach ($indicatorsafter as $indicatorafter)
+            @foreach ($outputindicators as $outputindicator)
+            @if ($outputindicator->id == $indicatorafter->indicator_id)
+            @php
+            $gt = $gt + $indicatorafter->monthly_total;
+            @endphp
+            @endif
+            @endforeach
+            @endforeach
+            {{$gt}}
+        
+        </th>
     </tr>
+    @php
+    $gtb = 0;
+    @endphp
+    @foreach ($indicatorsbefore as $indicatorbefore)
+    @foreach ($outputindicators as $outputindicator)
+    @if ($outputindicator->id == $indicatorbefore->indicator_id)
+    @php
+    $gtb = $gtb + $indicatorbefore->monthly_total;
+    @endphp
+    @endif
+    @endforeach
+    @endforeach
+    
+    @php
+    $cl = "";
+    if ($gtb > 0) {
+    $mp = $gt/$gtb*100;
+    }else {
+    $mp = $gt*100;
+    }
+    if ($mp <26) { $cl="red" ; } if ($mp>25 && $mp <51) { $cl="yellow" ; } if ($mp>50 && $mp <75) { $cl="blue" ; } if ($mp>
+                75) {
+                $cl = "green";
+                }
+                @endphp
+    
+                <tr>
+                    <td colspan="4" style="background-color:{{$cl}}; font-weight:bold; color:#000;font-size: large;">
+                        {{$year}} Overall perfomance: {{sprintf('%0.02f', $mp)}}%
+                    </td>
+                </tr>
+    
+                
 </table>
 <h2>SECTION 1. TECHNICAL ACCOMPLISHMENT AGAINST PLAN DURING THE YEAR</h2>
 <table class="table table-bordered">
@@ -108,10 +84,7 @@
         <th>Indicator description</th>
         <th>Baseline</th>
         <th>Total targeted for the year</th>
-        <th>QRT 1</th>
-        <th>QRT 2</th>
-        <th>QRT 3</th>
-        <th>QRT 4</th>
+      
         <th>Achievement for year {{$year}}</th>
         <th>RYGB</th>
     </tr>
@@ -122,8 +95,8 @@
             <table class="table cdcc">
                 @foreach ($goalindicators as $goalindicator)
                 @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
+                @foreach ($indicatorsaftergrouped as $indicatoraftergrouped)
+                @if ($goalindicator->id == $indicatoraftergrouped->indicator_id)
                 <tr>
                     <td>{!!$goalindicator->name!!}</td>
                 </tr>
@@ -137,8 +110,8 @@
             <table class="table cdcc" id="liss">
                 @foreach ($goalindicators as $goalindicator)
                 @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
+                @foreach ($indicatorsaftergrouped as $indicatoraftergrouped)
+                @if ($goalindicator->id == $indicatoraftergrouped->indicator_id)
                 <tr>
                     <td>{{$goalindicator->baseline_target}}</td>
                 </tr>
@@ -153,8 +126,8 @@
             <table class="table cdcc">
                 @foreach ($goalindicators as $goalindicator)
                 @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
+                @foreach ($indicatorsaftergrouped as $indicatoraftergrouped)
+                @if ($goalindicator->id == $indicatoraftergrouped->indicator_id)
                 <tr>
                     <td>{{$goalindicator->project_target}}</td>
                 </tr>
@@ -166,337 +139,245 @@
         </td>
         <td style="padding:0px !important;">
             <table class="table cdcc">
-                @foreach ($goalindicators as $goalindicator)
-                @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar}}</td>
-                </tr>
-                @endif
-                @endforeach
-
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc">
-                @foreach ($goalindicators as $goalindicator)
-                @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun}}</td>
-                </tr>
-                @endif
-                @endforeach
-
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc">
-                @foreach ($goalindicators as $goalindicator)
-                @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep}}</td>
-                </tr>
-
-                @endif
-                @endforeach
-
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc">
-                @foreach ($goalindicators as $goalindicator)
-                @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec}}</td>
-                </tr>
-
-                @endif
-                @endforeach
-
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc">
-                @foreach ($goalindicators as $goalindicator)
-                @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
-
-                <tr>
-                    <td>{{$indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep + $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec}}
-                    </td>
-                </tr>
-
-                @endif
-                @endforeach
-
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc">
-
-                @foreach ($goalindicators as $goalindicator)
-                @if ($project->id == $goalindicator->goal_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($goalindicator->id == $indicatorafter->indicator_id)
                 @php
-                if ($goalindicator->project_target == "0") {
-                $perc = ($indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may +
-                $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep +
-                $indicatorafter->oct +
-                $indicatorafter->nov + $indicatorafter->dec) * 100;
-                }else{
-                $perc = ($indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may +
-                $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep +
-                $indicatorafter->oct +
-                $indicatorafter->nov + $indicatorafter->dec) / $goalindicator->project_target * 100;
-                }
-                $perc = sprintf('%0.2f', $perc);
-                if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 &&
-                        $perc
-                        <75) { $color='blue' ; } if ($perc> 74) {
-                            $color = 'green';
-                            }
-                            @endphp
-                            <tr>
-                                <td
-                                    style=" font-weight: bold; border:1px solid #fff; color:#fff;padding:0px 0px 0px 10px; background-color:{{$color}}">
-                                    {{$perc}}%
-                                </td>
-                            </tr>
+                    $tfrg = 0;
+                    @endphp
 
+                @foreach ($goalindicators as $goalindicator)
+                
+                @foreach ($indicatorsbefore as $indicatorbefore)
+                @if ($goalindicator->id == $indicatorbefore->indicator_id)
+                @php
+                $tfrg = $tfrg + $indicatorbefore->monthly_total;
+                @endphp
+              
+                @endif
+                @endforeach
 
-                            @endif
-                            @endforeach
-                            @endif
-                            @endforeach
+                @endforeach
+                <tr>
+                    <td>{{$tfrg}}</td>
+                </tr>
             </table>
+            
 
+            
         </td>
+        
+        @php
+        $bf = 0;
+        $bb = 0;
+        @endphp
+        @foreach ($goalindicators as $goalindicator)
+        @foreach ($indicatorsafter as $indicatorafter)
+        @if ($goalindicator->id == $indicatorafter->indicator_id)
+        @php
+        $bf = $bf + $indicatorafter->monthly_total;
+        @endphp
+        @endif
+        @endforeach
+        @endforeach
+
+
+        @foreach ($goalindicators as $goalindicator)
+        @foreach ($indicatorsbefore as $indicatorbefore)
+        @if ($goalindicator->id == $indicatorbefore->indicator_id)
+        @php
+        $bb = $bb + $indicatorbefore->monthly_total;
+        @endphp
+        
+        @endif
+        @endforeach
+        @endforeach
+        
+        @php
+        
+        if ($bb == 0) {
+        $bb = 1;
+        }
+        $perfom = $bf/$bb * 100;
+        if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                    $cr = "green";
+                    }
+        
+                    @endphp
+        
+        
+        
+        
+                    <td style="padding:0px !important;">
+                        <table class="table cdcc">
+                            <tr>
+                                <td style="background-color:{{$cr}}; font-weight:bold;color:#000;font-size: large;">
+                                    {{sprintf('%0.02f',$perfom)}}%</td>
+                            </tr>
+                        </table>
+        
+                    </td>
     </tr>
+
     @php
     $y = 1;
     @endphp
-    @foreach ($outcomes as $outcome)
-
+    @foreach ($outcomeindicators as $outcomeindicator)
+    
     <tr>
-        <td><b style="color:#0081c3;">Outcome {{$y}}</b>- {!!$outcome->name!!} </td>
-
+        <td style="color:#0081c3; font-size:bold;">Outcome {{$y}} -
+    
+            @foreach ($outcomes as $outcome)
+            @if ($outcomeindicator->outcome_id == $outcome->id)
+            {!!$outcome->name!!}
+            @endif
+            @endforeach
+        </td>
+    
         <td style="padding:0px !important;">
             <table class="table cdcc">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
+                @foreach ($indicatorsaftergrouped as $indicatoraftergrouped)
+                @if ($outcomeindicator->id == $indicatoraftergrouped->indicator_id)
+    
                 <tr>
-                    <td>{!!$outcomeindicator->name!!}</td>
+                    <td style="padding-left:5px !important;">{!!$outcomeindicator->name!!}</td>
                 </tr>
-                @endif
-                @endforeach
                 @endif
                 @endforeach
             </table>
         </td>
+    
+    
         <td style="padding:0px !important;">
-
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
+            <table class="table cdcc">
+                @foreach ($indicatorsaftergrouped as $indicatoraftergrouped)
+                @if ($outcomeindicator->id == $indicatoraftergrouped->indicator_id)
                 <tr>
                     <td>{{$outcomeindicator->baseline_target}}</td>
                 </tr>
                 @endif
                 @endforeach
-                @endif
-                @endforeach
+    
             </table>
         </td>
+    
         <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$outcomeindicator->project_target}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar}}</td>
-                </tr>
-
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outcomeindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep + $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec}}
-                    </td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
+    
             <table class="table cdcc">
-                @foreach ($outcomeindicators as $outcomeindicator)
-                @if ($outcome->id == $outcomeindicator->outcome_id)
+    
+                @php
+                $tfrg = 0;
+                @endphp
+    
+                @foreach ($indicatorsbefore as $indicatorbefore)
+                @if ($outcomeindicator->id == $indicatorbefore->indicator_id)
+                @php
+                $tfrg = $tfrg + $indicatorbefore->monthly_total;
+                @endphp
+    
+                @endif
+                @endforeach
+                <tr>
+                    <td>{{$tfrg}}</td>
+                </tr>
+    
+            </table>
+    
+        </td>
+        <td style="padding:0px !important;">
+    
+            <table class="table cdcc">
+    
+                @php
+                $tfrg = 0;
+                @endphp
+    
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outcomeindicator->id == $indicatorafter->indicator_id)
                 @php
-                if ($outcomeindicator->project_target == "0") {
-                $perc = ($indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may +
-                $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep +
-                $indicatorafter->oct +
-                $indicatorafter->nov + $indicatorafter->dec) * 100;
-                }else{
-                $perc = ($indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may +
-                $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep +
-                $indicatorafter->oct +
-                $indicatorafter->nov + $indicatorafter->dec) / $outcomeindicator->project_target * 100;
-                }
-                $perc = sprintf('%0.2f', $perc);
-                if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 &&
-                        $perc
-                        <75) { $color='blue' ; } if ($perc> 74) {
-                            $color = 'green';
-                            }
-                            @endphp
-                            <tr>
-                                <td
-                                    style="font-weight: bold; line-height: 38px; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
-                                    {{$perc}}%
-                                </td>
-                            </tr>
-                            @endif
-                            @endforeach
-                            @endif
-                            @endforeach
+                $tfrg = $tfrg + $indicatorafter->monthly_total;
+                @endphp
+    
+                @endif
+                @endforeach
+                <tr>
+                    <td>{{$tfrg}}</td>
+                </tr>
+    
             </table>
-
+    
         </td>
-
+    
+    
+    
+        @php
+        $bf = 0;
+        $bb = 0;
+        @endphp
+    
+        @foreach ($indicatorsafter as $indicatorafter)
+        @if ($outcomeindicator->id == $indicatorafter->indicator_id)
+        @php
+        $bf = $bf + $indicatorafter->monthly_total;
+        @endphp
+        @endif
+        @endforeach
+    
+        @foreach ($indicatorsbefore as $indicatorbefore)
+        @if ($outcomeindicator->id == $indicatorbefore->indicator_id)
+        @php
+        $bb = $bb + $indicatorbefore->monthly_total;
+        @endphp
+    
+        @endif
+        @endforeach
+    
+        @php
+    
+        if ($bb == 0) {
+        $bb = 1;
+        }
+        $perfom = $bf/$bb * 100;
+        if ($perfom <26) { $cr="red" ; } if ($perfom>25 && $perfom <51) { $cr="yellow" ; } if ($perfom>50 &&
+                $perfom <76) { $cr="blue" ; } if ($perfom>75) {
+                    $cr = "green";
+                    }
+    
+                    @endphp
+    
+    
+    
+    
+                    <td style="padding:0px !important;">
+                        <table class="table cdcc">
+                            <tr>
+                                <td style="background-color:{{$cr}}; font-weight:bold;color:#000;font-size: large;">
+                                    {{sprintf('%0.02f',$perfom)}}%</td>
+                            </tr>
+                        </table>
+    
+                    </td>
+    
     </tr>
-
     @php
     $i = 1;
     @endphp
+    
     @foreach ($outputs as $output)
-    @if ($outcome->id == $output->outcome_id)
-
+    @if ($outcomeindicator->outcome_id == $output->outcome_id)
     <tr>
-        <td><b style="color:green;">Output {{$y}}.{{$i}} </b> - {!!$output->name!!} </td>
-
+        <td><b>Output {{$y}}.{{$i}}</b> - {!!$output->name!!} </td>
+        <td style="padding:0px !important;">
+            @foreach ($outputindicators as $outputindicator)
+            @if ($output->id == $outputindicator->output_id)
+            {!!$outputindicator->name!!}
+            @endif
+    
+            @endforeach
+        </td>
         <td style="padding:0px !important;">
             <table class="table cdcc">
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{!!$outputindicator->name!!}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
+                @foreach ($indicatorsaftergrouped as $indicatorafter)
                 @if ($outputindicator->id == $indicatorafter->indicator_id)
                 <tr>
                     <td>{{$outputindicator->baseline_target}}</td>
@@ -506,148 +387,90 @@
                 @endif
                 @endforeach
             </table>
-
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$outputindicator->project_target}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec}}</td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
-        </td>
-        <td style="padding:0px !important;">
-            <table class="table cdcc" style="line-height: 40px;">
-                @foreach ($outputindicators as $outputindicator)
-                @if ($output->id == $outputindicator->output_id)
-                @foreach ($indicatorsafter as $indicatorafter)
-                @if ($outputindicator->id == $indicatorafter->indicator_id)
-                <tr>
-                    <td>{{$indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr + $indicatorafter->may + $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep + $indicatorafter->oct + $indicatorafter->nov + $indicatorafter->dec}}
-                    </td>
-                </tr>
-                @endif
-                @endforeach
-                @endif
-                @endforeach
-            </table>
         </td>
         <td style="padding:0px !important;">
             <table class="table cdcc">
+                @php
+                $twe1 = 0;
+                @endphp
+                @foreach ($outputindicators as $outputindicator)
+                @if ($output->id == $outputindicator->output_id)
+                @foreach ($indicatorsbefore as $indicatorbefore)
+                @if ($outputindicator->id == $indicatorbefore->indicator_id)
+                @php
+                $twe1 = $twe1 + $indicatorbefore->monthly_total;
+                @endphp
+    
+                @endif
+                @endforeach
+                @endif
+                @endforeach
+                <tr>
+                    <td>{{$twe1}}</td>
+                </tr>
+            </table>
+    
+    
+        </td>
+    
+        <td style="padding:0px !important;">
+            <table class="table cdcc">
+                @php
+                $twe2 = 0;
+                @endphp
                 @foreach ($outputindicators as $outputindicator)
                 @if ($output->id == $outputindicator->output_id)
                 @foreach ($indicatorsafter as $indicatorafter)
                 @if ($outputindicator->id == $indicatorafter->indicator_id)
                 @php
-                if ($outputindicator->project_target == "0") {
-                $perc = ($indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may +
-                $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep +
-                $indicatorafter->oct +
-                $indicatorafter->nov + $indicatorafter->dec) * 100;
-                }else{
-                $perc = ($indicatorafter->jan + $indicatorafter->feb + $indicatorafter->mar + $indicatorafter->apr +
-                $indicatorafter->may +
-                $indicatorafter->jun + $indicatorafter->jul + $indicatorafter->aug + $indicatorafter->sep +
-                $indicatorafter->oct +
-                $indicatorafter->nov + $indicatorafter->dec) / $outputindicator->project_target * 100;
+                $twe2 = $twe2 + $indicatorafter->monthly_total;
+                @endphp
+    
+                @endif
+                @endforeach
+                @endif
+                @endforeach
+                <tr>
+                    <td>{{$twe2}}</td>
+                </tr>
+            </table>
+    
+    
+        </td>
+    
+        <td style="padding:0px !important;">
+            <table class="table cdcc">
+                @php
+                $cl = "";
+                if ($twe1 > 0) {
+                $mp = $twe2/$twe1*100;
+                }else {
+                $mp = $twe1*100;
                 }
-                $perc = sprintf('%0.2f', $perc);
-                if ($perc <25) { $color='red' ; } if ($perc> 24 && $perc <50) { $color='yellow' ; } if ($perc> 49 &&
-                        $perc
-                        <75) { $color='blue' ; } if ($perc> 74) {
-                            $color = 'green';
+                if ($mp <26) { $cl="red" ; } if ($mp>25 && $mp <51) { $cl="yellow" ; } if ($mp>50 && $mp <76) { $cl="blue" ;
+                            } if ($mp>
+                            75) {
+                            $cl = "green";
                             }
                             @endphp
+    
+    
                             <tr>
-                                <td
-                                    style="font-weight: bold; line-height: 38px; border:1px solid #fff; color:#fff; padding:0px 0px 0px 10px; background-color:{{$color}}">
-                                    {{$perc}}%
+                                <td style="background-color:{{$cl}}; font-weight:bold; color:#000;font-size: large;">
+                                    {{sprintf('%0.02f', $mp)}}%
                                 </td>
                             </tr>
-                            @endif
-                            @endforeach
-                            @endif
-                            @endforeach
             </table>
-
         </td>
-
+    
     </tr>
     @php
     $i++;
     @endphp
     @endif
     @endforeach
-
+    
+    
     @php
     $y++;
     @endphp
