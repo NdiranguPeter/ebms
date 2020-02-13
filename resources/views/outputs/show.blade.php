@@ -58,10 +58,10 @@
                         <i class="ace-icon glyphicon glyphicon-plus"></i>
                         Add output
                     </a>
-                    <a href="/planning/{{$outcome->id}}" class="btn btn-success" style="float:left; margin-bottom: 2%;">
+                    {{-- <a href="/planning/{{$outcome->id}}" class="btn btn-success" style="float:left; margin-bottom: 2%;">
                         <i class="ace-icon glyphicon glyphicon-th"></i>
                         Planning
-                    </a>
+                    </a> --}}
                     @include('layouts.messages')
 
                     @if (count($outputs) > 0)
