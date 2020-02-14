@@ -78,6 +78,7 @@ class ActivitiesAfterController extends Controller
 
         $cativityafter->total_beneficiaries = $request->input('achieved');
         $cativityafter->budget = $request->input('cost');
+        $cativityafter->remarks = $request->input('remarks');
         $cativityafter->save();      
         
         $activity = Activity::findOrFail($cativityafter->activity_id);

@@ -375,6 +375,13 @@
                         <div style="min-height:10px;">
                             <p>&nbsp</p>
                         </div>
+                        <div class="col-sm-12">
+                            {{Form::label('remarks', 'Remarks')}}
+                            {{Form::textarea('remarks', '', ['class' => 'form-control',])}}
+                        </div>
+                        <div style="min-height:10px;">
+                            <p>&nbsp</p>
+                        </div>
 
                     </div>
 
