@@ -53,7 +53,7 @@
                                 @php
                                 $anchor = "#";
                                 @endphp
-                                @if (auth()->user()->role == 1 || auth()->user()->role == 10)
+                                @if (auth()->user()->role == -1 || auth()->user()->role == 1)
                                 @php
                                 $anchor = "/kenya";
                                 @endphp
@@ -80,7 +80,7 @@
                                 @php
                                     $anchor = "#";
                                     @endphp
-                                    @if (auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    @if (auth()->user()->role == -1 || auth()->user()->role == 2)
                                     @php
                                     $anchor = "/somalia";
                                     @endphp
@@ -108,7 +108,7 @@
                                 @php
                                 $anchor = "#";
                                 @endphp
-                                @if (auth()->user()->role == 1 || auth()->user()->role == 3)
+                                @if (auth()->user()->role == -1 || auth()->user()->role == 3)
                                 @php
                                 $anchor = "/ethiopia";
                                 @endphp
@@ -135,7 +135,7 @@
                                 @php
                                 $anchor = "#";
                                 @endphp
-                                @if (auth()->user()->role == 1 || auth()->user()->role == 4)
+                                @if (auth()->user()->role == -1 || auth()->user()->role == 4)
                                 @php
                                 $anchor = "/sudan";
                                 @endphp
@@ -161,7 +161,7 @@
                                 @php
                                 $anchor = "#";
                                 @endphp
-                                @if (auth()->user()->role == 1 || auth()->user()->role == 5)
+                                @if (auth()->user()->role == -1 || auth()->user()->role == 5)
                                 @php
                                 $anchor = "/southsudan";
                                 @endphp
