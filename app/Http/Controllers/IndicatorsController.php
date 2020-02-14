@@ -526,7 +526,7 @@ class IndicatorsController extends Controller
 
             if ($startyear != $endyear) {
                 for ($i = $startyear; $i <= $endyear; $i++) {
-                    for ($y = $startmonth;
+                    for ($y = 1;
                         $y <= 12;
                         $y++) {
 
