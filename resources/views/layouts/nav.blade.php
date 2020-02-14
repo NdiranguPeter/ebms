@@ -1,5 +1,5 @@
 <ul class="nav nav-list">
-@if (auth()->user()->role == -1 || auth()->user()->role == auth()->user()->country)
+@if (auth()->user()->role == 999 || auth()->user()->role == auth()->user()->country)
 <li class="{{ (request()->is('admin')) ? 'active' : '' }}">
 		<a href="/admin">
 			<i class="menu-icon fa fa-tachometer"></i>
