@@ -49,7 +49,17 @@
                             <th rowspan="1" style="font-weight:bold; font-size:medium;">Budget Use</th>
                         </tr>
                         <tr>
-                            <td style="font-weight:bold;"><a href="/kenya">Kenya</a></td>
+                            <td style="font-weight:bold;">
+                                @php
+                                $anchor = "#";
+                                @endphp
+                                @if (auth()->user()->role == 1 || auth()->user()->role == 10)
+                                @php
+                                $anchor = "/kenya";
+                                @endphp
+                                @endif
+                                <a href={{$anchor}}>Kenya</a>
+                            </td>
                             <td style="background-color:#0081c3;font-weight: bold; color: white;">67%</td>
                             <td style="background-color:yellow;font-weight: bold; color: #0c4213;">42%</td>
                             <td style="background-color:#0081c3;font-weight: bold; color: white;">59%</td>
@@ -65,7 +75,18 @@
                             <td style="background-color:red;font-weight: bold; color: white;">19%</td>
                         </tr>
                         <tr>
-                            <td style="font-weight:bold;"><a href="/somalia">Somalia</a></td>
+                            <td style="font-weight:bold;">
+                                
+                                @php
+                                    $anchor = "#";
+                                    @endphp
+                                    @if (auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    @php
+                                    $anchor = "/somalia";
+                                    @endphp
+                                    @endif
+
+                                <a href={{$anchor}}>Somalia</a></td>
                             <td style="background-color:#0081c3;font-weight: bold; color: white;">70%</td>
                             <td style="background-color:red;font-weight: bold; color: white;">24%</td>
                             <td style="background-color:yellow;font-weight: bold; color: #0c4213;">46%</td>
@@ -82,7 +103,19 @@
                             <td style="background-color:red;font-weight: bold; color: white;">15%</td>
                         </tr>
                         <tr>
-                            <td style="font-weight:bold;"><a href="/ethiopia">Ethiopia</a></td>
+                            <td style="font-weight:bold;">
+                                
+                                @php
+                                $anchor = "#";
+                                @endphp
+                                @if (auth()->user()->role == 1 || auth()->user()->role == 3)
+                                @php
+                                $anchor = "/ethiopia";
+                                @endphp
+                                @endif
+                                
+                                <a href={{$anchor}}>                           
+                                Ethiopia</a></td>
                             <td style="background-color:green;font-weight: bold; color: white;">81%</td>
                             <td style="background-color:red;font-weight: bold; color: white;">25%</td>
                             <td style="background-color:yellow;font-weight: bold; color: #0c4213;">47%</td>
@@ -98,7 +131,17 @@
                             <td style="background-color:green;font-weight: bold; color: white;">76%</td>
                         </tr>
                         <tr>
-                            <td style="font-weight:bold;"><a href="sudan">Sudan</a></td>
+                            <td style="font-weight:bold;">
+                                @php
+                                $anchor = "#";
+                                @endphp
+                                @if (auth()->user()->role == 1 || auth()->user()->role == 4)
+                                @php
+                                $anchor = "/sudan";
+                                @endphp
+                                @endif
+                                
+                                <a href={{$anchor}}>Sudan</a></td>
                             <td style="background-color:#0081c3;font-weight: bold; color: white;">58%</td>
                             <td style="background-color:yellow;font-weight: bold; color: #0c4213;">31%</td>
                             <td style="background-color:red;font-weight: bold; color: white;">18%</td>
@@ -114,7 +157,17 @@
                             <td style="background-color:yellow;font-weight: bold; color: white;">48%</td>
                         </tr>
                         <tr>
-                            <td style="font-weight:bold;"><a href="southsudan">South Sudan</a></td>
+                            <td style="font-weight:bold;">
+                                @php
+                                $anchor = "#";
+                                @endphp
+                                @if (auth()->user()->role == 1 || auth()->user()->role == 5)
+                                @php
+                                $anchor = "/southsudan";
+                                @endphp
+                                @endif
+                                
+                                <a href={{$anchor}}>South Sudan</a></td>
                             <td style="background-color:#0081c3;font-weight: bold; color: white;">64%</td>
                             <td style="background-color:red;font-weight: bold; color: white;">23%</td>
                             <td style="background-color:red;font-weight: bold; color: white;">21%</td>
