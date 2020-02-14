@@ -466,11 +466,12 @@ class ProjectsController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role == 1) {
-             $projects = Project::where('country',3)->orderBy('created_at', 'desc')->paginate(10);
+        if ($user->role == 1 || $user->role=3) {
+             $projects = Project::where('country',3)->where('id','<',105)->orderBy('created_at', 'desc')->paginate(10);
             // dd($projects);
             return view('ethiopia')->with(['projects'=>$projects]);
         }
+        
         if ($user->role == 0) {
             return redirect('/home');
         }
