@@ -35,7 +35,7 @@ class HomeController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role == 1) {
+        if ($user->role == 999) {
             return view('regional');
         }
         if ($user->role == 0) {
