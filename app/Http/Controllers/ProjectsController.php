@@ -47,7 +47,7 @@ class ProjectsController extends Controller
 
         $user = User::findOrFail($user_id);
 
-        if ($user->role == 1) {
+        if ($user->role == 999) {
 
             $projects = Project::orderBy('project_counter', 'asc')->paginate(10);
 
@@ -420,7 +420,7 @@ class ProjectsController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role == 1) {
+        if ($user->role == 999  || $user->country = $user->role) {
             $projects = Project::where('country',1)->orderBy('created_at', 'desc')->paginate(10);
             // dd($projects);
             return view('kenya')->with(['projects'=>$projects]);
@@ -436,7 +436,7 @@ class ProjectsController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role == 1) {
+        if ($user->role == 999  || $user->country = $user->role) {
              $projects = Project::where('country',4)->orderBy('created_at', 'desc')->paginate(10);
             // dd($projects);
             return view('sudan')->with(['projects'=>$projects]);
@@ -451,7 +451,7 @@ class ProjectsController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role == 1) {
+        if ($user->role == 999 || $user->country = $user->role) {
             $projects = Project::where('country',2)->orderBy('created_at', 'desc')->paginate(10);
             // dd($projects);
             return view('somalia')->with(['projects'=>$projects]);
@@ -466,7 +466,7 @@ class ProjectsController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role == 1 || $user->role=3) {
+        if ($user->role == 999 || $user->role=$user->country) {
              $projects = Project::where('country',3)->where('id','<',105)->orderBy('created_at', 'desc')->paginate(10);
             // dd($projects);
             return view('ethiopia')->with(['projects'=>$projects]);
@@ -482,7 +482,7 @@ class ProjectsController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role == 1) {
+        if ($user->role == 999  || $user->country = $user->role) {
             $projects = Project::where('country',5)->orderBy('created_at', 'desc')->paginate(10);
             // dd($projects);
             return view('southsudan')->with(['projects'=>$projects]);
