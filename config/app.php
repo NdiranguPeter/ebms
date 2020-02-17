@@ -231,7 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacades::class,
         'Form' => Collective\Html\HtmlFacades::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+       'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

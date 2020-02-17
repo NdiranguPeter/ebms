@@ -183,4 +183,6 @@ Route::post('/before', 'IndicatorsController@before2');
 Route::post('/activity/before', 'ActivitiesController@before2');
 Route::get('/monthly_perfomance_report', 'SendEmailController@index');
 Route::post('/sendemail/send', 'SendEmailController@send');
+Route::get('/export_excel/excel/{id}', 'ExportExcelController@excel')->name('export_excel.excel');
+
 

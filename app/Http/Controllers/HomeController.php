@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         $user = auth()->user();
 
-        if ($user->role == 999) {
+        if ($user->role == 999 || $user->role == $user->country) {
 
             $act_b = \DB::table('projects')
                 ->join('outcomes', 'outcomes.project_id', 'projects.id')

@@ -26,6 +26,10 @@
                     {{$survey->name}}
                 </h1>
 
+               <div style="float:right;margin-top: -20px;">
+                <a class="btn btn-primary" href="#">Table</a>
+                   <a  class="btn btn-light" href="/export_excel/excel/{{$survey->id}}"><i class="fa fa-file-excel-o blue" aria-hidden="true"></i></a>
+               </div>
             </div><!-- /.page-header -->
 
             <!-- PAGE CONTENT BEGINS -->
