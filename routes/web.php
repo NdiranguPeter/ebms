@@ -124,7 +124,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/admin', 'HomeController@admin')->name('admin')->middleware('auth');
-Route::get('/regional', 'HomeController@regional')->middleware('auth');
+Route::get('/regional/{year}', 'HomeController@regional')->middleware('auth');
 Route::get('/kenya', 'ProjectsController@kenya');
 Route::get('/sudan', 'ProjectsController@sudan');
 Route::get('/southsudan', 'ProjectsController@southsudan');

@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
-use App\Project;
-
 namespace App\Http\Controllers;
 
 class HomeController extends Controller
@@ -31,18 +27,198 @@ class HomeController extends Controller
     {
         return view('pages.admin');
     }
-    public function regional()
+    public function regional($year)
     {
+
         $user = auth()->user();
 
         if ($user->role == 999) {
-            return view('regional');
+
+            $act_b = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 1)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "before")
+                ->get();
+
+            $tt = 0;
+
+            foreach ($act_b as $ac) {
+                $tt = $tt + $ac->total_beneficiaries;
+            }
+
+            $act_a = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 1)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "after")
+                ->get();
+
+            $tta = 0;
+
+            foreach ($act_a as $acc) {
+                $tta = $tta + $acc->total_beneficiaries;
+            }
+
+            $act_be = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 3)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "before")
+                ->get();
+
+            $tte = 0;
+
+            foreach ($act_be as $ace) {
+                $tte = $tte + $ace->total_beneficiaries;
+            }
+
+            $act_ae = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 3)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "after")
+                ->get();
+
+            $ttae = 0;
+
+            foreach ($act_ae as $acce) {
+                $ttae = $ttae + $acce->total_beneficiaries;
+            }
+
+            $act_bsom = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 2)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "before")
+                ->get();
+
+            $ttsom = 0;
+
+            foreach ($act_bsom as $acsom) {
+                $ttsom = $ttsom + $acsom->total_beneficiaries;
+            }
+
+            $act_asom = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 2)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "after")
+                ->get();
+
+            $ttasom = 0;
+
+            foreach ($act_asom as $accsom) {
+                $ttasom = $ttasom + $accsom->total_beneficiaries;
+            }
+
+
+
+            
+            $act_bsud = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 4)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "before")
+                ->get();
+
+            $ttsud = 0;
+
+            foreach ($act_bsud as $acsud) {
+                $ttsud = $ttsud + $acsud->total_beneficiaries;
+            }
+
+            $act_asud = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 4)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "after")
+                ->get();
+
+            $ttasud = 0;
+
+            foreach ($act_asud as $accsud) {
+                $ttasud = $ttasud + $accsud->total_beneficiaries;
+            }
+
+
+            
+
+            
+            $act_bss = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 5)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "before")
+                ->get();
+
+            $ttss = 0;
+
+            foreach ($act_bss as $acss) {
+                $ttss = $ttss + $acss->total_beneficiaries;
+            }
+
+            $act_ass = \DB::table('projects')
+                ->join('outcomes', 'outcomes.project_id', 'projects.id')
+                ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+                ->join('activities', 'activities.output_id', 'outputs.id')
+                ->join('activityafters', 'activityafters.activity_id', 'activities.id')
+                ->select('activityafters.*')
+                ->where('projects.country', 5)
+                ->where('activityafters.year', $year)
+                ->where('activityafters.before_after', "after")
+                ->get();
+
+            $ttass = 0;
+
+            foreach ($act_ass as $accss) {
+                $ttass = $ttass + $accss->total_beneficiaries;
+            }
+
+ 
+
+            return view('regional')->with(['tta' => $tta, 'tt' => $tt, 'ttae' => $ttae, 'tte' => $tte, 'ttasom' => $ttasom, 'ttsom' => $ttsom, 'ttasud' => $ttasud, 'ttsud' => $ttsud,'ttass' => $ttass, 'ttss' => $ttss]);
         }
         if ($user->role == 0) {
             return redirect('/home');
         }
 
     }
-
 
 }

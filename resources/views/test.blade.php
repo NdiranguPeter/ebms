@@ -1,186 +1,221 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta charset="utf-8" />
-    <title>EBMS</title>
+namespace App\Http\Controllers;
 
-    <meta name="description" content="overview &amp; stats" />
-    {{-- <meta name="csrf-token" content="{{ csrf-token() }}" /> --}}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+class HomeController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth' => 'verified']);
+    }
 
-    <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }} " />
-    <link rel="stylesheet" href="{{ asset('frontend/font-awesome/4.5.0/css/font-awesome.min.css') }}" />
-    <script src="{{ asset('frontend/js/jquery-1.11.1.min.js') }}"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('pages.dashboard');
+    }
+    public function admin()
+    {
+        return view('pages.admin');
+    }
+    public function regional($year)
+    {
 
-    <!-- page specific plugin styles -->
+        $user = auth()->user();
 
-    <!-- text fonts -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/fonts.googleapis.com.css') }}" />
+        if ($user->role == 999) {
 
-    <!-- ace styles -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/ace.min.css') }}" class="ace-main-stylesheet"
-        id="main-ace-style" />
-
-    <!--[if lte IE 9]>
-			<link rel="stylesheet" href="frontend/css/ace-part2.min.css" class="ace-main-stylesheet" />
-		<![endif]-->
-    <link rel="stylesheet" href="{{ asset('frontend/css/ace-skins.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/ace-rtl.min.css') }}" />
-
-
-    <script src="{{ asset('frontend/js/ace-extra.min.js') }}"></script>
-
-
-    <style>
-        .dashcard {
-            color: #fff;
-            border: 10px solid #fff;
-            min-height: 160px;
-
+           $ind_b = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 1)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "before")
+        ->get();
+        
+        $idd = 0;
+        
+        foreach ($ind_b as $idd) {
+        $idd = $idd + $idd->monthly_total;
+        }
+        
+        $ind_a = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 1)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "after")
+        ->get();
+        
+        $idda = 0;
+        
+        foreach ($ind_a as $iddc) {
+        $idda = $idda + $iddc->monthly_total;
+        }
+        
+        $ind_be = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 3)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "before")
+        ->get();
+        
+        $idde = 0;
+        
+        foreach ($ind_be as $idde) {
+        $idde = $idde + $idde->monthly_total;
+        }
+        
+        $ind_ae = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 3)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "after")
+        ->get();
+        
+        $iddae = 0;
+        
+        foreach ($ind_ae as $iddce) {
+        $iddae = $iddae + $iddce->monthly_total;
+        }
+        
+        $ind_bsom = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 2)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "before")
+        ->get();
+        
+        $iddsom = 0;
+        
+        foreach ($ind_bsom as $iddsom) {
+        $iddsom = $iddsom + $iddsom->monthly_total;
+        }
+        
+        $ind_asom = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 2)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "after")
+        ->get();
+        
+        $iddasom = 0;
+        
+        foreach ($ind_asom as $iddcsom) {
+        $iddasom = $iddasom + $iddcsom->monthly_total;
+        }
+        
+        
+        
+        
+        $ind_bsud = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 4)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "before")
+        ->get();
+        
+        $iddsud = 0;
+        
+        foreach ($ind_bsud as $iddsud) {
+        $iddsud = $iddsud + $iddsud->monthly_total;
+        }
+        
+        $ind_asud = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 4)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "after")
+        ->get();
+        
+        $iddasud = 0;
+        
+        foreach ($ind_asud as $iddcsud) {
+        $iddasud = $iddasud + $iddcsud->monthly_total;
+        }
+        
+        
+        
+        
+        
+        $ind_bss = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 5)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "before")
+        ->get();
+        
+        $iddss = 0;
+        
+        foreach ($ind_bss as $iddss) {
+        $iddss = $iddss + $iddss->monthly_total;
+        }
+        
+        $ind_ass = \DB::table('projects')
+        ->join('outcomes', 'outcomes.project_id', 'projects.id')
+        ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
+        ->join('indicators', 'indicators.output_id', 'outputs.id')
+        ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+        ->select('indicatorafters.*')
+        ->where('projects.country', 5)
+        ->where('indicatorafters.year', $year)
+        ->where('indicatorafters.before_after', "after")
+        ->get();
+        
+        $iddass = 0;
+        
+        foreach ($ind_ass as $iddcss) {
+        $iddass = $iddass + $iddcss->monthly_total;
+        }
+            return view('regional')->with(['idda' => $idda, 'idd' => $idd, 'iddae' => $iddae, 'idde' => $idde, 'iddasom' => $iddasom, 'iddsom' => $iddsom, 'iddasud' => $iddasud, 'iddsud' => $iddsud,'iddass' => $iddass, 'iddss' => $iddss]);
+        }
+        if ($user->role == 0) {
+            return redirect('/home');
         }
 
-        .dashcard h6 {
-            text-align: center;
-            font-weight: bold;
-            font-size: medium;
-        }
+    }
 
-        .dashcard i {
-            /* display: list-item; */
-            display: block;
-            margin-top: 8%;
-            /* font-size: -webkit-xxx-large; */
-            font-size: xx-large;
-        }
-
-        .well {
-            border: 1px solid #2da0ef;
-            color: #2da0ef;
-        }
-
-        .shw b {
-            color: #2da0ef;
-        }
-
-        .acts td {
-            padding: 5px;
-        }
-    </style>
-
-</head>
-
-<body class="no-skin">
-    <div id="navbar" class="navbar navbar-default ace-save-state">
-        <div class="navbar-container ace-save-state" id="navbar-container">
-            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
-                <span class="sr-only">Toggle sidebar</span>
-
-                <span class="icon-bar"></span>
-
-                <span class="icon-bar"></span>
-
-                <span class="icon-bar"></span>
-            </button>
-
-            <div class="navbar-header pull-left">
-                <a href="#" class="navbar-brand">
-                    <small>
-                        <img src="{{ asset('storage/images/logo.jpg') }}" alt=""
-                            style="max-height: 40px; margin-top: -5%;">
-                        EBMS
-                    </small>
-                </a>
-            </div>
-
-            <div class="navbar-buttons navbar-header pull-right" role="navigation">
-                <ul class="nav ace-nav">
-
-
-                    <li class="light-blue dropdown-modal">
-                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="{{ asset('frontend/images/avatars/user.jpg') }}" />
-                            <span class="user-info">
-                                <small>Welcome,</small>
-                                {{ Auth::user()->name }}
-                            </span>
-
-                            <i class="ace-icon fa fa-caret-down"></i>
-                        </a>
-
-                        <ul
-                            class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                            <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-cog"></i>
-                                    Settings
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-user"></i>
-                                    Profile
-                                </a>
-                            </li>
-
-                            <li class="divider"></li>
-
-                            <li>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
-															                                                     document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div><!-- /.navbar-container -->
-    </div>
-
-    <div class="main-container ace-save-state" id="main-container">
-        <script type="text/javascript">
-            try{ace.settings.loadState('main-container')}catch(e){}
-        </script>
-
-        <div id="sidebar" class="sidebar  responsive  ace-save-state">
-            <script type="text/javascript">
-                try{ace.settings.loadState('sidebar')}catch(e){}
-            </script>
-
-            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-
-                </div>
-
-            </div><!-- /.sidebar-shortcuts -->
-
-            @include('layouts.nav')
-
-
-            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
-                    data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-            </div>
-        </div>
-
-        <div class="alert alert-danger">
-            <p>
-                Matlab plugin not configured on the host server.
-            </p>
-        </div>
-
-        @include('layouts.footer')
-</body>
-
-</html>
+}
