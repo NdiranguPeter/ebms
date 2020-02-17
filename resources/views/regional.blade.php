@@ -107,7 +107,7 @@
                                 @endif
 
                                 <a href={{$anchor}}>Somalia</a></td>
-                            <td style="background-color:#0081c3;font-weight: bold; color: white;">70%</td>
+                            <td style="background-color:#0081c3;font-weight: bold; color: white;">80%</td>
                             @php
                             $cl = "white";
                             if ($ttasom < 1) { $ttasom=1; } $act_per=$ttsom/$ttasom * 100; if ($act_per <26) { $cl="white" ; $col="red" ; } if ($act_per>25
