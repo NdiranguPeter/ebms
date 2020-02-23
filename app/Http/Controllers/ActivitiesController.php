@@ -446,8 +446,6 @@ class ActivitiesController extends Controller
 
         $output_id = $request->input('id');
 
-        
-        dd($output_id);
 
         $activity_name = strip_tags($request->input('activity'));
         $activity_scoring = $request->input('scoring');
@@ -485,6 +483,11 @@ class ActivitiesController extends Controller
         $totol_beneficiaries = $total_male + $total_female;
 
         $activity = Activity::findOrFail($id);
+
+        
+        
+        dd($activity);
+
         $activity->user_id = $user_id;
         $activity->output_id = $output_id;
         $activity->name = $activity_name;
