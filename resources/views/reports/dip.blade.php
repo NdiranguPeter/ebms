@@ -29,8 +29,8 @@
     </div>
     <div class="col-sm-6">
         <p>Location: <b>{{$project->location}} </b></p>
-        <p>Start: <b>January {{$period}} </b></p>
-        <p>End: <b>December {{$period}} </b></p>
+        <p>Year: <b>{{$period}} </b></p>
+       
         @php
         $end = \Carbon\Carbon::parse($project->end);
         $start = \Carbon\Carbon::parse($project->start);

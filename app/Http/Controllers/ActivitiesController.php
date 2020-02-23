@@ -482,8 +482,7 @@ class ActivitiesController extends Controller
         $total_female = $zero_two_female + $three_five_female + $six_twelve_female + $thirteen_seventeen_female + $eigteen_twentyfive_female + $twentysix_fourtynine_female + $fifty_fiftynine_female + $sixty_sixtynine_female + $seventy_seventynine_female + $above_eighty_female;
         $totol_beneficiaries = $total_male + $total_female;
 
-        $activity = Activity::findOrFail($id);
-
+        $activity = Activity::find($id);
         
         
         dd($activity);
