@@ -433,6 +433,8 @@ class ActivitiesController extends Controller
     public function update(Request $request, $id)
     {
 
+        dd($id);
+
         $this->validate($request, [
             'activity' => 'required',
             'scoring' => 'required',
