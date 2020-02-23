@@ -25,10 +25,11 @@
 
             <b>{{$dn}}</b></p>
         <p>Sector: <b>{!!$project->sector!!}</b></p>
-        <p>Type of project: <b>{!!$project->type!!}</b></p>
+       
     </div>
     <div class="col-sm-6">
         <p>Location: <b>{{$project->location}} </b></p>
+        <p>Type of project: <b>{!!$project->type!!}</b></p>
         <p>Year: <b>{{$period}} </b></p>
        
         @php
