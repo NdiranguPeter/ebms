@@ -69,7 +69,7 @@ class VerificationsourcesController extends Controller
      */
     public function show($id)
     {
-        $vs = Verificationsource::orderBy('created_at', 'desc')->paginate(10);
+        $vs = Verificationsource::where("user_id", auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('/verifiablesource/show')->with('vs', $vs);
     }
