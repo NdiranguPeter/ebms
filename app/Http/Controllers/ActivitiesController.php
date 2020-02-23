@@ -433,7 +433,6 @@ class ActivitiesController extends Controller
     public function update(Request $request, $id)
     {
 
-        dd($id);
 
         $this->validate($request, [
             'activity' => 'required',
@@ -446,6 +445,9 @@ class ActivitiesController extends Controller
         $user_id = auth()->user()->id;
 
         $output_id = $request->input('id');
+
+        
+        dd($output_id);
 
         $activity_name = strip_tags($request->input('activity'));
         $activity_scoring = $request->input('scoring');
