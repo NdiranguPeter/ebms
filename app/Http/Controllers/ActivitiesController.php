@@ -484,8 +484,6 @@ class ActivitiesController extends Controller
 
         $activity = Activity::find($id);
         
-        
-        dd($activity);
 
         $activity->user_id = $user_id;
         $activity->output_id = $output_id;
