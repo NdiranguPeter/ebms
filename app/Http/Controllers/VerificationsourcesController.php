@@ -15,7 +15,10 @@ class VerificationsourcesController extends Controller
      */
     public function index()
     {
-        //
+
+     $vs = Verificationsource::where("user_id",auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('/verifiablesource/show')->with('vs', $vs);
     }
 
     /**
@@ -50,14 +53,17 @@ class VerificationsourcesController extends Controller
         $vs->name = $request->input('name');
         $vs->responsibility = $request->input('responsibility');
         $vs->frequency = $request->input('frequency');
+        $vs->user_id = auth()->user()->id;
         $vsource = $request->input('source');
         $vs->source = implode(',', $vsource);
         $vs->collection_method = $request->input('collection_method');
         $vs->indicator_id = $request->input('indicator_id');
 
+        $pid=$request->project_id;
+
         $vs->save();
 
-        return redirect('/verificationsources/' . $vs->indicator_id);
+        return redirect('/verificationsources/'.$pid);
 
     }
 
@@ -69,9 +75,17 @@ class VerificationsourcesController extends Controller
      */
     public function show($id)
     {
-        $vs = Verificationsource::orderBy('created_at', 'desc')->paginate(10);
+                
+        $vs = Verificationsource::where("user_id",auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('/verifiablesource/show')->with('vs', $vs);
+        $indicators = \DB::table('projects')
+    ->join('indicators', 'indicators.project_id', 'projects.id')
+    ->select('indicators.*')->where('projects.id', $id)
+    ->orderBy('created_at', 'asc')
+    ->get();
+
+
+        return view('/verifiablesource/show')->with(['vs'=> $vs, 'project_id'=>$id, 'indicators'=>$indicators]);
     }
 
     /**
@@ -103,9 +117,18 @@ class VerificationsourcesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+
+           $pid=$request->project_id;
+
+        $verificationsource = Verificationsource::findOrFail($id);
+
+$verificationsource->delete();
+
+return redirect('/verificationsources/' . $pid);
+
+
     }
 
     public function selectIndicator($id)

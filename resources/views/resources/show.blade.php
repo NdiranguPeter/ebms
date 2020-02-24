@@ -30,9 +30,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Activity </th>
                                 <th>Resource</th>
 
-                                <th>actions</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,9 +41,23 @@
                             @foreach ($vs as $v)
                             <tr>
                                 <td> {{$counter}} </td>
+                                <td> @foreach ($activities as $activity)
+                                @if ($activity->id == $v->activity_id)
+                                {{$activity->name}}
+                                @endif
+                                @endforeach</td>
                                 <td> {{$v->name}} </td>
 
                                 <td>
+
+                                    {!! Form::open(['action'=>['ResourcesController@destroy', $v->id],
+                                    'method'=>'POST']) !!}
+                                    <input type="hidden" name='project_id' value={{$project_id}}>
+                                    
+                                    {{Form::button('<i class="red ace-icon fa fa-trash-o"></i>', ['type'=>'submit', 'onClick'=>'return confirm("Are you sure you want to delete?")'])}}
+                                    
+                                    {{Form::hidden('_method','DELETE')}}
+                                    {!!Form::close()!!}
 
                                 </td>
                             </tr>

@@ -32,6 +32,7 @@
                     {!! Form::open(['action'=>'VerificationsourcesController@store', 'method'=>'POST']) !!}
                     @csrf
                     <input type="hidden" name='indicator_id' value={{$indicator->id}}>
+                    <input type="hidden" name='project_id' value={{$indicator->project_id}}>
 
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
@@ -71,10 +72,8 @@
 
                     <div class="form-group">
                         {{Form::label('source', 'Information Source')}}
-                        <select multiple name="source[]" id="source"
-                            class="form-control @error('source') is-invalid @enderror">
-
-                            <option value="baseline study">Baseline study</option>
+                        <select name="source[]" id="" class="form-control" multiple="multiple" role="multiselect">
+                          <option value="baseline study">Baseline study</option>
                             <option value="database">Database</option>
                             <option value="evaluation forms">Evaluation forms</option>
                             <option value="external fiancial audit">External fiancial audit</option>
@@ -88,7 +87,9 @@
                             <option value="activity report">Activity report</option>
                             <option value="surveys">Surveys</option>
                             <option value="training report">Training report</option>
+                        
                         </select>
+                    
                     </div>
                     <div class="form-group">
                         {{Form::label('collection_method', 'Collection Method')}}

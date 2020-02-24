@@ -41,6 +41,7 @@
                     {!! Form::open(['action'=>'ResourcesController@store', 'method'=>'POST']) !!}
                     @csrf
                     <input type="hidden" name='activity_id' value={{$activity->id}}>
+                    <input type="hidden" name='output_id' value={{$activity->output_id}}>
 
                     <div class="form-group">
                         {{Form::label('name', 'Resource name')}}
