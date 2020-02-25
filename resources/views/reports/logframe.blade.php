@@ -15,7 +15,7 @@
         border-top: 1px solid #bfdeec
     }
 </style>
-<table class="cdcc table table-bordered">
+<table class="table table-bordered">
     <thead>
         <tr style="background: #349ba7 !important;color: #fff;">
             <th style="padding:5px;">Goal</th>
@@ -28,10 +28,10 @@
         <thead>
         <tbody>
             <tr style="font-size: smaller;">
-                <th style="padding:5px;">{!!$project->goal!!}</td>
-                <td style="padding:5px;">{!!$project->description!!}</th>
+                <th style="padding:5px; width: 100px;">Goal 1</td>
+                <td style="padding:5px;">{!!$project->goal!!}</th>
                 <td>
-                    <table class="table cdccw">
+                    <table class="">
                         @php
                         $y = 1;
                         @endphp
@@ -46,7 +46,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="table">
+                    <table>
                         @php
                         $y = 1;
                         @endphp
@@ -66,7 +66,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="table">
+                    <table>
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($risks as $risk)
                         @if($goalindicator->goal_id == $risk->goal_id)
@@ -79,7 +79,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="table">
+                    <table>
                         @foreach ($goalindicators as $goalindicator)
                         @foreach ($assumptions as $assumption)
                         @if($goalindicator->goal_id == $assumption->goal_id)
@@ -111,7 +111,7 @@
             <th style="padding:5px;">Outcome {{$counter}}</td>
             <td style="padding:5px;">{!!$outcome->name!!}</th>
             <td>
-                <table class="table cdccw">
+                <table class="table ">
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @if ($outcomeindicator->outcome_id == $outcome->id)
                     <tr>
@@ -122,7 +122,7 @@
                 </table>
             </td>
             <td>
-                <table class="table cdccw">
+                <table class="table ">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($verificationsources as $verificationsource)
@@ -141,7 +141,7 @@
                 </table>
             </td>
             <td>
-                <table class="table cdccw">
+                <table class="table ">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($risks as $risk)
@@ -157,7 +157,7 @@
                 </table>
             </td>
             <td>
-                <table class="table cdccw">
+                <table class="table ">
 
                     @foreach ($outcomeindicators as $outcomeindicator)
                     @foreach ($assumptions as $assumption)
@@ -182,7 +182,7 @@
     </tbody>
     <tr style="background: #349ba7 !important;color: #fff;">
         <th style="padding:5px;"> Outputs </th>
-        <th style="padding:5px;">Description</th>
+        <th style="padding:5px; width: 250px;">Description</th>
         <th style="padding:5px;">Indicators</th>
         <th style="padding:5px;">Means of Verification</th>
         <th style="padding:5px;">Risks</th>
@@ -200,9 +200,9 @@
     <tbody>
         <tr style="font-size: smaller;">
             <th style="padding:5px;">Output {{$fgrt}}.{{$coer}}</td>
-            <td style="padding:5px;" rowspan=" {{count($outputindicators)}}">{!!$output->name!!}</th>
+            <td style="padding:5px; width: 250px;" rowspan=" {{count($outputindicators)}}">{!!$output->name!!}</th>
             <td>
-                <table class="table cdccw">
+                <table class="table ">
                     @foreach ($outputindicators as $outputindicator)
                     @if ($outputindicator->output_id == $output->id)
                     <tr>
@@ -213,7 +213,7 @@
                 </table>
             </td>
             <td>
-                <table class="table cdccw">
+                <table class="table ">
 
                     @foreach ($outputindicators as $outputindicator)
                     @foreach ($verificationsources as $verificationsource)
@@ -230,7 +230,7 @@
                 </table>
             </td>
             <td>
-                <table class="table cdccw">
+                <table class="table ">
 
                     @foreach ($risks as $risk)
                     @foreach ($outputindicators as $outputindicator)
@@ -264,11 +264,10 @@
 
     <tr style="background: #349ba7 !important;color: #fff;">
         <th style="padding:5px;">Activities </th>
-        <th style="padding:5px;">Activities associated with Outputs</th>
+        <th style="padding:5px;" colspan="3">Activities associated with Outputs</th>
         <th style="padding:5px;">Resources</th>
         <th style="padding:5px;" style="width:100px;">Budget</th>
-        <th style="padding:5px;">Risks</th>
-        <th style="padding:5px;">Assumptions</th>
+      
     </tr>
 
     @php
@@ -291,9 +290,9 @@
             <th rowspan="{{count($activityresources)}}" style="padding-left:5px;">Activity:
                 {{$fgrt}}.{{$coer}}.{{$activ}}
                 </td>
-            <td style="padding-left:5px;" rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
+            <td colspan="3"  style="padding-left:5px;" rowspan="{{count($activityresources)}}">{!!$activity->name!!}</th>
             <td rowspan="{{count($activityresources)}}">
-                <table class="table cdccw">
+                <table class="table ">
                     @foreach ($activityresources as $activityresource)
                     @if ($activityresource->activity_id == $activity->id)
                     <tr>
@@ -317,8 +316,7 @@
                 {{$number}}
 
             </td>
-            <td rowspan="{{count($activityresources)}}"></td>
-            <td rowspan="{{count($activityresources)}}"></td>
+          
         </tr>
 
     </tbody>

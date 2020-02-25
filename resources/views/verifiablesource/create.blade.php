@@ -30,7 +30,7 @@
                 <div class="well col-sm-12">
                     <span style="color: #0081c3;
     font-weight: bold;">{!!$indicator->name!!}</span>
-    <br>
+                    <br>
                     {!! Form::open(['action'=>'VerificationsourcesController@store', 'method'=>'POST']) !!}
                     @csrf
                     <input type="hidden" name='indicator_id' value={{$indicator->id}}>
@@ -75,7 +75,7 @@
                     <div class="form-group">
                         {{Form::label('source', 'Information Source')}}
                         <select name="source[]" id="" class="form-control" multiple="multiple" role="multiselect">
-                          <option value="baseline study">Baseline study</option>
+                            <option value="baseline study">Baseline study</option>
                             <option value="database">Database</option>
                             <option value="evaluation forms">Evaluation forms</option>
                             <option value="external fiancial audit">External fiancial audit</option>
@@ -89,9 +89,9 @@
                             <option value="activity report">Activity report</option>
                             <option value="surveys">Surveys</option>
                             <option value="training report">Training report</option>
-                        
+
                         </select>
-                    
+
                     </div>
                     <div class="form-group">
                         {{Form::label('collection_method', 'Collection Method')}}
