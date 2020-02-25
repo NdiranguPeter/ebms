@@ -1,6 +1,7 @@
 <style>
     .cdcc td {
         height: 60px;
+     border-top: 1px solid #bfdeecdd;
     }
 
     .cdcc>tbody>tr>td,
