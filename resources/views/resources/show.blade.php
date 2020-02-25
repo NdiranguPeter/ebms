@@ -67,7 +67,9 @@
                     </table>
 
                 </div>
-                <div style="min-height: 20px;"></div>
+                <div style="min-height: 20px;">
+                <a class="btn btn-light" href="/activities/{{$project_id}}">Back to activities</a>
+                </div>
 
 
             </div>

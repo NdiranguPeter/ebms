@@ -61,10 +61,10 @@ return view('/resources/show')->with('vs', $vs);
 
         $pid = $outcome->project_id;
 
-
         $resource->save();
 
         return redirect('/resources/'.$pid);
+
 
     }
 
@@ -87,6 +87,7 @@ return view('/resources/show')->with('vs', $vs);
             ->select('activities.*')->where('projects.id', $id)
             ->orderBy('created_at', 'desc')
             ->get();
+
 
         return view('/resources/show')->with(['vs'=>$vs, 'project_id'=>$id, 'activities'=>$activities]);
 
@@ -130,7 +131,8 @@ return view('/resources/show')->with('vs', $vs);
 
         $resource->delete();
 
-        return redirect('/resources');
+        return redirect('/resources/' . $pid);
+
     }
 
     public function selectActivity($id)
