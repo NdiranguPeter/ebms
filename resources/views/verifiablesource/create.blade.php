@@ -28,7 +28,9 @@
                 @endisset($error)
 
                 <div class="well col-sm-12">
-                    <span style="color: green; font-size:bold;">{!!$indicator->name!!}</span>
+                    <span style="color: #0081c3;
+    font-weight: bold;">{!!$indicator->name!!}</span>
+    <br>
                     {!! Form::open(['action'=>'VerificationsourcesController@store', 'method'=>'POST']) !!}
                     @csrf
                     <input type="hidden" name='indicator_id' value={{$indicator->id}}>
