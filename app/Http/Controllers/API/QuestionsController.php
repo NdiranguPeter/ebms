@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Activity;
+use App\Activityafter;
 use App\Answer;
 use App\AssumptionAfter;
 use App\Http\Controllers\Controller;
-use App\Indicator;
 use App\Indicatorafter;
 use App\Option;
-use App\Outcome;
-use App\Output;
 use App\Project;
 use App\Question;
 use App\Risksafter;
-use App\Unit;
-use App\Activityafter;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
@@ -90,7 +85,7 @@ class QuestionsController extends Controller
     {
         $qid = $request->qid;
 
-        $answer = Answer::where('qid', $qid)->where('qn_id',$request->qn_id)->get();
+        $answer = Answer::where('qid', $qid)->where('qn_id', $request->qn_id)->get();
 
         if ($answer->isEmpty()) {
             Answer::create($request->all());
@@ -102,7 +97,7 @@ class QuestionsController extends Controller
 
         $indicatorafter = Indicatorafter::where('indicator_id', $request->id)->where('year', $request->year)->where('month', $request->month)->where('before_after', "after")->first();
         $indicatorafter->monthly_total = $request->achieved;
-        $indicatorafter->person_responsible = $request->responsible;        
+        $indicatorafter->person_responsible = $request->responsible;
         $indicatorafter->save();
     }
 
@@ -139,68 +134,10 @@ class QuestionsController extends Controller
     public function activityafter(Request $request)
     {
 
-        $actyafter = Activityafter::where('activity_id', $request->activity_id)->where('before_after', 'after')->first();
-        if ($actyafter === null) {
-            $activity = Activity::findOrFail($id);
-            $output = Output::findOrFail($activity->output_id);
-            $activity->jan = 0;
-            $activity->feb = 0;
-            $activity->mar = 0;
-            $activity->apr = 0;
-            $activity->may = 0;
-            $activity->jun = 0;
-            $activity->jul = 0;
-            $activity->aug = 0;
-            $activity->sep = 0;
-            $activity->oct = 0;
-            $activity->nov = 0;
-            $activity->dec = 0;
-
-        } else {
-
-            $activity = Activityafter::where('activity_id', $request->activity_id)->where('before_after', 'after')->first();
-            $act = Activity::findOrFail($activity->activity_id);
-            $activity->name = $act->name;
-            $activity->output_id = $act->output_id;
-            $activity->start = $act->start;
-            $activity->end = $act->end;
-            $activity->id = $act->id;
-            $activity->duration = $act->duration;
-
-            $output = Output::findOrFail($act->output_id);
-        }
-
-        $units = Unit::all();
-
-        $outcome = Outcome::findOrFail($output->outcome_id);
-
-        $project = Project::findOrFail($outcome->project_id);
-
-        $before_after = 'after';
-
-        $id = $activity->id;
-
-        $output_id = $activity->output_id;
-        $year = $request->year;
-        $before_after = "after";
-
-        $actyafter = Activityafter::where('activity_id', $id)->where('year', $year)->where('before_after', $before_after)->first();
-        if ($actyafter === null) {
-            $activityafter = new Activityafter;
-
-        } else {
-
-            $activityafter = $actyafter;
-
-        }
-
-        $activityafter->activity_id = $id;
-        $activityafter->duration = $activity->duration;
-
-        $sbudget = $activity->budget;
-        $fbudget = $request->budget;
-
-        $budget_diff = $sbudget - $fbudget;
+        $activityafter = Activityafter::where('activity_id', $request->activity_id)->where('year', $request->year)->where('month', $request->month)->where('before_after', 'after')->first();
+        $activityafter->total_beneficiaries = $request->ta;
+        $activityafter->budget = $request->budget;
+        $activityafter->remarks = $request->remarks;
 
         $zero_two_male = $request->zero_two_male;
         $three_five_male = $request->three_five_male;
@@ -251,38 +188,11 @@ class QuestionsController extends Controller
         $activityafter->seventy_seventynine_female = $seventy_seventynine_female;
         $activityafter->above_eighty_female = $above_eighty_female;
 
-        $activityafter->total_beneficiaries = $totol_beneficiaries;
         $activityafter->total_male = $total_male;
         $activityafter->total_female = $total_female;
 
-        $activityafter->budget = $fbudget;
-        $activityafter->budget_diff = $budget_diff;
-        $activityafter->person_responsible = $activity->person_responsible;
-        $activityafter->start = $activity->start;
-        $activityafter->end = $activity->end;
-
-        $years = $year;
-        $months = $year;
-
-        $activityafter->jan = $request->jan;
-        $activityafter->feb = $request->feb;
-        $activityafter->mar = $request->mar;
-        $activityafter->apr = $request->apr;
-        $activityafter->may = $request->may;
-        $activityafter->jun = $request->jun;
-        $activityafter->jul = $request->jul;
-        $activityafter->aug = $request->aug;
-        $activityafter->sep = $request->sep;
-        $activityafter->oct = $request->oct;
-        $activityafter->nov = $request->nov;
-        $activityafter->dec = $request->dec;
-
-        $activityafter->year = $request->year;
-        $activityafter->before_after = "after";
         $activityafter->indirect_male = $request->indirect_male;
         $activityafter->indirect_female = $request->indirect_female;
-
-        $activityafter->years = $years;
 
         $activityafter->save();
 
