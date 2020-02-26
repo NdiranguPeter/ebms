@@ -2035,6 +2035,7 @@ caption {
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
+    border-top: 1px solid #bfdeec
 }
 .table>thead>tr>th {
     vertical-align: bottom;

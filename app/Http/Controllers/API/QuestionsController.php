@@ -100,70 +100,9 @@ class QuestionsController extends Controller
     public function indicatorafter(Request $request)
     {
 
-        $actyafter = Indicatorafter::where('indicator_id', $request->id)->where('before_after', "after")->first();
-
-        if ($actyafter === null) {
-            $indicator = Indicator::findOrFail($request->id);
-        } else {
-
-            $indicator = Indicatorafter::where('indicator_id', $request->id)->where('before_after', 'after')->first();
-            $act = Indicator::findOrFail($indicator->indicator_id);
-            $indicator->name = $act->name;
-            $indicator->output_id = $act->output_id;
-            $indicator->outcome_id = $act->outcome_id;
-            $indicator->goal_id = $act->goal_id;
-            $indicator->project_id = $act->project_id;
-
-            $indicator->start = $act->start;
-            $indicator->end = $act->end;
-            $indicator->id = $act->id;
-            $indicator->duration = $act->duration;
-            $indicator->project_id = $act->project_id;
-
-        }
-
-        $id = $request->id;
-
-        $output_id = $indicator->output_id;
-        $goal_id = $indicator->goal_id;
-        $outcome_id = $indicator->outcome_id;
-        $project_id = $indicator->project_id;
-        $year = $request->year;
-        $before_after = "after";
-
-        $actyafter = indicatorafter::where('indicator_id', $request->id)->where('year', $request->year)->where('before_after', 'after')->first();
-
-        if ($actyafter == null) {
-            $indicatorafter = new indicatorafter;
-        } else {
-            $indicatorafter = $actyafter;
-
-        }
-
-        $indicatorafter->person_responsible = $request->responsible;
-        $indicatorafter->start = $indicator->start;
-        $indicatorafter->end = $indicator->end;
-
-        $indicatorafter->ovi_date = $indicator->start;
-
-        $indicatorafter->baseline_target = $indicator->baseline_target;
-        $indicatorafter->project_target = $indicator->project_target;
-
-        $indicatorafter->year = $request->year;
-        $indicatorafter->before_after = "after";
-        $indicatorafter->indicator_id = $request->id;
-        $indicatorafter->jan = $request->jan;
-        $indicatorafter->feb = $request->feb;
-        $indicatorafter->mar = $request->mar;
-        $indicatorafter->apr = $request->apr;
-        $indicatorafter->may = $request->may;
-        $indicatorafter->jun = $request->jun;
-        $indicatorafter->jul = $request->jul;
-        $indicatorafter->aug = $request->aug;
-        $indicatorafter->sep = $request->sep;
-        $indicatorafter->oct = $request->oct;
-        $indicatorafter->nov = $request->nov;
-        $indicatorafter->dec = $request->dec;
+        $indicatorafter = Indicatorafter::where('indicator_id', $request->id)->where('year', $request->year)->where('month', $request->month)->where('before_after', "after")->first();
+        $indicatorafter->monthly_total = $request->achieved;
+        $indicatorafter->person_responsible = $request->responsible;        
         $indicatorafter->save();
     }
 
