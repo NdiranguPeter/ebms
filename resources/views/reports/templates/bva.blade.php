@@ -31,6 +31,7 @@
                     <i class="ace-icon fa fa-download"></i>
 
                 </a> --}}
+               <a href="#" onClick="window.print()" style=" float:right; margin-left:20px;"><i class="fa fa-file-pdf-o red" aria-hidden="true"></i></a>
                 <a href="/reports/{{$project->id}}" class="btn btn-success" style=" float:right;">
                     <i class="ace-icon fa fa-arrow-circle-o-left"></i>
                     Back to Reports
