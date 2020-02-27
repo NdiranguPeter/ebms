@@ -171,7 +171,7 @@
 
                 <hr>
 
-                {!! Form::open(['action'=>'GroupsController@store', 'method'=>'POST']) !!}
+                {!! Form::open(['action'=>'GroupsController@store', 'method'=>'POST', 'autocomplete'=>'off']) !!}
 
                 <input type="hidden" name="survey_id" value={{$survey->id}}>
                 {{Form::label('name', 'Group name')}}
