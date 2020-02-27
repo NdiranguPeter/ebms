@@ -467,7 +467,7 @@ class ProjectsController extends Controller
         $user = auth()->user();
 
         if ($user->role == 999 || $user->role=$user->country) {
-             $projects = Project::where('country',3)->where('id','<',105)->orderBy('created_at', 'desc')->paginate(10);
+             $projects = Project::where('country',3)->orderBy('created_at', 'desc')->paginate(10);
             // dd($projects);
             return view('ethiopia')->with(['projects'=>$projects]);
         }
