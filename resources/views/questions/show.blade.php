@@ -36,7 +36,7 @@
             <div class="container-fluid">
                 @include('layouts.messages')
                 <div class="col-xs-12 col-sm-6 table-bordered" style="margin-top: 25px; padding: 10px;">
-                    {!! Form::open(['action'=>'QuestionsController@store', 'method'=>'POST']) !!}
+                    {!! Form::open(['action'=>'QuestionsController@store', 'method'=>'POST', 'autocomplete'=>'off']) !!}
                     <input type="hidden" name="survey_id" value={{$survey->id}}>
                     <input type="hidden" name="hint" value="">
                     <input type="hidden" name="qn_order" value={{$qn_order+1}}>
