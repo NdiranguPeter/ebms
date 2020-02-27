@@ -62,8 +62,8 @@
                     <div class="form-group">
                         {{Form::label('type', 'Question type')}}
                         <select name="type" id="group" class="form-control @error('ir_office') is-invalid @enderror">
-                            <option value="text">Text </option>
                             <option value="integer">Number</option>
+                            <option value="text">Text </option>                            
                             <option value="decimal">Decimal</option>
                             <option value="radio">Select one</option>
                             <option value="checkbox">Select multiple</option>
