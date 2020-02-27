@@ -31,7 +31,7 @@
                 <span style="font-weight: bold; font-size: large;"> {!!$question->name!!} </span>
 
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                {!! Form::open(['action'=>['QuestionsController@storeType',$question->id], 'method'=>'POST']) !!}
+                {!! Form::open(['action'=>['QuestionsController@storeType',$question->id], 'method'=>'POST' , 'autocomplete'=>'off']) !!}
                 <input type="hidden" name="qn_id" value={{$question->id}}>
                 <input type="hidden" name="survey_id" value={{$question->survey_id}}>
                 <div><span>Options</span> <span style="margin-left: 13%;">Values</span></div>
