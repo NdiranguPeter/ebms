@@ -2,55 +2,78 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use Excel;
 use App\Answer;
-use App\Group;
-use App\Option;
 use App\Question;
 use App\Survey;
+use Excel;
 
 class ExportExcelController extends Controller
 {
-    
 
     public function excel($id)
     {
 
-        $survey = Survey::findOrFail($id);
+       $survey = Survey::findOrFail($id);
 
-        $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->paginate(10);
+        $questions = Question::where('survey_id', $id)->orderBy('qn_order', 'asc')->get();
 
-        $survey_data = Answer::where('survey_id', $id)->get();
+        $answers = Answer::where('survey_id', $id)->get();
 
-        $survey_headers[] = Answer::where('survey_id', $id)->groupBy('qn_id')->get()->toArray();
+        $answers_list = Answer::where('survey_id', $id)->groupBy('qn_id')->get();
 
 
-        foreach ($survey_headers as $header) {
+        $excelData ="";
 
-            // dd($header[0]);
+        if(count($answers_list) >0 ){
+            $excelData .='<table><tr>';
+            foreach ($answers_list as $answer_list){
+                foreach ($questions as $question){
+                    
+                        if ($question->id == $answer_list->qn_id){
 
-            foreach ($survey_data as $data) {
+                $excelData .= '<th style="border: 1px solid #ddd; background-color:#ddd; color:#000;">'.$question->column.'</th>';
 
-                    for ($i=0; $i < sizeof($header); $i++) { 
-                        
-                if ($data->qn_id == $header){
-                        
-
- $header[$i] = $data($i);
                     }
-                    }
-
+                }
 
             }
-           
-        }
-        
-        Excel::create('Survey Data', function ($excel) use ($survey_headers) {
-            $excel->setTitle('Survey Data');
-            $excel->sheet('Survey Data', function ($sheet) use ($survey_headers) {
-                $sheet->fromArray($survey_headers, null, 'A1', false, false);
-            });
-        })->download('xlsx');
+            $excelData .='</tr><tr>';
+
+
+            
+            foreach ($answers_list as $answer_list){
+                $excelData .= '<td style="border: 1px solid #ddd;"><table>';
+
+                foreach ($answers as $answer){
+                if ($answer->qn_id == $answer_list->qn_id){
+
+                    $excelData .= '<tr>';
+                    if ($answer->ans == null){
+                        $excelData .= '<td></td>';
+                    }else{
+                        $excelData .= '<td>'.$answer->ans.'</td>';
+                    }
+                    $excelData .= '</tr>';
+
+                    }
+                }
+
+                $excelData .= '</table></td>';
+                                        
+            }
+            $excelData .= '</tr></table>';
+                               
+                                      
+
+        }               
+
+        $filename = $survey->name;
+
+        header('Content-Type: application/xls');
+        header('Content-Disposition: attachment; filename='.$filename.'.xls');
+
+        echo $excelData;
+
+
     }
 }
