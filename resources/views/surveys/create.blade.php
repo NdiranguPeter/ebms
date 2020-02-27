@@ -34,7 +34,7 @@
                 @include('layouts.messages')
 
                 <div class="well col-sm-12">
-                    {!! Form::open(['action'=>'SurveysController@store', 'method'=>'POST' 'autocomplete'=>'off']) !!}
+                    {!! Form::open(['action'=>'SurveysController@store', 'method'=>'POST', 'autocomplete'=>'off']) !!}
                     <div class="form-group">
                         {{Form::label('name', 'Survey name')}}
                         {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Survey name'])}}
