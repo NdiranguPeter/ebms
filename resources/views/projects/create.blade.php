@@ -79,6 +79,8 @@
                                 </option>
                                 <option value="5" @if (old('ir_office')==5) style="display:none;" @endif>IR South Sudan
                                 </option>
+                                <option value="6" @if (old('ir_office')==6) style="display:none;" @endif>Grobal MEAL
+                                </option>
                             </select>
                         </div>
                         <div class="form-group">
