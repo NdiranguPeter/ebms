@@ -51,18 +51,15 @@ class ExportExcelController extends Controller
                     if ($answer->ans == null){
                         $excelData .= '<td></td>';
                     }else{
-                        $excelData .= '<td  style="border: 1px solid #ddd;">'.$answer->ans.'</td>';
+                        $excelData .= '<td style="border:1px solid #ddd;">'.$answer->ans.'</td>';
                     }
                     $excelData .= '</tr>';
-
                     }
                 }
 
-                $excelData .= '</table></td>';
-                                        
+                $excelData .= '</table></td>';                                        
             }
-            $excelData .= '</tr></table>';
-                               
+            $excelData .= '</tr></table>';                       
                                       
 
         }               
