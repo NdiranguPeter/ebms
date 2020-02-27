@@ -201,7 +201,9 @@ class ProjectsController extends Controller
 
         $project->save();
 
-        return redirect('/indicators/goal/create/' . $project->id);
+        return redirect('/projects')->with('success', 'Project successfully created');
+
+        // return redirect('/indicators/goal/create/' . $project->id);
 
     }
 
