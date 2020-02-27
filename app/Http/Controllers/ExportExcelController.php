@@ -51,7 +51,7 @@ class ExportExcelController extends Controller
                     if ($answer->ans == null){
                         $excelData .= '<td></td>';
                     }else{
-                        $excelData .= '<td>'.$answer->ans.'</td>';
+                        $excelData .= '<td  style="border: 1px solid #ddd;">'.$answer->ans.'</td>';
                     }
                     $excelData .= '</tr>';
 
