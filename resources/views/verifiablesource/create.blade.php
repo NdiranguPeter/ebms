@@ -30,7 +30,7 @@
                 <div class="well col-sm-12">
                     <span style="color: #0081c3;
     font-weight: bold;">{!!$indicator->name!!}</span>
-                    <br>
+                  <div style="min-height: 20px;"></div>
                     {!! Form::open(['action'=>'VerificationsourcesController@store', 'method'=>'POST']) !!}
                     @csrf
                     <input type="hidden" name='indicator_id' value={{$indicator->id}}>
