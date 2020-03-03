@@ -71,29 +71,30 @@ class ActivitiesController extends Controller
         $sec = $end - $start;
         $activity_tb = $request->input('project_target');
         $activity_currency = $request->input('currency');
-        $zero_two_male = $request->input('zero_two_male');
-        $three_five_male = $request->input('three_five_male');
-        $six_twelve_male = $request->input('six_twelve_male');
-        $thirteen_seventeen_male = $request->input('thirteen_seventeen_male');
-        $eigteen_twentyfive_male = $request->input('eigteen_twentyfive_male');
-        $twentysix_fourtynine_male = $request->input('twentysix_fourtynine_male');
-        $fifty_fiftynine_male = $request->input('fifty_fiftynine_male');
-        $sixty_sixtynine_male = $request->input('sixty_sixtynine_male');
-        $seventy_seventynine_male = $request->input('seventy_seventynine_male');
-        $above_eighty_male = $request->input('above_eighty_male');
+        $zero_two_male = 0;
+        $three_five_male =  0;
+        $six_twelve_male =  0;
+        $thirteen_seventeen_male =  0;
+        $eigteen_twentyfive_male =  0;
+        $twentysix_fourtynine_male =  0;
+        $fifty_fiftynine_male =  0;
+        $sixty_sixtynine_male =  0;
+        $seventy_seventynine_male =  0;
+        $above_eighty_male =  0;
 
         $total_male = $zero_two_male + $three_five_male + $six_twelve_male + $thirteen_seventeen_male + $eigteen_twentyfive_male + $twentysix_fourtynine_male + $fifty_fiftynine_male + $sixty_sixtynine_male + $seventy_seventynine_male + $above_eighty_male;
 
-        $zero_two_female = $request->input('zero_two_female');
-        $three_five_female = $request->input('three_five_female');
-        $six_twelve_female = $request->input('six_twelve_female');
-        $thirteen_seventeen_female = $request->input('thirteen_seventeen_female');
-        $eigteen_twentyfive_female = $request->input('eigteen_twentyfive_female');
-        $twentysix_fourtynine_female = $request->input('twentysix_fourtynine_female');
-        $fifty_fiftynine_female = $request->input('fifty_fiftynine_female');
-        $sixty_sixtynine_female = $request->input('sixty_sixtynine_female');
-        $seventy_seventynine_female = $request->input('seventy_seventynine_female');
-        $above_eighty_female = $request->input('above_eighty_female');
+        $zero_two_female =  0;
+        $three_five_female =  0;
+        $six_twelve_female =  0;
+        $thirteen_seventeen_female =  0;
+        $eigteen_twentyfive_female =  0;
+        $twentysix_fourtynine_female =  0;
+        $fifty_fiftynine_female =  0;
+        $sixty_sixtynine_female =  0;
+        $seventy_seventynine_female =  0;
+        $above_eighty_female = 0;
+
 
         $total_female = $zero_two_female + $three_five_female + $six_twelve_female + $thirteen_seventeen_female + $eigteen_twentyfive_female + $twentysix_fourtynine_female + $fifty_fiftynine_female + $sixty_sixtynine_female + $seventy_seventynine_female + $above_eighty_female;
         $totol_beneficiaries = $total_male + $total_female;
@@ -123,10 +124,10 @@ class ActivitiesController extends Controller
 
         $activity->project_target = $request->input('project_target');
         $activity->currency = $activity_currency;
-        $activity->indirect_male = $request->input('indirect_male');
-        $activity->indirect_female = $request->input('indirect_female');
-        $activity->disabled_male = $request->input('disabled_male');
-        $activity->disabled_female = $request->input('disabled_female');
+        $activity->indirect_male = 0;
+        $activity->indirect_female = 0;
+        $activity->disabled_male = 0;
+        $activity->disabled_female = 0;
 
         $activity->zero_two_male = $zero_two_male;
         $activity->three_five_male = $three_five_male;

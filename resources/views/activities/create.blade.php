@@ -58,6 +58,29 @@
                             {{Form::textarea('activity', '', ['class' => 'form-control', 'placeholder' => 'Activity name'])}}
                         </div>
 
+                        <div class="form-group">
+                            {{Form::label('start', 'Start')}}
+                            {{Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'Start date'])}}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{Form::label('end', 'End')}}
+                            {{Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'End date'])}}
+                        </div>
+
+                        <div class="form-group">
+                            {{Form::label('project_target', 'Project target')}}
+                            {{Form::number('project_target','', ['class' => 'form-control', 'placeholder' => 'Project target'])}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('person_responsible', 'Person responsible')}}
+                            {{Form::text('person_responsible', '', ['class' => 'form-control', 'placeholder' => 'Person responsible'])}}
+                        </div>
+                        
+                        
+                      
+
+{{--                         
                         <h5>Direct beneficiaries</h5>
                         <div class="form-group">
                             <table class="table table-bordered">
@@ -129,12 +152,12 @@
 
                                 </tbody>
                             </table>
-                        </div>
+                        </div> --}}
 
 
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <h5>Indirect beneficiaries</h5>
                             <div class="col-sm-6">
                                 {{Form::label('indirect_male', 'Male')}}
@@ -159,7 +182,7 @@
                                 {{Form::number('disabled_female', 0, ['class' => 'form-control', 'placeholder' => ''])}}
                             </div>
 
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <a style="float:right;" data-toggle="modal" data-target="#scoringModal">Create new scoring
@@ -188,34 +211,12 @@
                                 @endif
                             </select>
                         </div>
-                        <div class="form-group">
-                            {{Form::label('start', 'Start')}}
-                            {{Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'Start date'])}}
-                        </div>
-
-                        <div class="form-group">
-                            {{Form::label('end', 'End')}}
-                            {{Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'End date'])}}
-                        </div>
+                        
                         {{-- <div class="form-group">
                                                 {{Form::label('target_baseline', 'Baseline')}}
                         {{Form::text('target_baseline','', ['class' => 'form-control', 'placeholder' => 'Target at baseline'])}}
                     </div> --}}
-                    <div class="form-group">
-                        {{Form::label('project_target', 'Project target')}}
-                        {{Form::number('project_target','', ['class' => 'form-control', 'placeholder' => 'Project target'])}}
-                    </div>
-                    <div class="form-group">
-                        {{Form::label('person_responsible', 'Person responsible')}}
-                        {{Form::text('person_responsible', '', ['class' => 'form-control', 'placeholder' => 'Person responsible'])}}
-                    </div>
-
-
-
-                    <div class="form-group">
-                        {{Form::label('budget_code', 'Budget code')}}
-                        {{Form::text('budget_code', '', ['class' => 'form-control', 'placeholder' => 'Budget code'])}}
-                    </div>
+                   
                     <div class="form-group">
                         {{Form::label('budget_unit', 'Budgeting unit')}}
                         <select name="budget_unit" id="budget_unit"
@@ -236,6 +237,11 @@
                             <option value='Days'>Days</option>
 
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        {{Form::label('budget_code', 'Budget code')}}
+                        {{Form::text('budget_code', '', ['class' => 'form-control', 'placeholder' => 'Budget code'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('no_unit', 'Number of budgeting units')}}
