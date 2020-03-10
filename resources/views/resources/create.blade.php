@@ -25,7 +25,7 @@
 
             <div class="page-header">
                 <h1>
-                    Add Verification source
+                    Add Resource
                 </h1>
             </div><!-- /.page-header -->
 
