@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+
 class HomeController extends Controller
 {
     /**
@@ -211,9 +213,11 @@ class HomeController extends Controller
                 $ttass = $ttass + $accss->total_beneficiaries;
             }
 
- 
+            $allprojects = Project::all();
 
-            return view('regional')->with(['tta' => $tta, 'tt' => $tt, 'ttae' => $ttae, 'tte' => $tte, 'ttasom' => $ttasom, 'ttsom' => $ttsom, 'ttasud' => $ttasud, 'ttsud' => $ttsud,'ttass' => $ttass, 'ttss' => $ttss]);
+           
+
+            return view('regional')->with(['allprojects'=>$allprojects, 'tta' => $tta, 'tt' => $tt, 'ttae' => $ttae, 'tte' => $tte, 'ttasom' => $ttasom, 'ttsom' => $ttsom, 'ttasud' => $ttasud, 'ttsud' => $ttsud,'ttass' => $ttass, 'ttss' => $ttss]);
         }
         if ($user->role == 0) {
             return redirect('/home');

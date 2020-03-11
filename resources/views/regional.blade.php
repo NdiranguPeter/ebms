@@ -37,7 +37,7 @@
                     <table class="table table-bordered">
                         <tr>
                             <th rowspan="1" style="font-weight:bold; font-size:medium;">Country</th>
-                            <th rowspan="1" style="font-weight:bold; font-size:medium;">Project Status</th>
+                            <th rowspan="1" style="font-weight:bold; font-size:medium;"># of Projects</th>
                             <th rowspan="1" style="font-weight:bold; font-size:medium;">Processes (Activities)</th>
                             <th rowspan="1" style="font-weight:bold; font-size:medium;">Results (Outputs)</th>
                             <th rowspan="1" style="font-weight:bold; font-size:medium;">
@@ -67,7 +67,13 @@
                                 @endif
                                 <a href={{$anchor}}>Kenya</a>
                             </td>
-                            <td style="background-color:#0081c3;font-weight: bold; color: white;">67%</td>
+
+                            <td style="background-color:#0081c3;font-weight: bold; color: white;">
+                                {{count($allprojects->where('country',1))}}
+                            </td>
+
+
+
                             @php
                             $cl = "white";
                             if ($tta < 1) { $tta=1; }
@@ -107,7 +113,9 @@
                                 @endif
 
                                 <a href={{$anchor}}>Somalia</a></td>
-                            <td style="background-color:green;font-weight: bold; color: white;">80%</td>
+                            <td style="background-color:green;font-weight: bold; color: white;">
+                               {{count($allprojects->where('country',2))}}
+                            </td>
                             @php
                             $cl = "white";
                             if ($ttasom < 1) { $ttasom=1; } $act_per=$ttsom/$ttasom * 100; if ($act_per <26) { $cl="white" ; $col="red" ; } if ($act_per>25
@@ -147,7 +155,9 @@
 
                                 <a href={{$anchor}}>
                                     Ethiopia</a></td>
-                            <td style="background-color:green;font-weight: bold; color: white;">81%</td>
+                            <td style="background-color:green;font-weight: bold; color: white;"> 
+                                {{count($allprojects->where('country',3))}}                            
+                            </td>
 
                             @php
                             $cl = "white";
@@ -190,7 +200,9 @@
                                 @endif
 
                                 <a href={{$anchor}}>Sudan</a></td>
-                            <td style="background-color:#0081c3;font-weight: bold; color: white;">58%</td>
+                            <td style="background-color:#0081c3;font-weight: bold; color: white;">
+                             {{count($allprojects->where('country',4))}}
+                            </td>
                            
                             @php
                                 $cl = "white";
@@ -229,7 +241,8 @@
                                 @endif
 
                                 <a href={{$anchor}}>South Sudan</a></td>
-                            <td style="background-color:#0081c3;font-weight: bold; color: white;">64%</td>
+                            <td style="background-color:#0081c3;font-weight: bold; color: white;">
+                                {{count($allprojects->where('country',5))}}</td>
                             @php
                                 $cl = "white";
                                 if ($ttass < 1) { $ttass=1; } $act_per=$ttss/$ttass * 100; if ($act_per <26) { $cl="white" ; $col="red" ; } if
