@@ -27,9 +27,9 @@ class SendEmailController extends Controller
         $user = auth()->user()->email;
         $data = $request->all();
 
-     Mail::to($user)
-     ->send(new SendMail($data))
-     ->cc($request->manager_email);
+     Mail::to($request->manager_email)
+     ->send(new SendMail($data));
+    //  ->cc($request->manager_email);
 
     //  Mail::to($request->manager_email)->send(new SendMail($data));
 

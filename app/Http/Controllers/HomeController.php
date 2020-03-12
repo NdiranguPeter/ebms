@@ -70,6 +70,24 @@ class HomeController extends Controller
                 $tta = $tta + $acc->total_beneficiaries;
             }
 
+            $kia = \DB::table('projects')
+                ->join('indicators', 'indicators.project_id', 'projects.id')
+                ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+                ->select('indicatorafters.*')
+                ->where('projects.country', 1)
+                ->where('indicatorafters.before_after', 'after')
+                ->where('indicatorafters.year', $year)
+                ->get();
+
+            $kib = \DB::table('projects')
+                ->join('indicators', 'indicators.project_id', 'projects.id')
+                ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
+                ->select('indicatorafters.*')
+                ->where('projects.coutry', 1)
+                ->where('indicatorafters.before_after', 'before')
+                ->where('indicatorafters.year', $year)
+                ->get();
+
             $act_be = \DB::table('projects')
                 ->join('outcomes', 'outcomes.project_id', 'projects.id')
                 ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
@@ -138,9 +156,6 @@ class HomeController extends Controller
                 $ttasom = $ttasom + $accsom->total_beneficiaries;
             }
 
-
-
-            
             $act_bsud = \DB::table('projects')
                 ->join('outcomes', 'outcomes.project_id', 'projects.id')
                 ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
@@ -175,10 +190,6 @@ class HomeController extends Controller
                 $ttasud = $ttasud + $accsud->total_beneficiaries;
             }
 
-
-            
-
-            
             $act_bss = \DB::table('projects')
                 ->join('outcomes', 'outcomes.project_id', 'projects.id')
                 ->join('outputs', 'outputs.outcome_id', 'outcomes.id')
@@ -215,9 +226,7 @@ class HomeController extends Controller
 
             $allprojects = Project::all();
 
-           
-
-            return view('regional')->with(['allprojects'=>$allprojects, 'tta' => $tta, 'tt' => $tt, 'ttae' => $ttae, 'tte' => $tte, 'ttasom' => $ttasom, 'ttsom' => $ttsom, 'ttasud' => $ttasud, 'ttsud' => $ttsud,'ttass' => $ttass, 'ttss' => $ttss]);
+            return view('regional')->with(['allprojects' => $allprojects, 'tta' => $tta, 'tt' => $tt, 'ttae' => $ttae, 'tte' => $tte, 'ttasom' => $ttasom, 'ttsom' => $ttsom, 'ttasud' => $ttasud, 'ttsud' => $ttsud, 'ttass' => $ttass, 'ttss' => $ttss]);
         }
         if ($user->role == 0) {
             return redirect('/home');

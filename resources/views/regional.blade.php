@@ -88,7 +88,12 @@
                                         @endphp
                                         <td style="background-color:{{$col}};font-weight: bold; color: {{$cl}};">
                                             {{sprintf('%0.02f',$act_per)}}%</td>
+
+
                                         <td style="background-color:#0081c3;font-weight: bold; color: white;">59%</td>
+
+
+                                        
                                         <td>
                                             <table>
                                                 <tr>
