@@ -9,7 +9,7 @@
 
 <body>
     @php
-    $datetime1 = new \DateTime($data['date']);
+    $datetime1 = new \DateTime($date);
     $month = $datetime1->format('m');
     if ($month == 1) {
     $m = "January";
@@ -48,332 +48,337 @@
     $m = "December";
     }
     @endphp
-    <h3>Monthly Management Update: {{$m}}</h3>
+    <h3>{{$m}} - Management Perfomance Update </h3>
+<hr>
 
-    <table class="table table-bordered">
+<table style="height: 68px; width=100%;" >
+    <tbody>
+        <tr>
+            <td style="width:10%; background-color: #0081C3; color:#fff;" align="center">
+                <p><strong>Staff Name</strong></p>
+            </td>
+            <td style="width: 20%;">
+                <p>{{$name}}</p>
+            </td>
+            <td style="width: 10%; background-color: #0081C3; color:#fff;" align="center">
+                <p><strong>Job Title</strong></p>
+            </td>
+            <td style="width: 20%;">
+                <p>{{$title}}</p>
+            </td>
+            <td style="width: 10%; background-color: #0081C3; color:#fff;" rowspan="2" align="center">
+                <p><strong>Date of Update</strong></p>
+            </td>
+            <td style="width: 20%;" rowspan="2">
+                <p>{{$date}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 10%; background-color: #0081C3; color:#fff;" align="center">
+                <p><strong>Country/Department</strong></p>
+            </td>
+            <td style="width: 20%;">
+                <p>{{$department}}</p>
+            </td>
+            <td style="width: 10%; background-color: #0081C3; color:#fff;" align="center">
+                <p><strong>Line Manager</strong></p>
+            </td>
+            <td style="width: 20%;">
+                <p>{{$manager}}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+   
+    <hr>
+
+    <table style="width=100%;">
         <tbody>
             <tr>
-                <td width="236">
-                    <p><strong>Staff Name</strong></p>
-                </td>
-                <td width="236">
-                    <p>{{$data['name']}}</p>
-                </td>
-                <td width="236">
-                    <p><strong>Job Title</strong></p>
-                </td>
-                <td width="236">
-                    <p>{{$data['title']}}</p>
-                </td>
-                <td rowspan="2" width="236">
-                    <p><strong>Date of Update</strong></p>
-                </td>
-                <td rowspan="2" width="236">
-                    <p>{{$data['date']}}</p>
-                </td>
-            </tr>
-            <tr>
-                <td width="236">
-                    <p><strong>Country/Department</strong></p>
-                </td>
-                <td width="236">
-                    <p>{{$data['department']}}</p>
-                </td>
-                <td width="236">
-                    <p><strong>Line Manager</strong></p>
-                </td>
-                <td width="236">
-                    <p>{{$data['manager']}}</p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <p>&nbsp;</p>
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <td width="1411">
-                    <p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Key Achievements/Tasks
+                <td style="width:100%; background-color: #0081C3; color:#fff;">
+                    <p><strong>1. Key Achievements/Tasks
                             Completed</strong></p>
 
                 </td>
             </tr>
             <tr>
-                <td width="1411">
-                    <p>{{$data['achievements']}}</p>
+                <td style="width:100%;">
+                    <p>{{$achievements}}</p>
                 </td>
             </tr>
             <tr>
-                <td width="1411">
-                    <p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Key Challenges and Proposed
+                <td style="width:100%; background-color: #0081C3; color:#fff;">
+                    <p><strong>2. Key Challenges and Proposed
                             Solutions/Need for Support</strong></p>
                 </td>
             </tr>
             <tr>
-                <td width="1411">
-                    <p>{{$data['challenges']}}</p>
+                <td style="width:100%;">
+                    <p>{{$challenges}}</p>
                 </td>
             </tr>
         </tbody>
     </table>
-    <p>&nbsp;</p>
-    <table class="table table-bordered">
+
+    <table style="width=100%;">
         <tbody>
-            <tr>
-                <td colspan="3" width="1411">
-                    <p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Monthly Deliverables</strong></p>
+            <tr style="width:100%;">
+                <td style="background-color: #0081C3; color:#fff;" colspan="3">
+                    <p><strong>3. Monthly Deliverables</strong></p>
 
                 </td>
             </tr>
-            <tr>
-                <td width="365">
+            <tr style="background-color: #ddd;" >
+                <td style="width: 33%;">
                     <p><strong>Deliverables</strong></p>
                 </td>
-                <td width="227">
+                <td style="width: 33%;">
                     <p><strong>Submitted (Yes/No)</strong></p>
                 </td>
-                <td width="819">
+                <td style="width: 33%;">
                     <p><strong>Reason for non-submission and expected submission date</strong></p>
                 </td>
             </tr>
             <tr>
-                <td width="365">
+                <td style="width: 33%;">
                     <p>Employee Screening Update</p>
                 </td>
-                <td width="227">
-                    <p>{{$data['screening']}}</p>
+                <td style="width: 33%;">
+                    <p>{{$screening}}</p>
                 </td>
-                <td width="819">
-                    <p>{{$data['screening_reason']}}</p>
+                <td style="width: 33%;">
+                    <p>{{$screening_reason}}</p>
                 </td>
             </tr>
             <tr>
-                <td width="365">
+                <td style="width: 33%;">
                     <p>Income Targets</p>
                 </td>
-                <td width="227">
-                    <p>{{$data['targets']}}</p>
+                <td style="width: 33%;">
+                    <p>{{$targets}}</p>
                 </td>
-                <td width="819">
-                    <p>{{$data['target_reason']}}</p>
+                <td style="width: 33%;">
+                    <p>{{$target_reason}}</p>
                 </td>
             </tr>
             <tr>
-                <td width="365">
+                <td style="width: 33%;">
                     <p>Project Monitoring Template</p>
                 </td>
-                <td width="227">
-                    <p>{{$data['monitoring']}}</p>
+                <td style="width: 33%;">
+                    <p>{{$monitoring}}</p>
                 </td>
-                <td width="819">
-                    <p>{{$data['mornitoring_reason']}}</p>
+                <td style="width: 33%;">
+                    <p>{{$mornitoring_reason}}</p>
                 </td>
             </tr>
             <tr>
-                <td width="365">
+                <td style="width: 33%;">
                     <p>Audit/M&amp;E Plans (if applicable)</p>
                 </td>
-                <td width="227">
-                    <p>{{$data['me']}}</p>
+                <td style="width: 33%;">
+                    <p>{{$me}}</p>
                 </td>
-                <td width="819">
-                    <p>{{$data['me_reason']}}</p>
+                <td style="width: 33%;">
+                    <p>{{$me_reason}}</p>
                 </td>
             </tr>
         </tbody>
     </table>
-    <p>&nbsp;</p>
-    <table class="table table-bordered">
+   
+
+    <table style="width=100%;">
         <tbody>
             <tr>
-                <td colspan="7" width="1417">
-                    <p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Income Targets</strong></p>
+                <td colspan="7" style="background-color: #0081C3; color:#fff;" >
+                    <p><strong>4.Income Targets</strong></p>
 
                 </td>
             </tr>
-            <tr>
-                <td rowspan="2" width="272">
-                    <p><strong><em>Country(ies)</em></strong></p>
+            <tr style="background-color: #ddd;">
+                <td rowspan="2" >
+                    <p><strong><em>Country</em></strong></p>
                 </td>
-                <td colspan="2" width="382">
+                <td colspan="2">
                     <p><strong><em>Income Target (Current Year) - </em></strong><em>GBP</em></p>
                 </td>
-                <td colspan="2" width="382">
+                <td colspan="2" >
                     <p><strong><em>Actual Income Received (YTD) - </em></strong><em>GBP</em></p>
                 </td>
-                <td colspan="2" width="382">
+                <td colspan="2">
                     <p><strong><em>Forecast Income (YTD -&gt; End of Year) - </em></strong><em>GBP</em></p>
                 </td>
             </tr>
-            <tr>
-                <td width="191">
+            <tr style="background-color: #ddd;">
+                <td>
                     <p><strong><em>Inc. IFDD and IR UK</em></strong></p>
                 </td>
-                <td width="191">
+                <td >
                     <p><strong><em>Exc. IFDD and IR UK</em></strong></p>
                 </td>
-                <td width="191">
+                <td >
                     <p><strong><em>Inc. IFDD and IR UK</em></strong></p>
                 </td>
-                <td width="191">
+                <td >
                     <p><strong><em>Exc. IFDD and IR UK</em></strong></p>
                 </td>
-                <td width="191">
+                <td >
                     <p><strong><em>Inc. IFDD and IR UK</em></strong></p>
                 </td>
-                <td width="191">
+                <td >
                     <p><strong><em>Exc. IFDD and IR UK</em></strong></p>
                 </td>
             </tr>
             <tr>
-                <td width="272">
-                    <p>{{$data['country']}}</p>
+                <td >
+                    <p>{{$country}}</p>
                 </td>
-                <td width="191">
-                    <p>{{$data['I_T_Inc_IFDD']}}</p>
+                <td >
+                    <p>{{$I_T_Inc_IFDD}}</p>
                 </td>
-                <td width="191">
-                    <p>{{$data['I_T_Enc_IFDD']}}</p>
+                <td >
+                    <p>{{$I_T_Enc_IFDD}}</p>
                 </td>
-                <td width="191">
-                    <p>{{$data['A_I_Inc_IFDD']}}</p>
+                <td >
+                    <p>{{$A_I_Inc_IFDD}}</p>
                 </td>
-                <td width="191">
-                    <p>{{$data['A_I_Enc_IFDD']}}</p>
+                <td >
+                    <p>{{$A_I_Enc_IFDD}}</p>
                 </td>
-                <td width="191">
-                    <p>{{$data['F_I_Inc_IFDD']}}</p>
+                <td >
+                    <p>{{$F_I_Inc_IFDD}}</p>
                 </td>
-                <td width="191">
-                    <p>{{$data['F_I_Enc_IFDD']}}</p>
+                <td >
+                    <p>{{$F_I_Enc_IFDD}}</p>
                 </td>
             </tr>
         </tbody>
     </table>
-    <p>&nbsp;</p>
-    <table class="table table-bordered">
+    
+
+    <table style="width=100%;">
         <tbody>
             <tr>
-                <td width="1414">
-                    <p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>External Audits/M&amp;E Visits
+                <td style="background-color: #0081C3; color:#fff;" >
+                    <p><strong>5. External Audits/M&amp;E Visits
                             Due in
                             Next 3 Months</strong></p>
 
                 </td>
             </tr>
             <tr>
-                <td width="1414">
-                    <p>{{$data['external_audit_next_3months']}}</p>
+                <td>
+                    <p>{{$external_audit_next_3months}}</p>
                 </td>
             </tr>
         </tbody>
     </table>
-    <p>&nbsp;</p>
-    <table class="table table-bordered">
+  
+    <table style="width=100%;">
         <tbody>
             <tr>
-                <td width="1414">
-                    <p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>External Audits/M&amp;E Visits
+                <td style="background-color: #0081C3; color:#fff;">
+                    <p><strong>6. External Audits/M&amp;E Visits
                             Completed Last Month</strong></p>
 
                 </td>
             </tr>
             <tr>
-                <td width="1414">
-                    <p>{{$data['external_audit_last_month']}}</p>
+                <td>
+                    <p>{{$external_audit_last_month}}</p>
                 </td>
             </tr>
         </tbody>
     </table>
-    <p>&nbsp;</p>
-    <table width="1419" class="table table-bordered">
+    
+    <table style="width=100%;">
         <tbody>
             <tr>
-                <td colspan="4" width="1419">
-                    <p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Cases of Misconduct (Fraud,
+                <td colspan="4" style="background-color: #0081C3; color:#fff;">
+                    <p><strong>7. Cases of Misconduct (Fraud,
                             Complaints, Harassment, Child Protection Policy Violation or Abuse)</strong></p>
                 </td>
             </tr>
-            <tr>
-                <td width="339">
+            <tr style="background-color: #ddd;">
+                <td >
                     <p><strong><em>Incident Type</em></strong></p>
                 </td>
-                <td width="339">
+                <td >
                     <p><strong><em>Date of Occurrence</em></strong></p>
                 </td>
-                <td width="371">
+                <td >
                     <p><strong><em>Actions (to be) Taken and Deadline</em></strong></p>
                 </td>
-                <td width="371">
+                <td>
                     <p><strong><em>Informed IRW? (Yes/No, if yes, who?)</em></strong></p>
                 </td>
             </tr>
             <tr>
-                <td width="339">
-                    <p>{{$data['case_type']}}</p>
+                <td>
+                    <p>{{$case_type}}</p>
                 </td>
-                <td width="339">
-                    <p>{{$data['case_occurrence_date']}}</p>
+                <td>
+                    <p>{{$case_occurrence_date}}</p>
                 </td>
-                <td width="371">
-                    <p>{{$data['case_actions']}}</p>
+                <td>
+                    <p>{{$case_actions}}</p>
                 </td>
-                <td width="371">
-                    <p>{{$data['case_informed_irw']}}</p>
+                <td>
+                    <p>{{$case_informed_irw}}</p>
                 </td>
             </tr>
         </tbody>
     </table>
-    <p>&nbsp;</p>
-    <table width="1419" class="table table-bordered">
+
+    <table style="width=100%;">
         <tbody>
             <tr>
-                <td colspan="4" width="1419">
-                    <p><strong>8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Accidents and Deaths</strong></p>
+                <td colspan="4" style="background-color: #0081C3; color:#fff;">
+                    <p><strong>8. Accidents and Deaths</strong></p>
                 </td>
             </tr>
-            <tr>
-                <td width="339">
+            <tr style="background-color: #ddd;">
+                <td >
                     <p><strong><em>Incident Type</em></strong></p>
                 </td>
-                <td width="339">
+                <td>
                     <p><strong><em>Date of Occurrence</em></strong></p>
                 </td>
-                <td width="371">
+                <td>
                     <p><strong><em>Actions (to be) Taken and Deadline</em></strong></p>
                 </td>
-                <td width="371">
+                <td >
                     <p><strong><em>Informed IRW? (Yes/No, if yes, who?)</em></strong></p>
                 </td>
             </tr>
             <tr>
-                <td width="339">
-                    <p>{{$data['accident_type']}}</p>
+                <td>
+                    <p>{{$accident_type}}</p>
                 </td>
-                <td width="339">
-                    <p>{{$data['accident_date']}}</p>
+                <td>
+                    <p>{{$accident_date}}</p>
                 </td>
-                <td width="371">
-                    <p>{{$data['accident_actions']}}</p>
+                <td>
+                    <p>{{$accident_actions}}</p>
                 </td>
-                <td width="371">
-                    <p>{{$data['accident_informed_irw']}}</p>
+                <td>
+                    <p>{{$accident_informed_irw}}</p>
                 </td>
             </tr>
         </tbody>
     </table>
-    <p>&nbsp;</p>
-    <table width="1422" class="table table-bordered">
+    
+    <table style="width: 100%;">
         <tbody>
             <tr>
-                <td width="1422">
-                    <p><strong>9.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>Any other discussions points
+                <td style="background-color: #0081C3; color:#fff;">
+                    <p><strong>9. Any other discussions points
                             (optional)</strong></p>
                 </td>
             </tr>
             <tr>
-                <td width="1422">
-                    <p>{{$data['aob']}}</p>
+                <td>
+                    <p>{{$aob}}</p>
                 </td>
             </tr>
         </tbody>

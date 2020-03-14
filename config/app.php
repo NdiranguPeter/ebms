@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -232,6 +233,7 @@ return [
         'Form' => Collective\Html\FormFacades::class,
         'Form' => Collective\Html\HtmlFacades::class,
        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+       'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

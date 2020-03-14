@@ -1,5 +1,7 @@
+
 @extends('layouts.default')
 @section('content')
+
 <div class="container-fluid main-content">
     <div class="main-content-inner">
         <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -50,7 +52,7 @@
                         <strong>{{ $message }}</strong>
                     </div>
                     @endif
-                    <div class="col-sm-12" style="border: 1px solid #bfdeec;">
+                    <div class="col-sm-12" style="border: 1px solid #bfdeec; padding-bottom: 20px;">
                         <form method="post" action="{{url('sendemail/send')}}">
 
                             {{ csrf_field() }}
@@ -95,61 +97,52 @@
                                         non-submissions
                                         and expected submission dates</i> </label>
 
-                                <table class="">
+                                <table style="width: 100%;">
                                     <tr>
-                                        <td style="min-width: 300px;
-    padding: 10px;">Employee Screening Update</td>
-                                        <td colspan="2" style="min-width: 200px;
-    padding: 10px;">
+                                        <td style="padding: 10px;">Employee Screening Update</td>
+                                        <td colspan="2" style="padding: 10px;">
                                             <select name="screening" id="">
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
                                             </select>
                                         </td>
-                                        <td style="min-width: 300px;
-    padding: 10px;">
+                                        <td style="padding: 10px;">
                                             <textarea name="screening_reason" class="form-control"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Income Targets</td>
-                                        <td colspan="2" style="min-width: 200px;
-    padding: 10px;">
+                                        <td colspan="2" style="padding: 10px;">
                                             <select name="targets" id="">
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
                                             </select>
                                         </td>
-                                        <td style="min-width: 300px;
-    padding: 10px;">
+                                        <td style="padding: 10px;">
                                             <textarea name="target_reason" class="form-control"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Project Monitoring Template</td>
-                                        <td colspan="2" style="min-width: 200px;
-    padding: 10px;">
+                                        <td colspan="2" style="padding: 10px;">
                                             <select name="monitoring" id="">
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
                                             </select>
                                         </td>
-                                        <td style="min-width: 300px;
-    padding: 10px;">
+                                        <td style="padding: 10px;">
                                             <textarea name="mornitoring_reason" class="form-control"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Audit/M&E Plans (if applicable)</td>
-                                        <td colspan="2" style="min-width: 200px;
-    padding: 10px;">
+                                        <td colspan="2" style="padding: 10px;">
                                             <select name="me" id="">
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
                                             </select>
                                         </td>
-                                        <td style="min-width: 300px;
-    padding: 10px;">
+                                        <td style="padding: 10px;">
                                             <textarea name="me_reason" class="form-control"></textarea>
                                         </td>
                                     </tr>
@@ -162,7 +155,7 @@
                                     <i> Income should only consider the cash / in-kind that will be received by the
                                         respective Field Offices during the year</i> </label>
 
-                                <table class="col-sm-12" style="table-layout:fixed;">
+                                <table class="col-sm-12" style="table-layout:fixed; width:100%;">
                                     <tr>
                                         <th rowspan="2" style="border:1px solid #ddd;">Country(ies)</th>
                                         <th colspan="2" style="border:1px solid #ddd;">Income Target (Current Year) -
@@ -221,7 +214,7 @@
                             <div class="form-group col-sm-12">
                                 <label><b>7. Cases of Misconduct (Fraud, Complaints, Harassment, Child Protection Policy
                                         Violation or Abuse)</b></label>
-                                <table>
+                                <table style="width: 100%;">
                                     <tr>
                                         <th style="border:1px solid #ddd;">Incident Type</th>
                                         <th style="border:1px solid #ddd;">Date of Occurrence</th>
@@ -238,7 +231,7 @@
                             </div>
                             <div class="form-group col-sm-12">
                                 <label><b>8. Accidents and Deaths</b></label>
-                                <table>
+                                <table style="width: 100%;">
                                     <tr>
                                         <th style="border:1px solid #ddd;">Incident Type</th>
                                         <th style="border:1px solid #ddd;">Date of Occurrence</th>
@@ -258,10 +251,12 @@
                                 <textarea name="aob" class="form-control"></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="send" class="btn btn-info" value="Submit Report"
+                                <input type="submit" name="send" class="btn btn-info" value="Send Report"
                                     style="float:right" />
                             </div>
                         </form>
+
+
                     </div>
 
                 </div>
@@ -271,6 +266,10 @@
     </div>
 </div>
 
-
+<style>
+    label {
+        font-weight: bold;
+    }
+</style>
 
 @endsection

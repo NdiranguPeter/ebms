@@ -7,6 +7,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use PDF;
+
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -28,10 +30,16 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('ebms@islamicrelief.org')
-        ->subject('Monthly Management Performance Report')
-        ->view('dynamic_email_template')
-        ->with('data', $this->data);
+
+ $pdf = PDF::loadView('dynamic_email_template', $this->data);
+
+return $this->from('ebms@islamicrelief.org')
+    ->subject($this->data['name'] . ' Monthly Management Performance Report')
+    ->view('mail')
+    ->attachData($pdf->output(), "Monthly Management Performance Report.pdf")
+    ->with('data', $this->data);
+
+       
     }
 }
 

@@ -2,39 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
-
+use PDF;
 
 class SendEmailController extends Controller
 {
-    function index()
+    public function index()
     {
-     return view('send_email');
+        return view('send_email');
     }
 
-    function send(Request $request)
+    public function send(Request $request)
     {
         $this->validate($request, [
-      'name'     =>  'required',
-      'title'     =>  'required',
-      'department' =>  'required',
-      'manager'  =>  'required',
-           ]);
-
+            'name' => 'required',
+            'title' => 'required',
+            'department' => 'required',
+            'manager' => 'required',
+        ]);
 
         $user = auth()->user()->email;
         $data = $request->all();
 
-     Mail::to($request->manager_email)
-     ->send(new SendMail($data));
-    //  ->cc($request->manager_email);
-
-    //  Mail::to($request->manager_email)->send(new SendMail($data));
-
-     return back()->with('success', 'Report successfully submitted!');
+        
+        Mail::to($request->manager_email)
+         ->cc($user)
+            ->send(new SendMail($data));
+       
+        return back()->with('success', 'Report successfully submitted!');
 
     }
 
+   
 }
