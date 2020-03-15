@@ -52,7 +52,8 @@
                         <strong>{{ $message }}</strong>
                     </div>
                     @endif
-                    <div class="col-sm-12" style="border: 1px solid #bfdeec; padding-bottom: 20px;">
+                    <div class="col-sm-12" style="padding-bottom: 20px;
+    background-color: #dddddd6b;">
                         <form method="post" action="{{url('sendemail/send')}}">
 
                             {{ csrf_field() }}
