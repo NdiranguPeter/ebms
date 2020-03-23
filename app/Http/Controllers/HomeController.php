@@ -83,7 +83,7 @@ class HomeController extends Controller
                 ->join('indicators', 'indicators.project_id', 'projects.id')
                 ->join('indicatorafters', 'indicatorafters.indicator_id', 'indicators.id')
                 ->select('indicatorafters.*')
-                ->where('projects.coutry', 1)
+                ->where('projects.country', 1)
                 ->where('indicatorafters.before_after', 'before')
                 ->where('indicatorafters.year', $year)
                 ->get();
