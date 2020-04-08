@@ -35,14 +35,14 @@
                             <h6>Projects</h6>
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectProject">
+                    <a href="" data-toggle="modal" data-target="#selectProject">
                         <div class="col-md-4 dashcard" style="background-color:#d15b47 !important; ">
                             <i class="ace-icon fa fa-desktop"></i>
                             <h6>Logic Model</h6>
                         </div>
                     </a>
 
-                    <a data-toggle="modal" data-target="#selectProject2">
+                    <a href="" data-toggle="modal" data-target="#selectProject2">
                         <div class="col-md-4 dashcard" style="background-color:#87b87f !important; ">
                             <i class="ace-icon fa fa-bar-chart-o"></i>
                             <h6>Reports</h6>

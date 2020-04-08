@@ -58,14 +58,14 @@
                             {{-- <span class="badge badge-primary" style="float:right;">{{$number_outputs}}</span> --}}
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectWhen">
+                    <a href=""  data-toggle="modal" data-target="#selectWhen">
                         <div class="col-md-4 dashcard" style="background-color:#abbac3 !important; ">
                             <i class="ace-icon fa fa-calendar"></i>
                             <h6>DIP</h6>
                             {{-- <span class="badge badge-primary" style="float:right;">{{$number_outputs}}</span> --}}
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectYear">
+                    <a href="" data-toggle="modal" data-target="#selectYear">
                         <div class="col-md-4 dashcard" style="background-color:#d15b47 !important; ">
                             <i class="ace-icon fa fa-flask"></i>
                             <h6>Project Perfomance Reports</h6>
@@ -80,7 +80,7 @@
                             {{-- <span class="badge badge-primary" style="float:right;">{{$number_outputs}}</span> --}}
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectBeforeAfter">
+                    <a href="" data-toggle="modal" data-target="#selectBeforeAfter">
 
                         <div class="col-md-4 dashcard" style="background-color:#415f8f !important; ">
                             <i class="ace-icon fa fa-lemon-o "></i>
@@ -101,7 +101,7 @@
 
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectBeforeAfter2">
+                    <a href="" data-toggle="modal" data-target="#selectBeforeAfter2">
 
                         <div class="col-md-4 dashcard" style="background-color:#d6487e !important; ">
                             <i class="ace-icon fa fa-info-circle "></i>

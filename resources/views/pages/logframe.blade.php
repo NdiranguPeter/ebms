@@ -56,7 +56,7 @@
                             {{-- <span class="badge badge-white" style="float:right;">{{$number_outcomes}}</span> --}}
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectOutcome">
+                    <a href="" data-toggle="modal" data-target="#selectOutcome">
                         <div class="col-md-4 dashcard" style="background-color:#d15b47 !important; ">
                             <i class="ace-icon fa fa-fire"></i>
                             <h6>Output</h6>
@@ -86,14 +86,14 @@
                         </div>
                     </a>
 
-                    <a data-toggle="modal" data-target="#selectRiskFor">
+                    <a href=""  data-toggle="modal" data-target="#selectRiskFor">
                         <div class="col-md-4 dashcard " style="background-color:#87b87f !important; ">
                             <i class="ace-icon fa fa-bullhorn "></i>
                             <h6>Risks </h6>
                             {{-- <span class="badge badge-white" style="float:right;">{{$number_outcomes}}</span> --}}
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectAssumptionFor">
+                    <a href="" data-toggle="modal" data-target="#selectAssumptionFor">
                         <div class="col-md-4 dashcard" style="background-color:#ffb752 !important; ">
                             <i class="ace-icon fa fa-leaf"></i>
                             <h6>Assumptions</h6>

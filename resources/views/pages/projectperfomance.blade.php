@@ -40,14 +40,14 @@
 
                 <div class="row">
 
-                    <a data-toggle="modal" data-target="#selectMonth">
+                    <a href=""  data-toggle="modal" data-target="#selectMonth">
                         <div class="col-md-4 dashcard" style="background-color:#87b87f !important; ">
                             <i class="ace-icon fa fa-flask"></i>
                             <h6>Monthly Report</h6>
                             {{-- <span class="badge badge-primary" style="float:right;">{{$number_outputs}}</span> --}}
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectQuater">
+                    <a href="" data-toggle="modal" data-target="#selectQuater">
                         <div class="col-md-4 dashcard" style="background-color:#d15b47 !important; ">
                             <i class="ace-icon fa fa-flask"></i>
                             <h6>Quarterly Report</h6>
@@ -60,7 +60,7 @@
                             {{-- <span class="badge badge-primary" style="float:right;">{{$number_outputs}}</span> --}}
                         </div>
                     </a>
-                    <a data-toggle="modal" data-target="#selectSummaryDetailed">
+                    <a href="" data-toggle="modal" data-target="#selectSummaryDetailed">
                         <div class="col-md-4 dashcard" style="background-color:#415f8f !important; ">
                             <i class="ace-icon fa fa-lemon-o "></i>
 
