@@ -11,44 +11,59 @@
     </thead>
     <tbody>
         @php
-        $dy = 91000;
+        $dy = 0;
         @endphp
+
+
+
         @if (count($activities)>0)
         @foreach ($activities as $activity)
 
+        @foreach ($activitiesafter as $activityafter)
+
+        @if ($activity->id == $activityafter->activity_id)
+
+       
+
         <?php
        
-$budget_diff = $activity->budget - ($activity->budget-$dy);
+$budget_diff = $activityafter->budget - $activity->budget;
 
-    $variace = $budget_diff/$activity->budget*100;
+    $variance = $budget_diff/$activity->budget*100;
 
-$dy = $dy - 9232;
+$dy = $activityafter->budget;
 
             ?>
+
+            @endif
+            
+            @endforeach
         <tr>
             <td> {{$activity->budget_code}} </td>
             <td>{{$activity->name}}</td>
             <td>
                 @php
                 $number = number_format($activity->budget);
-
                 @endphp
                 {{$number}}
             </td>
             <td>
                 @php
-                $number = number_format($activity->budget-$dy);
+                $number = number_format($dy);
 
                 @endphp
                 {{$number}}</td>
             <td>{{number_format($budget_diff)}}</td>
-            @if ($variace> 0)
-            <td style="background-color:green; font-weight:bold;color:white;">{{sprintf('%0.2f',$variace)}}%</td>
+           
+            @if ($variance >= 0)
+            <td style="background-color:green; font-weight:bold;color:white;">{{sprintf('%0.2f',$variance)}}%</td>
             @endif
-            @if ($variace < 0) <td style="background-color:red; font-weight:bold;color:white;">
-                {{sprintf('%0.2f',$variace)}}%</td>
+            @if ($variance < 0) <td style="background-color:red; font-weight:bold;color:white;">
+                {{sprintf('%0.2f', $variance)}}%</td>
                 @endif
         </tr>
+
+        
 
         @endforeach
 
