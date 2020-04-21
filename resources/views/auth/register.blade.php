@@ -43,14 +43,20 @@
                             <label for="country"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
                             <div class="col-md-6">
+
+@php
+    $countries = App\Country::all();
+@endphp
+
+
                                 <select name="country" id="country"
                                     class="form-control @error('country') is-invalid @enderror">
-                                    <option value="1">Kenya</option>
-                                    <option value="2">Somalia</option>
-                                    <option value="3">Ethiopia</option>
-                                    <option value="4">Sudan</option>
-                                    <option value="5">South Sudan</option>
-                                    <option value="6">Global MEAL</option>
+
+                                    @foreach ($countries as $country)
+                                        <option value={{$country->id}}>{{$country->name}}</option>
+                                    @endforeach
+
+
                                 </select>
                                 @error('country')
                                 <span class="invalid-feedback" role="alert">
